@@ -7,10 +7,7 @@ const App = () => {
   <div></div>
   <div>Hello World!</div>
   <div></div>
-  <div>Hello World!</div>
-  <div></div>
-  <div>Hello World!</div>
-  <div></div>
+  <div>Goodbye World!</div>
   )
 }
 
