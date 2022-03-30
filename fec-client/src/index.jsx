@@ -4,7 +4,7 @@ import reactDOM from 'react-dom'
 const App = () => {
   return (
   <div>
-    <div>Hello World!</div>
+    <h1>Hello World!</h1>
     <div></div>
     <div>Hello World!</div>
     <div></div>
