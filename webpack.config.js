@@ -9,5 +9,6 @@ module.exports = {
   },
   module: {
     rules: [{test: /\.jsx/, use: 'babel-loader'}]
-  }
+  },
+  watch: true
 };
