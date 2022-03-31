@@ -42,6 +42,9 @@ border: 1px solid black;
 width: 90%;
 height: 25%;
 `;
+const foo = function (){
+
+};
 
 const App = () => {
 
