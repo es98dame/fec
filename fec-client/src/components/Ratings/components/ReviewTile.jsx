@@ -1,14 +1,53 @@
 import React from 'react';
 import styled from 'styled-components';
+import dateformat from 'dateformat';
+
+const Tile = styled.div`
+margin-top: 20px;
+display: flex;
+flex-direction: row;
+gap: 0.5rem;
+`;
+
+const UserInfo = styled.div`
+display: flex;
+flex-direction: column;
+min-width: 10rem;
+padding-top: 1%;
+padding-right: 2%;
+border: solid;
+border-color: lightgray;
+`;
+
+const ReviewContent = styled.div`
+display: flex;
+flex-direction: column;
+flex-grow: 1;
+padding-top: 1%;
+padding-left: 5%;
+border: solid;
+border-color: lightgray;
+`;
 
 const ReviewTile = ({ review }) => {
 
   return (
-    <div> This is a Review Tile Component
-      <div>Name: {review.reviewer_name}</div>
-      <div>Date: {review.date}</div>
+    <Tile>
+      <UserInfo>
+        <div>{review.reviewer_name}</div>
+        <div>{dateformat(review.date, 'mmmm dd, yyyy')}</div>
+      </UserInfo>
+      <ReviewContent>
+        <div>Rating: {review.rating}</div>
+        <div>Summary: {review.summary}</div>
+        <p>Body: {review.body}</p>
+        <div> Recommended: {review.recommended} </div>
+        <div> Helpfulness: {review.helpfulness}</div>
+        <div> Response: {review.response} </div>
 
-    </div>
+      </ReviewContent>
+
+    </Tile>
 
   );
 
