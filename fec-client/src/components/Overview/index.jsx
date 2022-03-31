@@ -32,7 +32,7 @@ const Content = styled.div`
 
 const Overview = () => {
   return (
-    <div>
+    <div className ='Overview'>
       <H2>Overview here</H2>
 
       <FullDiv>
