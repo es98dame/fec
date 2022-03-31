@@ -12,7 +12,3 @@
   * Kate Anderson
   * Owen Yoshishige
   * Dami Kim
-
-
-
-
