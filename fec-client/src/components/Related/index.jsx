@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Products = (props)=> {
   return (
     <div>Related Product</div>
-  )
+  );
 };
 
 export default Products;
