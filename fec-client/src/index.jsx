@@ -6,9 +6,15 @@ import Products from './components/Related/index.jsx';
 import Ratings from './components/Ratings/index.jsx';
 import Overview from './components/Overview/index.jsx';
 import QA from './components/Q&A/QA.jsx';
+// import Example from './hooksPractice.jsx';
+
+const AppDiv = styled.div`
+  @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+  font-family: 'Open Sans';
+`
 
 const H1 = styled.h1`
-  font-size: 2.0em;
+  font-size: 2.5em;
   text-align: center;
   color: black;
 `;
@@ -31,32 +37,41 @@ height: 25%;
 `;
 
 const RatingsDiv = styled.div`
+font-family: inherit;
 border: 1px solid black;
 width: 90%;
 height: 25%;
 `;
 
 const App = () => {
+
+  var product = (productId) => {
+
+  }
+
   return (
-  <div>
+  <AppDiv>
     <div>
-    <H1>Project Atelier</H1>
-  </div>
-  <div>
-    <OverviewDiv>
-      <Overview/>
-    </OverviewDiv>
-    <RelatedDiv>
+      <H1>Project Atelier</H1>
+    </div>
+    <div>
+      <OverviewDiv>
+        <Overview/>
+     </OverviewDiv>
+
+      <RelatedDiv>
         <Products/>
-    </RelatedDiv>
-    <QandADiv>
+     </RelatedDiv>
+
+      <QandADiv>
         <QA />
-    </QandADiv>
-    <RatingsDiv>
-      <Ratings/>
-    </RatingsDiv>
+      </QandADiv>
+
+      <RatingsDiv>
+       <Ratings/>
+     </RatingsDiv>
   </div>
-  </div>
+  </AppDiv>
   )
 }
 
