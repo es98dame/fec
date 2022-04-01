@@ -9,7 +9,7 @@ import axios from 'axios';
 // const auth = { headers: { Authorization: config.TOKEN } };
 
 
-// const Products = (props)=> {
+const Products = (props)=> {
 //   const [idArray, setIdArray] = useState([]);
 
 //   //console.log(config.TOKEN); // ok I got token
@@ -38,6 +38,6 @@ import axios from 'axios';
 //   //     })}
 //   //   </div>
 //   // );
-// };
+ };
 
 export default Products;
