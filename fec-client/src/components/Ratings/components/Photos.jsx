@@ -8,8 +8,7 @@ gap: 0.2rem;
 `;
 
 const Image = styled.img`
-width: 5rem;
-height: 5rem;
+height: 6rem;
 `;
 
 const Photos = ({ images }) => (

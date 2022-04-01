@@ -10,7 +10,6 @@ font-weight: 300;
 margin-top: 20px;
 display: flex;
 flex-direction: row;
-gap: 0.5rem;
 `;
 
 const UserInfo = styled.div`
@@ -21,29 +20,33 @@ min-width: 10rem;
 padding-top: 1%;
 padding-left: 1%;
 padding-right: 2%;
-border: solid;
-border-color: lightgray;
+
+background-color: #f1f1f1;
+border-radius: 2px;
 `;
 
 const ReviewContent = styled.div`
 display: flex;
 flex-direction: column;
 flex-grow: 1;
-gap: 0.5rem;
+gap: 0.2rem;
 
 padding-top: 1%;
 padding-left: 4%;
-border: solid;
-border-color: lightgray;
+`;
+
+const Name = styled.div`
+font-size: 0.9rem;
+font-weight: 600;
 `;
 
 const Date = styled.div`
-font-size: small;
+font-size: 0.8rem;
 `;
 
 const Summary = styled.div`
-font-weight: 500;
-font-size: 1rem;
+font-weight: 600;
+font-size: .9rem;
 `;
 
 const Body = styled.p`
@@ -64,7 +67,7 @@ const ReviewTile = ({ review }) => {
   return (
     <Tile>
       <UserInfo>
-        <div><b>{review.reviewer_name}</b></div>
+        <Name>{review.reviewer_name}</Name>
         <Date>{dateformat(review.date, 'mmmm dd, yyyy')}</Date>
       </UserInfo>
       <ReviewContent>
