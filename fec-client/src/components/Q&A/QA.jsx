@@ -5,8 +5,6 @@ import axios from 'axios';
 const QA = function (productId = []) {
   const [QAData, SetQA] = useState(productId);
 
-  //
-
   return (
     <div>
       <div>SearchBar Goes Here</div>
