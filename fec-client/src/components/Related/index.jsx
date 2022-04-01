@@ -21,9 +21,9 @@ const Products = (props)=> {
   //console.log(config.TOKEN); // ok I got token
 
   const getRelatedItemsId = (id) => {
-    axios.get(`/products/${id}/related`) //get request to get the related item id array
+    axios.get('/api', {headers: {path: `/products/${id}/related`}}) //get request to get the related item id array
     .then(res => {
-      console.log(res);
+      console.log('related',res);
       setIdArray(res.data);
     })
     .catch(err=> console.log(err));
