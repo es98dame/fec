@@ -6,7 +6,6 @@ const axios = require('axios');
 const {API_KEY} = require('./config/config.js');
 const auth = { headers: { Authorization: API_KEY} };
 
-//create "Authorization" header
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 
 app.use(express.json());
@@ -28,28 +27,13 @@ app.get('/api', (req, res) => {
 
   console.log(`${url}${req.headers.path}`);
 
-  axios.get(`${url}${req.headers.path}`, { headers: {Authorization: API_KEY}})
+  axios.get(`${url}${req.headers.path}`, auth)
     .then((response) => {
       res.send(response.data);
     })
     .catch((err) => res.send(err));
 
 });
-
-app.get('/api/qa/questions/', (req, res) => {
-  // let params = {
-  //   product_id:
-  // };
-  //initial render^^^
-  res.send('poop');
-});
-
-
-
-//make an axios call to the api (for product info.)
-//https://app-hrsei-api.herokuapp.com/api/fec2/rfp/:reviews?product_id=num
-
-
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
