@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import dateformat from 'dateformat';
 
-import Stars from './Stars.jsx';
+import Stars from '../../Shared/Stars.jsx';
 import Photos from './Photos.jsx';
 
 const Tile = styled.div`
