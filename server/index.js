@@ -11,12 +11,24 @@ const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../fec-client/dist')));
-// /products/65632/styles
-app.get('/api/:field', (req, res) => {
-  //Send to this something of the form
-  // '/api/YOURFIELD?your-query=your-value'
 
-  axios.get(`${url}/${req.params.field}`, { params: req.query, headers: {Authorization: API_KEY}})
+app.get('/api', (req, res) => {
+
+  /* TO SEND A GET REQUEST FROM THIS METHOD:
+  --this code goes in your component file--
+
+    axios.get('/api', {headers: {path: '/products/65631/styles'}})
+
+    make an an axios get request to the /api endpoint, pass in an object with
+    a prop for headers, and pass an object as theat props value. Call a prop in that object
+    'headers' and set it equal to the endpoint you are trying to acess. If any there are
+    questions ask me or refer to the example line of code above!
+
+  */
+
+  console.log(`${url}${req.headers.path}`);
+
+  axios.get(`${url}${req.headers.path}`, { headers: {Authorization: API_KEY}})
     .then((response) => {
       res.send(response.data);
     })
