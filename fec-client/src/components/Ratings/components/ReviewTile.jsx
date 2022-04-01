@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import dateformat from 'dateformat';
 
+import Stars from './Stars.jsx';
+
 const Tile = styled.div`
+font-weight: 300;
 margin-top: 20px;
 display: flex;
 flex-direction: row;
@@ -34,10 +37,11 @@ const ReviewTile = ({ review }) => {
   return (
     <Tile>
       <UserInfo>
-        <div>{review.reviewer_name}</div>
+        <div><b>{review.reviewer_name}</b></div>
         <div>{dateformat(review.date, 'mmmm dd, yyyy')}</div>
       </UserInfo>
       <ReviewContent>
+        <Stars rating = {review.rating}/>
         <div>Rating: {review.rating}</div>
         <div>Summary: {review.summary}</div>
         <p>Body: {review.body}</p>
