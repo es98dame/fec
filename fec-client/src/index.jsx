@@ -1,5 +1,5 @@
 import React from 'react';
-import reactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 import Products from './components/Related';
@@ -41,6 +41,9 @@ border: 1px solid black;
 width: 90%;
 height: 25%;
 `;
+const foo = function () {
+
+};
 
 let App = () => {
   return (
@@ -70,4 +73,4 @@ let App = () => {
 };
 
 // eslint-disable-next-line no-undef
-reactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
