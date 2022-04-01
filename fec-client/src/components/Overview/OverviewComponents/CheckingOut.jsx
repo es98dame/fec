@@ -4,7 +4,19 @@ import styled from 'styled-components';
 
 const CheckingOut = () => {
   return (
-    <h3>Dropdowns and checkout button here</h3>
+    <div>
+      <div>
+        <select>
+          <option>Size</option>
+        </select>
+        <select>
+          <option>Qantity</option>
+        </select>
+      </div>
+      <div>
+        <button>checkout</button>
+      </div>
+    </div>
   );
 };
 

@@ -4,6 +4,8 @@ import Images from './OverviewComponents/Images.jsx';
 import Styles from './OverviewComponents/Styles.jsx';
 import ProductSpecs from './OverviewComponents/ProductSpecs.jsx';
 import styled from 'styled-components';
+import axios from 'axios';
+
 
 const H2 = styled.h2`
   text-align: center;
@@ -19,7 +21,6 @@ const ImagesDiv = styled.div`
   padding: 5px;
   border: 1px solid black;
   width: 60%;
-  min-height: 600px;
 `;
 
 const Content = styled.div`
@@ -27,8 +28,16 @@ const Content = styled.div`
   padding: 5px;
   border: 1px solid black;
   width: 40%;
-  min-height: 600px;
 `;
+
+var getProducts = () => {
+  axios.get('/api', {headers: {path: '/products/65631/styles'}})
+    .then((response) => {
+      console.log(response.data);
+    });
+};
+
+getProducts();
 
 const Overview = () => {
   return (
