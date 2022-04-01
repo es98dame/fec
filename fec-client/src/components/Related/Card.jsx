@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import config from '../../../../config.js';
-
-
 const ProductCard = styled.div`
 display: flex;
 flex-direction: column;

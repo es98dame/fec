@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import RelatedList from './RelatedList.jsx';
 
-import config from '../../../../config.js';
+// import config from '../../../../config.js';
 
 const ProductList = styled.div`
 display: flex;
@@ -21,7 +21,7 @@ const Products = (props)=> {
   //console.log(config.TOKEN); // ok I got token
 
   const getRelatedItemsId = (id) => {
-    axios.get(`${config.url}/products/${id}/related`, config.auth) //get request to get the related item id array
+    axios.get(`/products/${id}/related`) //get request to get the related item id array
     .then(res => {
       console.log(res);
       setIdArray(res.data);

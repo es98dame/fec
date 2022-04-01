@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Card from './Card.jsx'
 
-import config from '../../../../config.js';
-
 
 const RelatedList = ({id})=> {
 
@@ -16,11 +14,11 @@ const RelatedList = ({id})=> {
   useEffect(()=>{
 
     const getProductInfo = async () => {
-      const res = await axios.get(`${config.url}/products/${id}`, config.auth) //get request to get the related item id array
+      const res = await axios.get(`/products/${id}`) //get request to get the related item id array
       setProductInfo(res.data);
     };
     const getStyleInfo= async () => {
-      const res = await axios.get(`${config.url}/products/${id}/styles`, config.auth) //get request to get the related item id array
+      const res = await axios.get(`/products/${id}/styles`) //get request to get the related item id array
       console.log(res)
       setStyleInfo(res.data.results)
     };
