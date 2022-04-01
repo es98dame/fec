@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import sampleData from './sampledata.js';
 
-import ReviewList from './components/ReviewList.jsx';
+import ReviewList from './ReviewList/index.jsx';
 
 const RatingsList = styled.div`
 display: flex;
