@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import QAList from './QAList';
@@ -21,6 +21,16 @@ const QListButton = styled.button`
   }
 `;
 
+const SearchForm = styled.form`
+  display: flex;
+  flex-direction: row;
+`;
+
+const StyledInput = styled.input`
+  height: 2em;
+  width: 100%;
+`;
+
 const QA = function ({productId}) {
   const [storage, setStorage] = useState([]);
   const [QAData, setQA] = useState([]);
@@ -35,6 +45,11 @@ const QA = function ({productId}) {
     alert('Modal Prompt Would Pop Up to add question');
   };
 
+  const handleSearch = function(e) {
+    e.preventDefault();
+    alert('Searching for poop');
+  };
+
   useEffect(() => {
     axios.get('/api', {headers: {path: `/qa/questions?product_id=${productId}`}})
       .then((res) => {
@@ -46,7 +61,11 @@ const QA = function ({productId}) {
 
   return (
     <QAContainer>
-      <div>SearchBar Goes Here</div>
+      <h4>Questions And Answers</h4>
+      <SearchForm type="submit" onSubmit={handleSearch}>
+        <StyledInput type="text" placeholder="Have a Question? Search for answers..."/>
+        <button type="submit">Search</button>
+      </SearchForm>
       <QAList QAData={QAData}/>
       <QLBContainer>
         <QListButton onClick={handleMoreQuestions}>{seeMoreView}</QListButton>

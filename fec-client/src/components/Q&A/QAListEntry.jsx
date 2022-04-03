@@ -6,7 +6,8 @@ import AListEntry from './AListEntry.jsx';
 const QAEntry = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 5px 0;
+  margin-top: 5px;
+  gap: .5em;
 `;
 
 const QContainer = styled.div`
@@ -14,9 +15,8 @@ const QContainer = styled.div`
   flex-direction: row;
 `;
 
-const QItem1 = styled.div`
-  padding-left: 2px;
-  font-size: 0.9rem;
+const QItem = styled.div`
+  padding-left: 10px;
   font-weight: 600;
 `;
 
@@ -27,18 +27,9 @@ const QItem2 = styled.div`
   gap: 0.3em;
 `;
 
-const QAEntryButton = styled.button`
-  width: 15em;
-  height: 3em;
-  border-radius: 0;
-  cursor: pointer;
-  &:hover {
-    background-color: grey;
-  }
-`;
-
 //May change these colors to match groups colors
 const ATag = styled.a`
+  padding-left: 2px;
   cursor: pointer;
   &:hover {
     color: grey;
@@ -48,9 +39,34 @@ const ATag = styled.a`
   }
 `;
 
+const AMoreQuestions = styled.a`
+margin: .5em 0;
+margin-left: .7em;
+width: 130px;
+cursor: pointer;
+&:hover {
+  color: grey;
+},
+a:link {
+  color: purple;
+}
+`;
+
+const AnswerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const AList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: .7em;
+`;
+
 const QAListEntry = function({question}) {
   let allAnswers = Object.entries(question.answers);
-  let askerName = question.asker_Name;
+  let askerName = question.asker_name;
+  let sortedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
 
   const [buttonText, setButtonText] = useState('See More Answers');
   const [answers, setAnswers] = useState(allAnswers.slice(0, 2));
@@ -71,17 +87,23 @@ const QAListEntry = function({question}) {
   return (
     <QAEntry>
       <QContainer>
-        <QItem1>Q: {question.question_body}</QItem1>
+        <QItem>Q:</QItem>
+        <QItem>{question.question_body}</QItem>
         <QItem2>
           <div>Helpful?</div>
           <ATag onClick={handleHelpfulYes}>{`Yes (${question.question_helpfulness})`}</ATag>
           <div>|</div>
           <ATag onClick={handleAddAnswer}>Add Answer</ATag>
         </QItem2>
-      </QContainer>{
+      </QContainer>
+      <AnswerContainer>{
+        answers.length ? <QItem>A:</QItem> : null
+      }<AList>{
         answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={key}/>) : null
-      }{ allAnswers.length > 2 ? <QAEntryButton onClick={handleSeeMoreAnswers}>{buttonText}</QAEntryButton> : null
-      }</QAEntry>
+      }{ allAnswers.length > 2 ? <AMoreQuestions onClick={handleSeeMoreAnswers}>{buttonText}</AMoreQuestions> : null
+      }</AList>
+      </AnswerContainer>
+    </QAEntry>
   );
 };
 
