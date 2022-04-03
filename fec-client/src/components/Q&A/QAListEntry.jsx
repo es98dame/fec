@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import AListEntry from './AListEntry.jsx';
@@ -68,6 +68,8 @@ const QAListEntry = function({question}) {
   let askerName = question.asker_name;
   let sortedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
 
+  const pressedHelpful = useRef(false);
+  const [count, setCount] = useState(question.question_helpfulness);
   const [buttonText, setButtonText] = useState('See More Answers');
   const [answers, setAnswers] = useState(allAnswers.slice(0, 2));
 
@@ -81,7 +83,10 @@ const QAListEntry = function({question}) {
   };
 
   const handleHelpfulYes = function() {
-    alert('Would Increase the number here by 1 and only 1.  Would need to send POST request');
+    if (!pressedHelpful.current) {
+      pressedHelpful.current = true;
+      setCount(count + 1);
+    }
   };
 
   return (
@@ -91,7 +96,7 @@ const QAListEntry = function({question}) {
         <QItem>{question.question_body}</QItem>
         <QItem2>
           <div>Helpful?</div>
-          <ATag onClick={handleHelpfulYes}>{`Yes (${question.question_helpfulness})`}</ATag>
+          <ATag onClick={handleHelpfulYes}>{`Yes (${count})`}</ATag>
           <div>|</div>
           <ATag onClick={handleAddAnswer}>Add Answer</ATag>
         </QItem2>

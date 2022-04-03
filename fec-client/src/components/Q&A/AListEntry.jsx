@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -49,12 +49,19 @@ const AListEntry = function({answer, askerName}) {
   let answerer = answer[1].answerer_name;
   let isSeller = answerer === 'Seller';
 
+  const pressedHelpful = useRef(false);
+  const [report, setReport] = useState('Report');
+  const [count, setCount] = useState(answer[1].helpfulness);
+
   const handleHelpfulYes = function() {
-    alert('Would Increase the helpfness by one and only one, also would send post request');
+    if (!pressedHelpful.current) {
+      pressedHelpful.current = true;
+      setCount(count + 1);
+    }
   };
 
   const handleReport = function() {
-    alert('Would send a put or patch request, will update state without this answer');
+    report !== 'Reported' ? setReport('Reported') : undefined;
   };
 
   return (
@@ -69,8 +76,8 @@ const AListEntry = function({answer, askerName}) {
         <span>|</span>
         <span>Helpful?</span>
         <span>|</span>
-        <ATag onClick={handleHelpfulYes}>Yes({answer[1].helpfulness})</ATag>
-        <ATag onClick={handleReport}>Report</ATag>
+        <ATag onClick={handleHelpfulYes}>Yes({count})</ATag>
+        <ATag onClick={handleReport}>{report}</ATag>
       </UserContainer>
     </AnswerContainer>
   );

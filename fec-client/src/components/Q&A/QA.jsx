@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import QAList from './QAList';
@@ -32,12 +32,12 @@ const StyledInput = styled.input`
 `;
 
 const QA = function ({productId}) {
-  const [storage, setStorage] = useState([]);
+  const storage = useRef([]);
   const [QAData, setQA] = useState([]);
   const [seeMoreView, setMoreView] = useState('See More Questions');
 
   const handleMoreQuestions = function() {
-    QAData.length <= 4 ? setQA(storage) : setQA(storage.slice(0, 4));
+    QAData.length <= 4 ? setQA(storage.current) : setQA(storage.current.slice(0, 4));
     seeMoreView === 'See More Questions' ? setMoreView('See Less Questions') : setMoreView('See More Questions');
   };
 
@@ -53,7 +53,7 @@ const QA = function ({productId}) {
   useEffect(() => {
     axios.get('/api', {headers: {path: `/qa/questions?product_id=${productId}`}})
       .then((res) => {
-        setStorage(res.data.results);
+        storage.current = res.data.results;
         setQA(res.data.results.slice(0, 4));
       })
       .catch((err) => console.error(err));
