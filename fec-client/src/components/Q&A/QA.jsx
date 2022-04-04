@@ -66,7 +66,6 @@ const QA = function ({productId}) {
     axios.get('/api', {headers: {path: `/qa/questions?product_id=${productId}`}})
       .then((res) => {
         storage.current = res.data.results;
-        console.log('I made it here');
         setQA(res.data.results.slice(0, 4));
       })
       .catch((err) => console.error(err));
