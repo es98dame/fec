@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import styled from 'styled-components';
 
 import Products from './components/Related';
@@ -74,4 +74,11 @@ let App = () => {
 };
 
 // eslint-disable-next-line no-undef
-ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.render is no longer supported, need to change it to this
+// https://reactjs.org/docs/react-dom-client.html
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<App />);
+
+export default App;
