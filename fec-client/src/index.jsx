@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
@@ -42,11 +42,11 @@ border: 1px solid black;
 width: 90%;
 height: 25%;
 `;
-const foo = function () {
 
-};
 
 let App = () => {
+  let [productId, setProductId] = useState(65631);
+
   return (
     <AppDiv>
       <div>
@@ -54,19 +54,19 @@ let App = () => {
       </div>
       <div>
         <OverviewDiv>
-          <Overview />
+          <Overview productId={productId} setProductId={setProductId}/>
         </OverviewDiv>
 
         <RelatedDiv>
-          <Products />
+          <Products productId={productId} setProductId={setProductId}/>
         </RelatedDiv>
 
         <QandADiv>
-          <QA productId={65631}/>
+          <QA productId={productId}/>
         </QandADiv>
 
         <RatingsDiv>
-          <Ratings />
+          <Ratings productId={productId}/>
         </RatingsDiv>
       </div>
     </AppDiv>
