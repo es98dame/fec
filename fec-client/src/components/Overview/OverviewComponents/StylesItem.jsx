@@ -5,12 +5,14 @@ var StylesDiv = styled.div`
   margin: 5px;
   padding: 5px;
   border: 1px solid black;
-  width: 25%;
+  width: 50px;
+  height: 50px;
 `;
 
 var Image = styled.img`
   width 100%;
-  object-fit: none;
+  object-fit: cover;
+  object-position: center;
 `;
 
 
