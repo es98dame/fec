@@ -62,7 +62,7 @@ let App = () => {
         </RelatedDiv>
 
         <QandADiv>
-          <QA productId={65634}/>
+          <QA productId={65631}/>
         </QandADiv>
 
         <RatingsDiv>

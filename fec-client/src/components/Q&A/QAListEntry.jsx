@@ -2,80 +2,49 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import AListEntry from './AListEntry.jsx';
-
-const QAEntry = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-  gap: .5em;
-`;
-
-const QContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+import { ContainerRow, AContainer, QContainer } from './styles/Container.styles.js';
+import { A } from './styles/ATag.styles.js';
 
 const QItem = styled.div`
-  padding-left: 10px;
+  padding-left: .5em;
   font-weight: 600;
 `;
 
-const QItem2 = styled.div`
-  display: flex;
-  flex-direction: row;
+const QItem2 = styled(ContainerRow)`
   margin-left: auto;
   gap: 0.3em;
 `;
 
-//May change these colors to match groups colors
-const ATag = styled.a`
-  padding-left: 2px;
-  cursor: pointer;
-  &:hover {
-    color: grey;
-  },
-  a:link {
-    color: #111213;
-  }
+const AMoreAnswers = styled(A)`
+  margin-top: .3em;
+  margin-bottom: .5em;
+  margin-left: .6em;
+  width: 130px;
 `;
 
-const AMoreQuestions = styled.a`
-margin: .5em 0;
-margin-left: .7em;
-width: 130px;
-cursor: pointer;
-&:hover {
-  color: grey;
-},
-a:link {
-  color: purple;
-}
-`;
+const sortSeller = function(answers) {
+  let result = [];
+  let sellers = [];
+  answers.forEach((answer) => answer[1].answerer_name === 'Seller' ? sellers.push(answer) : result.push(answer));
 
-const AnswerContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const AList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: .7em;
-`;
+  return [...sellers, ...result];
+};
 
 const QAListEntry = function({question}) {
   let allAnswers = Object.entries(question.answers);
   let askerName = question.asker_name;
-  let sortedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
+  let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
 
+  const sortedAnswers = useRef(sortSeller(orderedAnswers));
   const pressedHelpful = useRef(false);
+
   const [count, setCount] = useState(question.question_helpfulness);
   const [buttonText, setButtonText] = useState('See More Answers');
-  const [answers, setAnswers] = useState(allAnswers.slice(0, 2));
+  const [answers, setAnswers] = useState(sortedAnswers.current.slice(0, 2));
 
   const handleSeeMoreAnswers = function() {
     buttonText === 'See More Answers' ? setButtonText('Collapse Answers') : setButtonText('See More Answers');
-    answers.length === 2 ? setAnswers(allAnswers) : setAnswers(allAnswers.slice(0, 2));
+    answers.length === 2 ? setAnswers(sortedAnswers.current) : setAnswers(sortedAnswers.current.slice(0, 2));
   };
 
   const handleAddAnswer = function() {
@@ -90,25 +59,25 @@ const QAListEntry = function({question}) {
   };
 
   return (
-    <QAEntry>
-      <QContainer>
+    <QContainer>
+      <ContainerRow>
         <QItem>Q:</QItem>
         <QItem>{question.question_body}</QItem>
         <QItem2>
           <div>Helpful?</div>
-          <ATag onClick={handleHelpfulYes}>{`Yes (${count})`}</ATag>
+          <A onClick={handleHelpfulYes}>{`Yes (${count})`}</A>
           <div>|</div>
-          <ATag onClick={handleAddAnswer}>Add Answer</ATag>
+          <A onClick={handleAddAnswer}>Add Answer</A>
         </QItem2>
-      </QContainer>
-      <AnswerContainer>{
-        answers.length ? <QItem>A:</QItem> : null
-      }<AList>{
-        answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={key}/>) : null
-      }{ allAnswers.length > 2 ? <AMoreQuestions onClick={handleSeeMoreAnswers}>{buttonText}</AMoreQuestions> : null
-      }</AList>
-      </AnswerContainer>
-    </QAEntry>
+      </ContainerRow>
+      <ContainerRow>
+        {answers.length ? <QItem>A:</QItem> : null}
+        <AContainer>
+          {answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={key}/>) : null}
+          {allAnswers.length > 2 ? <AMoreAnswers color={'purple'} onClick={handleSeeMoreAnswers}>{buttonText}</AMoreAnswers> : null}
+        </AContainer>
+      </ContainerRow>
+    </QContainer>
   );
 };
 

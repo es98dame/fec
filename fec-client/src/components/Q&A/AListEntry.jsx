@@ -1,48 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { ContainerRow, ContainerCol } from './styles/Container.styles.js';
+import { A } from './styles/ATag.styles.js';
 
-const AnswerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: .7em;
+const AnswerContainer = styled(ContainerCol)`
+  margin-left: .5em;
+  margin-right: auto;
 `;
 
-const ABodyContainer = styled.div`
-  display: flex;
-  flex-direction: row;
+const ABodyContainer = styled(ContainerRow)`
   margin-bottom: .2em;
-  gap: .2em;
+  gap: .4em;
 `;
 
 const ALabel = styled.span`
   font-weight: 600;
 `;
 
-const UserContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: .5em;
+const UserContainer = styled(ContainerRow)`
+  gap: .4em;
   font-size: small;
 `;
 
 const UserLine = styled.span`
   font-style: oblique;
-`;
-
-const UserLineSeller = styled.span`
-  font-style: oblique;
-  font-weight: 600;
-`;
-
-const ATag = styled.a`
-  cursor: pointer;
-  &:hover {
-    color: grey;
-  },
-  a:link {
-    color: #111213;
-  }
+  font-weight: ${ props => props.seller === 'Seller' ? 700 : 300 }
 `;
 
 const AListEntry = function({answer, askerName}) {
@@ -71,13 +54,11 @@ const AListEntry = function({answer, askerName}) {
       </ABodyContainer>
       <UserContainer>
         <UserLine>by</UserLine>
-        {isSeller ? <UserLineSeller>{answerer}</UserLineSeller> : <UserLine>{answerer}</UserLine>}
+        <UserLine seller={answerer}>{answerer}</UserLine>
         <UserLine>{answer[1].date.slice(0, 10)}</UserLine>
-        <span>|</span>
-        <span>Helpful?</span>
-        <span>|</span>
-        <ATag onClick={handleHelpfulYes}>Yes({count})</ATag>
-        <ATag onClick={handleReport}>{report}</ATag>
+        <span> &nbsp; | &nbsp; Helpful?</span>
+        <A onClick={handleHelpfulYes}>{' '}Yes({count}){' '}</A>
+        <A onClick={handleReport}>{report}</A>
       </UserContainer>
     </AnswerContainer>
   );
