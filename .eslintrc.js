@@ -9,7 +9,8 @@ module.exports = {
     'es6': true
   },
   parserOptions: {
-    'sourceType': 'module',
+    sourceType: 'module',
+    ecmaVersion: 8,
     ecmaFeatures: {
       'jsx': true
     }
