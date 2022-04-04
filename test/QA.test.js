@@ -1,12 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import * as React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import QA from './../fec-client/src/components/Q&A/QA.jsx';
 import QAList from './../fec-client/src/components/Q&A/QAList.jsx';
 
-beforeEach(() => {
-  const app = document.createElement('app');
-  document.body.appendChild(app);
-});
+// beforeEach(() => {
+//   const app = document.createElement('app');
+//   document.body.appendChild(app);
+// });
 
 describe('Numerical Testing - Not Component Related', () => {
   test('adds two numbers together', () => {
@@ -26,11 +27,12 @@ describe('Numerical Testing - Not Component Related', () => {
 
 describe('QA component', () => {
   const app = document.createElement('app');
+  console.log(app);
   document.body.appendChild(app);
-  render(<QA />, app);
+  let { getByText } = render(QA, app);
 
   test('it renders QA component to the App', () => {
-    expect(screen.getByPlaceholderText('Have a Question? Search for answers...'));
+    expect(getByText('Questions And Answers'));
   });
 });
 
