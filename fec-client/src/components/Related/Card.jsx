@@ -30,16 +30,16 @@ const Card = (props)=> {
      image = props.styleInfo[0].photos[0].thumbnail_url;
   }
 
-  const handleClickOutside = ({ target }) => {
-    if (show && !inputRef.current.contains(target)) setShow(false);
+  const handleOutsideClick = e => {
+    if (!inputRef.current.contains(e.target)) handleClick();
   };
 
 
   const handleClick = () => {
     if (!show) {
-      document.addEventListener("click", handleClickOutside, false);
+      document.addEventListener("click", handleOutsideClick, false);
     } else {
-      document.removeEventListener("click", handleClickOutside, false);
+      document.removeEventListener("click", handleOutsideClick, false);
     }
 
     setShow(prevShow => ( !show ));
@@ -61,7 +61,7 @@ const Card = (props)=> {
   return(
   <ProductCard ref={node => { inputRef = node; }}>
     <PreviewImg src={image} onClick={handleClick}></PreviewImg>
-    { show && <Modal show={show} handleClose={handleClick}></Modal> }
+    { show && <Modal show={show} handleClose={handleClick} productInfo = {props.productInfo}></Modal> }
     <div>{props.productInfo.category}</div>
     <div>{props.productInfo.name}</div>
     <div>{props.productInfo.default_price}</div>
