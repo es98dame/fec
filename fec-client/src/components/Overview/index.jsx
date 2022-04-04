@@ -30,14 +30,16 @@ const Content = styled.div`
   width: 40%;
 `;
 
-const Overview = () => {
+const Overview = (props) => {
   const [styles, setStyle] = useState([]);
+  const [productId] = useState(props.productId);
+  const [currentStyle, setCurrentStyle] = useState([]);
 
   useEffect(() => {
-    axios.get('/api', {headers: {path: '/products/65631/styles'}})
+    axios.get('/api', {headers: {path: `/products/${productId}/styles`}})
       .then((response) => {
         setStyle(response.data.results);
-        console.log(styles);
+        setCurrentStyle(response.data.results[0]);
       });
   }, []);
 
@@ -47,7 +49,7 @@ const Overview = () => {
 
       <FullDiv>
         <ImagesDiv>
-          <Images />
+          <Images currentStyle={currentStyle}/>
         </ImagesDiv>
         <Content>
           <ProductSpecs />

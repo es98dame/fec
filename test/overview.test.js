@@ -19,5 +19,5 @@ afterAll(() => server.close());
 test('loads and displays "Overview here"', () => {
   render(<App url="/test" />);
 
-  expect(screen.getByRole('heading')).toHaveTextContent('hello there');
+  expect(screen.getByRole('heading')).toHaveTextContent('Overview here');
 });

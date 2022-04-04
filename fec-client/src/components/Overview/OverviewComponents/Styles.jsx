@@ -11,13 +11,15 @@ var Container = styled.div`
 `;
 
 const Styles = (props) => {
-  console.log(props.styles);
+  let num = 0;
   return (
     <div>
       <h3>choose a style</h3>
       <Container>
-        {props.styles.map((style) =>
-          <StylesItem style={style}/>
+        {props.styles.map((style) => {
+          num = num + 1;
+          return (<StylesItem style={style} key={num} />);
+        }
         )}
       </Container>
     </div>
