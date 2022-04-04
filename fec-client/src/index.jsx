@@ -33,6 +33,7 @@ const QandADiv = styled.div`
 border: 1px solid black;
 width: 90%;
 height: 25%;
+margin: 5px 0;
 `;
 
 const RatingsDiv = styled.div`
@@ -61,7 +62,7 @@ let App = () => {
         </RelatedDiv>
 
         <QandADiv>
-          <QA />
+          <QA productId={65631}/>
         </QandADiv>
 
         <RatingsDiv>
