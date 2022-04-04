@@ -31,7 +31,7 @@ const Content = styled.div`
 `;
 
 const Overview = () => {
-  const [styles, setStyle] = useState(['none']);
+  const [styles, setStyle] = useState([]);
 
   useEffect(() => {
     axios.get('/api', {headers: {path: '/products/65631/styles'}})
