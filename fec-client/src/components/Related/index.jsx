@@ -48,7 +48,6 @@ const Products = (props)=> {
   const getRelatedItemsId = (id) => {
     axios.get('/api', {headers: {path: `/products/${id}/related`}}) //get request to get the related item id array
     .then(res => {
-      console.log('related', res);
       setIdArray(res.data);
     })
     .catch(err=> console.log(err));

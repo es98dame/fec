@@ -17,6 +17,22 @@ flex-direction: column;
 height : 100%;
 `;
 
+const Heartbutton = styled.button`
+
+  position: absolute;
+  color: black;
+  font-size: 2rem;
+  cursor: pointer;
+  left: 50%;
+  bottom: 50%;
+`;
+const Actionicon = styled.i`
+  position: absolute;
+  z-index: 2;
+  color: red;
+  position: absolute;
+`;
+
 const Card = (props)=> {
   //console.log('syeye',props.styleInfo);
   let inputRef = useRef();
