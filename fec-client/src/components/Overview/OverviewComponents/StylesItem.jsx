@@ -21,9 +21,20 @@ var Image = styled.img`
 
 const StylesItem = (props) => {
   var photos = props.style.photos[0].thumbnail_url;
+
+
+  const handleClick = () => {
+    let name = props.style.name;
+    props.styles.forEach((style) => {
+      if (style.name = name) {
+        console.log(style);
+      }
+    });
+  };
+
   return (
     <StylesDiv>
-      <Image src={photos}/>
+      <Image src={photos} onClick={handleClick}/>
     </StylesDiv>
   );
 };

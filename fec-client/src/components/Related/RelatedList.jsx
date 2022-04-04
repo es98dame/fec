@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import Card from './Card.jsx'
-
+import "regenerator-runtime/runtime.js";
 
 const RelatedList = ({id})=> {
 

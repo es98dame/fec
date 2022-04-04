@@ -52,9 +52,9 @@ const Overview = (props) => {
           <Images currentStyle={currentStyle}/>
         </ImagesDiv>
         <Content>
-          <ProductSpecs />
+          <ProductSpecs currentStyle={currentStyle}/>
 
-          <Styles styles={styles}/>
+          <Styles styles={styles} set={setCurrentStyle}/>
 
           <CheckingOut />
         </Content>
