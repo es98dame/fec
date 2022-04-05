@@ -95,8 +95,14 @@ const Modal = ({ handleClose, show, productInfo }) => {
   //   };
   // },[])
 
-  return (
-
+  return show ? (
+    <div
+      className="modal-backdrop"
+      onClick={() => {
+        // close modal when outside of modal is clicked
+        handleClose();
+      }}
+    >
     <ShowHideClassName>
       <Modalmain>
         <h3>Comparing</h3>
@@ -122,8 +128,9 @@ const Modal = ({ handleClose, show, productInfo }) => {
         </button>
       </Modalmain>
     </ShowHideClassName>
+    </div>
 
-  );
+  ) : null;
 };
 
 export default Modal;
