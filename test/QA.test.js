@@ -1,8 +1,10 @@
 import '@testing-library/jest-dom';
-import * as React from 'react';
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+
 import QA from './../fec-client/src/components/Q&A/QA.jsx';
 import QAList from './../fec-client/src/components/Q&A/QAList.jsx';
+import App from './../fec-client/src/App.jsx';
 
 // beforeEach(() => {
 //   const app = document.createElement('app');
@@ -26,14 +28,15 @@ describe('Numerical Testing - Not Component Related', () => {
 });
 
 describe('QA component', () => {
-  const app = document.createElement('app');
-  console.log(app);
-  document.body.appendChild(app);
-  let { getByText } = render(QA, app);
-
+  // const app = document.createElement('app');
+  // document.body.appendChild(app);
+  // let { getByText } = render(QA, app);
   test('it renders QA component to the App', () => {
-    expect(getByText('Questions And Answers'));
+    // expect(getByText('Questions And Answers'));
+    render(<App />);
   });
+
+  screen.debug();
 });
 
 
