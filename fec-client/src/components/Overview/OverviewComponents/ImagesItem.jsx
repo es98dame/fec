@@ -19,7 +19,6 @@ var ImgDiv = styled.div`
 `;
 
 const ImagesItem = (props) => {
-  console.log(props.image);
   return (
     <ImgDiv>
       <Image src={props.image}/>
