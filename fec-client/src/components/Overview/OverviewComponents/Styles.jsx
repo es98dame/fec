@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import StylesItem from './StylesItem.jsx';
 
 var Container = styled.div`
   display: flex;
@@ -9,21 +10,17 @@ var Container = styled.div`
   justify-content: space-evenly;
 `;
 
-var StylesDiv = styled.div`
-  margin: 5px;
-  padding: 5px;
-  border: 1px solid black;
-`;
-
-const Styles = () => {
+const Styles = (props) => {
+  let num = 0;
   return (
     <div>
       <h3>choose a style</h3>
       <Container>
-        <StylesDiv>style 1</StylesDiv>
-        <StylesDiv>style 2</StylesDiv>
-        <StylesDiv>style 3</StylesDiv>
-        <StylesDiv>style 4</StylesDiv>
+        {props.styles.map((style) => {
+          num = num + 1;
+          return (<StylesItem style={style} key={num} styles={props.styles}/>);
+        }
+        )}
       </Container>
     </div>
   );

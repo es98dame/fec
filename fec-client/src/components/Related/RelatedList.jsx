@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Card from './Card.jsx'
 
-
 const RelatedList = ({id})=> {
 
   const [productInfo, setProductInfo] = useState({});

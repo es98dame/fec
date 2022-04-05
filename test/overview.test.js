@@ -17,7 +17,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test('loads and displays "Overview here"', () => {
-  render(<App url="/test" />);
+  render(<App/>);
 
-  expect(screen.getByRole('heading')).toHaveTextContent('hello there');
+  expect(screen.getByRole('heading')).toHaveTextContent('Overview here');
 });
