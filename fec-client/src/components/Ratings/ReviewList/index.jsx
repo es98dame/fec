@@ -28,7 +28,7 @@ const ReviewList = ({reviews}) => {
       {reviews.slice(0, numReviews).map(review => (
         <ReviewTile review = {review} key = {review.review_id} />
       ))}
-      <ShowMore onClick = {handleShowMoreClick} >Show More</ShowMore>
+      { reviews.length > numReviews ? <ShowMore onClick = {handleShowMoreClick} >Show More Reviews</ShowMore> : null }
 
     </ReviewContainer>
   );
