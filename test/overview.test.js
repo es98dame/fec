@@ -26,7 +26,7 @@ describe('Overview component', () => {
   test('loads and displays a style selection area', () => {
     render(<App/>);
 
-    expect(screen.getByTitle('Overview')).toHaveTextContent('choose a style');
+    expect(screen.getByTitle('Overview')).toHaveTextContent('Style:');
   });
 
 });
