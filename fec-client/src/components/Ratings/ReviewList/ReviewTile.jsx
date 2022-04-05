@@ -65,7 +65,7 @@ font-size: 0.8rem;
 const ReviewTile = ({ review }) => {
 
   return (
-    <Tile title = 'Title'>
+    <Tile title = 'Tile'>
       <UserInfo>
         <Name>{review.reviewer_name}</Name>
         <Date>{dateformat(review.date, 'mmmm dd, yyyy')}</Date>
@@ -79,8 +79,7 @@ const ReviewTile = ({ review }) => {
           'Yes, I would recommend this product to a friend.' :
           'No, I would not recommend this product to a friend.'} </Recommend>
         <Helpful> {review.helpfulness} people found this review helpful. </Helpful>
-        <div> {review.response} </div>
-
+        { review.response ? <div title = 'response'> {review.response} </div> : null }
       </ReviewContent>
 
     </Tile>
