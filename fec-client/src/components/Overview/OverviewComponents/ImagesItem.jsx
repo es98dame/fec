@@ -7,6 +7,7 @@ const Image = styled.img`
   object-fit: cover;
   object-position: center;
   margin: 5px;
+  border: 3px solid lightgrey;
 
   &:hover{
     border: 3px solid pink;

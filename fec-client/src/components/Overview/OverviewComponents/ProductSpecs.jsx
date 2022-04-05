@@ -11,7 +11,6 @@ const ProductSpecs = (props) => {
       <h3>{props.currentProduct.name}</h3>
       <p>{props.currentProduct.description}</p>
       <h4>{props.currentStyle.original_price}</h4>
-      <span>Selected style: {props.currentStyle.name}</span>
     </div>
   );
 };

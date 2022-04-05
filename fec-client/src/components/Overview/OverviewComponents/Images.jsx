@@ -11,6 +11,8 @@ const ImagesDiv = styled.div`
   margin: 5px;
   padding: 5px;
   width 100%;
+  overflow-x: auto;
+  justify-content: space-between;
 `;
 
 const Images = (props) => {

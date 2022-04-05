@@ -1,0 +1,9 @@
+Implaments 2 tests which pass
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch ian-feature-branch
+# Changes to be committed:
+#	modified:   fec-client/src/components/Overview/index.jsx
+#	modified:   test/overview.test.js
+#

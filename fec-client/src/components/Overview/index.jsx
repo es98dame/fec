@@ -24,10 +24,13 @@ const ImagesDiv = styled.div`
 `;
 
 const Content = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 5px;
   padding: 5px;
   border: 1px solid black;
   width: 40%;
+  justify-content: space-around;
 `;
 
 const Overview = (props) => {
@@ -64,7 +67,7 @@ const Overview = (props) => {
         <Content>
           <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct}/>
 
-          <Styles styles={styles} set={setCurrentStyle}/>
+          <Styles styles={styles} currentStyle={currentStyle} set={setCurrentStyle}/>
 
           <CheckingOut />
         </Content>
