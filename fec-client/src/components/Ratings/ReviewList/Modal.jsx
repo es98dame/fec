@@ -25,12 +25,6 @@ height: 40rem;
 width: 35rem;
 `;
 
-const ImageCarousel = styled.div`
-display: flex;
-flex-direction: row;
-overflow-x: auto;
-`;
-
 const ImageDisplay = styled.img`
 object-fit: contain;
 width: 90%;
@@ -48,15 +42,11 @@ padding: 1px;
 `;
 
 
-const ImagePopup = ({images, handleModal}) => (
+const ImagePopup = ({image, handleModal}) => (
   <Modal title = 'Modal'>
     <ModalContent >
       <Button onClick = {handleModal}>CLOSE</Button>
-      <ImageCarousel>
-        {images.map(image => (
-          <ImageDisplay src = {image.url} key = {image.id}></ImageDisplay>
-        ))}
-      </ImageCarousel>
+      <ImageDisplay src = {image.url} key = {image.id}></ImageDisplay>
     </ModalContent>
   </Modal>
 );
