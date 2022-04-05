@@ -6,6 +6,8 @@ width: 16px;
 height: 16px;
 `;
 
+//Stars should be passed a prop 'rating', a number between 0 and 5.
+
 const Stars = ({rating}) => {
 
   const fillRating = (n) => {
@@ -26,8 +28,8 @@ const Stars = ({rating}) => {
 
   return (
     <div>
-      {fills.map(fill => (
-        <Star viewBox="0 0 51 48">
+      {fills.map((fill, key) => (
+        <Star viewBox="0 0 51 48" key = {key}>
           <defs>
             <linearGradient id = {`gradient-${fill}`}>
               <stop offset = {'0%'} stopColor = "#3D463D"></stop>
