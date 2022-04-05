@@ -1,4 +1,9 @@
 node_modules
+.eslintrc.js
 bundle.js
 hooksPractice.jsx
+package.json
+package-lock.json
+webpack.config.js
 config.js
+memo

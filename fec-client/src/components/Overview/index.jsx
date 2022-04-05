@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CheckingOut from './OverviewComponents/CheckingOut.jsx';
 import Images from './OverviewComponents/Images.jsx';
 import Styles from './OverviewComponents/Styles.jsx';
@@ -30,28 +30,31 @@ const Content = styled.div`
   width: 40%;
 `;
 
-var getProducts = () => {
-  axios.get('/api', {headers: {path: '/products/65631/styles'}})
-    .then((response) => {
-      console.log(response.data);
-    });
-};
+const Overview = (props) => {
+  const [styles, setStyle] = useState([]);
+  const [productId] = useState(props.productId);
+  const [currentStyle, setCurrentStyle] = useState([]);
 
-getProducts();
+  useEffect(() => {
+    axios.get('/api', {headers: {path: `/products/${productId}/styles`}})
+      .then((response) => {
+        setStyle(response.data.results);
+        setCurrentStyle(response.data.results[0]);
+      });
+  }, []);
 
-const Overview = () => {
   return (
     <div className ='Overview'>
       <H2>Overview here</H2>
 
       <FullDiv>
         <ImagesDiv>
-          <Images />
+          <Images currentStyle={currentStyle}/>
         </ImagesDiv>
         <Content>
-          <ProductSpecs />
+          <ProductSpecs currentStyle={currentStyle}/>
 
-          <Styles />
+          <Styles styles={styles} set={setCurrentStyle}/>
 
           <CheckingOut />
         </Content>
