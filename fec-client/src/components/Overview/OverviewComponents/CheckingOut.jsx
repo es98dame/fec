@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Button = styled.button`
+  padding: 10px;
+  width: 100%;
+`;
 
 const CheckingOut = () => {
   return (
@@ -14,7 +18,7 @@ const CheckingOut = () => {
         </select>
       </div>
       <div>
-        <button>checkout</button>
+        <Button>Add To Cart</Button>
       </div>
     </div>
   );

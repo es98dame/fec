@@ -19,7 +19,6 @@ const FullDiv = styled.div`
 const ImagesDiv = styled.div`
   margin: 5px;
   padding: 5px;
-  border: 1px solid black;
   width: 60%;
 `;
 
@@ -28,7 +27,6 @@ const Content = styled.div`
   flex-direction: column;
   margin: 5px;
   padding: 5px;
-  border: 1px solid black;
   width: 40%;
   justify-content: space-around;
 `;

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ImagesItem from './ImagesItem.jsx';
 
 const Image = styled.img`
-  width: 70%
+  width: 80%;
+  object-position: center;
+  object-fit: contain;
+
 `;
 
 const ImagesDiv = styled.div`
@@ -17,6 +20,7 @@ const CarrosselDiv = styled.div`
 display: flex;
 margin: 5px;
 padding: 5px;
+min-height: 50rem;
 justify-content: space-between;
 background-color: lightgrey
 `;
@@ -31,21 +35,44 @@ flex-direction: column;
 
 
 const Images = (props) => {
-  let img = '';
-  let imgs = [{url: 'none'}];
   let num = 0;
 
-  if (props.currentStyle.photos) { img = props.currentStyle.photos[0].url; }
-  if (props.currentStyle.photos) { imgs = props.currentStyle.photos; }
+
+  const [image, setImage] = useState('');
+  const [images, setImages] = useState([{url: 'none'}]);
+  const [currentIndex, setIndex] = useState(0);
+
+  useEffect(()=> {
+    if (props.currentStyle.photos) {
+      setImage(props.currentStyle.photos[currentIndex].url);
+      setImages(props.currentStyle.photos);
+    }
+  });
+
+
+
+
+  const handleNext = () =>{
+    if (currentIndex === images.length - 1) { return; }
+    setIndex(currentIndex + 1);
+    setImage(props.currentStyle.photos[currentIndex].url);
+  };
+
+  const handleBack = () =>{
+    if (currentIndex === 0) { return; }
+    setIndex(currentIndex - 1);
+    setImage(props.currentStyle.photos[currentIndex].url);
+  };
+
   return (
     <Div>
       <CarrosselDiv>
-        <button> &#x2190; </button>
-        <Image src={img}/>
-        <button> &#x2192; </button>
+        <button onClick={handleBack}> &#x2190; </button>
+        <Image src={image}/>
+        <button onClick={handleNext}> &#x2192; </button>
       </CarrosselDiv>
       <ImagesDiv>
-        {imgs.map((item) => {
+        {images.map((item) => {
           ++num;
           return (<ImagesItem image={item.thumbnail_url} key={num}/>);
         }
