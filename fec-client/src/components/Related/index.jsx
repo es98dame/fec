@@ -13,6 +13,7 @@ display: flex;
 flex-direction: row;
 width : 100%;
 overflow-x: auto;
+
 // SCROLLBAR MODE
 &::-webkit-scrollbar {
   width: 10px;
@@ -29,6 +30,7 @@ overflow-x: auto;
     box-shadow: inset 0px 0px 5px white;
 }
 `;
+
 const Listtitle = styled.h3`
 display: inline-block;
 `;
@@ -48,6 +50,7 @@ const Products = (props)=> {
   const getRelatedItemsId = (id) => {
     axios.get('/api', {headers: {path: `/products/${id}/related`}}) //get request to get the related item id array
     .then(res => {
+      //console.log('related', res);
       setIdArray(res.data);
     })
     .catch(err=> console.log(err));
