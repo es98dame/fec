@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import ReviewTile from './ReviewTile.jsx';
+import Modal from './Modal.jsx';
 
 const ReviewContainer = styled.div`
 display: flex;
@@ -10,13 +12,18 @@ height: 500px;
 overflow-y: auto;
 `;
 
-const ReviewList = ({reviews}) => (
-  <ReviewContainer>
-    {reviews.map(review => (
-      <ReviewTile review = {review} key = {review.review_id} />
-    ))}
-  </ReviewContainer>
-);
+const ReviewList = ({reviews}) => {
+
+
+
+  return (
+    <ReviewContainer>
+      {reviews?.map(review => (
+        <ReviewTile review = {review} key = {review.review_id} />
+      ))}
+    </ReviewContainer>
+  );
+};
 
 
 export default ReviewList;
