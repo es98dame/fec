@@ -49,8 +49,8 @@ padding: 1px;
 
 
 const ImagePopup = ({images, handleModal}) => (
-  <Modal>
-    <ModalContent onBlur = {handleModal}>
+  <Modal title = 'Modal'>
+    <ModalContent >
       <Button onClick = {handleModal}>CLOSE</Button>
       <ImageCarousel>
         {images.map(image => (

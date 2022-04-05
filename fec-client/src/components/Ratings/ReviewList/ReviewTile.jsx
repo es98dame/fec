@@ -65,7 +65,7 @@ font-size: 0.8rem;
 const ReviewTile = ({ review }) => {
 
   return (
-    <Tile>
+    <Tile title = 'Title'>
       <UserInfo>
         <Name>{review.reviewer_name}</Name>
         <Date>{dateformat(review.date, 'mmmm dd, yyyy')}</Date>

@@ -17,8 +17,8 @@ const ReviewList = ({reviews}) => {
 
 
   return (
-    <ReviewContainer>
-      {reviews?.map(review => (
+    <ReviewContainer title = 'review-list'>
+      {reviews.map(review => (
         <ReviewTile review = {review} key = {review.review_id} />
       ))}
     </ReviewContainer>
