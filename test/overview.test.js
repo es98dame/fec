@@ -6,18 +6,27 @@ import '@testing-library/jest-dom';
 
 import App from '../fec-client/src/App.jsx';
 
-const server = setupServer(
-  rest.get('/test', (req, res, ctx) => {
-    return res(ctx.json({greeting: 'hello there'}));
-  })
-);
+// const server = setupServer(
+//   rest.get('/test', (req, res, ctx) => {
+//     return res(ctx.json({greeting: 'hello there'}));
+//   })
+// );
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+// beforeAll(() => server.listen());
+// afterEach(() => server.resetHandlers());
+// afterAll(() => server.close());
 
-test('loads and displays "Overview here"', () => {
-  render(<App/>);
+describe('Overview component', () => {
 
-  expect(screen.getByRole('heading')).toHaveTextContent('Overview here');
+  test('loads and displays "Overview here"', () => {
+    render(<App/>);
+
+    expect(screen.getByTitle('Overview')).toHaveTextContent('Overview here');
+  });
+  test('loads and displays a style selection area', () => {
+    render(<App/>);
+
+    expect(screen.getByTitle('Overview')).toHaveTextContent('choose a style');
+  });
+
 });
