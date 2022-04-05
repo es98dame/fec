@@ -34,12 +34,22 @@ const Overview = (props) => {
   const [styles, setStyle] = useState([]);
   const [productId] = useState(props.productId);
   const [currentStyle, setCurrentStyle] = useState([]);
+  const [currentProduct, setCurrentproduct] = useState([]);
 
   useEffect(() => {
     axios.get('/api', {headers: {path: `/products/${productId}/styles`}})
       .then((response) => {
         setStyle(response.data.results);
         setCurrentStyle(response.data.results[0]);
+      });
+
+    axios.get('/api', {headers: {path: '/products'}})
+      .then((response) => {
+        response.data.forEach((product) => {
+          if (product.id === productId) {
+            setCurrentproduct(product);
+          }
+        });
       });
   }, []);
 
@@ -52,7 +62,7 @@ const Overview = (props) => {
           <Images currentStyle={currentStyle}/>
         </ImagesDiv>
         <Content>
-          <ProductSpecs currentStyle={currentStyle}/>
+          <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct}/>
 
           <Styles styles={styles} set={setCurrentStyle}/>
 

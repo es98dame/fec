@@ -14,9 +14,10 @@ const ImagesDiv = styled.div`
 `;
 
 const Images = (props) => {
-  console.log(props.currentStyle);
   let img = '';
   let imgs = [{url: 'none'}];
+  let num = 0;
+
   if (props.currentStyle.photos) { img = props.currentStyle.photos[0].url; }
   if (props.currentStyle.photos) { imgs = props.currentStyle.photos; }
   return (
@@ -27,8 +28,10 @@ const Images = (props) => {
         <span> next </span>
       </div>
       <ImagesDiv>
-        {imgs.map((item) =>
-          <ImagesItem image={item.thumbnail_url}/>
+        {imgs.map((item) => {
+          ++num;
+          return (<ImagesItem image={item.thumbnail_url} key={num}/>);
+        }
         )}
       </ImagesDiv>
     </div>

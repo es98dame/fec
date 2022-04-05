@@ -4,7 +4,7 @@ import {setupServer} from 'msw/node';
 import {render, fireEvent, waitFor, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import App from '../fec-client/src/index.jsx';
+import App from '../fec-client/src/App.jsx';
 
 const server = setupServer(
   rest.get('/test', (req, res, ctx) => {
