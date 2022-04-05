@@ -23,10 +23,17 @@ describe('Overview component', () => {
 
     expect(screen.getByTitle('Overview')).toHaveTextContent('Overview here');
   });
+
   test('loads and displays a style selection area', () => {
     render(<App/>);
 
     expect(screen.getByTitle('Overview')).toHaveTextContent('Style:');
+  });
+
+  test('loads and displays an add to cart button', () => {
+    render(<App/>);
+
+    expect(screen.getByTitle('Overview')).toHaveTextContent('Add To Cart');
   });
 
 });
