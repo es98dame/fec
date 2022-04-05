@@ -25,7 +25,6 @@ const StylesItem = (props) => {
 
   const handleClick = () => {
     let name = props.style.name;
-    console.log(name);
     props.styles.forEach((style) => {
       if (style.name === name) {
         props.set(style);

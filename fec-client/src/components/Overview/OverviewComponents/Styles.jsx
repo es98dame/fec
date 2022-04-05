@@ -17,7 +17,7 @@ const Styles = (props) => {
       <h3>choose a style</h3>
       <Container>
         {props.styles.map((style) => {
-          num = num + 1;
+          ++num;
           return (<StylesItem style={style} key={num} styles={props.styles} set={props.set}/>);
         }
         )}
