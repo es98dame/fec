@@ -33,7 +33,7 @@ const RatingsStubs = {
       'rating': 5,
       'summary': 'These pants are great!',
       'recommend': true,
-      'response': '',
+      'response': 'So glad you liked the pants!',
       'body': 'I really like these pants. Best fit ever!',
       'date': '2019-02-18T00:00:00.000Z',
       'reviewer_name': 'figuringitout',
