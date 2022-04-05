@@ -2,14 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const ProductSpecs = () => {
+const ProductSpecs = (props) => {
+
   return (
     <div>
       <span>Star rating here</span>
-      <span>product category here</span>
-      <h3>PRODUCT TITLE</h3>
-      <h4>Price</h4>
-      <span>Selected style: style 1</span>
+      <h4>{props.currentProduct.category}</h4>
+      <h3>{props.currentProduct.name}</h3>
+      <p>{props.currentProduct.description}</p>
+      <h4>{props.currentStyle.original_price}</h4>
+      <span>Selected style: {props.currentStyle.name}</span>
     </div>
   );
 };
