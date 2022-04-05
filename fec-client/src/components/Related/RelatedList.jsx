@@ -19,6 +19,7 @@ const RelatedList = ({id})=> {
     };
     const getStyleInfo= async () => {
       const res = await axios.get('/api', {headers: {path: `/products/${id}/styles`}}) //get request to get the related item id array
+      //console.log(res)
       setStyleInfo(res.data.results)
     };
 
