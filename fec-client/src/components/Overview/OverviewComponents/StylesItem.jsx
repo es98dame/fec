@@ -4,8 +4,9 @@ import styled from 'styled-components';
 var StylesDiv = styled.div`
   margin: 5px;
   padding: 5px;
-  width 20%;
-  height 100%;
+  width: 5rem;
+  height: 5rem;
+}
 `;
 
 var Image = styled.img`

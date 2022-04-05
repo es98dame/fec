@@ -58,7 +58,7 @@ const Overview = (props) => {
 
   return (
     <div title='Overview'>
-      <H2>Overview here</H2>
+      <H2 display='none'>Overview here</H2>
 
       <FullDiv>
         <ImagesDiv>
