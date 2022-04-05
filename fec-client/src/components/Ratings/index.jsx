@@ -19,7 +19,7 @@ const Ratings = ({productId}) => {
         setData(response.data.results);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <div> This is the Ratings and Reviews component.
