@@ -17,12 +17,18 @@ left: 50%;
 transform: translate(-50%, -50%);
 
 display: flex;
-flex-direction: row;
-overflow-x: auto;
+flex-direction: column;
+align-items: flex-end;
 
 background-color: white;
 height: 40rem;
 width: 35rem;
+`;
+
+const ImageCarousel = styled.div`
+display: flex;
+flex-direction: row;
+overflow-x: auto;
 `;
 
 const ImageDisplay = styled.img`
@@ -31,12 +37,26 @@ width: 90%;
 margin: 5%;
 `;
 
-const ImagePopup = ({images}) => (
+const Button = styled.button`
+font-family: inherit;
+width: 4rem;
+border: none;
+font-size: xsmall;
+background-color: white;
+padding: 1px;
+
+`;
+
+
+const ImagePopup = ({images, handleModal}) => (
   <Modal>
-    <ModalContent>
-      {images.map(image => (
-        <ImageDisplay src = {image.url}></ImageDisplay>
-      ))}
+    <ModalContent >
+      <Button onClick = {handleModal}>CLOSE</Button>
+      <ImageCarousel>
+        {images.map(image => (
+          <ImageDisplay src = {image.url}></ImageDisplay>
+        ))}
+      </ImageCarousel>
     </ModalContent>
   </Modal>
 );

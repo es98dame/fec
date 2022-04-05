@@ -74,7 +74,7 @@ const ReviewTile = ({ review }) => {
         <Stars rating = {review.rating}/>
         <Summary>{review.summary}</Summary>
         <Body>{review.body}</Body>
-        <Photos images = {review.photos}/>
+        <Photos images = {review.photos} />
         <Recommend> {review.recommend ?
           'Yes, I would recommend this product to a friend.' :
           'No, I would not recommend this product to a friend.'} </Recommend>
