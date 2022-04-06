@@ -2,19 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 import StylesItem from './StylesItem.jsx';
 
-var Container = styled.div`
+const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   margin: 5px;
   padding: 5px;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  height: 5rem;
+`;
+
+const Text = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+`;
+
+const H2 = styled.h2`
+  color: grey;
+  margin-left: 5px;
 `;
 
 const Styles = (props) => {
   let num = 0;
   return (
     <div>
-      <h3>choose a style</h3>
+      <Text>
+        <h2>Style:</h2>
+        <H2>{props.currentStyle.name}</H2>
+      </Text>
       <Container>
         {props.styles.map((style) => {
           ++num;
