@@ -63,7 +63,6 @@ const Card = (props)=> {
   const [checked, setChecked] = useState(false);
   const toggle = () => setChecked(!checked);
 
-
   var image = '';
   if(props.styleInfo.length === 0){
      image = '';
@@ -78,9 +77,6 @@ const Card = (props)=> {
 
   return(
   <ProductCard>
-         <HeartLabel checked={checked}>
-        <HeartCheckbox type="checkbox" onChange={toggle}/>
-      </HeartLabel>
     <PreviewImg src={image} onClick={() => {setShow(!show);}}/>
 
 
