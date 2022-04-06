@@ -17,9 +17,11 @@ const H1 = styled.h1`
   color: black;
 `;
 const OverviewDiv = styled.div`
-  border: 1px solid black;
+  border-top: 3px solid lightgrey;
+  border-bottom: 3px solid lightgrey;
   width: 90%;
   height: 25%;
+  margin: auto;
 `;
 
 const RelatedDiv = styled.div`
