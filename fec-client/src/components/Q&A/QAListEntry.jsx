@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import AListEntry from './AListEntry.jsx';
+
 import { ContainerRow, AContainer, QContainer } from './styles/Container.styles.js';
 import { A } from './styles/ATag.styles.js';
 
@@ -41,7 +42,7 @@ const QAListEntry = function({question}) {
   const [count, setCount] = useState(question.question_helpfulness);
   const [buttonText, setButtonText] = useState('See More Answers');
   const [answers, setAnswers] = useState(sortedAnswers.current.slice(0, 2));
-  const [modalView, setModalView] = useState(false);
+  const [modalA, setModalA] = useState(false);
 
   const handleSeeMoreAnswers = function() {
     buttonText === 'See More Answers' ? setButtonText('Collapse Answers') : setButtonText('See More Answers');
@@ -49,7 +50,7 @@ const QAListEntry = function({question}) {
   };
 
   const handleAddAnswer = function() {
-    setModalView(!modalView);
+    setModalA(!modalA);
   };
 
   const handleHelpfulYes = function() {

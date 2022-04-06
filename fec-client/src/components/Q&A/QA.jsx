@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useInsertionEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import QAList from './QAList';
+import AddQModal from './AddQModal.jsx';
 import { ContainerCol, ButtonContainer } from './styles/Container.styles.js';
 import { Button } from './styles/Button.styles.js';
 
@@ -25,6 +26,7 @@ const QA = function ({productId}) {
   const [searchInput, setSearchInput] = useState('');
   const [QAData, setQA] = useState([]);
   const [seeMoreView, setMoreView] = useState('See More Questions');
+  const [modalQ, setModalQ] = useState(false);
 
   const handleMoreQuestions = function() {
     QAData.length <= 4 ? setQA(storage.current) : setQA(storage.current.slice(0, 4));
@@ -32,7 +34,7 @@ const QA = function ({productId}) {
   };
 
   const handleAddQuestions = function() {
-    alert('Modal Prompt Would Pop Up to add question');
+    setModalQ(!modalQ);
   };
 
   const handleSearch = function(e) {
@@ -68,7 +70,7 @@ const QA = function ({productId}) {
         storage.current = res.data.results;
         setQA(res.data.results.slice(0, 4));
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error('axios request in QA.jsx on line 73:', err));
   }, []);
 
   return (
@@ -83,6 +85,7 @@ const QA = function ({productId}) {
         <Button onClick={handleMoreQuestions}>{seeMoreView}</Button>
         <Button title="Add Question" onClick={handleAddQuestions}>Add A Question</Button>
       </ButtonContainer>
+      <AddQModal show={modalQ} hide={() => setModalQ(!modalQ)}/>
     </ContainerCol>
   );
 };
