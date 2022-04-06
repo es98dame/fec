@@ -16,6 +16,14 @@ const ImagesDiv = styled.div`
   width 90%;
 `;
 
+const ModalImagesDiv = styled.div`
+  display: flex;
+  margin: 5px;
+  padding: 5px;
+  height: 10%;
+  width 90%;
+`;
+
 const CarrosselDiv = styled.div`
   display: flex;
   margin: 5px;
@@ -23,6 +31,15 @@ const CarrosselDiv = styled.div`
   min-height: 50rem;
   justify-content: space-between;
   background-color: lightgrey
+`;
+
+const ModalCarrosselDiv = styled.div`
+  display: flex;
+  margin: 5px;
+  padding: 5px;
+  height: 80%;
+  justify-content: space-between;
+  background-color: grey;
 `;
 
 const Div = styled.div`
@@ -38,6 +55,27 @@ const Button = styled.button`
   margin: auto;
   `;
 
+const Modal = styled.div`
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .9);
+  flex-direction: column;
+  z-index: 20;
+`;
+
+const Exit = styled.button`
+  position: fixed;
+  height: 2rem;
+  width: 3rem;
+  margin: auto;
+  top: 1%;
+  left: 95%;
+`;
+
 
 
 const Images = (props) => {
@@ -47,6 +85,7 @@ const Images = (props) => {
   const [image, setImage] = useState('');
   const [images, setImages] = useState([{url: 'none'}]);
   const [currentIndex, setIndex] = useState(0);
+  const [displayModal, setDisplayModal] = useState(false);
 
   useInsertionEffect(()=> {
     if (props.currentStyle.photos) {
@@ -73,11 +112,40 @@ const Images = (props) => {
     setImage(props.currentStyle.photos[currentIndex].url);
   };
 
+  const handleOpen = () => {
+    setDisplayModal(true);
+  };
+
+  const handleClose = () => {
+    setDisplayModal(false);
+  };
+
+  if (displayModal) {
+    return (
+      <Modal>
+        <Exit onClick={handleClose}> Exit </Exit>
+        <ModalCarrosselDiv>
+          <Button onClick={handleBack}> &#x2190; </Button>
+          <Image src={image}/>
+          <Button onClick={handleNext}> &#x2192; </Button>
+        </ModalCarrosselDiv>
+        <ModalImagesDiv>
+          {images.map((item) => {
+            ++num;
+            return (<ImagesItem image={item.thumbnail_url} key={num} setIndex={setIndex} allImages={images}/>);
+          }
+          )}
+        </ModalImagesDiv>
+      </Modal>
+    );
+  }
+
   return (
     <Div>
+
       <CarrosselDiv>
         <Button onClick={handleBack}> &#x2190; </Button>
-        <Image src={image}/>
+        <Image src={image} onClick={handleOpen}/>
         <Button onClick={handleNext}> &#x2192; </Button>
       </CarrosselDiv>
       <ImagesDiv>
