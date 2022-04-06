@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import ReviewBar from './ReviewBar.jsx';
@@ -21,7 +21,6 @@ const countTotal = (obj) => {
 };
 
 const ReviewBreakdown = ({ reviewData, filterByRating }) => {
-
   const total = countTotal( reviewData );
 
   return (

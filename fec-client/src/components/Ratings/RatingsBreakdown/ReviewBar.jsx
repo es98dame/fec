@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Bar = styled.div`
@@ -11,15 +11,28 @@ gap: 5%;
   background-color: lightgray;
 }
 
+&.clicked {
+  font-weight: bold;
+}
+
 `;
 
 
 const ReviewBar = ({ rating, num, total, filterByRating }) => {
-
+  const [clicked, setClicked] = useState(false);
   const percent = num / total * 100;
 
+  const toggleColor = () => {
+    setClicked(!clicked);
+  };
+
+  const handleClick = () => {
+    toggleColor();
+    filterByRating(rating);
+  };
+
   return (
-    <Bar onClick = {() => filterByRating(rating)}>
+    <Bar className = { clicked ? 'clicked' : ''} onClick = {handleClick}>
       <span>{rating} stars:</span>
       <svg viewBox = '0, 0, 50, 5' width = '150' height = '15'>
         <linearGradient id = {`gradient-${percent}`}>
