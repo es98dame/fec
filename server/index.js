@@ -35,6 +35,16 @@ app.get('/api', (req, res) => {
 
 });
 
+//PUT REQUEST FOR RATINGS AND REVIEWS
+
+app.put('/api/reviews/:review_id/helpful', (req, res) => {
+  axios.put(`${url}/reviews/${req.params.review_id}/helpful`, null, auth)
+    .then(() => res.send('success'))
+    .catch((err) => console.log(err));
+});
+
+
+
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
 });
