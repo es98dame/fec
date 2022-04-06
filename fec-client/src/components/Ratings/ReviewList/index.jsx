@@ -10,17 +10,29 @@ flex-direction: column;
 gap: 1rem;
 height: 500px;
 overflow-y: auto;
+align-content: center;
+`;
+
+const ShowMore = styled.button`
+font-family: inherit;
+width: 10rem;
+text-align: center;
 `;
 
 const ReviewList = ({reviews}) => {
+  const [numReviews, setNumReviews] = useState(2);
 
-
+  const handleShowMoreClick = () => {
+    setNumReviews(numReviews + 2);
+  };
 
   return (
-    <ReviewContainer>
-      {reviews?.map(review => (
+    <ReviewContainer title = 'review-list'>
+      {reviews.slice(0, numReviews).map(review => (
         <ReviewTile review = {review} key = {review.review_id} />
       ))}
+      { reviews.length > numReviews ? <ShowMore onClick = {handleShowMoreClick} >Show More Reviews</ShowMore> : null }
+
     </ReviewContainer>
   );
 };

@@ -74,14 +74,14 @@ const QA = function ({productId}) {
   return (
     <ContainerCol>
       <H4>Questions And Answers</H4>
-      <SearchForm type="submit" onSubmit={handleSearch}>
+      <SearchForm title="live-search" type="submit" onSubmit={handleSearch}>
         <StyledInput type="text" onChange={handleInput} placeholder="Have a Question? Search for answers..."/>
         <button type="submit">Search</button>
       </SearchForm>
       <QAList QAData={QAData}/>
       <ButtonContainer>
         <Button onClick={handleMoreQuestions}>{seeMoreView}</Button>
-        <Button onClick={handleAddQuestions}>Add A Question</Button>
+        <Button title="Add Question" onClick={handleAddQuestions}>Add A Question</Button>
       </ButtonContainer>
     </ContainerCol>
   );
