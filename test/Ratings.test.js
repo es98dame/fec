@@ -46,36 +46,37 @@ test('Renders the company response div if a response is available', () => {
 });
 
 //THUMBNAIL POPUP
+describe('Thumbnail modal behavior', () => {
+  test('Renders a modal pop-up when a thumbnail is clicked', () => {
+    render(<ReviewList reviews = {RatingsStubs.results}/>);
+    fireEvent.click(screen.getAllByRole('img')[0]);
+    expect(screen.getByTitle('Modal')).toBeInTheDocument();
+  });
 
-test('Renders a modal pop-up when a thumbnail is clicked', () => {
-  render(<ReviewList reviews = {RatingsStubs.results}/>);
-  fireEvent.click(screen.getAllByRole('img')[0]);
-  expect(screen.getByTitle('Modal')).toBeInTheDocument();
+  test('Does not render the modal on document load', () => {
+    render(<ReviewList reviews = {RatingsStubs.results}/>);
+    expect(screen.queryByTitle('Modal')).toBeNull();
+  });
 });
 
-test('Does not render the modal on document load', () => {
-  render(<ReviewList reviews = {RatingsStubs.results}/>);
-  expect(screen.queryByTitle('Modal')).toBeNull();
-});
 
-//HELPFULNESS
+describe('Review List display options', () => {
+  test('Renders two reviews to the screen on Review List load', () => {
+    render(<ReviewList reviews = {RatingsStubs.results}/>);
+    const Tiles = screen.getAllByTitle('Tile');
+    expect(Tiles).toHaveLength(2);
+  });
 
-//TWO REVIEWS AT A TIME
-test('Renders two reviews to the screen on Review List load', () => {
-  render(<ReviewList reviews = {RatingsStubs.results}/>);
-  const Tiles = screen.getAllByTitle('Tile');
-  expect(Tiles).toHaveLength(2);
-});
+  test('Renders two additional reviews to the screen on Show More Reviews click', () => {
+    render(<ReviewList reviews = {RatingsStubs.results} />);
+    fireEvent.click(screen.getByText('Show More Reviews'));
+    expect(screen.getAllByTitle('Tile')).toHaveLength(4);
+  });
 
-test('Renders two additional reviews to the screen on Show More Reviews click', () => {
-  render(<ReviewList reviews = {RatingsStubs.results} />);
-  fireEvent.click(screen.getByText('Show More Reviews'));
-  expect(screen.getAllByTitle('Tile')).toHaveLength(4);
-});
-
-test('Should not display Show More Reviews button if two or fewer reviews are available', () => {
-  render(<ReviewList reviews = {RatingsStubs.results.slice(0, 2)}/>);
-  expect(screen.queryByText('Show More Reviews')).not.toBeInTheDocument();
+  test('Should not display Show More Reviews button if two or fewer reviews are available', () => {
+    render(<ReviewList reviews = {RatingsStubs.results.slice(0, 2)}/>);
+    expect(screen.queryByText('Show More Reviews')).not.toBeInTheDocument();
+  });
 });
 
 
