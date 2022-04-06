@@ -10,10 +10,13 @@ flex-direction: column;
 gap: 1rem;
 height: 500px;
 overflow-y: auto;
+align-content: center;
 `;
 
 const ShowMore = styled.button`
 font-family: inherit;
+width: 10rem;
+text-align: center;
 `;
 
 const ReviewList = ({reviews}) => {

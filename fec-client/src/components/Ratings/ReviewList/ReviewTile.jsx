@@ -60,6 +60,18 @@ font-weight: 400;
 
 const Helpful = styled.div`
 font-size: 0.8rem;
+
+display: flex;
+direction: row;
+gap: 5%;
+`;
+
+const HelpfulButton = styled.div`
+cursor: pointer;
+
+&:hover {
+  color: green;
+}
 `;
 
 const ReviewTile = ({ review }) => {
@@ -77,8 +89,11 @@ const ReviewTile = ({ review }) => {
         <Photos images = {review.photos} />
         <Recommend> {review.recommend ?
           'Yes, I would recommend this product to a friend.' :
-          'No, I would not recommend this product to a friend.'} </Recommend>
-        <Helpful> {review.helpfulness} people found this review helpful. </Helpful>
+          null } </Recommend>
+        <Helpful>
+          <div> Helpful? </div>
+          <HelpfulButton> Yes ({review.helpfulness}) </HelpfulButton>
+        </Helpful>
         { review.response ? <div title = 'response'> {review.response} </div> : null }
       </ReviewContent>
 
