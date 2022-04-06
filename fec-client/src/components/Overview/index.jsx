@@ -9,6 +9,7 @@ import axios from 'axios';
 
 const H2 = styled.h2`
   text-align: center;
+  display: none;
 `;
 
 const FullDiv = styled.div`
@@ -44,19 +45,15 @@ const Overview = (props) => {
         setCurrentStyle(response.data.results[0]);
       });
 
-    axios.get('/api', {headers: {path: '/products'}})
+    axios.get('/api', {headers: {path: `/products/${productId}`}})
       .then((response) => {
-        response.data.forEach((product) => {
-          if (product.id === productId) {
-            setCurrentproduct(product);
-          }
-        });
+        setCurrentproduct(response.data);
       });
   }, []);
 
   return (
     <div title='Overview'>
-      <H2 display='none'>Overview here</H2>
+      <H2>Overview here</H2>
 
       <FullDiv>
         <ImagesDiv>
@@ -67,7 +64,7 @@ const Overview = (props) => {
 
           <Styles styles={styles} currentStyle={currentStyle} set={setCurrentStyle}/>
 
-          <CheckingOut />
+          <CheckingOut skus={currentStyle.skus}/>
         </Content>
       </FullDiv>
     </div>

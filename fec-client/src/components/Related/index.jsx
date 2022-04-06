@@ -6,8 +6,6 @@ import axios from 'axios';
 import RelatedList from './RelatedList.jsx';
 import OutfitList from './OutfitList.jsx';
 
-// import config from '../../../../config.js';
-
 const ProductList = styled.div`
 display: flex;
 flex-direction: row;
@@ -44,8 +42,6 @@ overflow-x: auto;
 
 const Products = (props)=> {
   const [idArray, setIdArray] = useState([]);
-
-  //console.log(config.TOKEN); // ok I got token
 
   const getRelatedItemsId = (id) => {
     axios.get('/api', {headers: {path: `/products/${id}/related`}}) //get request to get the related item id array

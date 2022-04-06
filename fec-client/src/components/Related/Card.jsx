@@ -12,49 +12,31 @@ border: solid;
 border-color: lightgray;
 `;
 
+const CardDiv = styled.div`
+  width: fit-content;
+  line-height: 0.8em;
+`;
+const CardText = styled.p`
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-left: 1px;
+`;
+
 const PreviewImg = styled.img`
-flex-direction: column;
+position : relative;
 height : 100%;
+z-index: 2;
+&:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
 `;
 
-const HeartCheckbox = styled.input`
-  display: none;
+const ActionButton = styled.img`
+  position : relative;
+  left:85%;
+  z-index:10;
 `;
 
-const HeartLabel = styled.label`
-  color: ${({ checked }) => (checked ? "red" : "grey")};
-  background-color: currentColor;
-  display: inline-block;
-  height: 70px;
-  margin: 0 10px;
-  top: 0;
-  transform: rotate(-45deg);
-  position: relative;
-  left: 45%;
-  top: 45%;
-  width: 50px;
-
-  &::before,
-  &::after {
-    content: "";
-    background-color: currentColor;
-    border-radius: 50%;
-    height: 50px;
-    position: absolute;
-    width: 50px;
-  }
-
-  &:before {
-    top: -25px;
-    left: 0;
-  }
-
-  &:after {
-    left: 25px;
-    top: 0;
-  }
-
-`;
 
 const Card = (props)=> {
   //console.log('syeye',props.styleInfo);
@@ -75,15 +57,20 @@ const Card = (props)=> {
   //   console.log('show',show);
   // },[show])
 
+
+
   return(
   <ProductCard>
-    <PreviewImg src={image} onClick={() => {setShow(!show);}}/>
-
+    <div><ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png" onClick={() => {setShow(!show);}}></ActionButton>
+     </div>
+    <PreviewImg src={image} alt="no image"/>
 
     <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {props.productInfo}></Modal>
-    <div>{props.productInfo.category}</div>
-    <div>{props.productInfo.name}</div>
-    <div>{props.productInfo.default_price}</div>
+    <CardDiv>
+    <CardText>{props.productInfo.category}</CardText>
+    <CardText>{props.productInfo.name}</CardText>
+    <CardText>{props.productInfo.default_price}</CardText>
+    </CardDiv>
   </ProductCard>
   )
 }
