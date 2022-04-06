@@ -14,8 +14,11 @@ border-color: lightgray;
 
 const CardDiv = styled.div`
   width: fit-content;
+  line-height: 0.8em;
 `;
 const CardText = styled.p`
+  margin-top: 8px;
+  margin-bottom: 8px;
   padding-left: 1px;
 `;
 
@@ -32,52 +35,8 @@ const ActionButton = styled.img`
   position : relative;
   left:85%;
   z-index:10;
-
-`;
-const Buttonimage = styled(ActionButton)`
-display : inline;
-margin-top' : -234px;
-margin-left' : 127px;
 `;
 
-const HeartCheckbox = styled.input`
-  display: none;
-`;
-
-const HeartLabel = styled.label`
-  color: ${({ checked }) => (checked ? "red" : "grey")};
-  background-color: currentColor;
-  display: inline-block;
-  height: 70px;
-  margin: 0 10px;
-  top: 0;
-  transform: rotate(-45deg);
-  position: relative;
-  left: 45%;
-  top: 45%;
-  width: 50px;
-
-  &::before,
-  &::after {
-    content: "";
-    background-color: currentColor;
-    border-radius: 50%;
-    height: 50px;
-    position: absolute;
-    width: 50px;
-  }
-
-  &:before {
-    top: -25px;
-    left: 0;
-  }
-
-  &:after {
-    left: 25px;
-    top: 0;
-  }
-
-`;
 
 const Card = (props)=> {
   //console.log('syeye',props.styleInfo);
@@ -108,9 +67,9 @@ const Card = (props)=> {
 
     <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {props.productInfo}></Modal>
     <CardDiv>
-    <p>{props.productInfo.category}</p>
-    <p>{props.productInfo.name}</p>
-    <p>{props.productInfo.default_price}</p>
+    <CardText>{props.productInfo.category}</CardText>
+    <CardText>{props.productInfo.name}</CardText>
+    <CardText>{props.productInfo.default_price}</CardText>
     </CardDiv>
   </ProductCard>
   )
