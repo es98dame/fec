@@ -6,6 +6,7 @@ font-size: 0.8rem;
 display: flex;
 flex-direction: row;
 gap: 5%;
+justify-content: space-between;
 
 &:hover {
   background-color: lightgray;

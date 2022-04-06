@@ -8,17 +8,24 @@ const BarContainer = styled.div`
 display: flex;
 flex-direction: column;
 gap: 5px;
-
 width: 50%;
-
-font-size: 0.9rem;
-
 `;
 
 const Summary = styled.div`
 display: flex;
 flex-direction: row;
-gap: 5%;
+font-size: 0.9rem;
+justify-content: space-between;
+`;
+
+const Average = styled.div`
+display: flex;
+flex-direction: row;
+`;
+
+const Recommend = styled.p`
+font-style: italic;
+text-align: center;
 `;
 
 const countTotalAndAverage = (obj) => {
@@ -32,21 +39,25 @@ const countTotalAndAverage = (obj) => {
   return [total, average];
 };
 
-const ReviewBreakdown = ({ reviewData, filterByRating }) => {
+const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
   const [total, average] = countTotalAndAverage( reviewData );
+  const percentRecommended = Math.round(parseInt(recommended.true) / total * 100);
 
   return (
     <BarContainer>
       <Summary>
-        <Stars rating = {average}/>
-        <span>{average} </span>
-        <span> <i>{total} reviews</i> </span>
+        <Average>
+          <Stars rating = {average}/>
+          <span>({average})</span>
+        </Average>
+        <span> {total} reviews </span>
       </Summary>
       <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total} filterByRating = {filterByRating}/>
       <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total} filterByRating = {filterByRating}/>
       <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total} filterByRating = {filterByRating}/>
       <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} filterByRating = {filterByRating}/>
       <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} filterByRating = {filterByRating}/>
+      <Recommend>{percentRecommended}% of reviewers recommend this product.</Recommend>
     </BarContainer>
   );
 

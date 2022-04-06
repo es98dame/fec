@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import sampleData from './sampledata.js';
 import axios from 'axios';
 
 import ReviewList from './ReviewList';
@@ -44,12 +43,11 @@ const Ratings = ({productId}) => {
 
   const filterByRating = (rating) => {
     setFilters(filters.map((i, index) => index === rating - 1 ? i = 1 - i : i));
-    //setCurrentData(data.filter(review => review.rating === rating));
   };
 
   return (
     <RatingsContainer>
-      <h2>Ratings Component</h2>
+      <h3>Reviews</h3>
       <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
       <ReviewList reviews = {currentData}/>
     </RatingsContainer>
