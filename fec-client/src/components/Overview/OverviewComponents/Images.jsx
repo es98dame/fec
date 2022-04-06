@@ -17,20 +17,26 @@ const ImagesDiv = styled.div`
 `;
 
 const CarrosselDiv = styled.div`
-display: flex;
-margin: 5px;
-padding: 5px;
-min-height: 50rem;
-justify-content: space-between;
-background-color: lightgrey
+  display: flex;
+  margin: 5px;
+  padding: 5px;
+  min-height: 50rem;
+  justify-content: space-between;
+  background-color: lightgrey
 `;
 
 const Div = styled.div`
-display: flex;
-margin: 5px;
-padding: 5px;
-flex-direction: column;
+  display: flex;
+  margin: 5px;
+  padding: 5px;
+  flex-direction: column;
 `;
+
+const Button = styled.button`
+  height: 20rem;
+  width: 3rem;
+  margin: auto;
+  `;
 
 
 
@@ -42,7 +48,11 @@ const Images = (props) => {
   const [images, setImages] = useState([{url: 'none'}]);
   const [currentIndex, setIndex] = useState(0);
 
-  useEffect(()=> {
+  useInsertionEffect(()=> {
+
+  });
+
+  useInsertionEffect(()=> {
     if (props.currentStyle.photos) {
       setImage(props.currentStyle.photos[currentIndex].url);
       setImages(props.currentStyle.photos);
@@ -54,8 +64,6 @@ const Images = (props) => {
       setIndex(0);
     }
   }, [images]);
-
-
 
   const handleNext = () =>{
     if (currentIndex === images.length - 1) { return; }
@@ -72,14 +80,14 @@ const Images = (props) => {
   return (
     <Div>
       <CarrosselDiv>
-        <button onClick={handleBack}> &#x2190; </button>
+        <Button onClick={handleBack}> &#x2190; </Button>
         <Image src={image}/>
-        <button onClick={handleNext}> &#x2192; </button>
+        <Button onClick={handleNext}> &#x2192; </Button>
       </CarrosselDiv>
       <ImagesDiv>
         {images.map((item) => {
           ++num;
-          return (<ImagesItem image={item.thumbnail_url} key={num}/>);
+          return (<ImagesItem image={item.thumbnail_url} key={num} setIndex={setIndex} allImages={images}/>);
         }
         )}
       </ImagesDiv>

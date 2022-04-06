@@ -10,8 +10,8 @@ const ProductSpecs = (props) => {
       <span><Stars rating={3}/></span>
       <h4>{props.currentProduct.category}</h4>
       <h3>{props.currentProduct.name}</h3>
-      <p>{props.currentProduct.description}</p>
       <h4>{props.currentStyle.original_price}</h4>
+      <p>{props.currentProduct.description}</p>
     </div>
   );
 };
