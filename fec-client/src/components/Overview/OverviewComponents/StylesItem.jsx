@@ -4,6 +4,9 @@ import styled from 'styled-components';
 var StylesDiv = styled.div`
   margin: 5px;
   padding: 5px;
+  width: 5rem;
+  height: 5rem;
+}
 `;
 
 var Image = styled.img`
@@ -13,6 +16,7 @@ var Image = styled.img`
   object-position: center;
   border-radius: 50%;
   margin: 5px;
+  border: 3px solid lightgrey;
 
   &:hover{
     border: 3px solid pink;

@@ -7,6 +7,7 @@ const Image = styled.img`
   object-fit: cover;
   object-position: center;
   margin: 5px;
+  border: 3px solid lightgrey;
 
   &:hover{
     border: 3px solid pink;
@@ -19,9 +20,18 @@ var ImgDiv = styled.div`
 `;
 
 const ImagesItem = (props) => {
+
+  const handleClick = () => {
+    props.allImages.forEach((img) => {
+      if (img.thumbnail_url === props.image) {
+        props.setIndex(props.allImages.indexOf(img));
+      }
+    });
+  };
+
   return (
     <ImgDiv>
-      <Image src={props.image}/>
+      <Image src={props.image} onClick={handleClick}/>
     </ImgDiv>
   );
 };
