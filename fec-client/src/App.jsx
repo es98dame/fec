@@ -7,17 +7,42 @@ import Overview from './components/Overview';
 import QA from './components/Q&A/QA';
 
 const AppDiv = styled.div`
-  @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-  font-family: 'Open Sans';
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+  font-family: 'Open Sans', sans-serif;
 `;
 
 const H1 = styled.h1`
-  font-size: 2.5em;
+  font-size: 2.0em;
   text-align: center;
   color: black;
 `;
+
+const Input = styled.input`
+  all: unset;
+  border-bottom: 3px solid lightgrey;
+`;
+
+const Button = styled.button`
+  all: unset;
+  margin-right: 5px;
+  color: darkgrey;
+`;
+
+const Form = styled.form`
+  margin-right: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+`;
+
+const H1Div = styled.div`
+  margin: auto;
+  background-color: grey;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
 const OverviewDiv = styled.div`
-  border-top: 3px solid lightgrey;
   border-bottom: 3px solid lightgrey;
   width: 90%;
   height: 25%;
@@ -50,9 +75,13 @@ let App = () => {
 
   return (
     <AppDiv>
-      <div>
+      <H1Div>
         <H1>Project Atelier</H1>
-      </div>
+        <Form>
+          <Button type="submit"><i className="fa fa-search"></i></Button>
+          <Input type='text'></Input>
+        </Form>
+      </H1Div>
       <div>
         <OverviewDiv>
           <Overview productId={productId} setProductId={setProductId}/>
