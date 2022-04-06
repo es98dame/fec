@@ -45,13 +45,9 @@ const Overview = (props) => {
         setCurrentStyle(response.data.results[0]);
       });
 
-    axios.get('/api', {headers: {path: '/products'}})
+    axios.get('/api', {headers: {path: `/products/${productId}`}})
       .then((response) => {
-        response.data.forEach((product) => {
-          if (product.id === productId) {
-            setCurrentproduct(product);
-          }
-        });
+        setCurrentproduct(response.data);
       });
   }, []);
 
@@ -68,7 +64,7 @@ const Overview = (props) => {
 
           <Styles styles={styles} currentStyle={currentStyle} set={setCurrentStyle}/>
 
-          <CheckingOut />
+          <CheckingOut skus={currentStyle.skus}/>
         </Content>
       </FullDiv>
     </div>

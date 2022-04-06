@@ -7,10 +7,11 @@ const ProductSpecs = (props) => {
 
   return (
     <div>
-      <span><Stars rating={3}/></span>
+      <span><Stars rating={5}/></span>
       <h4>{props.currentProduct.category}</h4>
       <h3>{props.currentProduct.name}</h3>
       <h4>{props.currentStyle.original_price}</h4>
+      <h4>{props.currentProduct.slogan}</h4>
       <p>{props.currentProduct.description}</p>
     </div>
   );
