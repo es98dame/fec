@@ -20,17 +20,17 @@ const countTotal = (obj) => {
   return total;
 };
 
-const ReviewBreakdown = ({ reviewData }) => {
+const ReviewBreakdown = ({ reviewData, filterByRating }) => {
 
   const total = countTotal( reviewData );
 
   return (
     <BarContainer>
-      <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total}/>
-      <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total}/>
-      <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total}/>
-      <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total}/>
-      <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total}/>
+      <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total} filterByRating = {filterByRating}/>
+      <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total} filterByRating = {filterByRating}/>
+      <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total} filterByRating = {filterByRating}/>
+      <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} filterByRating = {filterByRating}/>
+      <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} filterByRating = {filterByRating}/>
     </BarContainer>
   );
 

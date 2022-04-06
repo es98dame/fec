@@ -13,12 +13,14 @@ font-weight: 300;
 
 const Ratings = ({productId}) => {
   const [data, setData] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
   const [metaData, setMetaData] = useState({});
 
   useEffect(() => {
     axios.get('/api', {headers: {path: `/reviews?product_id=${productId}`}})
       .then((response) => {
         setData(response.data.results);
+        setCurrentData(response.data.results);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -31,11 +33,15 @@ const Ratings = ({productId}) => {
       .catch((err) => console.log(err));
   }, []);
 
+  const filterByRating = (rating) => {
+    setCurrentData(data.filter(review => review.rating === rating));
+  };
+
   return (
     <RatingsContainer>
       <h2>Ratings Component</h2>
-      <RatingsBreakdown metaData = { metaData }/>
-      <ReviewList reviews = {data}/>
+      <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
+      <ReviewList reviews = {currentData}/>
     </RatingsContainer>
   );
 

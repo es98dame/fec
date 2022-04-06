@@ -11,10 +11,10 @@ gap: 5%;
 `;
 
 
-const RatingsBreakdown = ({ metaData }) => {
+const RatingsBreakdown = ({ metaData, filterByRating }) => {
   return (
     <BreakdownContainer>
-      { metaData.ratings ? <ReviewBreakdown reviewData = { metaData.ratings}/> : null }
+      { metaData.ratings ? <ReviewBreakdown reviewData = { metaData.ratings} filterByRating = {filterByRating}/> : null }
       { metaData.characteristics ? <ProductBreakdown productData = { metaData.characteristics}/> : null}
     </BreakdownContainer>
   );

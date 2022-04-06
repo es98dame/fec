@@ -7,15 +7,19 @@ display: flex;
 flex-direction: row;
 gap: 5%;
 
+&:hover {
+  background-color: lightgray;
+}
+
 `;
 
 
-const ReviewBar = ({ rating, num, total }) => {
+const ReviewBar = ({ rating, num, total, filterByRating }) => {
 
   const percent = num / total * 100;
 
   return (
-    <Bar>
+    <Bar onClick = {() => filterByRating(rating)}>
       <span>{rating} stars:</span>
       <svg viewBox = '0, 0, 50, 5' width = '150' height = '15'>
         <linearGradient id = {`gradient-${percent}`}>
