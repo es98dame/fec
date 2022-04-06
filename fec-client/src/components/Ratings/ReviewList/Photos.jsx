@@ -14,19 +14,21 @@ height: 6rem;
 
 const Photos = ({ images }) => {
   const [modal, setModal] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
 
-  const handleModal = () => {
+  const handleModal = (image) => {
     setModal(!modal);
+    setCurrentImage(image);
   };
 
   return (
     <div>
       <ImageContainer>
         {images.map(image => (
-          <Image src={image.url} key = {image.id} onClick = {handleModal}></Image>
+          <Image src={image.url} key = {image.id} onClick = {() => handleModal(image)}></Image>
         ))}
       </ImageContainer>
-      { modal ? <Modal images = {images} handleModal = {handleModal}/> : null }
+      { modal ? <Modal image = {currentImage} handleModal = {handleModal}/> : null }
     </div>
   );
 };

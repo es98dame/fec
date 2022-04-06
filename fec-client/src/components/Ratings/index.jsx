@@ -22,7 +22,8 @@ const Ratings = ({productId}) => {
   }, []);
 
   return (
-    <div> This is the Ratings and Reviews component.
+    <div>
+      <h2>Ratings Component</h2>
       <ReviewList reviews = {data}/>
     </div>
   );
