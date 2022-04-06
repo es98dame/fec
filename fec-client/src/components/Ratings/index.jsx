@@ -18,7 +18,7 @@ const Ratings = ({productId}) => {
   const [filters, setFilters] = useState(Array(5).fill(0));
 
   useEffect(() => {
-    axios.get('/api', {headers: {path: `/reviews?product_id=65634`}})
+    axios.get('/api', {headers: {path: `/reviews?product_id=${productId}&count=200`}})
       .then((response) => {
         setData(response.data.results);
         setCurrentData(response.data.results);
@@ -27,7 +27,7 @@ const Ratings = ({productId}) => {
   }, []);
 
   useEffect(() => {
-    axios.get('/api', {headers: {path: `/reviews/meta?product_id=65634`}})
+    axios.get('/api', {headers: {path: `/reviews/meta?product_id=${productId}`}})
       .then((response) => {
         setMetaData(response.data);
       })
