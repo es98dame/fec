@@ -7,9 +7,9 @@ var API_KEY = 'YOUR_API_KEY_HERE';
 module.exports = {API_KEY};
 
 module.exports = {
-  TOKEN: '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',
-  url : 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp',
-  auth : { headers: { Authorization: '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' } }
+  TOKEN: 'token_here',
+  url: 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp',
+  auth: { headers: { Authorization: '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' } }
 };
 
 router.get('/products', overview.getProducts);
