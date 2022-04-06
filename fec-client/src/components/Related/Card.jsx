@@ -17,26 +17,51 @@ flex-direction: column;
 height : 100%;
 `;
 
-const Heartbutton = styled.button`
-
-  position: absolute;
-  color: black;
-  font-size: 2rem;
-  cursor: pointer;
-  left: 50%;
-  bottom: 50%;
+const HeartCheckbox = styled.input`
+  display: none;
 `;
-const Actionicon = styled.i`
-  position: absolute;
-  z-index: 2;
-  color: red;
-  position: absolute;
+
+const HeartLabel = styled.label`
+  color: ${({ checked }) => (checked ? "red" : "grey")};
+  background-color: currentColor;
+  display: inline-block;
+  height: 70px;
+  margin: 0 10px;
+  top: 0;
+  transform: rotate(-45deg);
+  position: relative;
+  left: 45%;
+  top: 45%;
+  width: 50px;
+
+  &::before,
+  &::after {
+    content: "";
+    background-color: currentColor;
+    border-radius: 50%;
+    height: 50px;
+    position: absolute;
+    width: 50px;
+  }
+
+  &:before {
+    top: -25px;
+    left: 0;
+  }
+
+  &:after {
+    left: 25px;
+    top: 0;
+  }
+
 `;
 
 const Card = (props)=> {
   //console.log('syeye',props.styleInfo);
   const [show, setShow] = useState(false);
-
+  // for action button
+  const [checked, setChecked] = useState(false);
+  const toggle = () => setChecked(!checked);
 
   var image = '';
   if(props.styleInfo.length === 0){
@@ -52,7 +77,9 @@ const Card = (props)=> {
 
   return(
   <ProductCard>
-    <PreviewImg src={image} onClick={() => {setShow(!show);}}></PreviewImg>
+    <PreviewImg src={image} onClick={() => {setShow(!show);}}/>
+
+
     <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {props.productInfo}></Modal>
     <div>{props.productInfo.category}</div>
     <div>{props.productInfo.name}</div>
