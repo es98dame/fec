@@ -39,7 +39,6 @@ const ModalCarrosselDiv = styled.div`
   padding: 5px;
   height: 80%;
   justify-content: space-between;
-  background-color: grey;
 `;
 
 const Div = styled.div`
@@ -53,6 +52,13 @@ const Button = styled.button`
   height: 20rem;
   width: 3rem;
   margin: auto;
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  box-shaddow-none;
+
+  &:hover{
+    background: rgba(0, 0, 0, .5);
+  }
   `;
 
 const Modal = styled.div`
@@ -62,7 +68,7 @@ const Modal = styled.div`
   left: 0;
   width:100%;
   height: 100%;
-  background: rgba(0, 0, 0, .9);
+  background: rgba(0, 0, 0, 1);
   flex-direction: column;
   z-index: 20;
 `;
@@ -74,13 +80,22 @@ const Exit = styled.button`
   margin: auto;
   top: 1%;
   left: 95%;
+
+  color: grey;
+
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  box-shaddow-none;
+
+  &:hover{
+    background: lightgrey;
+  }
 `;
 
 
 
 const Images = (props) => {
   let num = 0;
-
 
   const [image, setImage] = useState('');
   const [images, setImages] = useState([{url: 'none'}]);
