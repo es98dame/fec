@@ -8,6 +8,11 @@ const BreakdownContainer = styled.div`
 display: flex;
 flex-direction: row;
 gap: 5%;
+
+font-size: 0.8rem;
+
+height: 200px;
+
 `;
 
 
