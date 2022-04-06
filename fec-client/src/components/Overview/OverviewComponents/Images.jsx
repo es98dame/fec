@@ -49,10 +49,6 @@ const Images = (props) => {
   const [currentIndex, setIndex] = useState(0);
 
   useInsertionEffect(()=> {
-
-  });
-
-  useInsertionEffect(()=> {
     if (props.currentStyle.photos) {
       setImage(props.currentStyle.photos[currentIndex].url);
       setImages(props.currentStyle.photos);
