@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Products from './components/Related';
@@ -47,6 +47,12 @@ height: 25%;
 
 let App = () => {
   let [productId, setProductId] = useState(65631);
+
+  //save product id on local storage to access it anywhere
+  //window.localStorage.getItem("ProductId") -> return '65631'
+  useEffect(()=>{
+    window.localStorage.setItem("ProductId", 65631);
+  },[]);
 
   return (
     <AppDiv>

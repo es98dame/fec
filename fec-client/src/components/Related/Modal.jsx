@@ -41,6 +41,7 @@ const StyledTable = styled.table`
   caption-side: top;
   border: none;
   border-collapse: collapse;
+  text-align : center;
   /* border-collapse: separate; */
   /* border-spacing: 5px 10px; */
 
@@ -88,13 +89,17 @@ const StyledTable = styled.table`
 
 const Modal = ({ handleClose, show, productInfo }) => {
   const ShowHideClassName = show ? Modaltrue : Modalfalse;
+  const id = window.localStorage.getItem("ProductId");
+  const [currentItemValues, setCurrentItemValues] = useState({});
 
-  // useEffect(()=>{
-  //   const getValues = async () => {
-  //     const res = await axios.get('/api', {headers: {path: `/products/${id}`}}) //get request to get the related item id array
-  //     setProductInfo(res.data);
-  //   };
-  // },[])
+  useEffect(()=>{
+    const getValues = async () => {
+      const res = await axios.get('/api', {headers: {path: `/products/${id}`}}) //get request to get current item's values
+      setCurrentItemValues(res.data);
+    };
+
+    getValues();
+  },[])
 
   return show ? (
     <div
@@ -105,22 +110,42 @@ const Modal = ({ handleClose, show, productInfo }) => {
       }}
     >
     <ShowHideClassName>
-      <Modalmain>
+      <Modalmain onClick={e => {
+          // do not close modal if anything inside modal content is clicked
+          e.stopPropagation();
+        }}>
+
         <h3>Comparing</h3>
         <br></br>
           <div className='comparingCards'>
             <StyledTable>
               <tbody>
+              <tr>
+                  <td className='tdName'>Selected Item</td>
+                  <td className='tdName'></td>
+                  <td className='tdName'>Current Item</td>
+                </tr>
                 <tr>
                   <td className='tdName'>{productInfo.name}</td>
                   <td className='tdName'>Name</td>
-                  <td className='tdName'>Overview item Name</td>
+                  <td className='tdName'>{currentItemValues.name}</td>
                 </tr>
-                <tr>
-                  <td>{productInfo.category}</td>
-                  <td>Category</td>
-                  <td>Overview item category</td>
-                </tr>
+                {/* current item values list */}
+            {currentItemValues.features.map((i, key)=>(
+              <tr key={key}>
+              <td className='tdName'>✔️</td>
+              <td className='tdName'>{i.feature + ' : ' + i.value}</td>
+              <td className='tdName'></td>
+            </tr>
+            ))}
+            {/* clicked item values list */}
+            {productInfo.features.map((i, key)=>(
+              <tr key={key}>
+              <td className='tdName'></td>
+              <td className='tdName'>{i.feature + ' : ' + i.value}</td>
+              <td className='tdName'>✔️</td>
+            </tr>
+            ))}
               </tbody>
             </StyledTable>
           </div>

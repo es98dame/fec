@@ -108,11 +108,9 @@ const Card = (props)=> {
 
     <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {props.productInfo}></Modal>
     <CardDiv>
-      <CardText>
     <p>{props.productInfo.category}</p>
     <p>{props.productInfo.name}</p>
     <p>{props.productInfo.default_price}</p>
-    </CardText>
     </CardDiv>
   </ProductCard>
   )
