@@ -43,6 +43,8 @@ overflow-x: auto;
 const Products = (props)=> {
   const [idArray, setIdArray] = useState([]);
 
+  //console.log(config.TOKEN); // ok I got token
+
   const getRelatedItemsId = (id) => {
     axios.get('/api', {headers: {path: `/products/${id}/related`}}) //get request to get the related item id array
     .then(res => {
