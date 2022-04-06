@@ -12,9 +12,32 @@ border: solid;
 border-color: lightgray;
 `;
 
+const CardDiv = styled.div`
+  width: fit-content;
+`;
+const CardText = styled.p`
+  padding-left: 1px;
+`;
+
 const PreviewImg = styled.img`
-flex-direction: column;
+position : relative;
 height : 100%;
+z-index: 2;
+&:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+`;
+
+const ActionButton = styled.img`
+  position : relative;
+  left:85%;
+  z-index:10;
+
+`;
+const Buttonimage = styled(ActionButton)`
+display : inline;
+margin-top' : -234px;
+margin-left' : 127px;
 `;
 
 const HeartCheckbox = styled.input`
@@ -75,15 +98,22 @@ const Card = (props)=> {
   //   console.log('show',show);
   // },[show])
 
+
+
   return(
   <ProductCard>
-    <PreviewImg src={image} onClick={() => {setShow(!show);}}/>
-
+    <div><ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png" onClick={() => {setShow(!show);}}></ActionButton>
+     </div>
+    <PreviewImg src={image} alt="no image"/>
 
     <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {props.productInfo}></Modal>
-    <div>{props.productInfo.category}</div>
-    <div>{props.productInfo.name}</div>
-    <div>{props.productInfo.default_price}</div>
+    <CardDiv>
+      <CardText>
+    <p>{props.productInfo.category}</p>
+    <p>{props.productInfo.name}</p>
+    <p>{props.productInfo.default_price}</p>
+    </CardText>
+    </CardDiv>
   </ProductCard>
   )
 }

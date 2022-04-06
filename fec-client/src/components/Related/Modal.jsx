@@ -13,6 +13,7 @@ const Modaltrue = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   display: block;
+  z-index : 20;
 `;
 
 const Modalfalse = styled.div`
