@@ -58,12 +58,12 @@ const Products = (props)=> {
 
   //componentDidmount
   useEffect(()=>{
-    getRelatedItemsId('65635') // id = 65633
+    getRelatedItemsId(props.productId) // id = 65631
   },[])
 
 
   return (
-    <div>
+    <div title='TheProductList'>
       <Listtitle>Related List</Listtitle>
       <ProductList>
       {idArray.map((data,index)=> (
