@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import dateformat from 'dateformat';
+import axios from 'axios';
 
 import Stars from '../../Shared/Stars.jsx';
 import Photos from './Photos.jsx';
@@ -76,6 +77,16 @@ cursor: pointer;
 
 const ReviewTile = ({ review }) => {
 
+  const [helpful, setHelpful] = useState(review.helpfulness);
+
+  const handleHelpfulClick = () => {
+    setHelpful(helpful + 1);
+    axios.put(`/api/reviews/${review.review_id}/helpful`)
+      .then(() => {})
+      .catch((err) => { console.log(err); });
+
+  };
+
   return (
     <Tile title = 'Tile'>
       <UserInfo>
@@ -92,7 +103,7 @@ const ReviewTile = ({ review }) => {
           null } </Recommend>
         <Helpful>
           <div> Helpful? </div>
-          <HelpfulButton> Yes ({review.helpfulness}) </HelpfulButton>
+          <HelpfulButton onClick = {handleHelpfulClick}> Yes ({helpful}) </HelpfulButton>
         </Helpful>
         { review.response ? <div title = 'response'> {review.response} </div> : null }
       </ReviewContent>
