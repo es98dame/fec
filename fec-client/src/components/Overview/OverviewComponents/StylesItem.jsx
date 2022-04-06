@@ -4,8 +4,8 @@ import styled from 'styled-components';
 var StylesDiv = styled.div`
   margin: 5px;
   padding: 5px;
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 5rem;
+  height: 5rem;
 }
 `;
 
