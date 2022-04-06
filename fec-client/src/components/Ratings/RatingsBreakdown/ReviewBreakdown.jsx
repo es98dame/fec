@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ReviewBar from './ReviewBar.jsx';
 import Stars from '../../Shared/Stars.jsx';
 
-const BarContainer = styled.div`
+const ReviewBreakdownContainer = styled.div`
 display: flex;
 flex-direction: column;
 gap: 5px;
@@ -44,7 +44,7 @@ const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
   const percentRecommended = Math.round(parseInt(recommended.true) / total * 100);
 
   return (
-    <BarContainer>
+    <ReviewBreakdownContainer>
       <Summary>
         <Average>
           <Stars rating = {average}/>
@@ -58,7 +58,7 @@ const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
       <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} filterByRating = {filterByRating}/>
       <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} filterByRating = {filterByRating}/>
       <Recommend>{percentRecommended}% of reviewers recommend this product.</Recommend>
-    </BarContainer>
+    </ReviewBreakdownContainer>
   );
 
 };

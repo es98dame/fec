@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
-const BreakdownContainer = styled.div`
+const RatingsBreakdownContainer = styled.div`
 display: flex;
 flex-direction: row;
 gap: 5%;
@@ -16,11 +16,12 @@ border-radius: 2px;
 
 
 const RatingsBreakdown = ({ metaData, filterByRating }) => {
+  //Should I return to this and conditionally render differently?
   return (
-    <BreakdownContainer>
+    <RatingsBreakdownContainer>
       { metaData.ratings ? <ReviewBreakdown reviewData = { metaData.ratings} recommended = { metaData.recommended} filterByRating = {filterByRating}/> : null }
       { metaData.characteristics ? <ProductBreakdown productData = { metaData.characteristics}/> : null}
-    </BreakdownContainer>
+    </RatingsBreakdownContainer>
   );
 };
 
