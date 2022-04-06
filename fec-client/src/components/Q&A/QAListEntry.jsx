@@ -41,6 +41,7 @@ const QAListEntry = function({question}) {
   const [count, setCount] = useState(question.question_helpfulness);
   const [buttonText, setButtonText] = useState('See More Answers');
   const [answers, setAnswers] = useState(sortedAnswers.current.slice(0, 2));
+  const [modalView, setModalView] = useState(false);
 
   const handleSeeMoreAnswers = function() {
     buttonText === 'See More Answers' ? setButtonText('Collapse Answers') : setButtonText('See More Answers');
@@ -48,7 +49,7 @@ const QAListEntry = function({question}) {
   };
 
   const handleAddAnswer = function() {
-    alert('Modal Prompt Would Go Here');
+    setModalView(!modalView);
   };
 
   const handleHelpfulYes = function() {
@@ -58,6 +59,7 @@ const QAListEntry = function({question}) {
     }
   };
 
+  // console.log(answers)
   return (
     <QContainer>
       <ContainerRow>
@@ -73,7 +75,7 @@ const QAListEntry = function({question}) {
       <ContainerRow>
         {answers.length ? <QItem>A:</QItem> : null}
         <AContainer>
-          {answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={key}/>) : null}
+          {answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={answer[0]}/>) : null}
           {allAnswers.length > 2 ? <AMoreAnswers color={'purple'} onClick={handleSeeMoreAnswers}>{buttonText}</AMoreAnswers> : null}
         </AContainer>
       </ContainerRow>

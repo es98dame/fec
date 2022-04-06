@@ -34,7 +34,7 @@ const QandADiv = styled.div`
 border: 1px solid black;
 width: 90%;
 height: 25%;
-margin: 5px 0;
+margin: auto;
 `;
 
 const RatingsDiv = styled.div`
