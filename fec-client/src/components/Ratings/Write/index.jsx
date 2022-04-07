@@ -3,7 +3,7 @@ import WriteModal from './WriteModal.jsx';
 
 
 
-const Write = () => {
+const Write = ({relevantChars, productId}) => {
   const [showModal, setShowModal] = useState(false);
   const toggleWriteModal = () => {
     setShowModal(!showModal);
@@ -12,7 +12,7 @@ const Write = () => {
   return (
     <div>
       <button onClick = {toggleWriteModal}>Write a Review</button>
-      { showModal ? <WriteModal /> : null}
+      { showModal ? <WriteModal relevantChars = {relevantChars} productId = {productId}/> : null}
     </div>
   );
 };

@@ -51,7 +51,7 @@ const Ratings = ({productId}) => {
       <h3>Reviews</h3>
       <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
       <ReviewList reviews = {currentData}/>
-      <Write />
+      <Write relevantChars = {metaData.characteristics} productId = {productId}/>
     </RatingsContainer>
   );
 
