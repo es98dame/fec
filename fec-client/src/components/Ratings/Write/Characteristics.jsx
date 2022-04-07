@@ -1,9 +1,21 @@
 import React, {useState} from 'react';
+import styled from 'styled-components';
 import factors from './factors.js';
+
+const Div = styled.div`
+display: flex;
+flex-direction: column;
+gap: 2%;
+`;
+
+const Selection = styled.span`
+font-style: italic;
+font-size: 0.8rem;
+`;
 
 
 const Characteristic = ({ characteristic, handleFactorChange }) => {
-  const [selection, setSelection] = useState('none selected');
+  const [selection, setSelection] = useState('None selected.');
 
   const handleSelectionChange = (e) => {
     //console.log(factors[characteristic]);
@@ -12,8 +24,8 @@ const Characteristic = ({ characteristic, handleFactorChange }) => {
   };
 
   return (
-    <div>
-      <div>{characteristic}</div>
+    <Div>
+      <div>{characteristic}:  <Selection>{selection}</Selection> </div>
       <div onChange = {handleSelectionChange}>
         <input type = 'radio' value = '1' name = {characteristic}/> 1
         <input type = 'radio' value = '2' name = {characteristic}/> 2
@@ -21,7 +33,7 @@ const Characteristic = ({ characteristic, handleFactorChange }) => {
         <input type = 'radio' value = '4' name = {characteristic}/> 4
         <input type = 'radio' value = '5' name = {characteristic}/> 5
       </div>
-    </div>
+    </Div>
 
   );
 

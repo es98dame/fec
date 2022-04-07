@@ -19,12 +19,16 @@ transform: translate(-50%, -50%);
 background-color: white;
 height: 40rem;
 width: 35rem;
+
+&input, textarea {
+  font-family: inherit;
+}
 `;
 
 const Header = styled.div`
 background-color: lightgray;
 text-align: center;
-height: 20%;
+height: 16%;
 margin: 2%;
 `;
 
@@ -32,38 +36,29 @@ const Form = styled.div`
 display: flex;
 flex-direction: column;
 gap: 10px;
-height: 80%;
+height: 76%;
 overflow-y: auto;
 margin: 2%;
 `;
 
+const Field = styled.div`
+padding: 2%;
+`;
+
 const Label = styled.div`
+font-weight: 400;
 `;
 
-const Recommend = styled.div`
-`;
-
-const Characteristics = styled.div`
-`;
-
-const Summary = styled.div`
-`;
-
-const Body = styled.div`
-`;
-
-const Name = styled.div`
-`;
 
 const Tip = styled.div`
 font-style: italic;
 font-size: 0.7rem;
 `;
 
-const Email = styled.div`
-`;
-
-const Submit = styled.div`
+const Submit = styled.input`
+font-family: inherit;
+width: 10rem;
+margin: auto;
 `;
 
 const Warning = styled.div`
@@ -110,36 +105,36 @@ const WriteModal = ({relevantChars, productId }) => {
           <h3>About the product {productId}</h3>
         </Header>
         <Form onSubmit = {handleSubmit}>
-          <Recommend onChange = {(e) => handleChange(e, setRecommend)}>
+          <Field onChange = {(e) => handleChange(e, setRecommend)}>
             <Label>Would you recommend this product to a friend? </Label>
             <input type='radio' value = 'true' name = 'recommend'/> Yes
             <input type='radio' value = 'false' name = 'recommend'/> No
-          </Recommend>
-          <Characteristics>
-            <Label>Characteristics go here.</Label>
+          </Field>
+          <Field>
+            <Label>Please rate the item on the following factors: </Label>
             {relevantFactors.map(factor => (
               <Characteristic key = {relevantChars[factor].id} characteristic = {factor} handleFactorChange = {handleFactorChange}/>
             ))}
-          </Characteristics>
-          <Summary>
+          </Field>
+          <Field>
             <Label>Review Summary</Label>
             <textarea rows='2' cols='50' placeholder = 'Write a brief summary' maxLength = '60' value = {summary} onChange = {(e) => handleChange(e, setSummary)}>{summary}</textarea>
-          </Summary>
-          <Body>
+          </Field>
+          <Field>
             <Label>Your Review</Label>
             <textarea rows = '10' cols = '50' placeholder = 'Write your review here' maxLength = '1000' value = {body} onChange = {(e) => handleChange(e, setBody)}>{body}</textarea>
             <Tip>{body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}</Tip>
-          </Body>
-          <Name>
+          </Field>
+          <Field>
             <Label>Your Username</Label>
             <input type = 'text' placeholder = 'Add a name, e.g. "kara122"' maxLength = '60' size = '50' value = {name} onChange = {(e) => handleChange(e, setName)}/>
             <Tip>For privacy reasons, do not use your full name or email address</Tip>
-          </Name>
-          <Email>
+          </Field>
+          <Field>
             <Label>Email</Label>
             <input type = 'text' placeholder = 'Your email' maxLength = '60' size = '50' value = {email} onChange = {(e) => handleChange(e, setEmail)}/>
-          </Email>
-          <input type = 'submit' value = 'Submit Review' onClick = {handleSubmit}/>
+          </Field>
+          <Submit type = 'submit' value = 'Submit Review' onClick = {handleSubmit}/>
           <Warning>{warning}</Warning>
         </Form>
       </ModalContent>
