@@ -53,6 +53,9 @@ const RelatedDiv = styled.div`
 border: 1px solid black;
 width: 90%;
 height: 25%;
+align-items: center;
+justify-content: center;
+margin-left: 50px;
 `;
 
 const QandADiv = styled.div`

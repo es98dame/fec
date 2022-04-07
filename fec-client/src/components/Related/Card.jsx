@@ -26,30 +26,39 @@ const PreviewImg = styled.img`
 position : relative;
 height : 100%;
 z-index: 2;
+transition: all 0.2s linear;
 &:hover {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 20px 8px rgba(0,0,0,0.3);
+  transform: scale(1.07);
 }
 `;
 
 const ActionButton = styled.img`
   position : relative;
-  left:85%;
+  left:83%;
   z-index:10;
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
 
 
-const Card = (props)=> {
-  //console.log('syeye',props.styleInfo);
+const Card = ({id})=> {
+  //console.log('id in card.js', id);
+
+  const [productInfo, setProductInfo] = useState({});
+  const [styleInfo, setStyleInfo] = useState([]);
+
   const [show, setShow] = useState(false);
   // for action button
   const [checked, setChecked] = useState(false);
   const toggle = () => setChecked(!checked);
 
   var image = '';
-  if(props.styleInfo.length === 0){
+  if(styleInfo.length === 0){
      image = '';
   } else {
-     image = props.styleInfo[0].photos[0].thumbnail_url;
+     image = styleInfo[0].photos[0].thumbnail_url;
   }
 
   // check show value here
@@ -57,6 +66,23 @@ const Card = (props)=> {
   //   console.log('show',show);
   // },[show])
 
+  useEffect(()=>{
+
+    const getProductInfo = async () => {
+      const res = await axios.get('/api', {headers: {path: `/products/${id}`}}) //get request to get the related item id array
+      setProductInfo(res.data);
+    };
+    const getStyleInfo= async () => {
+      const res = await axios.get('/api', {headers: {path: `/products/${id}/styles`}}) //get request to get the related item id array
+      //console.log(res)
+      setStyleInfo(res.data.results)
+    };
+
+    getStyleInfo();
+    getProductInfo();
+
+
+  },[])
 
 
   return(
@@ -65,11 +91,11 @@ const Card = (props)=> {
      </div>
     <PreviewImg src={image} alt="no image"/>
 
-    <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {props.productInfo}></Modal>
+    <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {productInfo}></Modal>
     <CardDiv>
-    <CardText>{props.productInfo.category}</CardText>
-    <CardText>{props.productInfo.name}</CardText>
-    <CardText>{props.productInfo.default_price}</CardText>
+    <CardText>{productInfo.category}</CardText>
+    <CardText>{productInfo.name}</CardText>
+    <CardText>{productInfo.default_price}</CardText>
     </CardDiv>
   </ProductCard>
   )

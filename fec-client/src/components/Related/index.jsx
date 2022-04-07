@@ -10,7 +10,8 @@ const ProductList = styled.div`
 display: flex;
 flex-direction: row;
 width : 100%;
-overflow-x: auto;
+// overflow-x: auto;
+
 
 // SCROLLBAR MODE
 &::-webkit-scrollbar {
@@ -56,7 +57,7 @@ const Products = (props)=> {
 
   //componentDidmount
   useEffect(()=>{
-    getRelatedItemsId(props.productId) // id = 65631
+    getRelatedItemsId(props.productId) // id = 65635
   },[])
 
 
@@ -64,9 +65,7 @@ const Products = (props)=> {
     <div title='TheProductList'>
       <Listtitle>Related List</Listtitle>
       <ProductList>
-      {idArray.map((data,index)=> (
-        <RelatedList id = {data} key = {index}/>
-      ))}
+        <RelatedList relatedArray={idArray}/>
     </ProductList>
     <Listtitle>Outfit List</Listtitle>
       <Outfit>
