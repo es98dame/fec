@@ -56,7 +56,7 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.h6`
-  font-size: 13px;
+  font-size: 12px;
   margin: 0;
 `;
 
@@ -180,7 +180,7 @@ const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmiss
           <Header>
             <Title>
               <TitleName>Ask Your Question</TitleName>
-              <SubTitle>{productName}</SubTitle>
+              <SubTitle>About the {productName}</SubTitle>
             </Title>
             <ExitButton onClick={() => handleExit(hide)}>
               <span>&times;</span>

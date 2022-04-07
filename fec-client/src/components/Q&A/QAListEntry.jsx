@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import AListEntry from './AListEntry.jsx';
+import AddAModal from './AddAmodal.jsx';
 
 const ContainerRow = styled.div`
   display: flex;
@@ -91,7 +92,7 @@ const QAListEntry = function({question}) {
   const [count, setCount] = useState(question.question_helpfulness);
   const [buttonText, setButtonText] = useState('See More Answers');
   const [answers, setAnswers] = useState(sortedAnswers.current.slice(0, 2));
-  const [modalA, setModalA] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSeeMoreAnswers = () => {
     buttonText === 'See More Answers' ? setButtonText('Collapse Answers') : setButtonText('See More Answers');
@@ -99,7 +100,7 @@ const QAListEntry = function({question}) {
   };
 
   const handleAddAnswer = () => {
-    setModalA(!modalA);
+    setShowModal(true);
   };
 
   const handleHelpfulYes = () => {
@@ -127,8 +128,9 @@ const QAListEntry = function({question}) {
           {answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={answer[0]}/>) : null}
           {allAnswers.length > 2 ? <Button color={'#007185'} onClick={handleSeeMoreAnswers}>{buttonText}</Button> : null}
         </AContainer>
-      </ContainerRow>
-    </QContainer>
+      </ContainerRow>{
+        showModal ? <AddAModal hide={setShowModal} /> : null
+      }</QContainer>
   );
 };
 
