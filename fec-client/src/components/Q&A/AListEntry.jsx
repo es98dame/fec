@@ -1,26 +1,41 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { ContainerRow, ContainerCol } from './styles/Container.styles.js';
-import { A } from './styles/ATag.styles.js';
 
-const AnswerContainer = styled(ContainerCol)`
+const AnswerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-left: .5em;
   margin-right: auto;
 `;
 
-const ABodyContainer = styled(ContainerRow)`
+const ABodyContainer = styled.div`
+  display: flex;
+  flex-direction: row;
   margin-bottom: .2em;
   gap: .4em;
 `;
 
-const ALabel = styled.span`
-  font-weight: 600;
+const ABody = styled.span`
+  font-size: medium;
+  font-weight: 300;
 `;
 
-const UserContainer = styled(ContainerRow)`
+const UserContainer = styled.div`
+  display: flex;
+  flex-direction: row;
   gap: .4em;
   font-size: small;
+`;
+
+const Link = styled.a`
+  cursor: pointer;
+  &:hover {
+    color: grey;
+  },
+  a:link {
+    color: ${ props => props.color || '#111213' }
+  }
 `;
 
 const UserLine = styled.span`
@@ -50,15 +65,15 @@ const AListEntry = function({answer, askerName}) {
   return (
     <AnswerContainer>
       <ABodyContainer>
-        <span data={answer[0]}>{answer[1].body}</span>
+        <ABody data={answer[0]}>{answer[1].body}</ABody>
       </ABodyContainer>
       <UserContainer>
         <UserLine>by</UserLine>
         <UserLine seller={answerer}>{answerer}</UserLine>
         <UserLine>{answer[1].date.slice(0, 10)}</UserLine>
         <span> &nbsp; | &nbsp; Helpful?</span>
-        <A onClick={handleHelpfulYes}>{' '}Yes({count}){' '}</A>
-        <A onClick={handleReport}>{report}</A>
+        <Link onClick={handleHelpfulYes}>{' '}Yes({count}){' '}</Link>
+        <Link onClick={handleReport}>{report}</Link>
       </UserContainer>
     </AnswerContainer>
   );

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import QAListEntry from './QAListEntry.jsx';
-import { ContainerCol } from './styles/Container.styles.js';
 
 //Make sure to delete borders then delete this comment at the end!!
-const QAListContainer = styled(ContainerCol)`
+const QAListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   border: 1px solid black;
   overflow-y: auto;
   max-height: 500px;
