@@ -53,6 +53,7 @@ const RelatedDiv = styled.div`
 border: 1px solid black;
 width: 90%;
 height: 25%;
+margin: auto;
 `;
 
 const QandADiv = styled.div`
@@ -67,6 +68,7 @@ font-family: inherit;
 border: 1px solid black;
 width: 90%;
 height: 25%;
+margin: auto;
 `;
 
 
