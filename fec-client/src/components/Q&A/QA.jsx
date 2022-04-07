@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useInsertionEffect, reset } from 'react';
+import React, { useState, useEffect, useRef, useInsertionEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import QAList from './QAList';
@@ -55,7 +55,7 @@ const H4 = styled.h4`
   margin-left: .7em;
 `;
 
-const QA = function ({productId}) {
+const QA = function ({productId, productName}) {
   const storage = useRef([]);
   const prevData = useRef([]);
   const showButton = useRef(true);
@@ -72,6 +72,11 @@ const QA = function ({productId}) {
 
   const handleAddQuestions = function() {
     setModalQ(!modalQ);
+  };
+
+  const handleQSubmission = (inputs) => {
+    console.log('Submission SuccessFul!, Axios Request would go here');
+    console.log(inputs);
   };
 
   useEffect(() => {
@@ -110,7 +115,7 @@ const QA = function ({productId}) {
         {storage.current.length > 2 && QAData.length < storage.current.length && showButton.current ? <Button onClick={handleMoreQuestions}>See More Questions</Button> : null}
         <Button title="Add Question" onClick={handleAddQuestions}>Add A Question +</Button>
       </ButtonContainer>
-      <AddQModal show={modalQ} hide={() => setModalQ(!modalQ)}/>
+      <AddQModal show={modalQ} hide={() => setModalQ(!modalQ)} productName={productName.current} handleQSubmission={handleQSubmission}/>
     </ContainerCol>
   );
 };

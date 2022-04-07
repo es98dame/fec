@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
 
@@ -28,7 +28,7 @@ const ModalWrapper = styled.div`
 
 const Modal = styled.div`
   z-index: 100;
-  background: white;
+  background: cornsilk;
   position: relative;
   margin: 1.75rem auto;
   border-radius: 3px;
@@ -41,8 +41,7 @@ const Header = styled.div`
   justify-content: space-between;
   flex-direction: row;
   border-bottom: 2px solid black;
-  background-color: lightgreen;
-  border-radius: 3px;
+  background-color: inherit;
 `;
 
 const TitleName = styled.span`
@@ -54,6 +53,11 @@ const TitleName = styled.span`
 const Title = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const SubTitle = styled.h6`
+  font-size: 13px;
+  margin: 0;
 `;
 
 const ExitButton = styled.button`
@@ -79,8 +83,18 @@ const Form = styled.form`
 
 const Field = styled.div`
   display: flex;
-  gap: .5em;
-  flex-direction: row;
+  gap: .3em;
+  flex-direction: column;
+  margin-top: 7px;
+`;
+
+const NicknameInput = styled.input`
+  width: 190px;
+`;
+
+const Advisory = styled.span`
+  font-size: smaller;
+  font-style: oblique;
 `;
 
 const QuestionBody = styled.textarea`
@@ -88,7 +102,24 @@ const QuestionBody = styled.textarea`
   flex: auto;
 `;
 
-const AddQModal = ({ show, hide, product = 'Some Product'}) => {
+const SubmitButton = styled.button`
+  width: 9em;
+  align-self: flex-end;
+`;
+
+const ErrorLabel = styled.label`
+  color: darkred;
+`;
+
+const InvalidList = styled.ul`
+  color: darkred;
+  margin: 0;
+`;
+
+const emailRegEx = /^([\w\.-]+)@([a-zA-z]{1,9})\.([a-zA-Z]{1,5})$/;
+
+const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmission}) => {
+  const [invalidEntries, setInvalidEntries] = useState([]);
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -103,49 +134,79 @@ const AddQModal = ({ show, hide, product = 'Some Product'}) => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-
-    let options = {
-      //
-    };
-
-
+  const handleExit = (hide) => {
     setEmail('');
     setNickname('');
     setQuestion('');
+    setInvalidEntries([]);
     hide();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInvalidEntries([]);
+    let valid = true;
+    let entries = [];
+
+    if (!question.length) {
+      entries.push('A question');
+      valid = false;
+    }
+    if (!nickname.length) {
+      entries.push('Your nickname');
+      valid = false;
+    }
+    if (!emailRegEx.test(email)) {
+      entries.push('A valid email');
+      valid = false;
+    }
+
+    setInvalidEntries(entries);
+
+    if (valid) {
+      let inputs = [nickname, email, question];
+      handleQSubmission(inputs);
+      setEmail('');
+      setNickname('');
+      setQuestion('');
+      hide();
+    }
   };
 
   return show ? ReactDom.createPortal(
     (<>
-      <Overlay/>
-      <ModalWrapper aria-modal aria-hidden tabIndex={-1} role="dialog">
-        <Modal>
+      <ModalWrapper onClick={() => handleExit(hide)}>
+        <Modal onClick={(e) => e.stopPropagation()}>
           <Header>
             <Title>
               <TitleName>Ask Your Question</TitleName>
-              <h6>{product}</h6>
+              <SubTitle>{productName}</SubTitle>
             </Title>
-            <ExitButton onClick={hide}>
+            <ExitButton onClick={() => handleExit(hide)}>
               <span>&times;</span>
             </ExitButton>
           </Header>
           <Form type="submit" onSubmit={handleSubmit}>
             <Field>
-              <label>Your Question</label>
+              <label>What is your nickname*</label>
+              <NicknameInput type="text" name="nickname" placeholder={'“Example: jackson11!”'} value={nickname} onChange={(e) => handleTextChange(e)}></NicknameInput>
+              <Advisory>For privacy reasons, do not use your full name or email address</Advisory>
+            </Field>
+            <Field>
+              <label>Your email*</label>
+              <input type="text" name="email" placeholder={'Why did you like the product or not?'} value={email} onChange={(e) => handleTextChange(e)}></input>
+              <Advisory>For authentication reasons, you will not be emailed</Advisory>
+            </Field>
+            <Field>
+              <label>Your question*</label>
               <QuestionBody type="text" name="question" value={question} onChange={(e) => handleTextChange(e)}></QuestionBody>
-            </Field>
-            <Field>
-              <label>Nickname</label>
-              <input type="text" name="nickname" value={nickname} onChange={(e) => handleTextChange(e)}></input>
-            </Field>
-            <Field>
-              <label>Email</label>
-              <input type="text" name="email" value={email} onChange={(e) => handleTextChange(e)}></input>
-            </Field>
-            <button>Submit Question</button>
+            </Field>{
+              invalidEntries.length > 0 ? (
+                <Field>
+                  <ErrorLabel>You must enter the following:</ErrorLabel>
+                  <InvalidList>{invalidEntries.map((entry, key) => <li key={key}>{entry}</li>)}</InvalidList>
+                </Field>) : null
+            }<SubmitButton>Submit Question</SubmitButton>
           </Form>
         </Modal>
       </ModalWrapper>
