@@ -35,13 +35,13 @@ const ReviewBar = ({ rating, num, total, filterByRating }) => {
   return (
     <Bar className = { clicked ? 'clicked' : ''} onClick = {handleClick}>
       <span>{rating} stars:</span>
-      <svg viewBox = '0, 0, 100, 5' width = '250' height = '15'>
+      <svg viewBox = '0, 0, 100, 5' width = '250'>
         <linearGradient id = {`gradient-${percent}`}>
           <stop offset = {'0%'} stopColor = "#3D463D"></stop>
           <stop offset = {`${percent}%`} stopColor = "#3D463D"></stop>
           <stop offset = {`${percent}%`} stopColor = "#BAC3BA"></stop>
         </linearGradient>
-        <rect fill = {`url(#gradient-${percent})`} width = '100%' height = '100%' />
+        <rect fill = {`url(#gradient-${percent})`} width = '100' height = '100' />
       </svg>
       <span>{num}</span>
     </Bar>
