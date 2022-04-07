@@ -9,6 +9,7 @@ import QA from './components/Q&A/QA';
 const AppDiv = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
   font-family: 'Open Sans', sans-serif;
+  color: #242124;
 `;
 
 const H1 = styled.h1`
@@ -53,7 +54,6 @@ const RelatedDiv = styled.div`
 border: 1px solid black;
 width: 90%;
 height: 25%;
-margin: auto;
 `;
 
 const QandADiv = styled.div`
@@ -68,7 +68,6 @@ font-family: inherit;
 border: 1px solid black;
 width: 90%;
 height: 25%;
-margin: auto;
 `;
 
 
@@ -78,8 +77,8 @@ let App = () => {
   //save product id on local storage to access it anywhere
   //window.localStorage.getItem("ProductId") -> return '65631'
   useEffect(()=>{
-    window.localStorage.setItem("ProductId", 65631);
-  },[]);
+    window.localStorage.setItem('ProductId', 65631);
+  }, []);
 
   return (
     <AppDiv>

@@ -15,7 +15,7 @@ const Image = styled.img`
   }
 `;
 
-var ImgDiv = styled.div`
+const ImgDiv = styled.div`
   margin: 5px;
   padding: 5px;
 `;

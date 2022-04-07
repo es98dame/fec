@@ -4,15 +4,21 @@ import styled from 'styled-components';
 const Button = styled.button`
   padding: 10px;
   width: 100%;
+  margin 10px
 `;
 
 const NoButton = styled.button`
   visibility: hidden;
   padding: 10px;
   width: 100%;
+  margin 10px
 `;
 
 const Dropdown = styled.select`
+  padding: 10px;
+  width: 100%;
+  margin 10px;
+  text-align: center;
 
 `;
 
@@ -32,7 +38,13 @@ const CheckingOut = (props) => {
   }
 
   const handleChange = (event) =>{
+    if (event.target.value === 'Select Size') {
+      setSelectedSize(event.target.value);
+      setSelectedCount(undefined);
+      return;
+    }
     setSelectedSize(event.target.value);
+    setSelectedCount(1);
   };
 
   const handleSelectCount = (event) =>{
@@ -43,19 +55,22 @@ const CheckingOut = (props) => {
   return (
     <div>
       <div>
-        <select value={selectedSize} onChange={handleChange}>
-          <option>Size</option>
+        <Dropdown value={selectedSize} onChange={handleChange}>
+          <option>Select Size</option>
           {skusArr.map((key) => {
             if (key) {
               return (<option key={key} value={key}>{skus[key].size}</option>);
             }
           })}
-        </select>
-        <select value={selectedCount} onChange={handleSelectCount}>
-          <option>-</option>
+        </Dropdown>
+
+        <Dropdown value={selectedCount} onChange={handleSelectCount}>
+          {selectedSize !== ''
+            ? <option>1</option>
+            : <option>-</option>}
           {skusArr.map((key) => {
             if (key === selectedSize ) {
-              let num = 1;
+              let num = 2;
               let options = [];
               while (num < skus[key].quantity && num < 16) {
                 options.push(<option value={num} key={num}>{num}</option>);
@@ -64,7 +79,7 @@ const CheckingOut = (props) => {
               return options;
             }
           })}
-        </select>
+        </Dropdown>
       </div>
       <div>
         {selectedCount
