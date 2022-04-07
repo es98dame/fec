@@ -54,6 +54,14 @@ const Body = styled.p`
 font-size: 0.9rem;
 `;
 
+const ShowMore = styled.span`
+font-style: italic;
+&:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+`;
+
 const Recommend = styled.div`
 font-size: 0.8rem;
 font-weight: 400;
@@ -61,7 +69,6 @@ font-weight: 400;
 
 const Helpful = styled.div`
 font-size: 0.8rem;
-
 display: flex;
 direction: row;
 gap: 5%;
@@ -69,15 +76,14 @@ gap: 5%;
 
 const HelpfulButton = styled.div`
 cursor: pointer;
-
 &:hover {
   color: green;
 }
 `;
 
 const ReviewTile = ({ review }) => {
-
   const [helpful, setHelpful] = useState(review.helpfulness);
+  const [bodyGrow, setBodyGrow] = useState(review.body.length > 250);
 
   const handleHelpfulClick = () => {
     setHelpful(helpful + 1);
@@ -85,6 +91,10 @@ const ReviewTile = ({ review }) => {
       .then(() => {})
       .catch((err) => { console.log(err); });
 
+  };
+
+  const handleShowMore = () => {
+    setBodyGrow(false);
   };
 
   return (
@@ -96,7 +106,12 @@ const ReviewTile = ({ review }) => {
       <ReviewContent>
         <Stars rating = {review.rating}/>
         <Summary>{review.summary}</Summary>
-        <Body>{review.body}</Body>
+        { bodyGrow ?
+          <Body>
+            {review.body.slice(0, 250) + '... '} <ShowMore onClick = {handleShowMore}>Show More</ShowMore>
+          </Body> :
+          <Body>{review.body}</Body>
+        }
         <Photos images = {review.photos} />
         <Recommend> {review.recommend ?
           'Yes, I would recommend this product to a friend.' :
