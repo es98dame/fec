@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import ReviewList from './ReviewList';
 import RatingsBreakdown from './RatingsBreakdown';
+import Write from './Write';
 
 const RatingsContainer = styled.div`
 font-weight: 300;
@@ -50,6 +51,7 @@ const Ratings = ({productId}) => {
       <h3>Reviews</h3>
       <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
       <ReviewList reviews = {currentData}/>
+      <Write />
     </RatingsContainer>
   );
 

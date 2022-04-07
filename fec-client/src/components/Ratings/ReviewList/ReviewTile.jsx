@@ -107,10 +107,10 @@ const ReviewTile = ({ review }) => {
         <Stars rating = {review.rating}/>
         <Summary>{review.summary}</Summary>
         { bodyGrow ?
-          <Body>
-            {review.body.slice(0, 250) + '... '} <ShowMore onClick = {handleShowMore}>Show More</ShowMore>
+          <Body title = 'review-body'>
+            {review.body.slice(0, 250) + '... '} <ShowMore title = 'Show More' onClick = {handleShowMore}>Show More</ShowMore>
           </Body> :
-          <Body>{review.body}</Body>
+          <Body title = 'review-body'>{review.body}</Body>
         }
         <Photos images = {review.photos} />
         <Recommend> {review.recommend ?
