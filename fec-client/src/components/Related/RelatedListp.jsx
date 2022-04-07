@@ -3,18 +3,19 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import Card from './Card.jsx'
+import CardList from './CardList.jsx';
 
 const Container = styled.div`
-
-width: 100%;
+  overflow : hidden;
 `;
 const SliderContainer = styled.div`
-  width: 95%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   // justify-content : space-between;
   min-width: 0;
-
+  flex: 1;
+  margin: 10px;
 `;
 
 const Button = styled.button`
@@ -47,10 +48,12 @@ const postsPerPage = 5;
 const RelatedList = ({relatedArray})=> {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [idArray, setIdArray] = useState([]);
+  const [productInfo, setProductInfo] = useState({});
+  // const [styleInfo, setStyleInfo] = useState([]);
 
   const slideRef = useRef(null);
   const nextSlide = () => {
-      if (currentSlide >= TOTAL_SLIDES) { // 더 이상 넘어갈 슬라이드가 없으면 슬라이드를 초기화합니다.
+      if (currentSlide >= TOTAL_SLIDES) {
         setCurrentSlide(0);
       } else {
         setCurrentSlide(currentSlide + 1);
@@ -64,20 +67,18 @@ const RelatedList = ({relatedArray})=> {
     }
   };
 
-  useEffect(() => {
-    if(relatedArray.length > 5){
-    slideRef.current.style.transition = "all 0.5s ease-in-out";
-    const indexOfFirst = currentSlide * postsPerPage;
-    const indexOfLast = postsPerPage * (currentSlide + 1);
-    setIdArray([...relatedArray.slice(indexOfFirst, indexOfLast)]);
-  } else {
-    setIdArray(relatedArray);
-  }
-  }, [currentSlide, relatedArray]);
-
   // useEffect(() => {
-  //   setIdArray([...relatedArray.slice(0, 4)]);
-  // }, [relatedArray]);
+  //   if(relatedArray.length > 5){
+  //   slideRef.current.style.transition = "all 0.5s ease-in-out";
+  //   const indexOfFirst = currentSlide * postsPerPage;
+  //   const indexOfLast = postsPerPage * (currentSlide + 1);
+  //   setIdArray([...relatedArray.slice(indexOfFirst, indexOfLast)]);
+  // } else {
+  //   setIdArray(relatedArray);
+  // }
+  // }, [currentSlide, relatedArray]);
+
+
 
   // useEffect(()=>{
   //   getfirstarray();
@@ -100,9 +101,7 @@ const RelatedList = ({relatedArray})=> {
   } else {
     return(
       <SliderContainer>
-      {idArray.map((data,index)=> (
-        <Card id = {data} key = {index}/>
-      ))}
+        <CardList relatedArray={relatedArray}/>
       </SliderContainer>
     );
 

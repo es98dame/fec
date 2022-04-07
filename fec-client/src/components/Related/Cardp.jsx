@@ -14,6 +14,9 @@ min-width: 0;
 border: solid;
 border-color: lightgray;
 
+&:nth-child(1) {
+  flex: 0 0 20%
+}
 
 &:nth-child(2) {
   flex: 0 0 20%;
@@ -27,11 +30,6 @@ border-color: lightgray;
 &:nth-child(5) {
   flex: 0 0 20%;
 }
-&:nth-child(6) {
-  flex: 0 0 20%;
-}
-
-
 `;
 
 const CardDiv = styled.div`
@@ -65,58 +63,36 @@ const ActionButton = styled.img`
 `;
 
 
-const Card = ({id})=> {
-  //console.log('id in card.js', id);
-
-  const [productInfo, setProductInfo] = useState({});
-  const [styleInfo, setStyleInfo] = useState([]);
-
+const Card = ({productInfo})=> {
+  // const { product , style } = productInfo;
+  console.log(productInfo);
   const [show, setShow] = useState(false);
 
   var image = '';
-  if(styleInfo.length === 0){
-     image = '';
-  } else {
-     image = styleInfo[0].photos[0].thumbnail_url;
-  }
 
-  // check show value here
   // useEffect(()=>{
-  //   console.log('show',show);
-  // },[show])
-
-  useEffect(()=>{
-
-    const getProductInfo = async () => {
-      const res = await axios.get('/api', {headers: {path: `/products/${id}`}}) //get request to get the related item id array
-      setProductInfo(res.data);
-    };
-    const getStyleInfo= async () => {
-      const res = await axios.get('/api', {headers: {path: `/products/${id}/styles`}}) //get request to get the related item id array
-      //console.log(res)
-      setStyleInfo(res.data.results)
-    };
-
-    getStyleInfo();
-    getProductInfo();
-
-
-  },[id])
+  //   for(let i in style){
+  //     if(style[i]['default?'] === true){
+  //       console.log('for');
+  //       image = style[i].photos[0].thumbnail_url;
+  //     }
+  //   }
+  // },[productInfo]);
 
 
   return(
-  <ProductCard>
+    <ProductCard>
     <div><ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png" onClick={() => {setShow(!show);}}></ActionButton>
      </div>
     <PreviewImg src={image} alt="no image"/>
 
-    <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {productInfo}></Modal>
-    <CardDiv>
-    <CardText>{productInfo.category}</CardText>
-    <CardText>{productInfo.name}</CardText>
-    <CardText>{productInfo.default_price}</CardText>
-    <Star rating ='4'/>
-    </CardDiv>
+    {/* <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {product}></Modal> */}
+    {/* <CardDiv>
+    <CardText>{product.category}</CardText>
+    <CardText>{product.name}</CardText>
+    <CardText>{product.default_price}</CardText>
+    <CardText><Star rating ='4'/></CardText>
+    </CardDiv> */}
   </ProductCard>
   )
 }
