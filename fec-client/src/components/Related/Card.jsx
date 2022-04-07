@@ -7,7 +7,8 @@ import Modal from './Modal.jsx';
 const ProductCard = styled.div`
 display: flex;
 flex-direction: column;
-min-width: 10rem;
+min-width: 0;
+flex: 1;
 border: solid;
 border-color: lightgray;
 `;

@@ -75,7 +75,7 @@ const RelatedList = ({relatedArray})=> {
     const indexOfLast = postsPerPage * (currentSlide + 1);
     setIdArray([...relatedArray.slice(indexOfFirst, indexOfLast)]);
   } else {
-    setIdArray([...relatedArray]);
+    setIdArray(relatedArray);
   }
   }, [currentSlide, relatedArray]);
 
@@ -105,7 +105,7 @@ const RelatedList = ({relatedArray})=> {
     return(
       <SliderContainer>
       {idArray.map((data,index)=> (
-        <Card id = {data} key = {data+index}/>
+        <Card id = {data} key = {index}/>
       ))}
       </SliderContainer>
     );

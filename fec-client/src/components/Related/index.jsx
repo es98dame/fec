@@ -11,7 +11,8 @@ display: flex;
 flex-direction: row;
 width : 100%;
 // overflow-x: auto;
-
+min-width: 0;
+flex: 1;
 
 // SCROLLBAR MODE
 &::-webkit-scrollbar {
