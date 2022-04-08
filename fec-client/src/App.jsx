@@ -5,6 +5,7 @@ import Products from './components/Related';
 import Ratings from './components/Ratings';
 import Overview from './components/Overview';
 import QA from './components/Q&A/QA';
+import PA from './logo/PA.png';
 
 const AppDiv = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
@@ -13,14 +14,28 @@ const AppDiv = styled.div`
 `;
 
 const H1 = styled.h1`
-  font-size: 2.0em;
+  font-size: 2.5em;
   text-align: center;
-  color: black;
+  color: lightgrey;
+  margin: 5px;
 `;
+
+const H3 = styled.h3`
+margin: 10px;
+padding: 10px;
+border-radius: 10px;
+
+  &:hover{
+    background-color: lightgrey;
+    color: #242124;
+  }
+`;
+
 
 const Input = styled.input`
   all: unset;
   border-bottom: 3px solid lightgrey;
+  color: lightgrey;
 `;
 
 const Button = styled.button`
@@ -35,12 +50,14 @@ const Form = styled.form`
   margin-bottom: auto;
 `;
 
-const H1Div = styled.div`
+const Nav = styled.div`
   margin: auto;
-  background-color: grey;
+  background-color: #242125;
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  height: 4rem;
+  color: #ffffff;
 `;
 
 const OverviewDiv = styled.div`
@@ -74,6 +91,7 @@ height: 25%;
 let App = () => {
   const productName = useRef('Camo Onesie');
   const [productId, setProductId] = useState(65631);
+  let [avg, setAvg] = useState(0);
 
   //save product id on local storage to access it anywhere
   //window.localStorage.getItem("ProductId") -> return '65631'
@@ -83,13 +101,16 @@ let App = () => {
 
   return (
     <AppDiv>
-      <H1Div>
-        <H1>Project Atelier</H1>
+      <Nav>
+        <img src={PA}/>
+        <H3>Home</H3>
+        <H3>Products</H3>
+        <H3>Cart</H3>
         <Form>
           <Button type="submit"><i className="fa fa-search"></i></Button>
           <Input type='text'></Input>
         </Form>
-      </H1Div>
+      </Nav>
       <div>
         <OverviewDiv>
           <Overview productId={productId} setProductId={setProductId} avg = {avg}/>
