@@ -2,26 +2,76 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import AListEntry from './AListEntry.jsx';
+import AddAModal from './AddAmodal.jsx';
 
-import { ContainerRow, AContainer, QContainer } from './styles/Container.styles.js';
-import { A } from './styles/ATag.styles.js';
-
-const QItem = styled.div`
-  padding-left: .5em;
-  font-weight: 600;
+const ContainerRow = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
-const QItem2 = styled(ContainerRow)`
+const ContainerCol = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.div`
+  padding-left: .5em;
+  font-weight: 400;
+`;
+
+const QContainer = styled(ContainerCol)`
+  gap: .7em;
+  margin-top: .5em;
+`;
+
+const QBody = styled.div`
+  padding-left: .4em;
+  font-weight: 400;
+`;
+
+const QInfoLine = styled(ContainerRow)`
   margin-left: auto;
   gap: 0.3em;
 `;
 
-const AMoreAnswers = styled(A)`
+const AContainer = styled(ContainerCol)`
+  overflow-y: auto;
+  max-height: 300px;
+  flex: auto;
+  gap: .8em;
+`;
+
+const Link = styled.a`
+  cursor: pointer;
+  &:hover {
+    color: grey;
+  },
+  a:link {
+    color: ${ props => props.color || '#111213' }
+  }
+`;
+
+const Button = styled.button`
   margin-top: .3em;
   margin-bottom: .5em;
   margin-left: .6em;
-  width: 130px;
+  cursor: pointer;
+  height: auto;
+  width: 13%;
+  background-color: cornsilk;
+  border-radius: 7px;
+  &:hover {
+    color: grey;
+  }
 `;
+
+// Saving this for refractoring
+// const Button = styled(Link)`
+//   margin-top: .3em;
+//   margin-bottom: .5em;
+//   margin-left: .6em;
+//   width: 140px;
+// `;
 
 const sortSeller = function(answers) {
   let result = [];
@@ -42,45 +92,45 @@ const QAListEntry = function({question}) {
   const [count, setCount] = useState(question.question_helpfulness);
   const [buttonText, setButtonText] = useState('See More Answers');
   const [answers, setAnswers] = useState(sortedAnswers.current.slice(0, 2));
-  const [modalA, setModalA] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  const handleSeeMoreAnswers = function() {
+  const handleSeeMoreAnswers = () => {
     buttonText === 'See More Answers' ? setButtonText('Collapse Answers') : setButtonText('See More Answers');
     answers.length === 2 ? setAnswers(sortedAnswers.current) : setAnswers(sortedAnswers.current.slice(0, 2));
   };
 
-  const handleAddAnswer = function() {
-    setModalA(!modalA);
+  const handleAddAnswer = () => {
+    setShowModal(true);
   };
 
-  const handleHelpfulYes = function() {
+  const handleHelpfulYes = () => {
     if (!pressedHelpful.current) {
       pressedHelpful.current = true;
       setCount(count + 1);
     }
   };
 
-  // console.log(answers)
   return (
     <QContainer>
       <ContainerRow>
-        <QItem>Q:</QItem>
-        <QItem>{question.question_body}</QItem>
-        <QItem2>
+        <Label>Q:</Label>
+        <QBody>{question.question_body}</QBody>
+        <QInfoLine>
           <div>Helpful?</div>
-          <A onClick={handleHelpfulYes}>{`Yes (${count})`}</A>
+          <Link onClick={handleHelpfulYes}>{`Yes (${count})`}</Link>
           <div>|</div>
-          <A onClick={handleAddAnswer}>Add Answer</A>
-        </QItem2>
+          <Link onClick={handleAddAnswer}>Add Answer</Link>
+        </QInfoLine>
       </ContainerRow>
       <ContainerRow>
-        {answers.length ? <QItem>A:</QItem> : null}
+        {answers.length ? <Label>A:</Label> : null}
         <AContainer>
           {answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={answer[0]}/>) : null}
-          {allAnswers.length > 2 ? <AMoreAnswers color={'purple'} onClick={handleSeeMoreAnswers}>{buttonText}</AMoreAnswers> : null}
+          {allAnswers.length > 2 ? <Button color={'#007185'} onClick={handleSeeMoreAnswers}>{buttonText}</Button> : null}
         </AContainer>
-      </ContainerRow>
-    </QContainer>
+      </ContainerRow>{
+        showModal ? <AddAModal hide={() => setShowModal(false)} /> : null
+      }</QContainer>
   );
 };
 
