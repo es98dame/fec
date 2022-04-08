@@ -72,8 +72,13 @@ height: 25%;
 
 
 let App = () => {
+<<<<<<< HEAD
+  let [productId, setProductId] = useState(65631);
+  let [avg, setAvg] = useState(0);
+=======
   const productName = useRef('Camo Onesie');
   const [productId, setProductId] = useState(65631);
+>>>>>>> main
 
   //save product id on local storage to access it anywhere
   //window.localStorage.getItem("ProductId") -> return '65631'
@@ -92,7 +97,7 @@ let App = () => {
       </H1Div>
       <div>
         <OverviewDiv>
-          <Overview productId={productId} setProductId={setProductId}/>
+          <Overview productId={productId} setProductId={setProductId} avg = {avg}/>
         </OverviewDiv>
 
         <RelatedDiv>
@@ -104,7 +109,7 @@ let App = () => {
         </QandADiv>
 
         <RatingsDiv>
-          <Ratings productId={productId}/>
+          <Ratings productId={productId} setAvg = {setAvg}/>
         </RatingsDiv>
       </div>
     </AppDiv>
