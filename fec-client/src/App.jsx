@@ -72,9 +72,16 @@ height: 25%;
 
 
 let App = () => {
+<<<<<<< HEAD
   let [productId, setProductId] = useState(65631);
   let [avg, setAvg] = useState(0);
   let productName = 'Filler for product name';
+=======
+
+  const productName = useRef('Camo Onesie');
+  const [productId, setProductId] = useState(65631);
+  let [avg, setAvg] = useState(0);
+>>>>>>> main
 
   //save product id on local storage to access it anywhere
   //window.localStorage.getItem("ProductId") -> return '65631'
