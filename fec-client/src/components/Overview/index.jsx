@@ -28,7 +28,7 @@ const Content = styled.div`
   flex-direction: column;
   margin: 5px;
   padding: 5px;
-  width: 40%;
+  width: 35%;
   justify-content: space-around;
 `;
 

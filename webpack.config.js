@@ -8,7 +8,8 @@ module.exports = {
     path: path.resolve(__dirname, './fec-client/dist'),
   },
   module: {
-    rules: [{ test: /\.jsx/, use: 'babel-loader' }],
+    rules: [{ test: /\.jsx/, use: 'babel-loader' }, { test: /\.(png|jpe?g|gif)$/i, loader: 'file-loader' }],
+
   },
   resolve: { extensions: ['.js', '.jsx'] },
   watch: true,
