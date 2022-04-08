@@ -11,7 +11,7 @@ display: flex;
 flex-direction: row;
 `;
 
-const DynamicStars = () => {
+const DynamicStars = ({setRating}) => {
   const [fills, setFills] = useState([0, 0, 0, 0, 0]);
   const [clicked, setClicked] = useState(false);
 
@@ -23,6 +23,7 @@ const DynamicStars = () => {
     }
     setFills(newFills);
     setClicked(true);
+    setRating(num + 1);
   };
 
   const handleMouseIn = (num) => {
