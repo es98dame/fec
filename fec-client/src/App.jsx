@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import Products from './components/Related';
@@ -72,7 +72,8 @@ height: 25%;
 
 
 let App = () => {
-  let [productId, setProductId] = useState(65631);
+  const productName = useRef('Camo Onesie');
+  const [productId, setProductId] = useState(65631);
 
   //save product id on local storage to access it anywhere
   //window.localStorage.getItem("ProductId") -> return '65631'
@@ -95,11 +96,11 @@ let App = () => {
         </OverviewDiv>
 
         <RelatedDiv>
-          <Products productId={productId} setProductId={setProductId}/>
+          <Products productId={productId} setProductId={setProductId} productName={productName}/>
         </RelatedDiv>
 
         <QandADiv>
-          <QA productId={productId}/>
+          <QA productId={productId} productName={productName}/>
         </QandADiv>
 
         <RatingsDiv>
