@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import Characteristic from './Characteristics.jsx';
+import DynamicStars from './DynamicStars.jsx';
 
 const Modal = styled.div`
 position: fixed;
@@ -106,6 +107,10 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
           <h3>About the product {productId}</h3>
         </Header>
         <Form onSubmit = {handleSubmit}>
+          <Field>
+            <Label> Overall Rating </Label>
+            <DynamicStars />
+          </Field>
           <Field onChange = {(e) => handleChange(e, setRecommend)}>
             <Label>Would you recommend this product to a friend? </Label>
             <input type='radio' value = 'true' name = 'recommend'/> Yes
