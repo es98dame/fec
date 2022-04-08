@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Characteristic from './Characteristics.jsx';
 import DynamicStars from './DynamicStars.jsx';
 import UploadPhotos from './UploadPhotos.jsx';
+
+const cloudName = 'daxw4bdp6';
+const upload_preset = 'grzngc1a';
 
 const Modal = styled.div`
 position: fixed;
@@ -73,30 +77,52 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
   const relevantFactors = Object.keys(relevantChars);
 
   const [recommend, setRecommend] = useState(null);
+  const [rating, setRating] = useState(null);
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
+  const [images, setImages] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [warning, setWarning] = useState(null);
-  const [charRatings, setCharRatings] = useState({});
+  const [characteristics, setCharacteristics] = useState({});
 
   const handleChange = (e, setter) => {
     setter(e.target.value);
   };
 
   const handleFactorChange = (characteristic, value) => {
-    const charCopy = {...charRatings};
+    const charCopy = {...characteristics};
     charCopy[relevantChars[characteristic].id] = value;
-    setCharRatings(charCopy);
+    setCharacteristics(charCopy);
   };
 
+  const imageUpload = (file) => {
+    return axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, { upload_preset, file});
+};
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (body.length < 50) {
-      setWarning('Your review must be at least 50 characters.');
-    } else if (name.length === 0 ) {
-      setWarning('Nickname is required.');
-    }
+    // e.preventDefault();
+    // if (body.length < 50) {
+    //   setWarning('Your review must be at least 50 characters.');
+    // } else if (name.length === 0 ) {
+    //   setWarning('Nickname is required.');
+    // }
+    Promise.all(images.map(url => imageUpload(url)))
+      .then((responses) => {
+          const photos = responses.map(response => response.data.url);
+          axios.post('/api/reviews', {
+          productId,
+          rating,
+          summary,
+          body,
+          recommend,
+          name,
+          email,
+          photos,
+          characteristics
+
+         })
+      })
   };
 
   return (
@@ -110,7 +136,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
         <Form onSubmit = {handleSubmit}>
           <Field>
             <Label> Overall Rating </Label>
-            <DynamicStars />
+            <DynamicStars setRating = {setRating}/>
           </Field>
           <Field onChange = {(e) => handleChange(e, setRecommend)}>
             <Label>Would you recommend this product to a friend? </Label>
@@ -134,7 +160,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
           </Field>
           <Field>
             <Label> Upload Photos </Label>
-            <UploadPhotos />
+            <UploadPhotos images = {images} setImages = {setImages}/>
           </Field>
           <Field>
             <Label>Your Username</Label>
