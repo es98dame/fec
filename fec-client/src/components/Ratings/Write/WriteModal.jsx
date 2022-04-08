@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import Characteristic from './Characteristics.jsx';
 import DynamicStars from './DynamicStars.jsx';
+import UploadPhotos from './UploadPhotos.jsx';
 
 const Modal = styled.div`
 position: fixed;
@@ -130,6 +131,10 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
             <Label>Your Review</Label>
             <textarea rows = '10' cols = '50' placeholder = 'Write your review here' maxLength = '1000' value = {body} onChange = {(e) => handleChange(e, setBody)}>{body}</textarea>
             <Tip>{body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}</Tip>
+          </Field>
+          <Field>
+            <Label> Upload Photos </Label>
+            <UploadPhotos />
           </Field>
           <Field>
             <Label>Your Username</Label>
