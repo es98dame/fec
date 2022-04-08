@@ -66,7 +66,7 @@ color: red;
 `;
 
 
-const WriteModal = ({relevantChars, productId }) => {
+const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 
   const relevantFactors = Object.keys(relevantChars);
 
@@ -100,6 +100,7 @@ const WriteModal = ({relevantChars, productId }) => {
   return (
     <Modal>
       <ModalContent>
+        <button onClick = {toggleWriteModal}>Close</button>
         <Header>
           <h2>Write Your Review</h2>
           <h3>About the product {productId}</h3>

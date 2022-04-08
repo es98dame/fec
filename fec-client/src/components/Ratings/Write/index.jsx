@@ -12,7 +12,7 @@ const Write = ({relevantChars, productId}) => {
   return (
     <div>
       <button onClick = {toggleWriteModal}>Write a Review</button>
-      { showModal ? <WriteModal relevantChars = {relevantChars} productId = {productId}/> : null}
+      { showModal ? <WriteModal relevantChars = {relevantChars} productId = {productId} toggleWriteModal = {toggleWriteModal}/> : null}
     </div>
   );
 };
