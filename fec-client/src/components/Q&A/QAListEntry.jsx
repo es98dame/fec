@@ -129,7 +129,7 @@ const QAListEntry = function({question}) {
           {allAnswers.length > 2 ? <Button color={'#007185'} onClick={handleSeeMoreAnswers}>{buttonText}</Button> : null}
         </AContainer>
       </ContainerRow>{
-        showModal ? <AddAModal hide={setShowModal} /> : null
+        showModal ? <AddAModal hide={() => setShowModal(false)} /> : null
       }</QContainer>
   );
 };

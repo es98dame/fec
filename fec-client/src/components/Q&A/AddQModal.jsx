@@ -2,17 +2,6 @@ import React, { useState, useRef } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
 
-const Overlay = styled.div`
-  position: fixed;
-  z-index: 1040;
-  justify-content: center;
-  margin: auto;
-  height: 100vw;
-  width: 100vh;
-  background-color: #000;
-  opacity: .5;
-`;
-
 const ModalWrapper = styled.div`
   position: fixed;
   z-index: 1050;
@@ -116,7 +105,7 @@ const InvalidList = styled.ul`
   margin: 0;
 `;
 
-const emailRegEx = /^([\w\.-]+)@([a-zA-z]{1,9})\.([a-zA-Z]{1,5})$/;
+const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
 const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmission}) => {
   const [invalidEntries, setInvalidEntries] = useState([]);
