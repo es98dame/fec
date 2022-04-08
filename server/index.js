@@ -35,6 +35,17 @@ app.get('/api', (req, res) => {
 
 });
 
+app.post('/api', (req, res) => {
+
+  console.log(req.body);
+
+  // axios.post(`${url}${req.headers.path}`, req.body)
+  //   .then((response) => {
+  //     res.send(response.data);
+  //   })
+  //   .catch((err) => res.send(err));
+});
+
 //PUT REQUEST FOR RATINGS AND REVIEWS
 
 app.put('/api/reviews/:review_id/helpful', (req, res) => {
