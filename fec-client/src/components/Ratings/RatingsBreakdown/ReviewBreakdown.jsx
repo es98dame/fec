@@ -47,7 +47,7 @@ const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
     <ReviewBreakdownContainer>
       <Summary>
         <Average>
-          <Stars rating = {average}/>
+          <Stars rating = {average} size = {'27'} />
           <span>({average})</span>
         </Average>
         <span> {total} reviews </span>

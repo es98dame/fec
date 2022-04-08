@@ -6,6 +6,11 @@ import Star from '../../Shared/Star.jsx';
 // height: 50;
 // `;
 
+const StarRow = styled.div`
+display: flex;
+flex-direction: row;
+`;
+
 const DynamicStars = () => {
   const [fills, setFills] = useState([0, 0, 0, 0, 0]);
   const [clicked, setClicked] = useState(false);
@@ -36,13 +41,13 @@ const DynamicStars = () => {
   };
 
   return (
-    <div>
+    <StarRow>
       {[0, 1, 2, 3, 4].map(item => (
         <div key = {item} onClick = {() => handleClick(item)} onMouseEnter = {()=>handleMouseIn(item)} onMouseLeave = {handleMouseOut}>
-          <Star fill = {fills[item]} />
+          <Star fill = {fills[item]} size = {'30'}/>
         </div>
       ))}
-    </div>
+    </StarRow>
   );
 
 
