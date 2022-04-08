@@ -7,9 +7,11 @@ import RelatedList from './RelatedList.jsx';
 import OutfitList from './OutfitList.jsx';
 
 const ProductList = styled.div`
+  display: flex;
   width : 100%;
   // overflow-x: auto;
   min-width: 0;
+  height: 440px;
 
   // SCROLLBAR MODE
   &::-webkit-scrollbar {

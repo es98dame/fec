@@ -50,7 +50,6 @@ const OverviewDiv = styled.div`
 `;
 
 const RelatedDiv = styled.div`
-border: 1px solid black;
 width: 90%;
 height: 25%;
 align-items: center;
@@ -74,13 +73,18 @@ height: 25%;
 
 
 let App = () => {
-  let [productId, setProductId] = useState(65631);
+  let [productId, setProductId] = useState(65635);
 
   //save product id on local storage to access it anywhere
   //window.localStorage.getItem("ProductId") -> return '65631'
-  useEffect(()=>{
-    window.localStorage.setItem("ProductId", 65631);
-  },[]);
+  // useEffect(()=>{
+  //   if(window.localStorage.getItem("ProductId") === null){
+  //     window.localStorage.setItem("ProductId", 65631);
+  //   } else {
+  //     setProductId(window.localStorage.getItem("ProductId"));
+  //   }
+
+  // },[]);
 
   return (
     <AppDiv>

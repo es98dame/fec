@@ -4,6 +4,21 @@ import styled from 'styled-components';
 
 import axios from 'axios';
 
+
+const Container = styled.div`
+
+`;
+
+const SliderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  // justify-content : space-between;
+  min-width: 0;
+  flex: 1;
+  margin: 10px;
+`;
+
 const Outfit = styled.div`
 display: flex;
 flex-direction: row;
@@ -53,6 +68,7 @@ const OutfitList = (props)=> {
     arr.splice(arr.indexOf(id), 1);
     setOutfitList(arr);
     window.localStorage.setItem("OutfitList", JSON.stringify(arr));
+    //think about toggle
 
   }
 

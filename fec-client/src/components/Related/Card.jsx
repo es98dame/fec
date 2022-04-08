@@ -7,32 +7,36 @@ import Star from '../Shared/Stars.jsx';
 
 
 const ProductCard = styled.div`
-display: flex;
-flex-direction: column;
-min-width: 0;
+  display : flex;
+  flex-direction: column;
+  position : relative;
+
+//min-width: 0;
 // flex: 1;
 border: solid;
 border-color: lightgray;
+//flex: 0 0 25%
+  background : white;
+&:hover {
+    z-index : 50;
+    transform: scale(1.4);
 
-
-&:nth-child(2) {
-  flex: 0 0 20%;
-}
-&:nth-child(3) {
-  flex: 0 0 20%;
-}
-&:nth-child(4) {
-  flex: 0 0 20%;
-}
-&:nth-child(5) {
-  flex: 0 0 20%;
-}
-&:nth-child(6) {
-  flex: 0 0 20%;
 }
 
-
+// &:nth-child(2) {
+//   flex: 0 0 25%;
+// }
+// &:nth-child(3) {
+//   flex: 0 0 25%;
+// }
+// &:nth-child(4) {
+//   flex: 0 0 25%;
+// }
+// &:nth-child(5) {
+//   flex: 0 0 25%;
+// }
 `;
+
 
 const CardDiv = styled.div`
   width: fit-content;
@@ -50,65 +54,44 @@ height : 100%;
 z-index: 2;
 transition: all 0.2s linear;
 &:hover {
-  box-shadow: 0 5px 20px 8px rgba(0,0,0,0.3);
-  transform: scale(1.07);
+  ${ProductCard}{
+    z-index : 50;
+    transform: scale(1.7);
+  }
 }
 `;
 
 const ActionButton = styled.img`
   position : relative;
   left:83%;
-  z-index:10;
+  z-index:7;
   &:hover {
     transform: scale(1.3);
   }
 `;
 
 
-const Card = ({id})=> {
-  //console.log('id in card.js', id);
+const Card = ({productInfo})=> {
+  // const { product , style } = productInfo;
 
-  const [productInfo, setProductInfo] = useState({});
-  const [styleInfo, setStyleInfo] = useState([]);
-
+  // const [info, setInfo] = useState(null);
+  // const [style, setStyle] = useState(null);
+  const image = useRef(null);
   const [show, setShow] = useState(false);
 
-  var image = '';
-  if(styleInfo.length === 0){
-     image = '';
-  } else {
-     image = styleInfo[0].photos[0].thumbnail_url;
-  }
-
-  // check show value here
-  // useEffect(()=>{
-  //   console.log('show',show);
-  // },[show])
-
   useEffect(()=>{
-
-    const getProductInfo = async () => {
-      const res = await axios.get('/api', {headers: {path: `/products/${id}`}}) //get request to get the related item id array
-      setProductInfo(res.data);
-    };
-    const getStyleInfo= async () => {
-      const res = await axios.get('/api', {headers: {path: `/products/${id}/styles`}}) //get request to get the related item id array
-      //console.log(res)
-      setStyleInfo(res.data.results)
-    };
-
-    getStyleInfo();
-    getProductInfo();
-
-
-  },[id])
+    console.log(productInfo);
+  },[productInfo]);
 
 
   return(
-  <ProductCard>
-    <div><ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png" onClick={() => {setShow(!show);}}></ActionButton>
+    <ProductCard>
+      {/* {productInfo === null ? '' :
+      <ProductCard> */}
+      <div>
+        <ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png" onClick={() => {setShow(!show);}}></ActionButton>
      </div>
-    <PreviewImg src={image} alt="no image"/>
+    <PreviewImg src='http://placecorgi.com/260/180' alt="no image"/>
 
     <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {productInfo}></Modal>
     <CardDiv>
@@ -117,7 +100,10 @@ const Card = ({id})=> {
     <CardText>{productInfo.default_price}</CardText>
     <Star rating ='4'/>
     </CardDiv>
-  </ProductCard>
+    </ProductCard>
+  // }
+  // </ProductCard>
+
   )
 }
 

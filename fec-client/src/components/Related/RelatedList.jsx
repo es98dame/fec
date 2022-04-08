@@ -1,32 +1,50 @@
 import React, {useState, useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 import Card from './Card.jsx'
 
 const Container = styled.div`
-
-width: 100%;
+overflow : hidden;
+width : 100%;
+position: relative
 `;
 const SliderContainer = styled.div`
-  width: 95%;
-  display: flex;
-  flex-direction: row;
+  // display: flex;
+  // flex-direction: row;
   // justify-content : space-between;
-  min-width: 0;
+  // min-width: 0;
+  // // flex: 1;
+  // margin: 10px;
+  position: relative;
+  top: 64px;
+  left: 63px;
+}
 
+`;
+
+const ProductCard = styled.div`
+width : 100%;
+display : flex;
+flex-direction: row;
 `;
 
 const Button = styled.button`
   display : none;
 
-  ${SliderContainer}:hover & {
+
+
+  ${Container}:hover & {
+    display : flex;
+    flex-direction: column;
+    position : relative;
     all: unset;
     display : block;
     border: 1px solid coral;
     color: coral;
     border-radius: 10px;
     position: relative;
+    z-index ; 20;
     padding-left: 10px;
     padding-right: 10px;
 
@@ -41,21 +59,51 @@ const Button = styled.button`
 `;
 
 
+
 const TOTAL_SLIDES = 2;
 const postsPerPage = 5;
 
 const RelatedList = ({relatedArray})=> {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [idArray, setIdArray] = useState([]);
-
+  //const [idArray, setIdArray] = useState(null);
   const slideRef = useRef(null);
+
+  const [infoArray, setInfoArray] = useState('');
+
+  const customAxiosFunctions = async () => {
+
+    const promises1 = relatedArray.map((id) => {
+      // return axios.get('/api', {headers: {path: `/products/${id}`}});
+      return  axios.all([
+        axios.get('/api', {headers: {path: `/products/${id}`}}),
+        // axios.get('/api', {headers: {path: `/products/${id}/styles`}})
+      ])
+      .then(axios.spread((data1) => {
+        // output of req.
+
+        //console.log('data1', data1, 'data2', data2)
+        return data1.data;
+      }));
+
+    });
+    // const promises2 = relatedArray.map((id) => {
+    //   return axios.get('/api', {headers: {path: `/products/${id}/styles`}});
+    // });
+
+    const resolvedResponses1 = await Promise.all(promises1);
+
+    resolvedResponses1.map((el) => {
+      //console.log(el)
+      setInfoArray(oldArray => [...oldArray, el]);
+    });
+
+  };
+
+
   const nextSlide = () => {
-      if (currentSlide >= TOTAL_SLIDES) { // 더 이상 넘어갈 슬라이드가 없으면 슬라이드를 초기화합니다.
-        setCurrentSlide(0);
-      } else {
-        setCurrentSlide(currentSlide + 1);
-      }
+        setCurrentSlide(currentSlide + 1)
     };
+
   const prevSlide = () => {
     if (currentSlide === 0) {
       setCurrentSlide(TOTAL_SLIDES);
@@ -65,50 +113,44 @@ const RelatedList = ({relatedArray})=> {
   };
 
   useEffect(() => {
-    if(relatedArray.length > 5){
-    slideRef.current.style.transition = "all 0.5s ease-in-out";
-    const indexOfFirst = currentSlide * postsPerPage;
-    const indexOfLast = postsPerPage * (currentSlide + 1);
-    setIdArray([...relatedArray.slice(indexOfFirst, indexOfLast)]);
-  } else {
-    setIdArray(relatedArray);
-  }
-  }, [currentSlide, relatedArray]);
+    slideRef.current.animate( { opacity: [0, 1]},   500 );
+    // slideRef.current.style.transform = `translateX(-${currentSlide}03%)`;
+    //setIdArray(infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)));
+  }, [currentSlide]);
+
+  useEffect(() => {
+    //setInfoArray('');
+    customAxiosFunctions();
+  }, [relatedArray]);
 
   // useEffect(() => {
-  //   setIdArray([...relatedArray.slice(0, 4)]);
+  //   if(relatedArray.length !== 0){
+  //     // setIdArray(relatedArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)));
+  //     setIdArray(relatedArray.slice(0));
+  //   }
+
   // }, [relatedArray]);
 
-  // useEffect(()=>{
-  //   getfirstarray();
-  // },[])
-
-  if(relatedArray.length > 5){
     return (
       <Container>
-        {/* {currentSlide} */}
         <SliderContainer ref={slideRef} >
-           <Button onClick={prevSlide}>←</Button>
-          {idArray.map((data,index)=> (
-          <Card id = {data} key = {data+index}/>
-        ))}
-       <Button onClick={nextSlide}>→</Button>
-        </SliderContainer>
-      </Container>
-
-    );
-  } else {
-    return(
-      <SliderContainer>
-      {idArray.map((data,index)=> (
-        <Card id = {data} key = {index}/>
+        <ProductCard>
+        <Button onClick={prevSlide}>←</Button>
+      {infoArray instanceof Array && infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)).map((data,index)=>(
+        <Card productInfo={data} key={index}/>
       ))}
-      </SliderContainer>
+      <Button onClick={nextSlide}>→</Button>
+      </ProductCard>
+        </SliderContainer>
+
+        </Container>
     );
 
-  }
+    //
+
 
 }
+
 
   //check info value
   // useEffect(() => {
