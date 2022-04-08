@@ -17,7 +17,7 @@ const QAList = function({QAData}) {
 
   return (
     <QAListContainer>{
-      QAData.length ? sortedData.map((question, key) => <QAListEntry question={question} key={key}/>) : null
+      QAData.length ? sortedData.map((question) => <QAListEntry question={question} key={question.question_id}/>) : null
     }</QAListContainer>
   );
 };
