@@ -47,6 +47,12 @@ const Title = styled.div`
   align-self: flex-start;
 `;
 
+const SubTitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: .2em;
+`;
+
 const SubTitle = styled.h6`
   font-size: 17px;
   margin: 0;
@@ -99,19 +105,21 @@ const AddAModal = ({ hide }) => {
   const [image, setImage] = useState('');
 
   const handleFile = (e) => {
-    console.log(e.target.result);
-    console.log(typeof e.target.result);
+    // Uncomment these to see what you get
+    // console.log(e.target.result);
+    // console.log(typeof e.target.result);
     setImage(e.target.result);
   };
 
   const handleUpload = (e) => {
     e.persist();
-    console.log(e)
-    console.log(e.target.files[0].name);
+    // console.log(e)
+    // console.log(e.target.files[0].name);
     let fileData = new FileReader();
+    //We are assigning a callback to be executed on this event, to this property.
     fileData.onloadend = handleFile;
+    //We are reading just the file, trying to send its properties wont work.
     fileData.readAsDataURL(e.target.files[0]);
-    // console.log(URL.createObjectURL(e.target.files[0]));
   };
 
   return reactDom.createPortal((
@@ -120,8 +128,10 @@ const AddAModal = ({ hide }) => {
         <Heading>
           <Title>
             <TitleName>Submit your Answer</TitleName>
-            <SubTitle>Product Name:</SubTitle>
-            <QuestionBody>does it poop?</QuestionBody>
+            <SubTitleContainer>
+              <SubTitle>Product Name:</SubTitle>
+              <QuestionBody>does it poop?</QuestionBody>
+            </SubTitleContainer>
           </Title>
           <ExitButton onClick={hide}>&times;</ExitButton>
         </Heading>
