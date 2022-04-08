@@ -54,6 +54,9 @@ app.put('/api/reviews/:review_id/helpful', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.post('/api/reviews', (req, res) => {
+  console.log(req.body);
+});
 
 
 app.listen(port, () => {
