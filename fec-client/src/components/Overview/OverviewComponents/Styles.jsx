@@ -8,7 +8,6 @@ const Container = styled.div`
   margin: 5px;
   padding: 5px;
   justify-content: flex-start;
-  height: 5rem;
 `;
 
 const Text = styled.div`
@@ -33,7 +32,7 @@ const Styles = (props) => {
       <Container>
         {props.styles.map((style) => {
           ++num;
-          return (<StylesItem style={style} key={num} styles={props.styles} set={props.set}/>);
+          return (<StylesItem style={style} key={num} styles={props.styles} set={props.set} selectedStyle={props.currentStyle.style_id}/>);
         }
         )}
       </Container>
