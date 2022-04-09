@@ -51,7 +51,7 @@ const ProductSpecs = (props) => {
   return (
     <Container>
       <Ratings>
-        <Stars rating={props.avg}/>
+        <Stars rating={props.avg} size={32}/>
         <Link onClick={handleScroll}>See all (number) ratings</Link>
       </Ratings>
       <Bolds>Category: {props.currentProduct.category}</Bolds>
