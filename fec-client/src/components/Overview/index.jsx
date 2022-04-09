@@ -28,7 +28,7 @@ const Content = styled.div`
   flex-direction: column;
   margin: 5px;
   padding: 5px;
-  width: 40%;
+  width: 35%;
   justify-content: space-around;
 `;
 
@@ -37,6 +37,7 @@ const Overview = (props) => {
   const [productId] = useState(props.productId);
   const [currentStyle, setCurrentStyle] = useState([]);
   const [currentProduct, setCurrentproduct] = useState([]);
+  const [currentAvg, setCurrentAvg] = useState(props.avg);
 
   useEffect(() => {
     axios.get('/api', {headers: {path: `/products/${productId}/styles`}})
@@ -48,6 +49,7 @@ const Overview = (props) => {
     axios.get('/api', {headers: {path: `/products/${productId}`}})
       .then((response) => {
         setCurrentproduct(response.data);
+        props.setProductName(response.data.name);
       });
   }, []);
 
@@ -60,7 +62,7 @@ const Overview = (props) => {
           <Images currentStyle={currentStyle}/>
         </ImagesDiv>
         <Content>
-          <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct}/>
+          <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct} avg={props.avg}/>
 
           <Styles styles={styles} currentStyle={currentStyle} set={setCurrentStyle}/>
 

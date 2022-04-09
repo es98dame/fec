@@ -8,6 +8,7 @@ const Container = styled.div`
   margin: 5px;
   padding: 5px;
   justify-content: flex-start;
+  max-width: 400px;
 `;
 
 const Text = styled.div`

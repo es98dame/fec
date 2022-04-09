@@ -20,7 +20,7 @@ const Image = styled.img`
   border: 3px solid lightgrey;
 
   &:hover{
-    border: 3px solid pink;
+    border: 3px solid #4b464d;;
   }
 `;
 
@@ -33,7 +33,7 @@ const Overlay = styled.div`
   position: absolute;
   color: white;
   font-size: 2rem;
-  border: 3px solid pink;
+  border: 3px solid #4b464d;
 `;
 
 const StylesItem = (props) => {

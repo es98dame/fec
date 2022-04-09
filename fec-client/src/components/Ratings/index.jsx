@@ -4,13 +4,14 @@ import axios from 'axios';
 
 import ReviewList from './ReviewList';
 import RatingsBreakdown from './RatingsBreakdown';
+import Write from './Write';
+import countTotalAndAverage from './countTotalAndAverage.js';
 
 const RatingsContainer = styled.div`
 font-weight: 300;
 `;
 
-
-const Ratings = ({productId}) => {
+const Ratings = ({productId, setAvg}) => {
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [metaData, setMetaData] = useState({});
@@ -29,6 +30,7 @@ const Ratings = ({productId}) => {
     axios.get('/api', {headers: {path: `/reviews/meta?product_id=${productId}`}})
       .then((response) => {
         setMetaData(response.data);
+        setAvg(countTotalAndAverage(response.data.ratings)[1]);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -50,6 +52,7 @@ const Ratings = ({productId}) => {
       <h3>Reviews</h3>
       <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
       <ReviewList reviews = {currentData}/>
+      <Write relevantChars = {metaData.characteristics} productId = {productId}/>
     </RatingsContainer>
   );
 

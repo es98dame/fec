@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import ReviewBar from './ReviewBar.jsx';
 import Stars from '../../Shared/Stars.jsx';
+import countTotalAndAverage from '../countTotalAndAverage.js';
 
 const ReviewBreakdownContainer = styled.div`
 display: flex;
@@ -28,17 +29,6 @@ font-style: italic;
 text-align: center;
 `;
 
-const countTotalAndAverage = (obj) => {
-  let total = 0;
-  let weighted = 0;
-  for (let num in obj) {
-    total += parseInt(obj[num]);
-    weighted += parseInt(obj[num]) * parseInt(num);
-  }
-  const average = Math.round(weighted / total * 10) / 10;
-  return [total, average];
-};
-
 const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
   const [total, average] = countTotalAndAverage( reviewData );
   const percentRecommended = Math.round(parseInt(recommended.true) / total * 100);
@@ -47,7 +37,7 @@ const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
     <ReviewBreakdownContainer>
       <Summary>
         <Average>
-          <Stars rating = {average}/>
+          <Stars rating = {average} size = {'27'} />
           <span>({average})</span>
         </Average>
         <span> {total} reviews </span>
