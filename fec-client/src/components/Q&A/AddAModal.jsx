@@ -11,7 +11,7 @@ const ModalWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
   background-color: rgb(0, 0, 0, 0.8);
 `;
 
@@ -24,7 +24,7 @@ const ModalContainer = styled.div`
   max-width: 500px;
   padding: 2rem;
   align-self: flex-start;
-  width: 400px;
+  width: 500px;
 `;
 
 const Heading = styled.div`
@@ -38,7 +38,7 @@ const Heading = styled.div`
 const TitleName = styled.span`
   font-size: 1.6em;
   font-weight: bold;
-  align-self: center;
+  align-self: flex-start;
 `;
 
 const Title = styled.div`
@@ -53,14 +53,16 @@ const SubTitleContainer = styled.div`
   gap: .2em;
 `;
 
-const SubTitle = styled.h6`
+const SubTitle = styled.span`
   font-size: 17px;
   margin: 0;
+  font-weight: bold;
+  white-space: nowrap;
 `;
 
-const QuestionBody = styled.p`
-  margin: 5px 0;
-  font-size: small;
+const QuestionBody = styled.span`
+  margin: 0;
+  font-size: 17px;
   font-style: oblique;
   overflow-wrap: break-word;
 `;
@@ -86,7 +88,6 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
-
 const Field = styled.div`
   display: flex;
   gap: .3em;
@@ -94,54 +95,176 @@ const Field = styled.div`
   margin-top: 7px;
 `;
 
-const UploadedImage = styled.img`
-  max-width: 100px;
-  height: auto;
+const NicknameInput = styled.input`
+  width: 190px;
 `;
+
+const Advisory = styled.span`
+  font-size: smaller;
+  font-style: oblique;
+`;
+
+const AnswerBody = styled.textarea`
+  height: 70px;
+  flex: auto;
+`;
+
+const ImageRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: .2em;
+`;
+
+const UploadedImage = styled.img`
+  width: auto;
+  height: 10rem;
+`;
+
+const SubmitButton = styled.button`
+  width: 9em;
+  align-self: flex-end;
+`;
+
+const ErrorLabel = styled.label`
+  color: darkred;
+`;
+
+const InvalidList = styled.ul`
+  color: darkred;
+  margin: 0;
+`;
+
+const FileHidden = styled.input`
+  width: 0;
+  height: 0;
+  visibility: hidden;
+`;
+
+const UploadButton = styled.label`
+  border: solid 1px;
+  width: 18%;
+  border-radius: 4px;
+  background-color: azure;
+  padding: 2px 6px;
+  font-size: 15px;
+  cursor: pointer;
+  &:hover {
+    color: lightgrey;
+  };
+`;
+
+const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
 const AddAModal = ({ hide }) => {
   const container = document.getElementById('app');
   const files = useRef('');
-  const [image, setImage] = useState('');
+
+  const [invalidEntries, setInvalidEntries] = useState([]);
+  const [images, setImages] = useState([]);
+  const [email, setEmail] = useState('');
+  const [answer, setAnswer] = useState('');
+  const [nickname, setNickname] = useState('');
+
+  const handleTextChange = (e) => {
+    if (e.target.name === 'answer' && answer.length < 1000) {
+      setAnswer(e.target.value);
+    } else if (e.target.name === 'nickname' && nickname.length < 60) {
+      setNickname(e.target.value);
+    } else if (e.target.name === 'email' && email.length < 60) {
+      setEmail(e.target.value);
+    }
+  };
+
+  const handleExit = (hide) => {
+    setEmail('');
+    setNickname('');
+    setAnswer('');
+    setInvalidEntries([]);
+    hide();
+  };
 
   const handleFile = (e) => {
-    // Uncomment these to see what you get
-    // console.log(e.target.result);
-    // console.log(typeof e.target.result);
-    setImage(e.target.result);
+    setImages(images.concat([e.target.result]));
   };
 
   const handleUpload = (e) => {
     e.persist();
-    // console.log(e)
-    // console.log(e.target.files[0].name);
     let fileData = new FileReader();
-    //We are assigning a callback to be executed on this event, to this property.
     fileData.onloadend = handleFile;
-    //We are reading just the file, trying to send its properties wont work.
     fileData.readAsDataURL(e.target.files[0]);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInvalidEntries([]);
+    let valid = true;
+    let entries = [];
+
+    if (!answer.length) {
+      entries.push('An answer');
+      valid = false;
+    }
+    if (!nickname.length) {
+      entries.push('Your nickname');
+      valid = false;
+    }
+    if (!emailRegEx.test(email)) {
+      entries.push('A valid email');
+      valid = false;
+    }
+
+    setInvalidEntries(entries);
+
+    if (valid) {
+      let inputs = [nickname, email, answer, fileData];
+      // handleQSubmission(inputs);
+      setEmail('');
+      setNickname('');
+      setAnswer('');
+      hide();
+    }
+  };
+
+
   return reactDom.createPortal((
-    <ModalWrapper onClick={hide}>
+    <ModalWrapper onClick={() => handleExit(hide)}>
       <ModalContainer onClick={(e) => e.stopPropagation()} >
         <Heading>
           <Title>
             <TitleName>Submit your Answer</TitleName>
-            <SubTitleContainer>
-              <SubTitle>Product Name:</SubTitle>
-              <QuestionBody>does it poop?</QuestionBody>
-            </SubTitleContainer>
+            <SubTitle>Product Name:</SubTitle>
+            <QuestionBody>What does the fox say? wop wop wop wop wopw oppop wopwopwo wopwowpwwop</QuestionBody>
           </Title>
-          <ExitButton onClick={hide}>&times;</ExitButton>
+          <ExitButton onClick={() => handleExit(hide)}>&times;</ExitButton>
         </Heading>
-        <Form>
+        <Form type="submit" onSubmit={handleSubmit}>
           <Field>
-            <label>nickname</label>
+            <label>What is your nickname*</label>
+            <NicknameInput type="text" name="nickname" placeholder={'Example: jack543!'} value={nickname} onChange={(e) => handleTextChange(e)}></NicknameInput>
+            <Advisory>For privacy reasons, do not use your full name or email address</Advisory>
           </Field>
-          <input type="file" name="file" onChange={handleUpload}/>
+          <Field>
+            <label>Your email*</label>
+            <input type="text" name="email" placeholder={'Example: jack@email.com'} value={email} onChange={(e) => handleTextChange(e)}></input>
+            <Advisory>For authentication reasons, you will not be emailed</Advisory>
+          </Field>
+          <Field>
+            <label>Your answer*</label>
+            <AnswerBody type="text" name="answer" value={answer} onChange={(e) => handleTextChange(e)}></AnswerBody>
+          </Field>{
+            images.length < 5 ? <UploadButton htmlFor="files">Upload Image</UploadButton> : null
+          }<FileHidden id="files" type="file" name="file" accept=".png,.jpeg,jpg,.gif" onChange={handleUpload}/>
+          <ImageRow>
+            { images.length ? images.map((image) => <UploadedImage src={image} />) : null }
+          </ImageRow>
+          { invalidEntries.length > 0 ? (
+            <Field>
+              <ErrorLabel>You must enter the following:</ErrorLabel>
+              <InvalidList>{invalidEntries.map((entry, key) => <li key={key}>{entry}</li>)}</InvalidList>
+            </Field>) : null
+          }<SubmitButton>Submit Question</SubmitButton>
         </Form>
-        {image.length ? <UploadedImage src={image}/> : null}
       </ModalContainer>
     </ModalWrapper>
   ), container);
