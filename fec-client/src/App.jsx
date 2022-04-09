@@ -109,7 +109,7 @@ let App = () => {
         </Form>
       </Nav>
       <div>
-      <OverviewDiv>
+        <OverviewDiv>
           <Overview productId={productId} setProductName={setProductName} avg={avg}/>
         </OverviewDiv>
         <RelatedDiv>
