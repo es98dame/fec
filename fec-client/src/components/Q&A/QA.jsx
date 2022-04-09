@@ -114,10 +114,16 @@ const QA = function ({productId, productName}) {
       .catch((err) => console.error('axios request in QA.jsx:', err));
   }, []);
 
-  const props = {
+  const ModalProps = {
     productName: productName,
     productId: productId,
     handleQSubmission: handleQSubmission,
+    showUpdates: showUpdates
+  };
+
+  const QAListProps = {
+    QAData: QAData,
+    productName: productName,
     showUpdates: showUpdates
   };
 
@@ -128,12 +134,12 @@ const QA = function ({productId, productName}) {
         <StyledInput title="search-input" type="text" value={searchInput} onChange={ e => setSearchInput(e.target.value)} placeholder="Have a Question? Search for answers..."/>
         <SearchIcon src={magnifyingGlass}/>
       </SearchForm>
-      <QAList QAData={QAData} productName={productName}/>
+      <QAList {...QAListProps}/>
       <ButtonContainer>
         {storage.current.length > 2 && QAData.length < storage.current.length && showButton.current ? <Button onClick={handleMoreQuestions}>See More Questions</Button> : null}
         <Button title="Add Question" onClick={handleAddQuestions}>Add A Question +</Button>
       </ButtonContainer>
-      <AddQModal show={modalQ} hide={() => setModalQ(!modalQ)} {...props}/>
+      <AddQModal show={modalQ} hide={() => setModalQ(!modalQ)} {...ModalProps}/>
     </ContainerCol>
   );
 };

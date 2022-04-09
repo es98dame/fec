@@ -13,12 +13,12 @@ const QAListContainer = styled.div`
   gap: .2em;
 `;
 
-const QAList = function({QAData, productName}) {
+const QAList = function({QAData, productName, showUpdates}) {
   let sortedData = QAData.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
 
   return (
     <QAListContainer>{
-      QAData.length ? sortedData.map((question) => <QAListEntry question={question} key={question.question_id} productName={productName}/>) : null
+      QAData.length ? sortedData.map((question) => <QAListEntry question={question} key={question.question_id} productName={productName} showUpdates={showUpdates}/>) : null
     }</QAListContainer>
   );
 };

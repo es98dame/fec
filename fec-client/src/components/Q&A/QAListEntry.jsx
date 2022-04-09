@@ -77,7 +77,7 @@ const sortSeller = function(answers) {
   return [...sellers, ...result];
 };
 
-const QAListEntry = function({question, productName, productId}) {
+const QAListEntry = function({question, productName, productId, showUpdates}) {
   let allAnswers = Object.entries(question.answers);
   let askerName = question.asker_name;
   let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
@@ -117,10 +117,11 @@ const QAListEntry = function({question, productName, productId}) {
       .catch((err) => console.error('This is handleHelpfulYes in Answers:', err));
   };
 
-  const props = {
+  const ModalProps = {
     productName: productName,
     question: question.question_body,
-    questionId: question.question_id
+    questionId: question.question_id,
+    showUpdates: showUpdates
   };
 
   return (
@@ -144,7 +145,7 @@ const QAListEntry = function({question, productName, productId}) {
           {allAnswers.length > 2 ? <Button color={'#007185'} onClick={handleSeeMoreAnswers}>{buttonText}</Button> : null}
         </AContainer>
       </ContainerRow>{
-        showModal ? <AddAModal hide={() => setShowModal(false)} {...props}/> : null
+        showModal ? <AddAModal hide={() => setShowModal(false)} {...ModalProps}/> : null
       }</QContainer>
   );
 };

@@ -159,7 +159,7 @@ const UploadButton = styled.label`
 
 const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
-const AddAModal = ({ hide, question, productName, questionId }) => {
+const AddAModal = ({ hide, question, productName, questionId, showUpdates }) => {
   const container = document.getElementById('app');
   const files = useRef('');
 
@@ -215,7 +215,7 @@ const AddAModal = ({ hide, question, productName, questionId }) => {
         }
 
         axios.post('/api', body, { headers: { path: `/qa/questions/${questionId}/answers`}})
-          .then((res) => console.log('POST SUCCESS!', res.body))
+          .then((res) => showUpdates())
           .catch((err) => console.error('This is POST request for Add an Answer:', err))
       })
       .catch((err) => console.error(err));
@@ -298,7 +298,7 @@ const AddAModal = ({ hide, question, productName, questionId }) => {
               <ErrorLabel>You must enter the following:</ErrorLabel>
               <InvalidList>{invalidEntries.map((entry, key) => <li key={key}>{entry}</li>)}</InvalidList>
             </Field>) : null
-          }<SubmitButton>Submit Question</SubmitButton>
+          }<SubmitButton>Submit Answer</SubmitButton>
         </Form>
       </ModalContainer>
     </ModalWrapper>
