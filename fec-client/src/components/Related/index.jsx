@@ -7,41 +7,44 @@ import RelatedList from './RelatedList.jsx';
 import OutfitList from './OutfitList.jsx';
 
 const ProductList = styled.div`
-display: flex;
-flex-direction: row;
-width : 100%;
-overflow-x: auto;
+  display: flex;
+  width : 100%;
+  // overflow-x: auto;
+  min-width: 0;
+  height: 503px;
 
-// SCROLLBAR MODE
-&::-webkit-scrollbar {
-  width: 10px;
-}
-&::-webkit-scrollbar-thumb {
-  background-color: grey;
-  border-radius: 10px;
-  background-clip: padding-box;
-  border: 2px solid transparent;
-}
-&::-webkit-scrollbar-track {
-  background-color: white;
+  // SCROLLBAR MODE
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: grey;
     border-radius: 10px;
-    box-shadow: inset 0px 0px 5px white;
-}
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: white;
+      border-radius: 10px;
+      box-shadow: inset 0px 0px 5px white;
+  }
 `;
 
 const Listtitle = styled.h3`
-display: inline-block;
+  display: inline-block;
 `;
 
 const Outfit = styled.div`
-display: flex;
-flex-direction: row;
-width : 100%;
-overflow-x: auto;
+  display: flex;
+  width : 100%;
+  min-width: 0;
+  flex: 1;
 `;
 
 const Products = (props)=> {
   const [idArray, setIdArray] = useState([]);
+
+  //console.log(config.TOKEN); // ok I got token
 
   const getRelatedItemsId = (id) => {
     axios.get('/api', {headers: {path: `/products/${id}/related`}}) //get request to get the related item id array
@@ -54,7 +57,7 @@ const Products = (props)=> {
 
   //componentDidmount
   useEffect(()=>{
-    getRelatedItemsId(props.productId) // id = 65631
+    getRelatedItemsId(props.productId) // id = 65635
   },[])
 
 
@@ -62,9 +65,7 @@ const Products = (props)=> {
     <div title='TheProductList'>
       <Listtitle>Related List</Listtitle>
       <ProductList>
-      {idArray.map((data,index)=> (
-        <RelatedList id = {data} key = {index}/>
-      ))}
+        <RelatedList relatedArray={idArray}/>
     </ProductList>
     <Listtitle>Outfit List</Listtitle>
       <Outfit>
