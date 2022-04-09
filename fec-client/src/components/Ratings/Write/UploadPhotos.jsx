@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import {FaPlus} from 'react-icons/fa';
 
 const cloudName = 'daxw4bdp6';
 const upload_preset = 'grzngc1a';
@@ -26,7 +27,6 @@ background-color: lightgray;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-
 justify-content: center;
 align-items: center;
 font-size: 5rem;
@@ -60,7 +60,7 @@ const UploadPhotos = ({ images, setImages }) => {
       <Thumbnails>
         {images.map(url => <Img src = {url}></Img>)}
         <Div>
-          <label htmlFor = 'write-review-file'>+</label>
+          <label htmlFor = 'write-review-file'><FaPlus size = '4rem' /></label>
           <FileInput type = 'file' id = 'write-review-file' onChange = {handleUpload}/>
         </Div>
       </Thumbnails>

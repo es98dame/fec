@@ -15,6 +15,7 @@ top: 0;
 width: 100%;
 height: 100%;
 background-color: rgba(0,0,0,0.5);
+z-index: 20;
 `;
 
 const ModalContent = styled.div`
@@ -75,7 +76,6 @@ color: red;
 const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 
   const relevantFactors = Object.keys(relevantChars);
-  const product_id = productId;
 
   const [recommend, setRecommend] = useState(null);
   const [rating, setRating] = useState(null);
@@ -93,7 +93,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 
   const handleFactorChange = (characteristic, value) => {
     const charCopy = {...characteristics};
-    charCopy[relevantChars[characteristic].id] = parseInt(value);
+    charCopy[relevantChars[characteristic].id] = value;
     setCharacteristics(charCopy);
   };
 
@@ -102,17 +102,12 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // if (body.length < 50) {
-    //   setWarning('Your review must be at least 50 characters.');
-    // } else if (name.length === 0 ) {
-    //   setWarning('Nickname is required.');
-    // }
+
     Promise.all(images.map(url => imageUpload(url)))
       .then((responses) => {
           const photos = responses.map(response => response.data.url);
-          axios.post('/api', {
-          product_id,
+          axios.post('/api/reviews', {
+          productId,
           rating,
           summary,
           body,
@@ -121,10 +116,8 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
           email,
           photos,
           characteristics
-         }, {headers: {path: '/reviews/'}})
-          .then((response) => {
-            console.log(response.data)
-          })
+
+         })
       })
   };
 
