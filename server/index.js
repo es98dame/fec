@@ -39,24 +39,25 @@ app.post('/api', (req, res) => {
 
   console.log(req.body);
 
-  // axios.post(`${url}${req.headers.path}`, req.body)
-  //   .then((response) => {
-  //     res.send(response.data);
-  //   })
-  //   .catch((err) => res.send(err));
+  axios.post(`${url}${req.headers.path}`, req.body, auth)
+    .then((response) => {
+      console.log(response);
+      res.send(response);
+    })
+    .catch((err) => res.send(err));
 });
 
 //PUT REQUEST FOR RATINGS AND REVIEWS
 
 app.put('/api/reviews/:review_id/helpful', (req, res) => {
   axios.put(`${url}/reviews/${req.params.review_id}/helpful`, null, auth)
-    .then(() => res.send('success'))
+    .then((response) => res.send(response.data))
     .catch((err) => console.log(err));
 });
 
-app.post('/api/reviews', (req, res) => {
-  console.log(req.body);
-});
+// app.post('/api/reviews', (req, res) => {
+//   console.log(req.body);
+// });
 
 
 app.listen(port, () => {

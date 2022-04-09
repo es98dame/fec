@@ -110,7 +110,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
     Promise.all(images.map(url => imageUpload(url)))
       .then((responses) => {
           const photos = responses.map(response => response.data.url);
-          axios.post('/api/reviews', {
+          axios.post('/api', {
           productId,
           rating,
           summary,
@@ -121,7 +121,10 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
           photos,
           characteristics
 
-         })
+         }, {headers: {path: '/reviews'}})
+          .then((response) => {
+            console.log(response.data)
+          })
       })
   };
 
@@ -140,8 +143,8 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
           </Field>
           <Field onChange = {(e) => handleChange(e, setRecommend)}>
             <Label>Would you recommend this product to a friend? </Label>
-            <input type='radio' value = 'true' name = 'recommend'/> Yes
-            <input type='radio' value = 'false' name = 'recommend'/> No
+            <input type='radio' value = {true} name = 'recommend'/> Yes
+            <input type='radio' value = {false} name = 'recommend'/> No
           </Field>
           <Field>
             <Label>Please rate the item on the following factors: </Label>
