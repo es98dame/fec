@@ -9,7 +9,7 @@ const RatingsStubs = {
       'summary': 'These pants are ok!',
       'recommend': false,
       'response': '',
-      'body': 'A little tight on the waist.',
+      'body': 'A little tight on the waist.But thats okay, this stub is just checking whether a 250 char limit is enforced on initial render. I have to say, I feel like these pants are rather ugly. I would never buy them myself, I just received them as a gift. One day they will turn into a beautiful quilt and I will pass it down to my daughter.',
       'date': '2019-01-05T00:00:00.000Z',
       'reviewer_name': 'bigbrother',
       'helpfulness': 2,

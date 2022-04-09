@@ -1,0 +1,66 @@
+import React, {useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+import axios from 'axios';
+import Modal from './Modal.jsx';
+import Star from '../Shared/Stars.jsx';
+import Card from './Cardp.jsx'
+
+
+const ProductCard = styled.div`
+width : 100%;
+display : flex;
+flex-direction: row;
+`;
+
+const CardList = ({relatedArray})=> {
+  console.log('re', relatedArray);
+  const [infoArray, setInfoArray] = useState('');
+  // const [styleArray, setStyleArray] = useState([]);
+  const customAxiosFunctions = async () => {
+
+    const promises1 = relatedArray.map((id) => {
+      // return axios.get('/api', {headers: {path: `/products/${id}`}});
+      return  axios.all([
+        axios.get('/api', {headers: {path: `/products/${id}`}}),
+        // axios.get('/api', {headers: {path: `/products/${id}/styles`}})
+      ])
+      .then(axios.spread((data1) => {
+        // output of req.
+
+        //console.log('data1', data1, 'data2', data2)
+        return data1.data;
+      }));
+
+    });
+    // const promises2 = relatedArray.map((id) => {
+    //   return axios.get('/api', {headers: {path: `/products/${id}/styles`}});
+    // });
+
+    const resolvedResponses1 = await Promise.all(promises1);
+
+    resolvedResponses1.map((el) => {
+      //console.log(el)
+      setInfoArray(oldArray => [...oldArray, el]);
+    });
+
+  };
+
+  const findInfo = (id)=>{
+
+  }
+  useEffect(() => {
+    setInfoArray('');
+    customAxiosFunctions();
+  }, [relatedArray]);
+
+  return(
+    <ProductCard>
+      {infoArray instanceof Array && infoArray.map((data,index)=>(
+        <Card productInfo={data} key={index}/>
+      ))}
+    </ProductCard>
+  )
+}
+
+export default CardList;

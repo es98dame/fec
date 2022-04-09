@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import dateformat from 'dateformat';
 import axios from 'axios';
+import { FaCheck } from 'react-icons/fa';
 
 import Stars from '../../Shared/Stars.jsx';
 import Photos from './Photos.jsx';
@@ -54,6 +55,14 @@ const Body = styled.p`
 font-size: 0.9rem;
 `;
 
+const ShowMore = styled.span`
+font-style: italic;
+&:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+`;
+
 const Recommend = styled.div`
 font-size: 0.8rem;
 font-weight: 400;
@@ -61,7 +70,6 @@ font-weight: 400;
 
 const Helpful = styled.div`
 font-size: 0.8rem;
-
 display: flex;
 direction: row;
 gap: 5%;
@@ -69,15 +77,14 @@ gap: 5%;
 
 const HelpfulButton = styled.div`
 cursor: pointer;
-
 &:hover {
   color: green;
 }
 `;
 
 const ReviewTile = ({ review }) => {
-
   const [helpful, setHelpful] = useState(review.helpfulness);
+  const [bodyGrow, setBodyGrow] = useState(review.body.length > 250);
 
   const handleHelpfulClick = () => {
     setHelpful(helpful + 1);
@@ -85,6 +92,10 @@ const ReviewTile = ({ review }) => {
       .then(() => {})
       .catch((err) => { console.log(err); });
 
+  };
+
+  const handleShowMore = () => {
+    setBodyGrow(false);
   };
 
   return (
@@ -96,11 +107,18 @@ const ReviewTile = ({ review }) => {
       <ReviewContent>
         <Stars rating = {review.rating}/>
         <Summary>{review.summary}</Summary>
-        <Body>{review.body}</Body>
+        { bodyGrow ?
+          <Body title = 'review-body'>
+            {review.body.slice(0, 250) + '... '} <ShowMore title = 'Show More' onClick = {handleShowMore}>Show More</ShowMore>
+          </Body> :
+          <Body title = 'review-body'>{review.body}</Body>
+        }
         <Photos images = {review.photos} />
-        <Recommend> {review.recommend ?
-          'Yes, I would recommend this product to a friend.' :
-          null } </Recommend>
+        {review.recommend ?
+          <Recommend>
+            <FaCheck /><span>    Yes, I would recommend this product to a friend.</span>
+          </Recommend> :
+          null }
         <Helpful>
           <div> Helpful? </div>
           <HelpfulButton onClick = {handleHelpfulClick}> Yes ({helpful}) </HelpfulButton>

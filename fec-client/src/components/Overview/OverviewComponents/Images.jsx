@@ -14,6 +14,7 @@ const ImagesDiv = styled.div`
   margin: 5px;
   padding: 5px;
   width 90%;
+  max-height: 8rem;
 `;
 
 const ModalImagesDiv = styled.div`
@@ -32,7 +33,7 @@ const CarrosselDiv = styled.div`
   padding: 5px;
   height: 45rem;
   justify-content: space-between;
-  background-color: lightgrey
+  background-color: #242125;
 `;
 
 const ModalCarrosselDiv = styled.div`
@@ -58,11 +59,19 @@ const Button = styled.button`
   background: rgba(0, 0, 0, 0);
   border: none;
   box-shaddow-none;
+  color: lightgrey;
 
   &:hover{
-    background: rgba(0, 0, 0, .5);
+    background-color: #4b464d;
   }
   `;
+
+const NoButton = styled.button`
+  height: 20rem;
+  width: 3rem;
+  margin: auto;
+  visibility: hidden;
+`;
 
 const ModalButton = styled.button`
   height: 20rem;
@@ -110,8 +119,6 @@ const Exit = styled.button`
     background: lightgrey;
   }
 `;
-
-
 
 const Images = (props) => {
   let num = 0;
@@ -176,11 +183,15 @@ const Images = (props) => {
 
   return (
     <Div>
-
       <CarrosselDiv>
-        <Button onClick={handleBack}> &#x2190; </Button>
+        {currentIndex === 0
+          ? <NoButton></NoButton>
+          : <Button onClick={handleBack}> &#x2190; </Button>}
         <Image src={image} onClick={handleOpen}/>
-        <Button onClick={handleNext}> &#x2192; </Button>
+        {currentIndex === images.length - 1
+          ? <NoButton></NoButton>
+          : <Button onClick={handleNext}> &#x2192; </Button>}
+
       </CarrosselDiv>
       <ImagesDiv>
         {images.map((item) => {

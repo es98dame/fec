@@ -21,7 +21,7 @@ afterAll(() => server.close());
 //SETUP
 test('renders Ratings component to the DOM', () => {
   render(<Ratings /> );
-  expect(screen.getByRole('heading')).toHaveTextContent('Ratings Component');
+  expect(screen.getByRole('heading')).toHaveTextContent('Reviews');
   expect(screen.getByTitle('review-list')).toBeInTheDocument();
 });
 
@@ -34,7 +34,7 @@ test('Renders Review List with two provided reviews', () => {
   expect(screen.getByText('figuringitout')).toBeInTheDocument();
 });
 
-//CONDITIONAL TILE ITEMS
+//Company Response
 test('Does not render the response div if no response available', () => {
   render(<ReviewList reviews = {RatingsStubs.results.slice(0, 1)} />);
   expect(screen.queryByTitle( 'response' )).not.toBeInTheDocument();
@@ -76,6 +76,21 @@ describe('Review List display options', () => {
   test('Should not display Show More Reviews button if two or fewer reviews are available', () => {
     render(<ReviewList reviews = {RatingsStubs.results.slice(0, 2)}/>);
     expect(screen.queryByText('Show More Reviews')).not.toBeInTheDocument();
+  });
+});
+
+describe('Review Body options', () => {
+  test('Renders 250 characters (plus ellipses and Show More tag) or less to the Review Body on initial load', () => {
+    render(<ReviewList reviews = {RatingsStubs.results.slice(0, 1)} />);
+    const suffix = '...  Show More'.length;
+    const body = screen.getByTitle('review-body');
+    expect(body.textContent.length).toBeLessThanOrEqual(250 + suffix);
+  });
+  test('Renders complete review to the Review Body when Show More is clicked, then hides the button', ()=>{
+    render(<ReviewList reviews = {RatingsStubs.results.slice(0, 1)}/>);
+    fireEvent.click(screen.getByText('Show More'));
+    expect(screen.getByTitle('review-body').textContent.length).toBe(331);
+    expect(screen.queryByText('Show More')).not.toBeInTheDocument();
   });
 });
 
