@@ -49,6 +49,7 @@ const Overview = (props) => {
     axios.get('/api', {headers: {path: `/products/${productId}`}})
       .then((response) => {
         setCurrentproduct(response.data);
+        props.setProductName(response.data.name);
       });
   }, []);
 
