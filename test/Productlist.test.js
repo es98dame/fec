@@ -47,14 +47,6 @@ test('Does DOM have "Related List" and "Outfit List"', () => {
   expect(HeadingList[1]).toHaveTextContent('Outfit List');
 });
 
-test('Does DOM have "Related List" and "Outfit List"', () => {
-  render(<Main/>);
-  const HeadingList = screen.getAllByRole('heading');
-  expect(HeadingList).toHaveLength(2);
-  expect(HeadingList[0]).toHaveTextContent('Related List');
-  expect(HeadingList[1]).toHaveTextContent('Outfit List');
-});
-
 //render relate list id = 65632
 // give title to cards
 // check same length
