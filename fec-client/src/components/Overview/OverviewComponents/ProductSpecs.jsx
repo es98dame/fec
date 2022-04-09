@@ -24,6 +24,7 @@ const Ratings = styled.div`
   display: flex;
   gap: 1rem;
   font-weight: 300;
+  color: #242124;
 `;
 
 const Link = styled.span`
@@ -34,6 +35,76 @@ const Link = styled.span`
 
   &:hover{
     color: #cccccc;
+  }
+`;
+
+const Features = styled.ul`
+  font-weight: 300;
+  border-top: 1px solid lightgrey;
+  margin: 5px;
+  padding: 1rem;
+`;
+
+const ShareDiv = styled.div`
+  display: flex;
+  gap: 1rem;
+  font-weight: 300;
+  text-align: center;
+  border-top: 1px solid lightgrey;
+  margin: 5px;
+  padding: 5px;
+`;
+
+const Share = styled.p`
+  font-weight: 300;
+  padding: auto;
+`;
+
+const Facebook = styled.a`
+  text-align: center;
+  text-decoration: none;
+  margin: 5px;
+  padding: 5px;
+  background: #3B5998;
+  color: white;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+
+  &:hover{
+    opacity: 0.7;
+  }
+`;
+
+const Twitter = styled.a`
+  text-align: center;
+  text-decoration: none;
+  margin: 5px;
+  padding: 5px;
+  background: #55ACEE;
+  color: white;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+
+  &:hover{
+    opacity: 0.7;
+  }
+`;
+
+const Pinterest = styled.a`
+  text-align: center;
+  text-decoration: none;
+  margin: 5px;
+  padding: 5px;
+  background: #cb2027;
+  color: white;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+
+  &:hover{
+    opacity: 0.7;
   }
 `;
 
@@ -61,6 +132,18 @@ const ProductSpecs = (props) => {
         : <h4>&#x24;{props.currentStyle.original_price}</h4>}
       <Bolds>{props.currentProduct.slogan}</Bolds>
       <Description>{props.currentProduct.description}</Description>
+      {props.currentProduct.features && props.currentProduct.features.length
+        ? <Features>
+          {props.currentProduct.features.map((feature) =>
+            <li>{feature.value} {feature.feature}</li>
+          )}
+        </Features>
+        : <div> nothing to feature</div>}
+      <ShareDiv>
+        <Facebook className="fa fa-facebook"></Facebook>
+        <Twitter className="fa fa-twitter"></Twitter>
+        <Pinterest className="fa fa-pinterest"></Pinterest>
+      </ShareDiv>
     </Container>
   );
 };

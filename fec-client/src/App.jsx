@@ -31,7 +31,6 @@ border-radius: 10px;
   }
 `;
 
-
 const Input = styled.input`
   all: unset;
   border-bottom: 3px solid lightgrey;
@@ -86,7 +85,6 @@ border: 1px solid black;
 width: 90%;
 height: 25%;
 `;
-
 
 let App = () => {
   //const productName = useRef('Camo Onesie');
