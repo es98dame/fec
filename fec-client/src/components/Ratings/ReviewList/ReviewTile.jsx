@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import dateformat from 'dateformat';
 import axios from 'axios';
+import { FaCheck } from 'react-icons/fa';
 
 import Stars from '../../Shared/Stars.jsx';
 import Photos from './Photos.jsx';
@@ -113,9 +114,11 @@ const ReviewTile = ({ review }) => {
           <Body title = 'review-body'>{review.body}</Body>
         }
         <Photos images = {review.photos} />
-        <Recommend> {review.recommend ?
-          'Yes, I would recommend this product to a friend.' :
-          null } </Recommend>
+        {review.recommend ?
+          <Recommend>
+            <FaCheck /><span>    Yes, I would recommend this product to a friend.</span>
+          </Recommend> :
+          null }
         <Helpful>
           <div> Helpful? </div>
           <HelpfulButton onClick = {handleHelpfulClick}> Yes ({helpful}) </HelpfulButton>

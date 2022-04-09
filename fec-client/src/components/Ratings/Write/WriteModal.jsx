@@ -141,10 +141,15 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
             <Label> Overall Rating </Label>
             <DynamicStars setRating = {setRating}/>
           </Field>
-          <Field onChange = {(e) => handleChange(e, setRecommend)}>
+          <Field onChange = {(e) => setRecommend(!!e.target.value)}>
             <Label>Would you recommend this product to a friend? </Label>
+<<<<<<< HEAD
             <input type='radio' value = {true} name = 'recommend'/> Yes
             <input type='radio' value = {false} name = 'recommend'/> No
+=======
+            <input type='radio' value = 'true' name = 'recommend'/> Yes
+            <input type='radio' value = '' name = 'recommend'/> No
+>>>>>>> 0aea2340453592faa361c1593d79c9b9c87996d0
           </Field>
           <Field>
             <Label>Please rate the item on the following factors: </Label>
