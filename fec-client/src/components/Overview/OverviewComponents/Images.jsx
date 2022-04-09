@@ -32,7 +32,7 @@ const CarrosselDiv = styled.div`
   padding: 5px;
   height: 45rem;
   justify-content: space-between;
-  background-color: lightgrey
+  background-color: #242125;
 `;
 
 const ModalCarrosselDiv = styled.div`
@@ -58,9 +58,10 @@ const Button = styled.button`
   background: rgba(0, 0, 0, 0);
   border: none;
   box-shaddow-none;
+  color: lightgrey;
 
   &:hover{
-    background: rgba(0, 0, 0, .5);
+    background-color: #4b464d;
   }
   `;
 
