@@ -40,12 +40,11 @@ const Link = styled.a`
 
 const UserLine = styled.span`
   font-style: oblique;
-  font-weight: ${ props => props.seller === 'Seller' ? 700 : 300 }
+  font-weight: ${ props => props.seller === 'seller' || props.seller === 'Seller' ? 700 : 300 }
 `;
 
 const AListEntry = function({answer, askerName}) {
   let answerer = answer[1].answerer_name;
-  let isSeller = answerer === 'Seller';
 
   const pressedHelpful = useRef(false);
   const [report, setReport] = useState('Report');
@@ -75,7 +74,7 @@ const AListEntry = function({answer, askerName}) {
       </ABodyContainer>
       <UserContainer>
         <UserLine>by</UserLine>
-        <UserLine seller={answerer}>{answerer}</UserLine>
+        <UserLine seller={answerer}>{answerer === 'seller' ? 'Seller' : answerer}</UserLine>
         <UserLine>{answer[1].date.slice(0, 10)}</UserLine>
         <span> &nbsp; | &nbsp; Helpful?</span>
         <Link onClick={handleHelpfulYes}>{' '}Yes({count}){' '}</Link>

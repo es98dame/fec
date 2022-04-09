@@ -193,9 +193,13 @@ const AddAModal = ({ hide, question, productName, questionId }) => {
 
   const handleUpload = (e) => {
     e.persist();
-    let fileData = new FileReader();
-    fileData.onloadend = handleFile;
-    fileData.readAsDataURL(e.target.files[0]);
+    if (e.target.files[0].size < 16000000) {
+      let fileData = new FileReader();
+      fileData.onloadend = handleFile;
+      fileData.readAsDataURL(e.target.files[0]);
+    } else {
+      !invalidEntries.includes('Valid photos') ? setInvalidEntries(invalidEntries.concat(['Valid photos'])) : undefined;
+    }
   };
 
   const sendToCloud = (inputs, files) => {
@@ -203,9 +207,7 @@ const AddAModal = ({ hide, question, productName, questionId }) => {
 
     Promise.all(uploads)
       .then((results) => {
-        let photos = results.map((info) => info.url);
-        console.log('Yo')
-
+        let photos = results.map((info) => info.data.url);
         let body = { ...inputs, photos: photos }
 
         if (!photos.length) {
@@ -236,6 +238,10 @@ const AddAModal = ({ hide, question, productName, questionId }) => {
     if (!emailRegEx.test(email)) {
       entries.push('A valid email');
       valid = false;
+    }
+    if (invalidEntries.includes('Valid photos')) {
+      let index = invalidEntries.indexOf('Valid photos');
+      setInvalidEntries(invalidEntries.splice(index, 1));
     }
 
     setInvalidEntries(entries);

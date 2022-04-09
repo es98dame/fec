@@ -72,7 +72,7 @@ const Button = styled.button`
 const sortSeller = function(answers) {
   let result = [];
   let sellers = [];
-  answers.forEach((answer) => answer[1].answerer_name === 'Seller' ? sellers.push(answer) : result.push(answer));
+  answers.forEach((answer) => answer[1].answerer_name === 'Seller' || answer[1].answerer_name === 'seller' ? sellers.push(answer) : result.push(answer));
 
   return [...sellers, ...result];
 };
