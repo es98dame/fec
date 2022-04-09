@@ -75,6 +75,7 @@ color: red;
 const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 
   const relevantFactors = Object.keys(relevantChars);
+  const product_id = productId;
 
   const [recommend, setRecommend] = useState(null);
   const [rating, setRating] = useState(null);
@@ -92,7 +93,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 
   const handleFactorChange = (characteristic, value) => {
     const charCopy = {...characteristics};
-    charCopy[relevantChars[characteristic].id] = value;
+    charCopy[relevantChars[characteristic].id] = parseInt(value);
     setCharacteristics(charCopy);
   };
 
@@ -111,7 +112,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
       .then((responses) => {
           const photos = responses.map(response => response.data.url);
           axios.post('/api', {
-          productId,
+          product_id,
           rating,
           summary,
           body,
@@ -120,8 +121,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
           email,
           photos,
           characteristics
-
-         }, {headers: {path: '/reviews'}})
+         }, {headers: {path: '/reviews/'}})
           .then((response) => {
             console.log(response.data)
           })
@@ -143,13 +143,8 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
           </Field>
           <Field onChange = {(e) => setRecommend(!!e.target.value)}>
             <Label>Would you recommend this product to a friend? </Label>
-<<<<<<< HEAD
-            <input type='radio' value = {true} name = 'recommend'/> Yes
-            <input type='radio' value = {false} name = 'recommend'/> No
-=======
             <input type='radio' value = 'true' name = 'recommend'/> Yes
             <input type='radio' value = '' name = 'recommend'/> No
->>>>>>> 0aea2340453592faa361c1593d79c9b9c87996d0
           </Field>
           <Field>
             <Label>Please rate the item on the following factors: </Label>

@@ -37,12 +37,9 @@ app.get('/api', (req, res) => {
 
 app.post('/api', (req, res) => {
 
-  console.log(req.body);
-
   axios.post(`${url}${req.headers.path}`, req.body, auth)
     .then((response) => {
-      console.log(response);
-      res.send(response);
+      res.send(response.data);
     })
     .catch((err) => res.send(err));
 });
