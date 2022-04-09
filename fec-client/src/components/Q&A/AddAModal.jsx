@@ -3,6 +3,8 @@ import reactDom from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
+const url = 'https://api.cloudinary.com/v1_1/daxw4bdp6/image/upload';
+
 const ModalWrapper = styled.div`
   display: flex;
   position: fixed;
@@ -157,7 +159,7 @@ const UploadButton = styled.label`
 
 const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
-const AddAModal = ({ hide, question, productName }) => {
+const AddAModal = ({ hide, question, productName, questionId }) => {
   const container = document.getElementById('app');
   const files = useRef('');
 
@@ -196,6 +198,27 @@ const AddAModal = ({ hide, question, productName }) => {
     fileData.readAsDataURL(e.target.files[0]);
   };
 
+  const sendToCloud = (inputs, files) => {
+    let uploads = files.map((file) => axios.post(url, { upload_preset: 'grzngc1a', file: file }) );
+
+    Promise.all(uploads)
+      .then((results) => {
+        let photos = results.map((info) => info.url);
+        console.log('Yo')
+
+        let body = { ...inputs, photos: photos }
+
+        if (!photos.length) {
+          body = inputs;
+        }
+
+        axios.post('/api', body, { headers: { path: `/qa/questions/${questionId}/answers`}})
+          .then((res) => console.log('POST SUCCESS!', res.body))
+          .catch((err) => console.error('This is POST request for Add an Answer:', err))
+      })
+      .catch((err) => console.error(err));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setInvalidEntries([]);
@@ -206,7 +229,7 @@ const AddAModal = ({ hide, question, productName }) => {
       entries.push('An answer');
       valid = false;
     }
-    if (nickname.length > 2) {
+    if (nickname.length < 2) {
       entries.push('Your nickname');
       valid = false;
     }
@@ -218,8 +241,13 @@ const AddAModal = ({ hide, question, productName }) => {
     setInvalidEntries(entries);
 
     if (valid) {
-      let inputs = [nickname, email, answer, fileData];
-      // handleQSubmission(inputs);
+      let input = {
+        name: nickname,
+        email: email,
+        body: answer
+      };
+
+      sendToCloud(input, images);
       setEmail('');
       setNickname('');
       setAnswer('');

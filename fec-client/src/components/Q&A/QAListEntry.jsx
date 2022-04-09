@@ -117,6 +117,12 @@ const QAListEntry = function({question, productName, productId}) {
       .catch((err) => console.error('This is handleHelpfulYes in Answers:', err));
   };
 
+  const props = {
+    productName: productName,
+    question: question.question_body,
+    questionId: question.question_id
+  };
+
   return (
     <QContainer>
       <QuestionRow>
@@ -138,7 +144,7 @@ const QAListEntry = function({question, productName, productId}) {
           {allAnswers.length > 2 ? <Button color={'#007185'} onClick={handleSeeMoreAnswers}>{buttonText}</Button> : null}
         </AContainer>
       </ContainerRow>{
-        showModal ? <AddAModal hide={() => setShowModal(false)} productName={productName} question={question.question_body}/> : null
+        showModal ? <AddAModal hide={() => setShowModal(false)} {...props}/> : null
       }</QContainer>
   );
 };
