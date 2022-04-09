@@ -123,6 +123,7 @@ const QAListEntry = function({question}) {
         </QInfoLine>
       </ContainerRow>
       <ContainerRow>
+        <>{console.log(answers)}</>
         {answers.length ? <Label>A:</Label> : null}
         <AContainer>
           {answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={answer[0]}/>) : null}

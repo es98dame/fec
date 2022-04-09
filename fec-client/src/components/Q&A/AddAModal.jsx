@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import reactDom from 'react-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -205,7 +206,7 @@ const AddAModal = ({ hide }) => {
       entries.push('An answer');
       valid = false;
     }
-    if (!nickname.length) {
+    if (nickname.length > 2) {
       entries.push('Your nickname');
       valid = false;
     }
