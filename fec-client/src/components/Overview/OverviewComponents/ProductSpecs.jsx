@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Stars from '../../Shared/Stars.jsx';
 
@@ -51,7 +51,7 @@ const ProductSpecs = (props) => {
   return (
     <Container>
       <Ratings>
-        <Stars rating={5}/>
+        <Stars rating={props.avg}/>
         <Link onClick={handleScroll}>See all (number) ratings</Link>
       </Ratings>
       <Bolds>Category: {props.currentProduct.category}</Bolds>

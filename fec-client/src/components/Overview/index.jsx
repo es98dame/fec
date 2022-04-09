@@ -37,6 +37,7 @@ const Overview = (props) => {
   const [productId] = useState(props.productId);
   const [currentStyle, setCurrentStyle] = useState([]);
   const [currentProduct, setCurrentproduct] = useState([]);
+  const [currentAvg, setCurrentAvg] = useState(props.avg);
 
   useEffect(() => {
     axios.get('/api', {headers: {path: `/products/${productId}/styles`}})
@@ -60,7 +61,7 @@ const Overview = (props) => {
           <Images currentStyle={currentStyle}/>
         </ImagesDiv>
         <Content>
-          <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct}/>
+          <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct} avg={props.avg}/>
 
           <Styles styles={styles} currentStyle={currentStyle} set={setCurrentStyle}/>
 
