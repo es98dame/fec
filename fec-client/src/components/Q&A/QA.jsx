@@ -65,6 +65,16 @@ const QA = function ({productId, productName}) {
   const [seeMoreView, setMoreView] = useState('See More Questions');
   const [modalQ, setModalQ] = useState(false);
 
+  const showUpdates = function() {
+    axios.get('/api', {headers: {path: `/qa/questions?product_id=${productId}&count=10000`}})
+      .then((res) => {
+        storage.current = res.data.results;
+        prevData.current = res.data.results.slice(0, 2);
+        setQA(res.data.results.slice(0, 2));
+      })
+      .catch((err) => console.error('axios request in QA.jsx:', err));
+  };
+
   const handleMoreQuestions = function() {
     setQA(storage.current.slice(0, QAData.length + 2));
     prevData.current = storage.current.slice(0, QAData.length + 2);
@@ -74,9 +84,10 @@ const QA = function ({productId, productName}) {
     setModalQ(!modalQ);
   };
 
-  const handleQSubmission = (inputs) => {
-    console.log('Submission SuccessFul!, Axios Request would go here');
-    console.log(inputs);
+  const handleQSubmission = (body) => {
+    axios.post('/api', body, {headers: { path: '/qa/questions'}})
+      .then((res) => showUpdates())
+      .catch((err) => console.log('This is POST request for adding Questions:', err.toJSON()));
   };
 
   useEffect(() => {
@@ -103,6 +114,13 @@ const QA = function ({productId, productName}) {
       .catch((err) => console.error('axios request in QA.jsx:', err));
   }, []);
 
+  const props = {
+    productName: productName,
+    productId: productId,
+    handleQSubmission: handleQSubmission,
+    showUpdates: showUpdates
+  };
+
   return (
     <ContainerCol>
       <H4>Questions And Answers</H4>
@@ -110,12 +128,12 @@ const QA = function ({productId, productName}) {
         <StyledInput title="search-input" type="text" value={searchInput} onChange={ e => setSearchInput(e.target.value)} placeholder="Have a Question? Search for answers..."/>
         <SearchIcon src={magnifyingGlass}/>
       </SearchForm>
-      <QAList QAData={QAData}/>
+      <QAList QAData={QAData} productName={productName}/>
       <ButtonContainer>
         {storage.current.length > 2 && QAData.length < storage.current.length && showButton.current ? <Button onClick={handleMoreQuestions}>See More Questions</Button> : null}
         <Button title="Add Question" onClick={handleAddQuestions}>Add A Question +</Button>
       </ButtonContainer>
-      <AddQModal show={modalQ} hide={() => setModalQ(!modalQ)} productName={productName.current} handleQSubmission={handleQSubmission}/>
+      <AddQModal show={modalQ} hide={() => setModalQ(!modalQ)} {...props}/>
     </ContainerCol>
   );
 };

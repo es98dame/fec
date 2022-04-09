@@ -55,11 +55,17 @@ const AListEntry = function({answer, askerName}) {
     if (!pressedHelpful.current) {
       pressedHelpful.current = true;
       setCount(count + 1);
+      axios.put('/api', null, {headers: {path: `/qa/answers/${answer[1].id}/helpful`}})
+        .then((res) => undefined)
+        .catch((err) => console.error('This is handleHelpfulYes in Answers:', err));
     }
   };
 
   const handleReport = function() {
     report !== 'Reported' ? setReport('Reported') : undefined;
+    axios.put('/api', null, {headers: {path: `/qa/answers/${answer[1].id}/report`}})
+      .then((res) => undefined)
+      .catch((err) => console.error('This is handleHelpfulYes in Answers:', err));
   };
 
   return (

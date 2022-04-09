@@ -89,7 +89,6 @@ height: 25%;
 
 
 let App = () => {
-  //const productName = useRef('Camo Onesie');
   const [productName, setProductName] = useState('none');
   const [productId, setProductId] = useState(65631);
   let [avg, setAvg] = useState(0);

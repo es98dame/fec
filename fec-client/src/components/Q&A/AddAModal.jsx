@@ -157,7 +157,7 @@ const UploadButton = styled.label`
 
 const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
-const AddAModal = ({ hide }) => {
+const AddAModal = ({ hide, question, productName }) => {
   const container = document.getElementById('app');
   const files = useRef('');
 
@@ -234,8 +234,8 @@ const AddAModal = ({ hide }) => {
         <Heading>
           <Title>
             <TitleName>Submit your Answer</TitleName>
-            <SubTitle>Product Name:</SubTitle>
-            <QuestionBody>What does the fox say? wop wop wop wop wopw oppop wopwopwo wopwowpwwop</QuestionBody>
+            <SubTitle>{productName}:</SubTitle>
+            <QuestionBody>{question}</QuestionBody>
           </Title>
           <ExitButton onClick={() => handleExit(hide)}>&times;</ExitButton>
         </Heading>

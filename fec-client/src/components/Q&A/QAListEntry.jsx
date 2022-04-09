@@ -14,6 +14,10 @@ const ContainerCol = styled.div`
   flex-direction: column;
 `;
 
+const QuestionRow = styled(ContainerRow)`
+  margin-right: 5px;
+`;
+
 const Label = styled.div`
   padding-left: .5em;
   font-weight: 400;
@@ -65,14 +69,6 @@ const Button = styled.button`
   }
 `;
 
-// Saving this for refractoring
-// const Button = styled(Link)`
-//   margin-top: .3em;
-//   margin-bottom: .5em;
-//   margin-left: .6em;
-//   width: 140px;
-// `;
-
 const sortSeller = function(answers) {
   let result = [];
   let sellers = [];
@@ -81,7 +77,7 @@ const sortSeller = function(answers) {
   return [...sellers, ...result];
 };
 
-const QAListEntry = function({question}) {
+const QAListEntry = function({question, productName, productId}) {
   let allAnswers = Object.entries(question.answers);
   let askerName = question.asker_name;
   let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
@@ -93,6 +89,7 @@ const QAListEntry = function({question}) {
   const [buttonText, setButtonText] = useState('See More Answers');
   const [answers, setAnswers] = useState(sortedAnswers.current.slice(0, 2));
   const [showModal, setShowModal] = useState(false);
+  const [report, setReport] = useState('Report');
 
   const handleSeeMoreAnswers = () => {
     buttonText === 'See More Answers' ? setButtonText('Collapse Answers') : setButtonText('See More Answers');
@@ -107,12 +104,22 @@ const QAListEntry = function({question}) {
     if (!pressedHelpful.current) {
       pressedHelpful.current = true;
       setCount(count + 1);
+      axios.put('/api', null, {headers: {path: `/qa/questions/${question.question_id}/helpful`}})
+        .then((res) => undefined)
+        .catch((err) => console.error('This is handleHelpfulYes in Questions:', err));
     }
+  };
+
+  const handleReport = function() {
+    report !== 'Reported' ? setReport('Reported') : undefined;
+    axios.put('/api', null, {headers: {path: `/qa/questions/${question.question_id}/report`}})
+      .then((res) => undefined)
+      .catch((err) => console.error('This is handleHelpfulYes in Answers:', err));
   };
 
   return (
     <QContainer>
-      <ContainerRow>
+      <QuestionRow>
         <Label>Q:</Label>
         <QBody>{question.question_body}</QBody>
         <QInfoLine>
@@ -120,17 +127,18 @@ const QAListEntry = function({question}) {
           <Link onClick={handleHelpfulYes}>{`Yes (${count})`}</Link>
           <div>|</div>
           <Link onClick={handleAddAnswer}>Add Answer</Link>
+          <div>|</div>
+          <Link onClick={handleReport}>{report}</Link>
         </QInfoLine>
-      </ContainerRow>
+      </QuestionRow>
       <ContainerRow>
-        <>{console.log(answers)}</>
         {answers.length ? <Label>A:</Label> : null}
         <AContainer>
           {answers.length ? answers.map((answer, key) => <AListEntry answer={answer} askerName={askerName} key={answer[0]}/>) : null}
           {allAnswers.length > 2 ? <Button color={'#007185'} onClick={handleSeeMoreAnswers}>{buttonText}</Button> : null}
         </AContainer>
       </ContainerRow>{
-        showModal ? <AddAModal hide={() => setShowModal(false)} /> : null
+        showModal ? <AddAModal hide={() => setShowModal(false)} productName={productName} question={question.question_body}/> : null
       }</QContainer>
   );
 };
