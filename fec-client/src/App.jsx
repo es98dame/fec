@@ -9,6 +9,7 @@ import QA from './components/Q&A/QA';
 const AppDiv = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
   font-family: 'Open Sans', sans-serif;
+  color: #242124;
 `;
 
 const H1 = styled.h1`
@@ -61,7 +62,7 @@ const QandADiv = styled.div`
 border: 1px solid black;
 width: 90%;
 height: 25%;
-margin: 5px 0;
+margin: auto;
 `;
 
 const RatingsDiv = styled.div`
@@ -73,18 +74,10 @@ height: 25%;
 
 
 let App = () => {
-  let [productId, setProductId] = useState(65635);
 
-  //save product id on local storage to access it anywhere
-  //window.localStorage.getItem("ProductId") -> return '65631'
-  // useEffect(()=>{
-  //   if(window.localStorage.getItem("ProductId") === null){
-  //     window.localStorage.setItem("ProductId", 65631);
-  //   } else {
-  //     setProductId(window.localStorage.getItem("ProductId"));
-  //   }
-
-  // },[]);
+  //default value is '65635'
+  const productId = window.localStorage.getItem("ProductId") === null ?
+  65635 : JSON.parse(window.localStorage.getItem("ProductId")) ;
 
   return (
     <AppDiv>
@@ -97,11 +90,11 @@ let App = () => {
       </H1Div>
       <div>
         <OverviewDiv>
-          <Overview productId={productId} setProductId={setProductId}/>
+          <Overview productId={productId}/>
         </OverviewDiv>
 
         <RelatedDiv>
-          <Products productId={productId} setProductId={setProductId}/>
+          <Products productId={productId}/>
         </RelatedDiv>
 
         <QandADiv>

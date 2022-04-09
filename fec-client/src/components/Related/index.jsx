@@ -11,7 +11,7 @@ const ProductList = styled.div`
   width : 100%;
   // overflow-x: auto;
   min-width: 0;
-  height: 440px;
+  height: 503px;
 
   // SCROLLBAR MODE
   &::-webkit-scrollbar {

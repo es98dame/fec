@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Modal from './Modal.jsx';
 import Star from '../Shared/Stars.jsx';
-
+import PreviewImage from './PreviewImage.jsx';
 
 const ProductCard = styled.div`
   display : flex;
@@ -18,8 +18,8 @@ border-color: lightgray;
 //flex: 0 0 25%
   background : white;
 &:hover {
-    z-index : 50;
-    transform: scale(1.4);
+    z-index : 20;
+    transform: scale(1.2);
 
 }
 
@@ -53,11 +53,6 @@ position : relative;
 height : 100%;
 z-index: 2;
 transition: all 0.2s linear;
-&:hover {
-  ${ProductCard}{
-    z-index : 50;
-    transform: scale(1.7);
-  }
 }
 `;
 
@@ -71,7 +66,7 @@ const ActionButton = styled.img`
 `;
 
 
-const Card = ({productInfo})=> {
+const Card = ({productInfo , styleInfo})=> {
   // const { product , style } = productInfo;
 
   // const [info, setInfo] = useState(null);
@@ -80,30 +75,22 @@ const Card = ({productInfo})=> {
   const [show, setShow] = useState(false);
 
   useEffect(()=>{
-    console.log(productInfo);
+    // console.log('product info in card', productInfo);
+    // console.log('style info in card', styleInfo);
   },[productInfo]);
 
 
   return(
+    <div>
+      <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {productInfo}></Modal>
     <ProductCard>
-      {/* {productInfo === null ? '' :
-      <ProductCard> */}
       <div>
         <ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png" onClick={() => {setShow(!show);}}></ActionButton>
-     </div>
-    <PreviewImg src='http://placecorgi.com/260/180' alt="no image"/>
+      </div>
 
-    <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {productInfo}></Modal>
-    <CardDiv>
-    <CardText>{productInfo.category}</CardText>
-    <CardText>{productInfo.name}</CardText>
-    <CardText>{productInfo.default_price}</CardText>
-    <Star rating ='4'/>
-    </CardDiv>
+    <PreviewImage productInfo = {productInfo} styleInfo ={styleInfo}/>
     </ProductCard>
-  // }
-  // </ProductCard>
-
+    </div>
   )
 }
 

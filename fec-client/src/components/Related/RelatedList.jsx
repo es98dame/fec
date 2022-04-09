@@ -7,6 +7,7 @@ import Card from './Card.jsx'
 const Container = styled.div`
 overflow : hidden;
 width : 100%;
+height : 600px;
 position: relative
 `;
 const SliderContainer = styled.div`
@@ -17,8 +18,8 @@ const SliderContainer = styled.div`
   // // flex: 1;
   // margin: 10px;
   position: relative;
-  top: 64px;
-  left: 63px;
+  top: 47px;
+  // left: 63px;
 }
 
 `;
@@ -27,6 +28,7 @@ const ProductCard = styled.div`
 width : 100%;
 display : flex;
 flex-direction: row;
+
 `;
 
 const Button = styled.button`
@@ -65,40 +67,46 @@ const postsPerPage = 5;
 
 const RelatedList = ({relatedArray})=> {
   const [currentSlide, setCurrentSlide] = useState(0);
-  //const [idArray, setIdArray] = useState(null);
+
   const slideRef = useRef(null);
 
   const [infoArray, setInfoArray] = useState('');
+  const [styleArray, setStyleArray] = useState('');
 
   const customAxiosFunctions = async () => {
 
+    //get product infomation
     const promises1 = relatedArray.map((id) => {
-      // return axios.get('/api', {headers: {path: `/products/${id}`}});
       return  axios.all([
         axios.get('/api', {headers: {path: `/products/${id}`}}),
-        // axios.get('/api', {headers: {path: `/products/${id}/styles`}})
       ])
       .then(axios.spread((data1) => {
-        // output of req.
-
-        //console.log('data1', data1, 'data2', data2)
         return data1.data;
       }));
 
     });
-    // const promises2 = relatedArray.map((id) => {
-    //   return axios.get('/api', {headers: {path: `/products/${id}/styles`}});
-    // });
-
     const resolvedResponses1 = await Promise.all(promises1);
-
     resolvedResponses1.map((el) => {
-      //console.log(el)
       setInfoArray(oldArray => [...oldArray, el]);
     });
 
-  };
+    //get product style infomation
+    const promises2 = relatedArray.map((id) => {
+      return  axios.all([
+        axios.get('/api', {headers: {path: `/products/${id}/styles`}}),
+      ])
+      .then(axios.spread((data1) => {
+        return data1.data;
+      }));
 
+    });
+    const resolvedResponses2 = await Promise.all(promises2);
+    resolvedResponses2.map((el) => {
+      setStyleArray(oldArray => [...oldArray, el]);
+    });
+
+
+  };
 
   const nextSlide = () => {
         setCurrentSlide(currentSlide + 1)
@@ -119,30 +127,23 @@ const RelatedList = ({relatedArray})=> {
   }, [currentSlide]);
 
   useEffect(() => {
-    //setInfoArray('');
     customAxiosFunctions();
   }, [relatedArray]);
 
-  // useEffect(() => {
-  //   if(relatedArray.length !== 0){
-  //     // setIdArray(relatedArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)));
-  //     setIdArray(relatedArray.slice(0));
-  //   }
-
-  // }, [relatedArray]);
 
     return (
       <Container>
         <SliderContainer ref={slideRef} >
         <ProductCard>
         <Button onClick={prevSlide}>←</Button>
-      {infoArray instanceof Array && infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)).map((data,index)=>(
-        <Card productInfo={data} key={index}/>
+      {infoArray instanceof Array && styleArray instanceof Array
+      && infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1))
+      .map((data,index)=>(
+        <Card productInfo={data} styleInfo = {styleArray[index]} key={index}/>
       ))}
       <Button onClick={nextSlide}>→</Button>
       </ProductCard>
         </SliderContainer>
-
         </Container>
     );
 
