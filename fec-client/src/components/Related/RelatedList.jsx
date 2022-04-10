@@ -50,7 +50,7 @@ const TOTAL_SLIDES = 2;
 const postsPerPage = 5;
 
 const RelatedList = ({relatedArray, mode, deletehandle})=> {
-  console.log('related arr in relate.jsx',relatedArray);
+  // console.log('related arr in relate.jsx',relatedArray);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideRef = useRef(null);
