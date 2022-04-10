@@ -13,7 +13,7 @@ const QAListContainer = styled.div`
   gap: .2em;
 `;
 
-const QAList = function({QAData, productName, showUpdates, handleMoreQuestions, mode, storage}) {
+const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, storage}) => {
   let sortedData = QAData.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
   const ref = useRef();
 
@@ -47,8 +47,6 @@ const QAList = function({QAData, productName, showUpdates, handleMoreQuestions, 
     }
 
   }, [QAData]);
-
-
 
   return (
     <QAListContainer ref={ref}>{

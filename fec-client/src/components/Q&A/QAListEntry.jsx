@@ -69,7 +69,7 @@ const Button = styled.button`
   }
 `;
 
-const sortSeller = function(answers) {
+const sortSeller = (answers) => {
   let result = [];
   let sellers = [];
   answers.forEach((answer) => answer[1].answerer_name === 'Seller' || answer[1].answerer_name === 'seller' ? sellers.push(answer) : result.push(answer));
@@ -77,7 +77,7 @@ const sortSeller = function(answers) {
   return [...sellers, ...result];
 };
 
-const QAListEntry = function({question, productName, productId, showUpdates}) {
+const QAListEntry = ({question, productName, productId, showUpdates}) => {
   let allAnswers = Object.entries(question.answers);
   let askerName = question.asker_name;
   let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
@@ -110,7 +110,7 @@ const QAListEntry = function({question, productName, productId, showUpdates}) {
     }
   };
 
-  const handleReport = function() {
+  const handleReport = () => {
     report !== 'Reported' ? setReport('Reported') : undefined;
     axios.put('/api', null, {headers: {path: `/qa/questions/${question.question_id}/report`}})
       .then((res) => undefined)

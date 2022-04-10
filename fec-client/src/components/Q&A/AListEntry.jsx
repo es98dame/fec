@@ -60,7 +60,7 @@ const Image = styled.img`
   }
 `;
 
-const AListEntry = function({answer, askerName}) {
+const AListEntry = ({answer, askerName}) => {
   let answerer = answer[1].answerer_name;
 
   const pressedHelpful = useRef(false);
