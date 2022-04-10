@@ -55,17 +55,18 @@ const H4 = styled.h4`
   margin-left: .7em;
 `;
 
-const QA = function ({productId, productName}) {
+const QA = ({productId, productName}) => {
   const storage = useRef([]);
   const prevData = useRef([]);
   const showButton = useRef(true);
+  const [mode, setMode] = useState('normal');
 
   const [searchInput, setSearchInput] = useState('');
   const [QAData, setQA] = useState([]);
   const [seeMoreView, setMoreView] = useState('See More Questions');
   const [modalQ, setModalQ] = useState(false);
 
-  const showUpdates = function() {
+  const showUpdates = () => {
     axios.get('/api', {headers: {path: `/qa/questions?product_id=${productId}&count=10000`}})
       .then((res) => {
         storage.current = res.data.results;
@@ -75,12 +76,12 @@ const QA = function ({productId, productName}) {
       .catch((err) => console.error('axios request in QA.jsx:', err));
   };
 
-  const handleMoreQuestions = function() {
+  const handleMoreQuestions = () => {
     setQA(storage.current.slice(0, QAData.length + 2));
     prevData.current = storage.current.slice(0, QAData.length + 2);
   };
 
-  const handleAddQuestions = function() {
+  const handleAddQuestions = () => {
     setModalQ(!modalQ);
   };
 
@@ -92,6 +93,7 @@ const QA = function ({productId, productName}) {
 
   useEffect(() => {
     if (searchInput.length > 2) {
+      setMode('search');
       let queryQuestions = [];
       showButton.current = false;
       for (let q of storage.current) {
@@ -99,6 +101,7 @@ const QA = function ({productId, productName}) {
       }
       setQA(queryQuestions);
     } else {
+      setMode('normal');
       showButton.current = true;
       setQA(prevData.current);
     }
@@ -124,7 +127,10 @@ const QA = function ({productId, productName}) {
   const QAListProps = {
     QAData: QAData,
     productName: productName,
-    showUpdates: showUpdates
+    showUpdates: showUpdates,
+    handleMoreQuestions: handleMoreQuestions,
+    mode: mode,
+    storage: storage.current.length
   };
 
   return (

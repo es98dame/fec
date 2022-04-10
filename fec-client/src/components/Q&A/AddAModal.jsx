@@ -127,6 +127,10 @@ const UploadedImage = styled.img`
 const SubmitButton = styled.button`
   width: 9em;
   align-self: flex-end;
+  cursor: pointer;
+  &:hover {
+    color: lightgrey;
+  };
 `;
 
 const ErrorLabel = styled.label`
@@ -287,6 +291,9 @@ const AddAModal = ({ hide, question, productName, questionId, showUpdates }) => 
           <Field>
             <label>Your answer*</label>
             <AnswerBody type="text" name="answer" value={answer} onChange={(e) => handleTextChange(e)}></AnswerBody>
+          </Field>
+          <Field>
+            <label>Upload your photos</label>
           </Field>{
             images.length < 5 ? <UploadButton htmlFor="files">Upload Image</UploadButton> : null
           }<FileHidden id="files" type="file" name="file" accept=".png,.jpeg,jpg,.gif" onChange={handleUpload}/>

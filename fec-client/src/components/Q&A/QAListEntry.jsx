@@ -125,7 +125,7 @@ const QAListEntry = function({question, productName, productId, showUpdates}) {
   };
 
   return (
-    <QContainer>
+    <QContainer >
       <QuestionRow>
         <Label>Q:</Label>
         <QBody>{question.question_body}</QBody>
