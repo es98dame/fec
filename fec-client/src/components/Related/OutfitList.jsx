@@ -39,7 +39,10 @@ const OutfitList = (props)=> {
       window.localStorage.setItem("OutfitList", JSON.stringify(arr));
       setOutfitList(arr);
     }else{
-      //outfistlist = JSON.parse(window.localStorage.getItem("OutfitList"));
+      const arr = JSON.parse(window.localStorage.getItem("OutfitList"));
+      arr.push(window.localStorage.getItem("ProductId"));
+      window.localStorage.setItem("OutfitList", JSON.stringify(arr));
+      setOutfitList(arr);
     }
 
   }

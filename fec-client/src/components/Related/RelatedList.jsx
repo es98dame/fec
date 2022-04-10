@@ -58,12 +58,15 @@ const TOTAL_SLIDES = 2;
 const postsPerPage = 5;
 
 const RelatedList = ({relatedArray, mode, deletehandle})=> {
+  console.log('related arr in relate.jsx',relatedArray);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideRef = useRef(null);
 
   const [infoArray, setInfoArray] = useState('');
   const [styleArray, setStyleArray] = useState('');
+
+
   const customAxiosFunctions = async () => {
      //get product infomation
      const promises1 = relatedArray.map((id) => {
@@ -118,6 +121,7 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
 
   useEffect(() => {
     customAxiosFunctions();
+
   }, [relatedArray]);
 
 

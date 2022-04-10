@@ -60,7 +60,7 @@ const CardText = styled.p`
 `;
 
 const PreviewImage = ({productInfo , styleInfo})=> {
-  // console.log('inside', productInfo, styleInfo);
+   console.log('inside', productInfo, styleInfo);
   const [results , setResults] = useState([]);
   const [main, setMain] = useState('');
   const [price , setPrice] = useState('');
