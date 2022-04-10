@@ -5,28 +5,21 @@ import axios from 'axios';
 import Card from './Card.jsx'
 
 const Container = styled.div`
-overflow : hidden;
-width : 100%;
-height : 600px;
-position: relative
+  overflow : hidden;
+  width : 100%;
+  height : 600px;
+  position: relative
 `;
 const SliderContainer = styled.div`
-  // display: flex;
-  // flex-direction: row;
-  // justify-content : space-between;
-  // min-width: 0;
-  // // flex: 1;
-  // margin: 10px;
   position: relative;
   top: 47px;
-  // left: 63px;
 }
 `;
 
 const ProductCard = styled.div`
-width : 100%;
-display : flex;
-flex-direction: row;
+  width : 100%;
+  display : flex;
+  flex-direction: row;
 `;
 
 const Button = styled.button`
@@ -44,6 +37,7 @@ const Button = styled.button`
     z-index ; 20;
     padding-left: 10px;
     padding-right: 10px;
+
     &:hover {
       transition: all 0.3s ease-in-out;
       background-color: coral;
@@ -51,8 +45,6 @@ const Button = styled.button`
     }
   }
 `;
-
-
 
 const TOTAL_SLIDES = 2;
 const postsPerPage = 5;

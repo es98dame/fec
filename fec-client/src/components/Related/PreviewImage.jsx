@@ -61,7 +61,7 @@ const CardText = styled.p`
 `;
 
 const PreviewImage = ({productInfo , styleInfo})=> {
-   console.log('inside', productInfo, styleInfo);
+  //  console.log('inside', productInfo, styleInfo);
   const [results , setResults] = useState([]);
   const [main, setMain] = useState('');
   const [price , setPrice] = useState('');
@@ -93,12 +93,12 @@ const PreviewImage = ({productInfo , styleInfo})=> {
     return discountprice === null ? 'none' : ' line-through';
   }
 
-  const showthumbs = () => {
+  const showthumbs = (value) => {
+    if(value){
     thumbcontainer.current.style.display = 'flex';
-  }
-
-  const hidethumbs = () => {
+    }else{
     thumbcontainer.current.style.display = 'none';
+    }
   }
 
  useEffect(()=>{
@@ -107,7 +107,7 @@ const PreviewImage = ({productInfo , styleInfo})=> {
  },[styleInfo]);
 
  return (
-  <Container onMouseOver={showthumbs} onMouseLeave={hidethumbs}>
+  <Container onMouseOver={() => {showthumbs(true);}} onMouseLeave={() => {showthumbs(false);}}>
       <Preview>
         <Image src = {main} onClick={updateId}/>
       </Preview>

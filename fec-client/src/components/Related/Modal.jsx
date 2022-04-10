@@ -42,6 +42,8 @@ const StyledTable = styled.table`
   border: none;
   border-collapse: collapse;
   text-align : center;
+
+  //Table Style
   /* border-collapse: separate; */
   /* border-spacing: 5px 10px; */
 

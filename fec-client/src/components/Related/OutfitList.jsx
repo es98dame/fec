@@ -6,25 +6,24 @@ import RelatedList from './RelatedList.jsx';
 import axios from 'axios';
 
 const Container = styled.div`
-position: relative;
-display : flex;
+  position: relative;
+  display : flex;
 `;
 
 const ProductCard = styled.div`
-border: solid;
-border-color: lightgray;
-display : flex;
-height: 431px;
-position: relative;
-top: 10%;
-text-align: center;
-align-items: center;
+  border: solid;
+  border-color: lightgray;
+  display : flex;
+  height: 72%;
+  position: relative;
+  top: 10%;
+  text-align: center;
+  align-items: center;
 `;
 
 const FirstCard = styled.div`
-display : flex;
-position : relative;
-
+  display : flex;
+  position : relative;
 `;
 
 
