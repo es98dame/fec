@@ -21,21 +21,16 @@ const SliderContainer = styled.div`
   top: 47px;
   // left: 63px;
 }
-
 `;
 
 const ProductCard = styled.div`
 width : 100%;
 display : flex;
 flex-direction: row;
-
 `;
 
 const Button = styled.button`
   display : none;
-
-
-
   ${Container}:hover & {
     display : flex;
     flex-direction: column;
@@ -49,15 +44,12 @@ const Button = styled.button`
     z-index ; 20;
     padding-left: 10px;
     padding-right: 10px;
-
     &:hover {
       transition: all 0.3s ease-in-out;
       background-color: coral;
       color: #fff;
     }
-
   }
-
 `;
 
 
@@ -72,11 +64,9 @@ const RelatedList = ({relatedArray})=> {
 
   const [infoArray, setInfoArray] = useState('');
   const [styleArray, setStyleArray] = useState('');
-
   const customAxiosFunctions = async () => {
-
-    //get product infomation
-    const promises1 = relatedArray.map((id) => {
+     //get product infomation
+     const promises1 = relatedArray.map((id) => {
       return  axios.all([
         axios.get('/api', {headers: {path: `/products/${id}`}}),
       ])
@@ -109,8 +99,8 @@ const RelatedList = ({relatedArray})=> {
   };
 
   const nextSlide = () => {
-        setCurrentSlide(currentSlide + 1)
-    };
+    setCurrentSlide(currentSlide + 1)
+  };
 
   const prevSlide = () => {
     if (currentSlide === 0) {
@@ -146,21 +136,6 @@ const RelatedList = ({relatedArray})=> {
         </SliderContainer>
         </Container>
     );
-
-    //
-
-
 }
-
-
-  //check info value
-  // useEffect(() => {
-  //   console.log('pro',productInfo)
-  //   console.log('sty',styleInfo)
-  // }, [productInfo,styleInfo])
-
-
-  // "https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
-
 
 export default RelatedList;
