@@ -1,37 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import RelatedList from './RelatedList.jsx';
 
 import axios from 'axios';
 
-const Outfit = styled.div`
-display: flex;
-flex-direction: row;
-width : 100%;
-overflow-x: auto;
+const Container = styled.div`
+position: relative;
+display : flex;
 `;
 
 const ProductCard = styled.div`
-display: flex;
-flex-direction: column;
-min-width: 10rem;
 border: solid;
 border-color: lightgray;
+display : flex;
+height: 431px;
+position: relative;
+top: 10%;
+text-align: center;
+align-items: center;
 `;
 
 const FirstCard = styled.div`
-align-items: center;
-height : 240px;
-line-height: 240px;
-text-align: center;
-`;
-
-const ActionButton = styled.img`
-  position : relative;
-  left:80%;
-  z-index:10;
+display : flex;
+position : relative;
 
 `;
+
+
 
 const OutfitList = (props)=> {
   const [outfitList, setOutfitList] = useState([]);
@@ -49,7 +45,7 @@ const OutfitList = (props)=> {
   }
 
   const deleteItemOutfit = (id) => {
-    const arr = outfitList;
+    const arr = [...outfitList];
     arr.splice(arr.indexOf(id), 1);
     setOutfitList(arr);
     window.localStorage.setItem("OutfitList", JSON.stringify(arr));
@@ -63,22 +59,17 @@ const OutfitList = (props)=> {
   }, [])
 
   return(
-    <Outfit>
-    <ProductCard>
-      <FirstCard onClick={addItemtoOutfit}>
-        Add current item +
-      </FirstCard>
+    <Container>
+    <ProductCard onClick={addItemtoOutfit}>
+
+        <span>Add current item +</span>
+
     </ProductCard>
 
     {outfitList.length !== 0 ? (
-      outfitList.map((i, index)=>(
-      <ProductCard key = {index}>
-        <div><ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/cancel.png" onClick={() => {deleteItemOutfit(i)}} ></ActionButton>
-     </div>
-      <FirstCard>{i}</FirstCard>
-      </ProductCard>
-    ))) : '' }
-    </Outfit>
+      <RelatedList relatedArray ={outfitList} mode={'outfit'} deletehandle={deleteItemOutfit}/>
+    ) : '' }
+    </Container>
 
   );
 

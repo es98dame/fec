@@ -57,7 +57,7 @@ const Button = styled.button`
 const TOTAL_SLIDES = 2;
 const postsPerPage = 5;
 
-const RelatedList = ({relatedArray})=> {
+const RelatedList = ({relatedArray, mode, deletehandle})=> {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideRef = useRef(null);
@@ -129,7 +129,7 @@ const RelatedList = ({relatedArray})=> {
       {infoArray instanceof Array && styleArray instanceof Array
       && infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1))
       .map((data,index)=>(
-        <Card productInfo={data} styleInfo = {styleArray[index]} key={index}/>
+        <Card productInfo={data} styleInfo = {styleArray[index]} key={index} mode={mode} deletehandle={deletehandle}/>
       ))}
       <Button onClick={nextSlide}>→</Button>
       </ProductCard>

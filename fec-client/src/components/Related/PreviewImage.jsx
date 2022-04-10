@@ -60,7 +60,7 @@ const CardText = styled.p`
 `;
 
 const PreviewImage = ({productInfo , styleInfo})=> {
-  console.log('inside', productInfo, styleInfo);
+  // console.log('inside', productInfo, styleInfo);
   const [results , setResults] = useState([]);
   const [main, setMain] = useState('');
   const [price , setPrice] = useState('');
@@ -81,9 +81,7 @@ const PreviewImage = ({productInfo , styleInfo})=> {
   }
 
   const updatePrice = (sales_price) => {
-    if(sales_price !== null){
       setDiscountprice(sales_price);
-    }
   }
 
   const getColor = ()=>{
@@ -113,10 +111,10 @@ const PreviewImage = ({productInfo , styleInfo})=> {
       <CardText>{productInfo.category}</CardText>
       <CardText>{productInfo.name}</CardText>
       <CardText>
-        <span style={{ "color": getColor() , "text-decoration" : getDecor()}}>{price}</span>
+        <span style={{ "color": getColor() , "textDecoration" : getDecor()}}>{price}</span>
         {discountprice === null ? '' : discountprice}
       </CardText>
-      <CardText><Star rating ='4'/></CardText>
+      <Star rating ='4'/>
     </Textarea>
   </Container>
  );

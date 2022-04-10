@@ -48,8 +48,10 @@ const ActionButton = styled.img`
   }
 `;
 
+const starturl = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png";
+const cancelurl = "https://img.icons8.com/ios-glyphs/30/000000/cancel.png";
 
-const Card = ({productInfo , styleInfo})=> {
+const Card = ({productInfo , styleInfo, mode, deletehandle})=> {
   const image = useRef(null);
   const [show, setShow] = useState(false);
 
@@ -64,7 +66,11 @@ const Card = ({productInfo , styleInfo})=> {
       <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {productInfo}></Modal>
     <ProductCard>
       <div>
-        <ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png" onClick={() => {setShow(!show);}}></ActionButton>
+        {mode === 'outfit' ?
+        <ActionButton src ={cancelurl} onClick={() => {deletehandle(productInfo.id);}} ></ActionButton>
+      : <ActionButton src ={starturl}  onClick={() => {setShow(!show);}}></ActionButton>
+      }
+
       </div>
 
     <PreviewImage productInfo = {productInfo} styleInfo ={styleInfo}/>
@@ -74,3 +80,5 @@ const Card = ({productInfo , styleInfo})=> {
 }
 
 export default Card;
+
+// onClick={() => {deleteItemOutfit(i)}}

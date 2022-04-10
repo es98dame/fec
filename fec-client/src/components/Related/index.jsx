@@ -63,12 +63,12 @@ const Products = (props)=> {
     <div title='TheProductList'>
       <Listtitle>Related List</Listtitle>
       <ProductList>
-      <RelatedList relatedArray={idArray}/>
+      <RelatedList relatedArray={idArray} mode={'related'}/>
     </ProductList>
     <Listtitle>Outfit List</Listtitle>
-      <Outfit>
+      <ProductList>
         <OutfitList/>
-      </Outfit>
+      </ProductList>
     </div>
   );
 };
