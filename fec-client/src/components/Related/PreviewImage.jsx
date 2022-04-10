@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import styled from 'styled-components';
 import axios from 'axios';
@@ -21,7 +21,8 @@ const Container = styled.div`
 `;
 
 const ThumbContainer = styled.div`
-  display: flex;
+  display: none;
+}
 `;
 
 const Mainview = styled.div`
@@ -65,6 +66,7 @@ const PreviewImage = ({productInfo , styleInfo})=> {
   const [main, setMain] = useState('');
   const [price , setPrice] = useState('');
   const [discountprice , setDiscountprice] = useState(null);
+  const thumbcontainer = useRef(null);
   // const [thumbnails, setThumbnails] = useState(null);
   //mainimage
 
@@ -91,17 +93,25 @@ const PreviewImage = ({productInfo , styleInfo})=> {
     return discountprice === null ? 'none' : ' line-through';
   }
 
+  const showthumbs = () => {
+    thumbcontainer.current.style.display = 'flex';
+  }
+
+  const hidethumbs = () => {
+    thumbcontainer.current.style.display = 'none';
+  }
+
  useEffect(()=>{
   setMain(styleInfo.results[0].photos[0].thumbnail_url);
   setPrice(productInfo.default_price);
  },[styleInfo]);
 
  return (
-  <Container>
+  <Container onMouseOver={showthumbs} onMouseLeave={hidethumbs}>
       <Preview>
         <Image src = {main} onClick={updateId}/>
       </Preview>
-      <ThumbContainer>
+      <ThumbContainer ref={thumbcontainer}>
         { styleInfo.results instanceof Array
         && styleInfo.results.slice(0,4).map((data,index)=>(
           <Thumbnails key={index} results = {data} imageClick={imageClick} updatePrice={updatePrice}/>
