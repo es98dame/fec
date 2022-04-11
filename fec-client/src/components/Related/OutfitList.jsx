@@ -28,7 +28,7 @@ const FirstCard = styled.div`
 
 
 
-const OutfitList = (props)=> {
+const OutfitList = ()=> {
   const [outfitList, setOutfitList] = useState([]);
 
   const addItemtoOutfit = () => {

@@ -18,7 +18,7 @@ background : white;
 
 &:hover {
     z-index : 20;
-    transform: scale(1.2);
+    transform: scale(1.01);
 }
 `;
 
@@ -52,29 +52,23 @@ const starturl = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png";
 const cancelurl = "https://img.icons8.com/ios-glyphs/30/000000/cancel.png";
 
 const Card = ({productInfo , styleInfo, mode, deletehandle})=> {
-  const image = useRef(null);
+
   const [show, setShow] = useState(false);
-
-  useEffect(()=>{
-    // console.log('product info in card', productInfo);
-    // console.log('style info in card', styleInfo);
-  },[productInfo]);
-
 
   return(
     <div>
       <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {productInfo}></Modal>
-    <ProductCard>
-      <div>
-        {mode === 'outfit' ?
-        <ActionButton src ={cancelurl} onClick={() => {deletehandle(productInfo.id);}} ></ActionButton>
-      : <ActionButton src ={starturl}  onClick={() => {setShow(!show);}}></ActionButton>
-      }
+        <ProductCard>
+          <div>
+            {mode === 'outfit' ?
+            <ActionButton src ={cancelurl} onClick={() => {deletehandle(productInfo.id);}} ></ActionButton>
+            : <ActionButton src ={starturl}  onClick={() => {setShow(!show);}}></ActionButton>
+            }
 
-      </div>
-
-    <PreviewImage productInfo = {productInfo} styleInfo ={styleInfo}/>
-    </ProductCard>
+          </div>
+            {styleInfo !== undefined ?
+            <PreviewImage productInfo = {productInfo} styleInfo ={styleInfo}/> : ''}
+        </ProductCard>
     </div>
   )
 }

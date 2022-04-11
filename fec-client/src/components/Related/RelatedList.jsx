@@ -22,27 +22,39 @@ const ProductCard = styled.div`
   flex-direction: row;
 `;
 
-const Button = styled.button`
-  display : none;
-  ${Container}:hover & {
-    display : flex;
-    flex-direction: column;
-    position : relative;
-    all: unset;
-    display : block;
-    border: 1px solid coral;
-    color: coral;
-    border-radius: 10px;
-    position: relative;
-    z-index ; 20;
-    padding-left: 10px;
-    padding-right: 10px;
+const NoButton = styled.button`
 
-    &:hover {
-      transition: all 0.3s ease-in-out;
-      background-color: coral;
-      color: #fff;
-    }
+  visibility: hidden;
+  flex-direction: column;
+  position : relative;
+  display : block;
+  position: relative;
+  z-index ; 20;
+  padding-left: 10px;
+  padding-right: 21px;
+
+`;
+
+const Button = styled.button`
+
+
+  display : flex;
+  flex-direction: column;
+  position : relative;
+  all: unset;
+  display : block;
+  border: 1px solid coral;
+  color: coral;
+  border-radius: 10px;
+  position: relative;
+  z-index ; 20;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: coral;
+    color: #fff;
   }
 `;
 
@@ -50,7 +62,7 @@ const TOTAL_SLIDES = 2;
 const postsPerPage = 5;
 
 const RelatedList = ({relatedArray, mode, deletehandle})=> {
-  // console.log('related arr in relate.jsx',relatedArray);
+  console.log('related arr in relate.jsx',relatedArray);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideRef = useRef(null);
@@ -99,7 +111,7 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
 
   const prevSlide = () => {
     if (currentSlide === 0) {
-      setCurrentSlide(TOTAL_SLIDES);
+      return;
     } else {
       setCurrentSlide(currentSlide - 1);
     }
@@ -112,6 +124,8 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
   }, [currentSlide]);
 
   useEffect(() => {
+    setInfoArray('');
+    setStyleArray('');
     customAxiosFunctions();
 
   }, [relatedArray]);
@@ -119,17 +133,22 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
 
     return (
       <Container>
-        <SliderContainer ref={slideRef} >
-        <ProductCard>
-        <Button onClick={prevSlide}>←</Button>
-      {infoArray instanceof Array && styleArray instanceof Array
-      && infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1))
-      .map((data,index)=>(
-        <Card productInfo={data} styleInfo = {styleArray[index]} key={index} mode={mode} deletehandle={deletehandle}/>
-      ))}
-      <Button onClick={nextSlide}>→</Button>
-      </ProductCard>
-        </SliderContainer>
+          <SliderContainer ref={slideRef} >
+            <ProductCard>
+              {currentSlide === 0 ? <NoButton></NoButton> :
+                <Button onClick={prevSlide}>←</Button>
+              }
+              {infoArray instanceof Array && styleArray instanceof Array
+              && infoArray.map((data,i)=>{
+                if( i >= currentSlide * postsPerPage && i < postsPerPage * (currentSlide + 1)) {
+                return (<Card productInfo={data} styleInfo = {styleArray[i]} key={i} mode={mode} deletehandle={deletehandle}/>);
+                }
+              })}
+              { postsPerPage * (currentSlide + 1) > infoArray.length ? '' :
+                <Button onClick={nextSlide}>→</Button>
+              }
+            </ProductCard>
+          </SliderContainer>
         </Container>
     );
 }
