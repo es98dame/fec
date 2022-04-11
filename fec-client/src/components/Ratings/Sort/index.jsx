@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
-//COMPARATORS
+const Div = styled.div`
+border-top: 1px solid lightgrey;
+margin: 10px;
+padding: 10px;
+`;
+
+const Label = styled.label`
+margin: 5px;
+`;
+
+//COMPARATORS -Help!!!!
 
 const newest = (a, b) => a.date < b.date ? 1 : -1;
 const helpful = (a, b) => b.helpfulness - a.helpfulness;
@@ -23,14 +34,15 @@ const Sort = ({currentData, setCurrentData}) => {
   };
 
   return (
-    <div>
-      <label> Sort
+    <Div>
+      <Label> Sort by:
         <select onChange = {handleChange}>
+          <option value = 'relevance'>Relevance</option>
           <option value = 'newest'>Newest</option>
           <option value = 'helpful'>Most Helpful</option>
         </select>
-      </label>
-    </div>
+      </Label>
+    </Div>
   );
 };
 

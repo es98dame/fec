@@ -26,8 +26,7 @@ transform: translate(-50%, -50%);
 background-color: white;
 height: 40rem;
 width: 35rem;
-
-&input, textarea {
+&input, textarea, button {
   font-family: inherit;
 }
 `;
@@ -43,7 +42,7 @@ const Form = styled.div`
 display: flex;
 flex-direction: column;
 gap: 10px;
-height: 76%;
+height: 70%;
 overflow-y: auto;
 margin: 2%;
 `;
@@ -70,12 +69,14 @@ margin: auto;
 
 const Warning = styled.div`
 color: red;
+font-size: small;
 `;
 
 
 const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 
   const relevantFactors = Object.keys(relevantChars);
+  const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
   const [recommend, setRecommend] = useState(null);
   const [rating, setRating] = useState(null);
@@ -84,8 +85,9 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
   const [images, setImages] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [warning, setWarning] = useState(null);
   const [characteristics, setCharacteristics] = useState({});
+  const [warningList, setWarningList] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleChange = (e, setter) => {
     setter(e.target.value);
@@ -99,26 +101,52 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 
   const imageUpload = (file) => {
     return axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, { upload_preset, file});
-};
+  };
 
   const handleSubmit = (e) => {
+    const warnings = [];
+    if (rating === null) {
+      warnings.push('Rating field is mandatory');
+    }
+    if (recommend === null) {
+      warnings.push('Recommend field is mandatory');
+    }
+    if (Object.keys(characteristics).length !== relevantFactors.length) {
+      warnings.push('All characteristic ratings are mandatory');
+    }
+    if (body.length < 50) {
+      warnings.push('Your review must be at least 50 characters in length');
+    }
+    if (!name.length) {
+      warnings.push('You must enter a nickname');
+    }
+    if (!emailRegEx.test(email)) {
+      warnings.push('Please enter a valid email address');
+    }
 
-    Promise.all(images.map(url => imageUpload(url)))
-      .then((responses) => {
-          const photos = responses.map(response => response.data.url);
-          axios.post('/api/reviews', {
-          productId,
-          rating,
-          summary,
-          body,
-          recommend,
-          name,
-          email,
-          photos,
-          characteristics
+    if(warnings.length) {
+      setWarningList(warnings);
 
-         })
-      })
+    } else {
+      Promise.all(images.map(url => imageUpload(url)))
+        .then((responses) => {
+            const photos = responses.map(response => response.data.url);
+            return axios.post('/api/reviews', {
+            productId,
+            rating,
+            summary,
+            body,
+            recommend,
+            name,
+            email,
+            photos,
+            characteristics
+
+           });
+        })
+        .then(() => {})
+    }
+
   };
 
   return (
@@ -129,6 +157,8 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
           <h2>Write Your Review</h2>
           <h3>About the product {productId}</h3>
         </Header>
+        { success ?
+        <h3> Thank you, your review has been submitted </h3> :
         <Form onSubmit = {handleSubmit}>
           <Field>
             <Label> Overall Rating </Label>
@@ -167,9 +197,18 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
             <Label>Email</Label>
             <input type = 'text' placeholder = 'Your email' maxLength = '60' size = '50' value = {email} onChange = {(e) => handleChange(e, setEmail)}/>
           </Field>
+          <Warning>
+            { warningList ?
+            <ul> Submit failed with the following warnings:
+              { warningList.map(warning => (
+                <li>{warning}</li>
+              ))}
+            </ul> :
+            null }
+          </Warning>
           <Submit type = 'submit' value = 'Submit Review' onClick = {handleSubmit}/>
-          <Warning>{warning}</Warning>
         </Form>
+        }
       </ModalContent>
     </Modal>
   );

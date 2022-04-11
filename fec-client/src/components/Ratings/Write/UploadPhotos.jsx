@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {FaPlus} from 'react-icons/fa';
 
 const cloudName = 'daxw4bdp6';
 const upload_preset = 'grzngc1a';
@@ -60,7 +59,7 @@ const UploadPhotos = ({ images, setImages }) => {
       <Thumbnails>
         {images.map(url => <Img src = {url}></Img>)}
         <Div>
-          <label htmlFor = 'write-review-file'><FaPlus size = '4rem' /></label>
+          <label htmlFor = 'write-review-file'>+</label>
           <FileInput type = 'file' id = 'write-review-file' onChange = {handleUpload}/>
         </Div>
       </Thumbnails>

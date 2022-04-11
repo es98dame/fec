@@ -16,19 +16,14 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-
 display: flex;
 flex-direction: column;
 align-items: flex-end;
-
 background-color: white;
-height: 40rem;
-width: 35rem;
 `;
 
 const ImageDisplay = styled.img`
-object-fit: contain;
-width: 90%;
+width: 30rem;
 margin: 5%;
 `;
 
