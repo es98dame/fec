@@ -26,7 +26,7 @@ const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, st
         observer.unobserve(entry.target);
       } else if (entry.isIntersecting && QAData.length > 2 && mode !== 'search' && storage > QAData.length) {
         observer.unobserve(entry.target);
-        setTimeout(() => handleMoreQuestions(), 200);
+        handleMoreQuestions();
       }
     };
 
