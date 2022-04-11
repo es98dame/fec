@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useInsertionEffect } from 'react';
+import React, { useState, useEffect, useRef, useInsertionEffect, useReducer } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import QAList from './QAList';
@@ -59,8 +59,9 @@ const QA = ({productId, productName}) => {
   const storage = useRef([]);
   const prevData = useRef([]);
   const showButton = useRef(true);
-  const [mode, setMode] = useState('normal');
 
+  const [pushed, setPushed] = useState(false);
+  const [mode, setMode] = useState('normal');
   const [searchInput, setSearchInput] = useState('');
   const [QAData, setQA] = useState([]);
   const [seeMoreView, setMoreView] = useState('See More Questions');
@@ -74,6 +75,11 @@ const QA = ({productId, productName}) => {
         setQA(res.data.results.slice(0, 2));
       })
       .catch((err) => console.error('axios request in QA.jsx:', err));
+  };
+
+  const pressedMoreQuestions = () => {
+    setPushed(true);
+    handleMoreQuestions();
   };
 
   const handleMoreQuestions = () => {
@@ -99,6 +105,7 @@ const QA = ({productId, productName}) => {
       for (let q of storage.current) {
         q.question_body.toLowerCase().includes(searchInput.toLowerCase()) ? queryQuestions.push(q) : undefined;
       }
+
       setQA(queryQuestions);
     } else {
       setMode('normal');
@@ -130,7 +137,9 @@ const QA = ({productId, productName}) => {
     showUpdates: showUpdates,
     handleMoreQuestions: handleMoreQuestions,
     mode: mode,
-    storage: storage.current.length
+    storage: storage.current.length,
+    pushed: pushed,
+    setPushed: setPushed,
   };
 
   return (
@@ -142,7 +151,7 @@ const QA = ({productId, productName}) => {
       </SearchForm>
       <QAList {...QAListProps}/>
       <ButtonContainer>
-        {storage.current.length > 2 && QAData.length < storage.current.length && showButton.current ? <Button onClick={handleMoreQuestions}>See More Questions</Button> : null}
+        {storage.current.length > 2 && QAData.length < storage.current.length && showButton.current ? <Button onClick={pressedMoreQuestions}>See More Questions</Button> : null}
         <Button title="Add Question" onClick={handleAddQuestions}>Add A Question +</Button>
       </ButtonContainer>
       <AddQModal show={modalQ} hide={() => setModalQ(!modalQ)} {...ModalProps}/>

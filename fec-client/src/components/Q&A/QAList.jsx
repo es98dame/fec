@@ -13,9 +13,10 @@ const QAListContainer = styled.div`
   gap: .2em;
 `;
 
-const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, storage}) => {
+const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, storage, pushed, setPushed}) => {
   let sortedData = QAData.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
   const ref = useRef();
+  let observingEntry = useRef();
 
   useEffect(() => {
     const callback = (entries, observer) => {
@@ -25,27 +26,27 @@ const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, st
         observer.unobserve(entry.target);
       } else if (entry.isIntersecting && QAData.length > 2 && mode !== 'search' && storage > QAData.length) {
         observer.unobserve(entry.target);
-        setTimeout(() => handleMoreQuestions(), 500);
+        setTimeout(() => handleMoreQuestions(), 200);
       }
     };
 
-    const options = {
+    const intOptions = {
       root: ref.current,
-      rootMargin: '5px',
+      rootMargin: '2px',
       threshold: 1.0
     };
 
-    const observer = new IntersectionObserver(callback, options);
+    const observer = new IntersectionObserver(callback, intOptions);
     let children = Array.from(ref.current.children);
 
     if (storage > QAData.length) {
       if (children.length > 0) {
         observer.observe(children[children.length - 1]);
+        observingEntry.current = children[children.length - 1];
       }
     } else {
       observer.disconnect();
     }
-
   }, [QAData]);
 
   return (

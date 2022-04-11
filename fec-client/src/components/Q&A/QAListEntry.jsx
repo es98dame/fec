@@ -29,6 +29,8 @@ const QContainer = styled(ContainerCol)`
 `;
 
 const QBody = styled.div`
+  display: flex;
+  flex-direction: row;
   padding-left: .4em;
   font-weight: 400;
 `;
@@ -67,6 +69,10 @@ const Button = styled.button`
   &:hover {
     color: grey;
   }
+`;
+
+const Highlighted = styled.span`
+  background: yellow;
 `;
 
 const sortSeller = (answers) => {
