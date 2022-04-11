@@ -107,7 +107,7 @@ const InvalidList = styled.ul`
 
 const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
-const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmission}) => {
+const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) => {
   const [invalidEntries, setInvalidEntries] = useState([]);
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
@@ -153,8 +153,13 @@ const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmiss
     setInvalidEntries(entries);
 
     if (valid) {
-      let inputs = [nickname, email, question];
-      handleQSubmission(inputs);
+      let body = {
+        body: question,
+        name: nickname,
+        email: email,
+        product_id: productId
+      };
+      handleQSubmission(body);
       setEmail('');
       setNickname('');
       setQuestion('');
