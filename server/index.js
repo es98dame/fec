@@ -36,7 +36,6 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/api', (req, res) => {
-
   axios.post(`${url}${req.headers.path}`, req.body, auth)
     .then((response) => {
       res.send(response.data);
