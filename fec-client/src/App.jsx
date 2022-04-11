@@ -88,7 +88,6 @@ margin: auto;
 `;
 
 let App = () => {
-  //const productName = useRef('Camo Onesie');
   const [productName, setProductName] = useState('none');
   // const [productId, setProductId] = useState(65631);
   let [avg, setAvg] = useState(0);
@@ -123,7 +122,7 @@ let App = () => {
         </QandADiv>
 
         <RatingsDiv>
-          <Ratings productId={productId} setAvg = {setAvg}/>
+          <Ratings productId={productId} setAvg = {setAvg} productName = {productName}/>
         </RatingsDiv>
       </div>
     </AppDiv>

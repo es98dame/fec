@@ -8,9 +8,11 @@ const ReviewContainer = styled.div`
 display: flex;
 flex-direction: column;
 gap: 1rem;
-height: 500px;
+height: 600px;
 overflow-y: auto;
 align-content: center;
+border-top: 1px solid lightgrey;
+margin: 10px;
 `;
 
 const ShowMore = styled.button`
@@ -28,9 +30,15 @@ const ReviewList = ({reviews}) => {
 
   return (
     <ReviewContainer title = 'review-list'>
-      {reviews.slice(0, numReviews).map(review => (
-        <ReviewTile review = {review} key = {review.review_id} />
-      ))}
+      { reviews.length ?
+        <div>
+          {reviews.slice(0, numReviews).map(review => (
+            <ReviewTile review = {review} key = {review.review_id} />
+          ))
+          }
+        </div> :
+        <h4>Be the first to write a review.</h4>
+      }
       { reviews.length > numReviews ? <ShowMore onClick = {handleShowMoreClick} >Show More Reviews</ShowMore> : null }
 
     </ReviewContainer>
