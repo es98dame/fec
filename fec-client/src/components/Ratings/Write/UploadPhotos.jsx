@@ -58,10 +58,14 @@ const UploadPhotos = ({ images, setImages }) => {
     <form>
       <Thumbnails>
         {images.map(url => <Img src = {url}></Img>)}
-        <Div>
-          <label htmlFor = 'write-review-file'>+</label>
-          <FileInput type = 'file' id = 'write-review-file' onChange = {handleUpload}/>
-        </Div>
+        { images.length < 5 ?
+          <Div>
+            <label htmlFor = 'write-review-file'>+</label>
+            <FileInput type = 'file' id = 'write-review-file' onChange = {handleUpload}/>
+          </Div> :
+          null
+        }
+
       </Thumbnails>
     </form>
   );

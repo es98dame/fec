@@ -21,7 +21,7 @@ const selections = ['Good', 'Fair', 'Average', 'Good', 'Great'];
 const DynamicStars = ({setRating}) => {
   const [fills, setFills] = useState([0, 0, 0, 0, 0]);
   const [clicked, setClicked] = useState(false);
-  const [selection, setSelection] = useState('No rating selected')
+  const [selection, setSelection] = useState('No rating selected');
 
   const handleClick = (num) => {
     const newFills = [];
@@ -48,7 +48,10 @@ const DynamicStars = ({setRating}) => {
   };
 
   const handleMouseOut = () => {
-    if (!clicked) { setFills([0, 0, 0, 0, 0]); }
+    if (!clicked) {
+      setFills([0, 0, 0, 0, 0]);
+      setSelection('No rating selected');
+    }
   };
 
   return (

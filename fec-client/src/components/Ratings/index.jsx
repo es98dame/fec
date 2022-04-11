@@ -11,7 +11,7 @@ const RatingsContainer = styled.div`
 font-weight: 300;
 `;
 
-const Ratings = ({productId, setAvg}) => {
+const Ratings = ({productId, setAvg, productName}) => {
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [metaData, setMetaData] = useState({});
@@ -53,7 +53,7 @@ const Ratings = ({productId, setAvg}) => {
       <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
       <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
       <ReviewList reviews = {currentData}/>
-      <Write relevantChars = {metaData.characteristics} productId = {productId}/>
+      <Write relevantChars = {metaData.characteristics} productId = {productId} productName = {productName}/>
     </RatingsContainer>
   );
 
