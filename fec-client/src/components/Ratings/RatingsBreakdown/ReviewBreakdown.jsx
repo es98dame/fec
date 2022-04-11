@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import ReviewBar from './ReviewBar.jsx';
 import Stars from '../../Shared/Stars.jsx';
 import countTotalAndAverage from '../countTotalAndAverage.js';
@@ -31,7 +30,7 @@ text-align: center;
 
 const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
   const [total, average] = countTotalAndAverage( reviewData );
-  const percentRecommended = Math.round(parseInt(recommended.true) / total * 100);
+  const percentRecommended = Math.round(parseInt(recommended.true || 0) / total * 100);
 
   return (
     <ReviewBreakdownContainer>
