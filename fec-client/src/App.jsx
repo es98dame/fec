@@ -84,6 +84,7 @@ font-family: inherit;
 border: 1px solid black;
 width: 90%;
 height: 25%;
+margin: auto;
 `;
 
 let App = () => {

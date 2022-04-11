@@ -57,7 +57,7 @@ const CheckingOut = (props) => {
 
   useEffect(() => {
     setSkus(props.skus);
-  }, [props.skus, props.currentStyle]);
+  }, [props.skus]);
 
   if (skus) {
     skusArr = Object.keys(skus);
@@ -90,7 +90,7 @@ const CheckingOut = (props) => {
         </Dropdown>
 
         <Dropdown value={selectedCount} onChange={handleSelectCount}>
-          {selectedSize === '' || selectedSize === 'Select Size'
+          {selectedCount === undefined
             ? <option>-</option>
             : <option>1</option>}
           {skusArr.map((key) => {
