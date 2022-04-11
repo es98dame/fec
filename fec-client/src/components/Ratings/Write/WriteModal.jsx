@@ -141,7 +141,6 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
             email,
             photos,
             characteristics
-
            });
         })
         .then(() => {})
