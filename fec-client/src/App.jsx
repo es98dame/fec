@@ -95,7 +95,7 @@ let App = () => {
 
   //default value is '65635'
   const productId = window.localStorage.getItem("ProductId") === null ?
-  65635 : JSON.parse(window.localStorage.getItem("ProductId")) ;
+    65635 : JSON.parse(window.localStorage.getItem("ProductId"));
 
   return (
     <AppDiv>

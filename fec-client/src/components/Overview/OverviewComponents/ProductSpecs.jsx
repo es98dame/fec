@@ -35,6 +35,7 @@ const Link = styled.span`
 
   &:hover{
     color: #cccccc;
+    cursor: pointer;
   }
 `;
 
