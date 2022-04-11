@@ -13,7 +13,7 @@ const Modaltrue = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   display: block;
-  z-index : 20;
+  z-index : 35;
 `;
 
 const Modalfalse = styled.div`
@@ -42,6 +42,8 @@ const StyledTable = styled.table`
   border: none;
   border-collapse: collapse;
   text-align : center;
+
+  //Table Style
   /* border-collapse: separate; */
   /* border-spacing: 5px 10px; */
 
