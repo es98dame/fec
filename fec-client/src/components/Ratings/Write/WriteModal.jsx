@@ -131,7 +131,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
       Promise.all(images.map(url => imageUpload(url)))
         .then((responses) => {
             const photos = responses.map(response => response.data.url);
-            return axios.post('/api/reviews', {
+            return axios.post('/api', {
             productId,
             rating,
             summary,
@@ -141,9 +141,11 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
             email,
             photos,
             characteristics
-           });
+           }, {headers: {path: '/reviews/'}});
         })
-        .then(() => {})
+        .then((response) => {
+          console.log(response.data);
+        })
     }
 
   };
