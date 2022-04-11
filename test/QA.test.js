@@ -9,9 +9,35 @@ import QA from './../fec-client/src/components/Q&A/QA.jsx';
 import QAList from './../fec-client/src/components/Q&A/QAList.jsx';
 import QAListEntry from './../fec-client/src/components/Q&A/QAListEntry.jsx';
 import AListEntry from './../fec-client/src/components/Q&A/AListEntry.jsx';
+import AListEntry from './../fec-client/src/components/Q&A/AListEntry.jsx';
+import AListEntry from './../fec-client/src/components/Q&A/AListEntry.jsx';
+
+global.IntersectionObserver = class IntersectionObserver {
+  constructor() {}
+
+  disconnect() {
+    return null;
+  }
+
+  observer() {
+    return null;
+  }
+
+  unobserver() {
+    return null;
+  }
+};
 
 const server = setupServer(
   rest.get('/api', (req, res, ctx) => {
+    return res(ctx.json(Questions));
+  }),
+
+  rest.post('/api', (req, res, ctx) => {
+    return res(ctx.json(Questions));
+  }),
+
+  rest.put('/api', (req, res, ctx) => {
     return res(ctx.json(Questions));
   })
 );
@@ -68,17 +94,5 @@ describe('QA component', () => {
 
       expect(screen.getByTitle('live-search')).toBeInTheDocument();
     });
-
-    // test('Search Bar should accept inputs', () => {
-    //   render(<QA product={12345}/>);
-    //   const handleChange = jest.fn();
-    //   let searchBar = screen.getByTitle('live-search');
-
-    //   console.log(searchBar.firstChild)
-
-    //   expect(screen.getByTitle('live-search')).toBeInTheDocument();
-    // });
-
-    //
   });
 });
