@@ -14,6 +14,10 @@ const ContainerCol = styled.div`
   flex-direction: column;
 `;
 
+const QuestionRow = styled(ContainerRow)`
+  margin-right: 5px;
+`;
+
 const Label = styled.div`
   padding-left: .5em;
   font-weight: 400;
@@ -25,6 +29,8 @@ const QContainer = styled(ContainerCol)`
 `;
 
 const QBody = styled.div`
+  display: flex;
+  flex-direction: row;
   padding-left: .4em;
   font-weight: 400;
 `;
@@ -65,23 +71,19 @@ const Button = styled.button`
   }
 `;
 
-// Saving this for refractoring
-// const Button = styled(Link)`
-//   margin-top: .3em;
-//   margin-bottom: .5em;
-//   margin-left: .6em;
-//   width: 140px;
-// `;
+const Highlighted = styled.span`
+  background: yellow;
+`;
 
-const sortSeller = function(answers) {
+const sortSeller = (answers) => {
   let result = [];
   let sellers = [];
-  answers.forEach((answer) => answer[1].answerer_name === 'Seller' ? sellers.push(answer) : result.push(answer));
+  answers.forEach((answer) => answer[1].answerer_name === 'Seller' || answer[1].answerer_name === 'seller' ? sellers.push(answer) : result.push(answer));
 
   return [...sellers, ...result];
 };
 
-const QAListEntry = function({question}) {
+const QAListEntry = ({question, productName, productId, updateAllStorages}) => {
   let allAnswers = Object.entries(question.answers);
   let askerName = question.asker_name;
   let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
@@ -93,6 +95,7 @@ const QAListEntry = function({question}) {
   const [buttonText, setButtonText] = useState('See More Answers');
   const [answers, setAnswers] = useState(sortedAnswers.current.slice(0, 2));
   const [showModal, setShowModal] = useState(false);
+  const [report, setReport] = useState('Report');
 
   const handleSeeMoreAnswers = () => {
     buttonText === 'See More Answers' ? setButtonText('Collapse Answers') : setButtonText('See More Answers');
@@ -103,16 +106,57 @@ const QAListEntry = function({question}) {
     setShowModal(true);
   };
 
+  const updateAnswers = () => {
+    axios.get('/api', {headers: {path: `/qa/questions/${question.question_id}/answers?count=10000`}})
+      .then((res) => {
+        let data = res.data.results;
+        for (let answer of data) {
+          answer.id = answer.answer_id;
+          answer.photos = answer.photos.map((photo) => photo.url);
+        }
+
+        let allAnswerIds = data.map((answer) => answer.answer_id);
+        let allAnswers = data.map((answer, i) => [allAnswerIds[i], answer]);
+
+        let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
+        let sorted = sortSeller(orderedAnswers);
+        sortedAnswers.current = sorted;
+
+        buttonText === 'See More Answers' ? setAnswers(sorted.slice(0, 2)) : setAnswers(sorted);
+        updateAllStorages(sorted, question.question_id);
+      })
+      .catch((err) => console.error('axios request to get all answers in QAListEntry.jsx', err));
+  };
+
   const handleHelpfulYes = () => {
     if (!pressedHelpful.current) {
       pressedHelpful.current = true;
       setCount(count + 1);
+      axios.put('/api', null, {headers: {path: `/qa/questions/${question.question_id}/helpful`}})
+        .then((res) => undefined)
+        .catch((err) => console.error('This is handleHelpfulYes in Questions:', err));
     }
   };
 
+  const handleReport = () => {
+    report !== 'Reported' ? setReport('Reported') : undefined;
+    axios.put('/api', null, {headers: {path: `/qa/questions/${question.question_id}/report`}})
+      .then((res) => undefined)
+      .catch((err) => console.error('This is handleHelpfulYes in Answers:', err));
+  };
+
+  const ModalProps = {
+    productName: productName,
+    question: question.question_body,
+    questionId: question.question_id,
+    updateAnswers: updateAnswers
+  };
+
+  // console.log(answers);
+
   return (
-    <QContainer>
-      <ContainerRow>
+    <QContainer >
+      <QuestionRow>
         <Label>Q:</Label>
         <QBody>{question.question_body}</QBody>
         <QInfoLine>
@@ -120,8 +164,10 @@ const QAListEntry = function({question}) {
           <Link onClick={handleHelpfulYes}>{`Yes (${count})`}</Link>
           <div>|</div>
           <Link onClick={handleAddAnswer}>Add Answer</Link>
+          <div>|</div>
+          <Link onClick={handleReport}>{report}</Link>
         </QInfoLine>
-      </ContainerRow>
+      </QuestionRow>
       <ContainerRow>
         {answers.length ? <Label>A:</Label> : null}
         <AContainer>
@@ -129,7 +175,7 @@ const QAListEntry = function({question}) {
           {allAnswers.length > 2 ? <Button color={'#007185'} onClick={handleSeeMoreAnswers}>{buttonText}</Button> : null}
         </AContainer>
       </ContainerRow>{
-        showModal ? <AddAModal hide={() => setShowModal(false)} /> : null
+        showModal ? <AddAModal hide={() => setShowModal(false)} {...ModalProps}/> : null
       }</QContainer>
   );
 };

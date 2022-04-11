@@ -8,7 +8,7 @@
     "build": "webpack",
     "client-server": "nodemon ./server/index.js",
     "lint": "./node_modules/.bin/eslint",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",
