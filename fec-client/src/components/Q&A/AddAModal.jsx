@@ -163,7 +163,7 @@ const UploadButton = styled.label`
 
 const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
-const AddAModal = ({ hide, question, productName, questionId, showUpdates }) => {
+const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) => {
   const container = document.getElementById('app');
   const files = useRef('');
 
@@ -219,7 +219,7 @@ const AddAModal = ({ hide, question, productName, questionId, showUpdates }) => 
         }
 
         axios.post('/api', body, { headers: { path: `/qa/questions/${questionId}/answers`}})
-          .then((res) => showUpdates())
+          .then((res) => updateAnswers())
           .catch((err) => console.error('This is POST request for Add an Answer:', err))
       })
       .catch((err) => console.error(err));

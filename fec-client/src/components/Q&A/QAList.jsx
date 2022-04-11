@@ -13,7 +13,7 @@ const QAListContainer = styled.div`
   gap: .2em;
 `;
 
-const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, storage, pushed, setPushed}) => {
+const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, storage, updateAllStorages}) => {
   let sortedData = QAData.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
   const ref = useRef();
   let observingEntry = useRef();
@@ -51,7 +51,7 @@ const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, st
 
   return (
     <QAListContainer ref={ref}>{
-      QAData.length ? sortedData.map((question) => <QAListEntry question={question} key={question.question_id} productName={productName} showUpdates={showUpdates} /> ) : null
+      QAData.length ? sortedData.map((question) => <QAListEntry question={question} key={question.question_id} productName={productName} showUpdates={showUpdates} updateAllStorages={updateAllStorages} /> ) : null
     }</QAListContainer>
   );
 };

@@ -60,7 +60,6 @@ const QA = ({productId, productName}) => {
   const prevData = useRef([]);
   const showButton = useRef(true);
 
-  const [pushed, setPushed] = useState(false);
   const [mode, setMode] = useState('normal');
   const [searchInput, setSearchInput] = useState('');
   const [QAData, setQA] = useState([]);
@@ -78,8 +77,25 @@ const QA = ({productId, productName}) => {
   };
 
   const pressedMoreQuestions = () => {
-    setPushed(true);
     handleMoreQuestions();
+  };
+
+  const updateAllStorages = (newAnswers, questionId) => {
+    for (let question of storage.current) {
+      if (question.question_id === questionId) {
+        let formattedAnswers = Object.fromEntries(newAnswers);
+        question.answers = formattedAnswers;
+        break;
+      }
+    }
+
+    for (let question of prevData.current) {
+      if (question.question_id === questionId) {
+        let formattedAnswers = Object.fromEntries(newAnswers);
+        question.answers = formattedAnswers;
+        break;
+      }
+    }
   };
 
   const handleMoreQuestions = () => {
@@ -138,8 +154,7 @@ const QA = ({productId, productName}) => {
     handleMoreQuestions: handleMoreQuestions,
     mode: mode,
     storage: storage.current.length,
-    pushed: pushed,
-    setPushed: setPushed,
+    updateAllStorages: updateAllStorages
   };
 
   return (

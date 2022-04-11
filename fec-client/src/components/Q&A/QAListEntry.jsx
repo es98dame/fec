@@ -83,7 +83,7 @@ const sortSeller = (answers) => {
   return [...sellers, ...result];
 };
 
-const QAListEntry = ({question, productName, productId, showUpdates}) => {
+const QAListEntry = ({question, productName, productId, updateAllStorages}) => {
   let allAnswers = Object.entries(question.answers);
   let askerName = question.asker_name;
   let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
@@ -104,6 +104,28 @@ const QAListEntry = ({question, productName, productId, showUpdates}) => {
 
   const handleAddAnswer = () => {
     setShowModal(true);
+  };
+
+  const updateAnswers = () => {
+    axios.get('/api', {headers: {path: `/qa/questions/${question.question_id}/answers?count=10000`}})
+      .then((res) => {
+        let data = res.data.results;
+        for (let answer of data) {
+          answer.id = answer.answer_id;
+          answer.photos = answer.photos.map((photo) => photo.url);
+        }
+
+        let allAnswerIds = data.map((answer) => answer.answer_id);
+        let allAnswers = data.map((answer, i) => [allAnswerIds[i], answer]);
+
+        let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
+        let sorted = sortSeller(orderedAnswers);
+        sortedAnswers.current = sorted;
+
+        buttonText === 'See More Answers' ? setAnswers(sorted.slice(0, 2)) : setAnswers(sorted);
+        updateAllStorages(sorted, question.question_id);
+      })
+      .catch((err) => console.error('axios request to get all answers in QAListEntry.jsx', err));
   };
 
   const handleHelpfulYes = () => {
@@ -127,8 +149,10 @@ const QAListEntry = ({question, productName, productId, showUpdates}) => {
     productName: productName,
     question: question.question_body,
     questionId: question.question_id,
-    showUpdates: showUpdates
+    updateAnswers: updateAnswers
   };
+
+  // console.log(answers);
 
   return (
     <QContainer >
