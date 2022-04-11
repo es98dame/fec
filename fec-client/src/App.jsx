@@ -31,7 +31,6 @@ border-radius: 10px;
   }
 `;
 
-
 const Input = styled.input`
   all: unset;
   border-bottom: 3px solid lightgrey;
@@ -87,17 +86,15 @@ width: 90%;
 height: 25%;
 `;
 
-
 let App = () => {
-  const productName = useRef('Camo Onesie');
-  const [productId, setProductId] = useState(65631);
+  //const productName = useRef('Camo Onesie');
+  const [productName, setProductName] = useState('none');
+  // const [productId, setProductId] = useState(65631);
   let [avg, setAvg] = useState(0);
 
-  //save product id on local storage to access it anywhere
-  //window.localStorage.getItem("ProductId") -> return '65631'
-  useEffect(()=>{
-    window.localStorage.setItem('ProductId', 65631);
-  }, []);
+  //default value is '65635'
+  const productId = window.localStorage.getItem("ProductId") === null ?
+  65635 : JSON.parse(window.localStorage.getItem("ProductId")) ;
 
   return (
     <AppDiv>
@@ -113,11 +110,11 @@ let App = () => {
       </Nav>
       <div>
         <OverviewDiv>
-          <Overview productId={productId} setProductId={setProductId} avg = {avg}/>
+          <Overview productId={productId} setProductName={setProductName} avg={avg}/>
         </OverviewDiv>
 
         <RelatedDiv>
-          <Products productId={productId} setProductId={setProductId} productName={productName}/>
+          <Products productId={productId}/>
         </RelatedDiv>
 
         <QandADiv>

@@ -3,13 +3,23 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import Modal from './Modal.jsx';
+import Star from '../Shared/Stars.jsx';
+import PreviewImage from './PreviewImage.jsx';
 
 const ProductCard = styled.div`
-display: flex;
+display : flex;
 flex-direction: column;
-min-width: 10rem;
+position : relative;
+//min-width: 0;
+// flex: 1;
 border: solid;
 border-color: lightgray;
+background : white;
+
+&:hover {
+    z-index : 20;
+    transform: scale(1.2);
+}
 `;
 
 const CardDiv = styled.div`
@@ -26,53 +36,49 @@ const PreviewImg = styled.img`
 position : relative;
 height : 100%;
 z-index: 2;
-&:hover {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
+transition: all 0.2s linear;
 `;
 
 const ActionButton = styled.img`
   position : relative;
-  left:85%;
-  z-index:10;
+  left:83%;
+  z-index:7;
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
 
+const starturl = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png";
+const cancelurl = "https://img.icons8.com/ios-glyphs/30/000000/cancel.png";
 
-const Card = (props)=> {
-  //console.log('syeye',props.styleInfo);
+const Card = ({productInfo , styleInfo, mode, deletehandle})=> {
+  const image = useRef(null);
   const [show, setShow] = useState(false);
-  // for action button
-  const [checked, setChecked] = useState(false);
-  const toggle = () => setChecked(!checked);
 
-  var image = '';
-  if(props.styleInfo.length === 0){
-     image = '';
-  } else {
-     image = props.styleInfo[0].photos[0].thumbnail_url;
-  }
-
-  // check show value here
-  // useEffect(()=>{
-  //   console.log('show',show);
-  // },[show])
-
+  useEffect(()=>{
+    // console.log('product info in card', productInfo);
+    // console.log('style info in card', styleInfo);
+  },[productInfo]);
 
 
   return(
-  <ProductCard>
-    <div><ActionButton src = "https://img.icons8.com/ios-glyphs/30/000000/star--v1.png" onClick={() => {setShow(!show);}}></ActionButton>
-     </div>
-    <PreviewImg src={image} alt="no image"/>
+    <div>
+      <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {productInfo}></Modal>
+    <ProductCard>
+      <div>
+        {mode === 'outfit' ?
+        <ActionButton src ={cancelurl} onClick={() => {deletehandle(productInfo.id);}} ></ActionButton>
+      : <ActionButton src ={starturl}  onClick={() => {setShow(!show);}}></ActionButton>
+      }
 
-    <Modal show={show} handleClose={() => {setShow(false);}} productInfo = {props.productInfo}></Modal>
-    <CardDiv>
-    <CardText>{props.productInfo.category}</CardText>
-    <CardText>{props.productInfo.name}</CardText>
-    <CardText>{props.productInfo.default_price}</CardText>
-    </CardDiv>
-  </ProductCard>
+      </div>
+
+    <PreviewImage productInfo = {productInfo} styleInfo ={styleInfo}/>
+    </ProductCard>
+    </div>
   )
 }
 
 export default Card;
+
+// onClick={() => {deleteItemOutfit(i)}}
