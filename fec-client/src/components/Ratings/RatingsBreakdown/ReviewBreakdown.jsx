@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import ReviewBar from './ReviewBar.jsx';
 import Stars from '../../Shared/Stars.jsx';
 import countTotalAndAverage from '../countTotalAndAverage.js';

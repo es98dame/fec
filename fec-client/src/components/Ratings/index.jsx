@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-
 import ReviewList from './ReviewList';
 import RatingsBreakdown from './RatingsBreakdown';
 import Write from './Write';
+import Sort from './Sort';
 import countTotalAndAverage from './countTotalAndAverage.js';
 
 const RatingsContainer = styled.div`
@@ -51,6 +51,7 @@ const Ratings = ({productId, setAvg}) => {
     <RatingsContainer>
       <h3>Reviews</h3>
       <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
+      <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
       <ReviewList reviews = {currentData}/>
       <Write relevantChars = {metaData.characteristics} productId = {productId}/>
     </RatingsContainer>
