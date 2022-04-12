@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReviewBar from './ReviewBar.jsx';
 import Stars from '../../Shared/Stars.jsx';
@@ -23,14 +23,28 @@ display: flex;
 flex-direction: row;
 `;
 
-const Recommend = styled.p`
+const Recommend = styled.div`
 font-style: italic;
 text-align: center;
+`;
+
+const ActiveFilters = styled.p`
+text-align: center:
+font-weight: bold;
 `;
 
 const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
   const [total, average] = countTotalAndAverage( reviewData );
   const percentRecommended = Math.round(parseInt(recommended.true || 0) / total * 100);
+  const [allFilters, setAllFilters] = useState(Array(5).fill(false));
+  const [activeFilters, setActiveFilters] = useState([]);
+
+  const toggleFilter = (rating) => {
+    const newFilters = [...allFilters];
+    newFilters[rating - 1] = !newFilters[rating - 1];
+    setAllFilters(newFilters);
+    setActiveFilters([1, 2, 3, 4, 5].filter((item, index) => newFilters[index]));
+  };
 
   return (
     <ReviewBreakdownContainer>
@@ -41,11 +55,15 @@ const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
         </Average>
         <span> {total} reviews </span>
       </Summary>
-      <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total} filterByRating = {filterByRating}/>
-      <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total} filterByRating = {filterByRating}/>
-      <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total} filterByRating = {filterByRating}/>
-      <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} filterByRating = {filterByRating}/>
-      <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} filterByRating = {filterByRating}/>
+      <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
+      <ActiveFilters> Displaying { activeFilters.length ?
+        activeFilters.join(', ') + '-star' :
+        'all'
+      } reviews </ActiveFilters>
       <Recommend>{percentRecommended}% of reviewers recommend this product.</Recommend>
     </ReviewBreakdownContainer>
   );
