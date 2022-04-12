@@ -20,7 +20,7 @@ const ModalWrapper = styled.div`
 
 const ModalContainer = styled.div`
   z-index: 100;
-  background: cornsilk;
+  background: #e5e8ed;
   position: relative;
   margin: 1.75rem auto;
   border-radius: 3px;
@@ -130,7 +130,10 @@ const SubmitButton = styled.button`
   cursor: pointer;
   &:hover {
     color: lightgrey;
-  };
+  }
+  background-color: #242125;
+  color: white;
+  border-radius: 3px;
 `;
 
 const ErrorLabel = styled.label`
@@ -151,14 +154,15 @@ const FileHidden = styled.input`
 const UploadButton = styled.label`
   border: solid 1px;
   width: 18%;
-  border-radius: 4px;
-  background-color: azure;
   padding: 2px 6px;
   font-size: 15px;
   cursor: pointer;
   &:hover {
     color: lightgrey;
   };
+  background-color: #242125;
+  color: white;
+  border-radius: 3px;
 `;
 
 const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;

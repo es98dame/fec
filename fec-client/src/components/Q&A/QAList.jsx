@@ -7,7 +7,7 @@ import QAListEntry from './QAListEntry.jsx';
 const QAListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border-bottom: 1px solid lightgrey;
   overflow-y: auto;
   max-height: 500px;
   gap: .2em;
