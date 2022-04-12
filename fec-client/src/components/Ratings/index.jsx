@@ -6,6 +6,7 @@ import RatingsBreakdown from './RatingsBreakdown';
 import Write from './Write';
 import Sort from './Sort';
 import countTotalAndAverage from '../Shared/countTotalAndAverage.js';
+import relevance from './Sort/relevance.js';
 
 const RatingsContainer = styled.div`
 font-weight: 300;
@@ -21,7 +22,7 @@ const Ratings = ({productId, setAvg, productName}) => {
     axios.get('/api', {headers: {path: `/reviews?product_id=${productId}&count=200`}})
       .then((response) => {
         setData(response.data.results);
-        setCurrentData(response.data.results);
+        setCurrentData(response.data.results.sort(relevance));
       })
       .catch((err) => console.log(err));
   }, []);
