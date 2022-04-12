@@ -9,67 +9,104 @@ const cloudName = 'daxw4bdp6';
 const upload_preset = 'grzngc1a';
 
 const Modal = styled.div`
-position: fixed;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0,0,0,0.5);
-z-index: 20;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 20;
 `;
 
 const ModalContent = styled.div`
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background-color: white;
-height: 40rem;
-width: 35rem;
-&input, textarea, button {
-  font-family: inherit;
-}
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  height: 40rem;
+  width: 35rem;
+  &input, textarea, button {
+    font-family: inherit;
+  }
+`;
+
+const Close = styled.button`
+  padding: 5px;
+  margin 10px;
+  background-color: #242125;
+  border: 1px solid #403244;
+  border-radius: 7px;
+  color: #fff;
+  width: 20%;
+
+  &: hover{
+    background-color: #4b464d;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  &:active{
+    background-color: #fff;
+    color: #242125;
+  }
 `;
 
 const Header = styled.div`
-background-color: lightgray;
-text-align: center;
-height: 16%;
-margin: 2%;
+  background-color: lightgray;
+  text-align: center;
+  height: 16%;
+  margin: 2%;
 `;
 
 const Form = styled.div`
-display: flex;
-flex-direction: column;
-gap: 10px;
-height: 70%;
-overflow-y: auto;
-margin: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 70%;
+  overflow-y: auto;
+  margin: 2%;
 `;
 
 const Field = styled.div`
-padding: 2%;
+  padding: 2%;
 `;
 
 const Label = styled.div`
-font-weight: 400;
+  font-weight: 400;
 `;
 
 
 const Tip = styled.div`
-font-style: italic;
-font-size: 0.7rem;
+  font-style: italic;
+  font-size: 0.7rem;
 `;
 
 const Submit = styled.input`
-font-family: inherit;
-width: 10rem;
-margin: auto;
+  font-family: inherit;
+  width: 10rem;
+  margin: auto;
+  padding: 5px;
+  background-color: #242125;
+  border: 1px solid #403244;
+  border-radius: 7px;
+  color: #fff;
+
+  &: hover{
+    background-color: #4b464d;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  &:active{
+    background-color: #fff;
+    color: #242125;
+  }
 `;
 
 const Warning = styled.div`
-color: red;
-font-size: small;
+  color: red;
+  font-size: small;
 `;
 
 
@@ -155,7 +192,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
   return (
     <Modal>
       <ModalContent>
-        <button onClick = {toggleWriteModal}>Close</button>
+        <Close onClick = {toggleWriteModal}>Close</Close>
         <Header>
           <h2>Write Your Review</h2>
           <h3>About the product {productName}</h3>
