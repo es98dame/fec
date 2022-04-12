@@ -10,7 +10,7 @@ const Image = styled.img`
   border: 3px solid lightgrey;
 
   &:hover{
-    border: 3px solid pink;
+    border: 3px solid #4b464d;
     transform: scale(1.2);
   }
 `;

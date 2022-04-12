@@ -15,6 +15,7 @@ const Button = styled.button`
 
   &: hover{
     background-color: #1a7431;
+    cursor: pointer;
   }
 
   &:active{
@@ -26,10 +27,18 @@ const Button = styled.button`
 `;
 
 const NoButton = styled.button`
-  visibility: hidden;
   padding: 10px;
   width: 100%;
-  margin 10px
+  margin 10px;
+  background-color: ##8a888a;
+  border-radius: 7px;
+  color: #fff;
+  text-shadow: 1px 1px #000000;
+  font-size: 2.0rem;
+
+  &:hover{
+    cursor: no-drop;
+  }
 `;
 
 const Divs = styled.div`
@@ -57,7 +66,7 @@ const CheckingOut = (props) => {
 
   useEffect(() => {
     setSkus(props.skus);
-  }, [props.skus, props.currentStyle]);
+  }, [props.skus]);
 
   if (skus) {
     skusArr = Object.keys(skus);
@@ -90,7 +99,7 @@ const CheckingOut = (props) => {
         </Dropdown>
 
         <Dropdown value={selectedCount} onChange={handleSelectCount}>
-          {selectedSize === '' || selectedSize === 'Select Size'
+          {selectedCount === undefined
             ? <option>-</option>
             : <option>1</option>}
           {skusArr.map((key) => {

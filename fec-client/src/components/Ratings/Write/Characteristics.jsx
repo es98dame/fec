@@ -3,16 +3,14 @@ import styled from 'styled-components';
 import factors from './factors.js';
 
 const Div = styled.div`
-display: flex;
-flex-direction: column;
-gap: 2%;
-min-width: max-content;
-
+  display: flex;
+  flex-direction: column;
+  gap: 2%;
 `;
 
 const Selection = styled.span`
-font-style: italic;
-font-size: 0.8rem;
+  font-style: italic;
+  font-size: 0.8rem;
 `;
 
 const Meanings = styled.div`

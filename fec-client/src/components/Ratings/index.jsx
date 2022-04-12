@@ -9,7 +9,11 @@ import countTotalAndAverage from '../Shared/countTotalAndAverage.js';
 import relevance from './Sort/relevance.js';
 
 const RatingsContainer = styled.div`
-font-weight: 300;
+  font-weight: 300;
+`;
+
+const H3 = styled.h3`
+  font-size: x-large;
 `;
 
 const Ratings = ({productId, setAvg, productName}) => {

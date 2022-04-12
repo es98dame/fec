@@ -5,20 +5,35 @@ import ReviewTile from './ReviewTile.jsx';
 import Modal from './Modal.jsx';
 
 const ReviewContainer = styled.div`
-display: flex;
-flex-direction: column;
-gap: 1rem;
-max-height: 600px;
-overflow-y: auto;
-align-content: center;
-border-top: 1px solid lightgrey;
-margin: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 600px;
+  overflow-y: auto;
+  align-content: center;
+  border-top: 1px solid lightgrey;
+  margin: 10px;
 `;
 
 const ShowMore = styled.button`
-font-family: inherit;
-width: 10rem;
-text-align: center;
+  padding: 5px;
+  margin 10px;
+  background-color: #242125;
+  border: 1px solid #403244;
+  border-radius: 7px;
+  color: #fff;
+  width: 20%;
+
+  &: hover{
+    background-color: #4b464d;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  &:active{
+    background-color: #fff;
+    color: #242125;
+  }
 `;
 
 const ReviewList = ({reviews}) => {

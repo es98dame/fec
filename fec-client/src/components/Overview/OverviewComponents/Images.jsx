@@ -63,6 +63,7 @@ const Button = styled.button`
 
   &:hover{
     background-color: #4b464d;
+    cursor: pointer;
   }
   `;
 
@@ -85,6 +86,7 @@ const ModalButton = styled.button`
   &:hover{
     color: lightgrey;
     background: grey;
+    cursor: pointer;
   }
 `;
 
