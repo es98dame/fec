@@ -6,6 +6,7 @@ import Modal from './Modal.jsx';
 
 const ReviewContainer = styled.div`
 <<<<<<< HEAD
+<<<<<<< HEAD
 display: flex;
 flex-direction: column;
 gap: 1rem;
@@ -15,6 +16,8 @@ align-content: center;
 border-top: 1px solid lightgrey;
 margin: 10px;
 =======
+=======
+>>>>>>> main
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -23,6 +26,9 @@ margin: 10px;
   align-content: center;
   border-top: 1px solid lightgrey;
   margin: 10px;
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
 `;
 

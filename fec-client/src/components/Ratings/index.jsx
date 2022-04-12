@@ -51,11 +51,16 @@ const Ratings = ({productId, setAvg, productName}) => {
   return (
     <RatingsContainer>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <h3>Reviews</h3>
       <RatingsBreakdown metaData = { metaData } setFilters = {setFilters}/>
 =======
       <H3>Reviews</H3>
       <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
+>>>>>>> main
+=======
+      <h3>Reviews</h3>
+      <RatingsBreakdown metaData = { metaData } setFilters = {setFilters}/>
 >>>>>>> main
       <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
       <ReviewList reviews = {currentData}/>

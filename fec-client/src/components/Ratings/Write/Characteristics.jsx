@@ -4,11 +4,17 @@ import factors from './factors.js';
 
 const Div = styled.div`
 <<<<<<< HEAD
+<<<<<<< HEAD
 display: flex;
 flex-direction: column;
 gap: 2%;
 min-width: max-content;
 
+=======
+  display: flex;
+  flex-direction: column;
+  gap: 2%;
+>>>>>>> main
 =======
   display: flex;
   flex-direction: column;
