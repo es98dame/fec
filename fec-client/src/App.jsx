@@ -6,6 +6,7 @@ import Ratings from './components/Ratings';
 import Overview from './components/Overview';
 import QA from './components/Q&A/QA';
 import PA from './logo/PA.png';
+import Slider from './components/Slider.jsx';
 
 const AppDiv = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
@@ -86,7 +87,7 @@ margin: auto;
 border-bottom: 1px solid lightgrey;
 `;
 
-let App = () => {
+const App = () => {
   const [productName, setProductName] = useState('none');
   // const [productId, setProductId] = useState(65631);
   let [avg, setAvg] = useState(0);
@@ -106,6 +107,7 @@ let App = () => {
           <Button type="submit"><i className="fa fa-search"></i></Button>
           <Input type='text'></Input>
         </Form>
+        <Slider />
       </Nav>
       <div>
         <OverviewDiv>

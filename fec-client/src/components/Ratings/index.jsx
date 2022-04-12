@@ -8,7 +8,11 @@ import Sort from './Sort';
 import countTotalAndAverage from '../Shared/countTotalAndAverage.js';
 
 const RatingsContainer = styled.div`
-font-weight: 300;
+  font-weight: 300;
+`;
+
+const H3 = styled.h3`
+  font-size: x-large;
 `;
 
 const Ratings = ({productId, setAvg, productName}) => {
@@ -49,7 +53,7 @@ const Ratings = ({productId, setAvg, productName}) => {
 
   return (
     <RatingsContainer>
-      <h3>Reviews</h3>
+      <H3>Reviews</H3>
       <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
       <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
       <ReviewList reviews = {currentData}/>

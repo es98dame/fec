@@ -5,11 +5,10 @@ import styled from 'styled-components';
 const Button = styled.button`
   padding: 5px;
   margin 10px;
-  background-color: #fff;
+  background-color: #242125;
   border: 1px solid #403244;
-  box-shadow: 2px 2px #403244;
   border-radius: 7px;
-  color: #242125;
+  color: #fff;
   width: 20%;
 
   &: hover{
@@ -21,9 +20,6 @@ const Button = styled.button`
   &:active{
     background-color: #fff;
     color: #242125;
-    box-shadow: 0 0 #87986a;
-    transform: translateY(2px);
-    transform: translatex(2px);
   }
 `;
 
