@@ -17,7 +17,7 @@ const Thumb = styled.img`
   border-radius: 50%;
   border: 3px solid lightgrey;
   &:hover{
-    border: 3px solid pink;
+    border: 3px solid black;
   }
 `;
 const Thumbnails = ({results, imageClick, updatePrice})=> {

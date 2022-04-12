@@ -17,6 +17,7 @@ border-color: lightgray;
 background : white;
 
 &:hover {
+  border-color: black;
     z-index : 20;
     transform: scale(1.01);
 }

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Thumbnails from './Thumbnails.jsx';
 import Star from '../Shared/Stars.jsx';
+import CardRating from './CardRating.jsx';
 
 const Container = styled.div`
   display: flex;
@@ -27,36 +28,50 @@ const Preview = styled.div`
 `;
 const LeftButton = styled.button`
   position: absolute;
-  width: 33px;
+  width: 42px;
   left: 0;
   top: 137px;
   text-align: center;
-  opacity: 0;
-  color : white
-  border: solid 2px white;
-  background-color: Transparent;
-  transition: opacity .35s ease;
+  opacity: 1;
+  color : white;
+  border: solid 3px white;
+  transition: all .5s ease;
+  border: 3px solid white;
+  line-height: 0.5;
+  font-size: 17px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 4px;
 
-  ${Preview}:hover & {
-    opacity: 1;
-  }
+  &:hover {
+    color: #001F3F;
+    background-color: #fff;
+}
 `;
 
 const RightButton = styled.button`
   position: absolute;
-  width: 33px;
+  width: 42px;
   right: 0;
   top: 137px;
   text-align: center;
-  opacity: 0;
+  opacity: 1;
   color : white;
-  border: solid 2px white;
-  background-color: grey;
-  transition: opacity .35s ease;
+  border: solid 3px white;
+  transition: all .5s ease;
+  border: 3px solid white;
+  line-height: 0.5;
+  font-size: 17px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 4px;
 
-  ${Preview}:hover & {
-    opacity: 0.33;
-  }
+  &:hover {
+    color: #001F3F;
+    background-color: #fff;
+}
 `;
 
 
@@ -129,6 +144,11 @@ const PreviewImage = ({productInfo , styleInfo})=> {
     setImageIndex(imageIndex+1);
   }
 
+  const prevPhoto = () =>{
+    setMain(styleInfo.results[0].photos[imageIndex-1].thumbnail_url);
+    setImageIndex(imageIndex-1);
+  }
+
   useEffect(()=>{
     setMain(styleInfo.results[0].photos[imageIndex].thumbnail_url);
     setPrice(productInfo.default_price);
@@ -138,12 +158,13 @@ const PreviewImage = ({productInfo , styleInfo})=> {
     <Container onClick={() => {showthumbs(true);}} onMouseLeave={() => {showthumbs(false);}}>
 
           {clickableimage ?
-          <Preview>
-          <LeftButton>←</LeftButton>
-          <Image src = {main} onClick={updateId}/>
-          <RightButton onClick={nextPhoto}>→</RightButton>
+          <Preview >
+            {imageIndex === 0 ? '' : <LeftButton onClick={prevPhoto}> ← </LeftButton> }
+              <Image src = {main} onClick={updateId}/>
+            {imageIndex + 1 === styleInfo.results[0].photos.length ? ''
+            : <RightButton onClick={nextPhoto}> → </RightButton> }
           </Preview>
-          : <Preview><Image src = {main}/></Preview>
+          : <Preview><Image src = {main} alt = 'Oops! no image' /></Preview>
           }
 
         <ThumbContainer ref={thumbcontainer}>
@@ -159,7 +180,7 @@ const PreviewImage = ({productInfo , styleInfo})=> {
           <span style={{ "color": getColor() , "textDecoration" : getDecor()}}>{price}</span>
           {discountprice === null ? '' : discountprice}
         </CardText>
-        <Star rating ='4'/>
+        <CardRating id={productInfo.id}/>
       </Textarea>
     </Container>
   );

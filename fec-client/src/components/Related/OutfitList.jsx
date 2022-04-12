@@ -38,10 +38,15 @@ const OutfitList = ()=> {
       window.localStorage.setItem("OutfitList", JSON.stringify(arr));
       setOutfitList(arr);
     }else{
-      const arr = JSON.parse(window.localStorage.getItem("OutfitList"));
-      arr.push(window.localStorage.getItem("ProductId"));
-      window.localStorage.setItem("OutfitList", JSON.stringify(arr));
-      setOutfitList(arr);
+      const arr = [...outfitList];
+      if(arr.indexOf(window.localStorage.getItem("ProductId")) === -1){
+        arr.push(window.localStorage.getItem("ProductId"));
+        window.localStorage.setItem("OutfitList", JSON.stringify(arr));
+        setOutfitList(arr);
+      }else{
+        alert('This item is already in the Outfit list');
+      }
+
     }
 
   }
