@@ -11,7 +11,7 @@ const Tile = styled.div`
 font-weight: 300;
 margin-top: 20px;
 display: flex;
-flex-direction: row;
+flex-direction: column;
 `;
 
 const UserInfo = styled.div`

@@ -10,8 +10,9 @@ flex-direction: row;
 gap: 5%;
 font-size: 0.8rem;
 height: 200px;
-background-color: #f1f1f1;
-border-radius: 2px;
+border-top: 1px solid lightgrey;
+margin: 10px;
+padding: 10px;
 `;
 
 

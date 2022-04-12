@@ -120,7 +120,7 @@ let App = () => {
         </QandADiv>
 
         <RatingsDiv>
-          <Ratings productId={productId} setAvg = {setAvg}/>
+          <Ratings productId={productId} setAvg = {setAvg} productName = {productName}/>
         </RatingsDiv>
       </div>
     </AppDiv>
