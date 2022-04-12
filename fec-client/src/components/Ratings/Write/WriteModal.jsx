@@ -15,6 +15,7 @@ top: 0;
 width: 100%;
 height: 100%;
 background-color: rgba(0,0,0,0.5);
+z-index: 20;
 `;
 
 const ModalContent = styled.div`
@@ -25,8 +26,7 @@ transform: translate(-50%, -50%);
 background-color: white;
 height: 40rem;
 width: 35rem;
-
-&input, textarea {
+&input, textarea, button {
   font-family: inherit;
 }
 `;
@@ -42,7 +42,7 @@ const Form = styled.div`
 display: flex;
 flex-direction: column;
 gap: 10px;
-height: 76%;
+height: 70%;
 overflow-y: auto;
 margin: 2%;
 `;
@@ -69,12 +69,14 @@ margin: auto;
 
 const Warning = styled.div`
 color: red;
+font-size: small;
 `;
 
 
-const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
+const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) => {
 
   const relevantFactors = Object.keys(relevantChars);
+  const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
   const product_id = productId;
 
   const [recommend, setRecommend] = useState(null);
@@ -84,8 +86,9 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
   const [images, setImages] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [warning, setWarning] = useState(null);
   const [characteristics, setCharacteristics] = useState({});
+  const [warningList, setWarningList] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e, setter) => {
     setter(e.target.value);
@@ -99,33 +102,54 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
 
   const imageUpload = (file) => {
     return axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, { upload_preset, file});
-};
+  };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // if (body.length < 50) {
-    //   setWarning('Your review must be at least 50 characters.');
-    // } else if (name.length === 0 ) {
-    //   setWarning('Nickname is required.');
-    // }
-    Promise.all(images.map(url => imageUpload(url)))
-      .then((responses) => {
-          const photos = responses.map(response => response.data.url);
-          axios.post('/api', {
-          product_id,
-          rating,
-          summary,
-          body,
-          recommend,
-          name,
-          email,
-          photos,
-          characteristics
-         }, {headers: {path: '/reviews/'}})
-          .then((response) => {
-            console.log(response.data)
-          })
-      })
+    const warnings = [];
+    if (rating === null) {
+      warnings.push('Rating field is mandatory');
+    }
+    if (recommend === null) {
+      warnings.push('Recommend field is mandatory');
+    }
+    if (Object.keys(characteristics).length !== relevantFactors.length) {
+      warnings.push('All characteristic ratings are mandatory');
+    }
+    if (body.length < 50) {
+      warnings.push('Your review must be at least 50 characters in length');
+    }
+    if (!name.length) {
+      warnings.push('You must enter a nickname');
+    }
+    if (!emailRegEx.test(email)) {
+      warnings.push('Please enter a valid email address');
+    }
+
+    if(warnings.length) {
+      setWarningList(warnings);
+
+    } else {
+      Promise.all(images.map(url => imageUpload(url)))
+        .then((responses) => {
+            const photos = responses.map(response => response.data.url);
+            return axios.post('/api', {
+            product_id,
+            rating,
+            summary,
+            body,
+            recommend,
+            name,
+            email,
+            photos,
+            characteristics
+           }, {headers: {path: '/reviews/'}});
+        })
+        .then((response) => {
+          console.log(response.data);
+          setSuccess(true);
+        })
+    }
+
   };
 
   return (
@@ -134,31 +158,34 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
         <button onClick = {toggleWriteModal}>Close</button>
         <Header>
           <h2>Write Your Review</h2>
-          <h3>About the product {productId}</h3>
+          <h3>About the product {productName}</h3>
         </Header>
+        { success ?
+        <h3> Thank you, your review has been submitted </h3> :
         <Form onSubmit = {handleSubmit}>
+          <Tip>* indicates a required field.</Tip>
           <Field>
-            <Label> Overall Rating </Label>
+            <Label> Overall Rating * </Label>
             <DynamicStars setRating = {setRating}/>
           </Field>
           <Field onChange = {(e) => setRecommend(!!e.target.value)}>
-            <Label>Would you recommend this product to a friend? </Label>
+            <Label>Would you recommend this product to a friend? * </Label>
             <input type='radio' value = 'true' name = 'recommend'/> Yes
             <input type='radio' value = '' name = 'recommend'/> No
           </Field>
           <Field>
-            <Label>Please rate the item on the following factors: </Label>
+            <Label>Please rate the item on the following factors *: </Label>
             {relevantFactors.map(factor => (
               <Characteristic key = {relevantChars[factor].id} characteristic = {factor} handleFactorChange = {handleFactorChange}/>
             ))}
           </Field>
           <Field>
             <Label>Review Summary</Label>
-            <textarea rows='2' cols='50' placeholder = 'Write a brief summary' maxLength = '60' value = {summary} onChange = {(e) => handleChange(e, setSummary)}>{summary}</textarea>
+            <textarea rows='2' cols='50' placeholder = 'Example: Best purchase ever!' maxLength = '60' value = {summary} onChange = {(e) => handleChange(e, setSummary)}>{summary}</textarea>
           </Field>
           <Field>
-            <Label>Your Review</Label>
-            <textarea rows = '10' cols = '50' placeholder = 'Write your review here' maxLength = '1000' value = {body} onChange = {(e) => handleChange(e, setBody)}>{body}</textarea>
+            <Label>Your Review *</Label>
+            <textarea rows = '10' cols = '50' placeholder = 'Why did you like the product or not?' maxLength = '1000' value = {body} onChange = {(e) => handleChange(e, setBody)}>{body}</textarea>
             <Tip>{body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}</Tip>
           </Field>
           <Field>
@@ -166,17 +193,27 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal }) => {
             <UploadPhotos images = {images} setImages = {setImages}/>
           </Field>
           <Field>
-            <Label>Your Username</Label>
+            <Label>Your Nickname *</Label>
             <input type = 'text' placeholder = 'Add a name, e.g. "kara122"' maxLength = '60' size = '50' value = {name} onChange = {(e) => handleChange(e, setName)}/>
             <Tip>For privacy reasons, do not use your full name or email address</Tip>
           </Field>
           <Field>
-            <Label>Email</Label>
+            <Label>Email *</Label>
             <input type = 'text' placeholder = 'Your email' maxLength = '60' size = '50' value = {email} onChange = {(e) => handleChange(e, setEmail)}/>
+            <Tip>For authentication reasons, you will not be emailed</Tip>
           </Field>
+          <Warning>
+            { warningList ?
+            <ul> You must enter the following:
+              { warningList.map(warning => (
+                <li>{warning}</li>
+              ))}
+            </ul> :
+            null }
+          </Warning>
           <Submit type = 'submit' value = 'Submit Review' onClick = {handleSubmit}/>
-          <Warning>{warning}</Warning>
         </Form>
+        }
       </ModalContent>
     </Modal>
   );
