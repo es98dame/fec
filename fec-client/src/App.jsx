@@ -60,7 +60,7 @@ const Nav = styled.div`
 `;
 
 const OverviewDiv = styled.div`
-  border-bottom: 3px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
   width: 90%;
   height: 25%;
   margin: auto;
@@ -80,11 +80,10 @@ margin: auto;
 `;
 
 const RatingsDiv = styled.div`
-font-family: inherit;
-border: 1px solid black;
 width: 90%;
 height: 25%;
 margin: auto;
+border-bottom: 1px solid lightgrey;
 `;
 
 let App = () => {
@@ -93,8 +92,8 @@ let App = () => {
   let [avg, setAvg] = useState(0);
 
   //default value is '65635'
-  const productId = window.localStorage.getItem("ProductId") === null ?
-    65635 : JSON.parse(window.localStorage.getItem("ProductId"));
+  const productId = window.localStorage.getItem('ProductId') === null ?
+    65635 : JSON.parse(window.localStorage.getItem('ProductId'));
 
   return (
     <AppDiv>
