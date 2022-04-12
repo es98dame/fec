@@ -28,7 +28,7 @@ font-style: italic;
 text-align: center;
 `;
 
-const ActiveFilters = styled.p`
+const ActiveFilters = styled.div`
 text-align: center:
 font-weight: bold;
 `;
@@ -47,6 +47,12 @@ const ReviewBreakdown = ({ reviewData, recommended, setFilters }) => {
     setActiveFilters([1, 2, 3, 4, 5].filter((item, index) => newFilters[index]));
   };
 
+  const handleShowAll = () => {
+    setAllFilters(Array(5).fill(false));
+    setFilters(Array(5).fill(false));
+    setActiveFilters([]);
+  };
+
   return (
     <ReviewBreakdownContainer>
       <Summary>
@@ -56,15 +62,17 @@ const ReviewBreakdown = ({ reviewData, recommended, setFilters }) => {
         </Average>
         <span> {total} reviews </span>
       </Summary>
-      <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total} toggleFilter = {toggleFilter}/>
-      <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total} toggleFilter = {toggleFilter}/>
-      <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total} toggleFilter = {toggleFilter}/>
-      <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} toggleFilter = {toggleFilter}/>
-      <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} toggleFilter = {toggleFilter}/>
-      <ActiveFilters> Displaying { activeFilters.length ?
+      <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total} toggleFilter = {toggleFilter} toggled = {allFilters[4]}/>
+      <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total} toggleFilter = {toggleFilter} toggled = {allFilters[3]}/>
+      <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total} toggleFilter = {toggleFilter} toggled = {allFilters[2]}/>
+      <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} toggleFilter = {toggleFilter} toggled = {allFilters[1]}/>
+      <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} toggleFilter = {toggleFilter} toggled = {allFilters[0]}/>
+      <ActiveFilters> Showing { activeFilters.length ?
         activeFilters.join(', ') + '-star' :
         'all'
-      } reviews </ActiveFilters>
+      } reviews
+      {activeFilters.length ? <button onClick = {handleShowAll}> Show all reviews </button> : null}
+      </ActiveFilters>
       <Recommend>{percentRecommended}% of reviewers recommend this product.</Recommend>
     </ReviewBreakdownContainer>
   );

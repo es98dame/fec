@@ -19,21 +19,16 @@ justify-content: space-between;
 `;
 
 
-const ReviewBar = ({ rating, num, total, toggleFilter }) => {
-  const [clicked, setClicked] = useState(false);
+const ReviewBar = ({ rating, num, total, toggleFilter, toggled }) => {
+  //const [clicked, setClicked] = useState(false);
   const percent = num / total * 100;
 
-  const toggleColor = () => {
-    setClicked(!clicked);
-  };
-
   const handleClick = () => {
-    toggleColor();
     toggleFilter(rating);
   };
 
   return (
-    <Bar className = { clicked ? 'clicked' : ''} onClick = {handleClick}>
+    <Bar className = { toggled ? 'clicked' : ''} onClick = {handleClick}>
       <span>{rating} stars:</span>
       <svg viewBox = '0, 0, 100, 5' width = '250'>
         <linearGradient id = {`gradient-${percent}`}>
