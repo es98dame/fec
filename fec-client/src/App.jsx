@@ -7,6 +7,21 @@ import Overview from './components/Overview';
 import QA from './components/Q&A/QA';
 import PA from './logo/PA.png';
 
+// const clickMetaData = {
+//   time: 'time goes here',
+//   module: 'poop'
+// };
+
+// const clickData = {
+//   A: {},
+// }
+
+// window.addEventListener('click', (e) => {
+//   console.log(e)
+//   console.log(e.target.nodeName);
+// })
+
+
 const AppDiv = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
   font-family: 'Open Sans', sans-serif;
@@ -90,6 +105,9 @@ let App = () => {
   const [productName, setProductName] = useState('none');
   // const [productId, setProductId] = useState(65631);
   let [avg, setAvg] = useState(0);
+  // console.log(window)
+  // console.log(window.event)
+  // console.log(window.localStorage);
 
   //default value is '65635'
   const productId = window.localStorage.getItem("ProductId") === null ?
