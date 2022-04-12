@@ -16,10 +16,10 @@ import PA from './logo/PA.png';
 //   A: {},
 // }
 
-// window.addEventListener('click', (e) => {
-//   console.log(e)
-//   console.log(e.target.nodeName);
-// })
+window.addEventListener('click', (e) => {
+  console.log(e)
+  console.log(e.target.nodeName);
+})
 
 
 const AppDiv = styled.div`

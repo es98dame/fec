@@ -271,8 +271,8 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
 
 
   return reactDom.createPortal((
-    <ModalWrapper onClick={() => handleExit(hide)}>
-      <ModalContainer onClick={(e) => e.stopPropagation()} >
+    <ModalWrapper>
+      <ModalContainer>
         <Heading>
           <Title>
             <TitleName>Submit your Answer</TitleName>

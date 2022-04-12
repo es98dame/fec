@@ -176,8 +176,8 @@ const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) =>
 
   return show ? ReactDom.createPortal(
     (<>
-      <ModalWrapper onClick={() => handleExit(hide)}>
-        <Modal onClick={(e) => e.stopPropagation()}>
+      <ModalWrapper>
+        <Modal>
           <Header>
             <Title>
               <TitleName>Ask Your Question</TitleName>
