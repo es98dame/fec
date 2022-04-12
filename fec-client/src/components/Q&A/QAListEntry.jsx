@@ -17,7 +17,7 @@ const ContainerCol = styled.div`
 
 const QuestionRow = styled(ContainerRow)`
   margin-right: 5px;
-  background-color: #bcbcbc26;
+  background-color: #f1f1f1;
   padding: 4px 0;
 `;
 

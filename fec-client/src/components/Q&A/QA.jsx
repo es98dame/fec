@@ -44,6 +44,7 @@ const StyledInput = styled.input`
   border: none;
   background-color: rgba(0, 0, 0, 0);
   outline-width: 0;
+  color: white;
 `;
 
 const SearchIcon = styled.img`
