@@ -8,7 +8,7 @@ const ReviewContainer = styled.div`
 display: flex;
 flex-direction: column;
 gap: 1rem;
-height: 600px;
+max-height: 600px;
 overflow-y: auto;
 align-content: center;
 border-top: 1px solid lightgrey;
