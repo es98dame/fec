@@ -17,7 +17,7 @@ const ModalWrapper = styled.div`
 
 const Modal = styled.div`
   z-index: 100;
-  background: cornsilk;
+  background: #e5e8ed;
   position: relative;
   margin: 1.75rem auto;
   border-radius: 3px;
@@ -94,6 +94,13 @@ const QuestionBody = styled.textarea`
 const SubmitButton = styled.button`
   width: 9em;
   align-self: flex-end;
+  background-color: #242125;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  &:hover {
+    color: lightgrey;
+  };
 `;
 
 const ErrorLabel = styled.label`
