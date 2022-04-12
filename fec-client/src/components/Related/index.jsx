@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import axios from 'axios';
@@ -33,42 +32,34 @@ const Listtitle = styled.h3`
   display: inline-block;
 `;
 
-const Outfit = styled.div`
-  display: flex;
-  width : 100%;
-  min-width: 0;
-  flex: 1;
-`;
-
-const Products = (props)=> {
+const Products = (props) => {
   const [idArray, setIdArray] = useState([]);
 
   const getRelatedItemsId = (id) => {
-    axios.get('/api', {headers: {path: `/products/${id}/related`}}) //get request to get the related item id array
-    .then(res => {
-      //console.log('related', res);
-      //unique
-      const relatedArr = [...new Set(res.data)];
-      setIdArray(relatedArr);
-    })
-    .catch(err=> console.log(err));
-  }
+    axios.get('/api', { headers: { path: `/products/${id}/related` } }) // get request to get the related item id array
+      .then((res) => {
+      // console.log('related', res);
+      // unique
+        const relatedArr = [...new Set(res.data)];
+        setIdArray(relatedArr);
+      })
+      .catch((err) => console.log(err));
+  };
 
-  //componentDidmount
-  useEffect(()=>{
-    getRelatedItemsId(props.productId)
-  },[])
-
+  // componentDidmount
+  useEffect(() => {
+    getRelatedItemsId(props.productId);
+  }, []);
 
   return (
-    <div title='TheProductList'>
+    <div title="TheProductList">
       <Listtitle>Related List</Listtitle>
       <ProductList>
-      <RelatedList relatedArray={idArray} mode={'related'}/>
-    </ProductList>
-    <Listtitle>Outfit List</Listtitle>
+        <RelatedList relatedArray={idArray} mode="related" />
+      </ProductList>
+      <Listtitle>Outfit List</Listtitle>
       <ProductList>
-        <OutfitList/>
+        <OutfitList />
       </ProductList>
     </div>
   );

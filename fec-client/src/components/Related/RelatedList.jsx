@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
-import Card from './Card.jsx'
+import Card from './Card.jsx';
 
 const Container = styled.div`
   overflow : hidden;
@@ -62,7 +62,7 @@ const TOTAL_SLIDES = 2;
 const postsPerPage = 5;
 
 const RelatedList = ({relatedArray, mode, deletehandle})=> {
-  console.log('related arr in relate.jsx',relatedArray);
+  //console.log('related arr in relate.jsx', relatedArray);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideRef = useRef(null);
@@ -72,14 +72,14 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
 
 
   const customAxiosFunctions = async () => {
-     //get product infomation
-     const promises1 = relatedArray.map((id) => {
-      return  axios.all([
+    //get product infomation
+    const promises1 = relatedArray.map((id) => {
+      return axios.all([
         axios.get('/api', {headers: {path: `/products/${id}`}}),
       ])
-      .then(axios.spread((data1) => {
-        return data1.data;
-      }));
+        .then(axios.spread((data1) => {
+          return data1.data;
+        }));
 
     });
     const resolvedResponses1 = await Promise.all(promises1);
@@ -89,12 +89,12 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
 
     //get product style infomation
     const promises2 = relatedArray.map((id) => {
-      return  axios.all([
+      return axios.all([
         axios.get('/api', {headers: {path: `/products/${id}/styles`}}),
       ])
-      .then(axios.spread((data1) => {
-        return data1.data;
-      }));
+        .then(axios.spread((data1) => {
+          return data1.data;
+        }));
 
     });
     const resolvedResponses2 = await Promise.all(promises2);
@@ -106,7 +106,7 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
   };
 
   const nextSlide = () => {
-    setCurrentSlide(currentSlide + 1)
+    setCurrentSlide(currentSlide + 1);
   };
 
   const prevSlide = () => {
@@ -118,7 +118,7 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
   };
 
   useEffect(() => {
-    slideRef.current.animate( { opacity: [0, 1]},   500 );
+    slideRef.current.animate( { opacity: [0, 1]}, 500 );
     // slideRef.current.style.transform = `translateX(-${currentSlide}03%)`;
     //setIdArray(infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)));
   }, [currentSlide]);
@@ -131,26 +131,26 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
   }, [relatedArray]);
 
 
-    return (
-      <Container>
-          <SliderContainer ref={slideRef} >
-            <ProductCard>
-              {currentSlide === 0 ? <NoButton></NoButton> :
-                <Button onClick={prevSlide}>←</Button>
-              }
-              {infoArray instanceof Array && styleArray instanceof Array
-              && infoArray.map((data,i)=>{
-                if( i >= currentSlide * postsPerPage && i < postsPerPage * (currentSlide + 1)) {
-                return (<Card productInfo={data} styleInfo = {styleArray[i]} key={i} mode={mode} deletehandle={deletehandle}/>);
+  return (
+    <Container>
+      <SliderContainer ref={slideRef} >
+        <ProductCard>
+          {currentSlide === 0 ? <NoButton></NoButton> :
+            <Button onClick={prevSlide}>←</Button>
+          }
+          {infoArray instanceof Array && styleArray instanceof Array
+              && infoArray.map((data, i)=>{
+                if ( i >= currentSlide * postsPerPage && i < postsPerPage * (currentSlide + 1)) {
+                  return (<Card productInfo={data} styleInfo = {styleArray[i]} key={i} mode={mode} deletehandle={deletehandle}/>);
                 }
               })}
-              { postsPerPage * (currentSlide + 1) >= infoArray.length ? <NoButton></NoButton> :
-                <Button onClick={nextSlide}>→</Button>
-              }
-            </ProductCard>
-          </SliderContainer>
-        </Container>
-    );
-}
+          { postsPerPage * (currentSlide + 1) >= infoArray.length ? <NoButton></NoButton> :
+            <Button onClick={nextSlide}>→</Button>
+          }
+        </ProductCard>
+      </SliderContainer>
+    </Container>
+  );
+};
 
 export default RelatedList;

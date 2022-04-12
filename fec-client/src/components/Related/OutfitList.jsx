@@ -19,6 +19,12 @@ const ProductCard = styled.div`
   top: 10%;
   text-align: center;
   align-items: center;
+
+  &:hover {
+    border-color: black;
+    transform: scale(1.01);
+  }
+
 `;
 
 const FirstCard = styled.div`
@@ -32,50 +38,50 @@ const OutfitList = ()=> {
   const [outfitList, setOutfitList] = useState([]);
 
   const addItemtoOutfit = () => {
-    if(outfitList.length === 0){
+    if (outfitList.length === 0) {
       const arr = [];
-      arr.push(window.localStorage.getItem("ProductId"));
-      window.localStorage.setItem("OutfitList", JSON.stringify(arr));
+      arr.push(window.localStorage.getItem('ProductId'));
+      window.localStorage.setItem('OutfitList', JSON.stringify(arr));
       setOutfitList(arr);
-    }else{
+    } else {
       const arr = [...outfitList];
-      if(arr.indexOf(window.localStorage.getItem("ProductId")) === -1){
-        arr.push(window.localStorage.getItem("ProductId"));
-        window.localStorage.setItem("OutfitList", JSON.stringify(arr));
+      if (arr.indexOf(window.localStorage.getItem('ProductId')) === -1) {
+        arr.push(window.localStorage.getItem('ProductId'));
+        window.localStorage.setItem('OutfitList', JSON.stringify(arr));
         setOutfitList(arr);
-      }else{
+      } else {
         alert('This item is already in the Outfit list');
       }
 
     }
 
-  }
+  };
 
   const deleteItemOutfit = (id) => {
     const arr = [...outfitList];
     arr.splice(arr.indexOf(id), 1);
     setOutfitList(arr);
-    window.localStorage.setItem("OutfitList", JSON.stringify(arr));
+    window.localStorage.setItem('OutfitList', JSON.stringify(arr));
 
-  }
+  };
 
   useEffect(() => {
-    if(window.localStorage.getItem("OutfitList") !== null){
-      setOutfitList(JSON.parse(window.localStorage.getItem("OutfitList")));
+    if (window.localStorage.getItem('OutfitList') !== null) {
+      setOutfitList(JSON.parse(window.localStorage.getItem('OutfitList')));
     }
-  }, [])
+  }, []);
 
-  return(
+  return (
     <Container>
-    <ProductCard onClick={addItemtoOutfit}>
+      <ProductCard onClick={addItemtoOutfit}>
 
         <span>Add current item +</span>
 
-    </ProductCard>
+      </ProductCard>
 
-    {outfitList.length !== 0 ? (
-      <RelatedList relatedArray ={outfitList} mode={'outfit'} deletehandle={deleteItemOutfit}/>
-    ) : '' }
+      {outfitList.length !== 0 ? (
+        <RelatedList relatedArray ={outfitList} mode={'outfit'} deletehandle={deleteItemOutfit}/>
+      ) : '' }
     </Container>
 
   );
