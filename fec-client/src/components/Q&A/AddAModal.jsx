@@ -235,11 +235,11 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
     let valid = true;
     let entries = [];
 
-    if (!answer.length) {
+    if (!answer.length || answer.length > 1000) {
       entries.push('An answer');
       valid = false;
     }
-    if (nickname.length < 2) {
+    if (nickname.length < 2 || nickname.length > 60) {
       entries.push('Your nickname');
       valid = false;
     }

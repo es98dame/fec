@@ -144,11 +144,11 @@ const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) =>
     let valid = true;
     let entries = [];
 
-    if (!question.length) {
+    if (!question.length || question.length > 1000) {
       entries.push('A question');
       valid = false;
     }
-    if (!nickname.length) {
+    if (!nickname.length || nickname.length > 60) {
       entries.push('Your nickname');
       valid = false;
     }
