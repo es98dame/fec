@@ -19,20 +19,23 @@ const ButtonContainer = styled.div`
 
 const Button = styled.button`
   cursor: pointer;
-  height: 50px;
-  width: 160px;
-  background-color: cornsilk;
+  height: 34px;
+  width: 142px;
+  background-color: #242125;
   &:hover {
     color: grey;
   }
   border-radius: 5px;
+  border: 2px solid #030303;
+  color: white;
+  margin: 7px 0;
 `;
 
 const SearchForm = styled.form`
   display: flex;
   flex-direction: row;
   border: solid 1px;
-  background-color: #d5e1df;
+  background-color: #242125;
 `;
 
 const StyledInput = styled.input`
@@ -51,8 +54,18 @@ const SearchIcon = styled.img`
   height: auto;
 `;
 
+const Icon = styled.i`
+right: 2px;
+width: 2%;
+position: relative;
+height: auto;
+color: white;
+margin: auto 0;
+`;
+
 const H4 = styled.h4`
-  margin-left: .7em;
+  margin: 10px 0;
+  font-size: x-large;
 `;
 
 const QA = ({productId, productName}) => {
@@ -162,7 +175,8 @@ const QA = ({productId, productName}) => {
       <H4>Questions And Answers</H4>
       <SearchForm title="live-search" type="submit">
         <StyledInput title="search-input" type="text" value={searchInput} onChange={ e => setSearchInput(e.target.value)} placeholder="Have a Question? Search for answers..."/>
-        <SearchIcon src={magnifyingGlass}/>
+        <Icon className="fa fa-search fa-lg"></Icon>
+        {/* <SearchIcon src={magnifyingGlass}/> */}
       </SearchForm>
       <QAList {...QAListProps}/>
       <ButtonContainer>

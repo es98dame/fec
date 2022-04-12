@@ -7,6 +7,7 @@ import AddAModal from './AddAmodal.jsx';
 const ContainerRow = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: 5px;
 `;
 
 const ContainerCol = styled.div`
@@ -16,6 +17,8 @@ const ContainerCol = styled.div`
 
 const QuestionRow = styled(ContainerRow)`
   margin-right: 5px;
+  background-color: #bcbcbc26;
+  padding: 4px 0;
 `;
 
 const Label = styled.div`
@@ -24,8 +27,8 @@ const Label = styled.div`
 `;
 
 const QContainer = styled(ContainerCol)`
-  gap: .7em;
-  margin-top: .5em;
+  gap: .3px;
+  margin-top: .2px;
 `;
 
 const QBody = styled.div`
@@ -45,7 +48,11 @@ const AContainer = styled(ContainerCol)`
   max-height: 300px;
   flex: auto;
   gap: .8em;
+  &:last-child {
+    margin-bottom: 5px;
+  };
 `;
+
 
 const Link = styled.a`
   cursor: pointer;
@@ -63,12 +70,14 @@ const Button = styled.button`
   margin-left: .6em;
   cursor: pointer;
   height: auto;
+  background-color: #242125;
   width: 13%;
-  background-color: cornsilk;
   border-radius: 7px;
   &:hover {
     color: grey;
   }
+  border: 2px solid #030303;
+  color: white;
 `;
 
 const Highlighted = styled.span`
