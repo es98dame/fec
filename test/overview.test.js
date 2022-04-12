@@ -4,7 +4,7 @@ import {setupServer} from 'msw/node';
 import {render, fireEvent, waitFor, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import App from '../fec-client/src/App.jsx';
+import Overview from '../fec-client/src/components/Overview/index.jsx';
 
 // const server = setupServer(
 //   rest.get('/test', (req, res, ctx) => {
@@ -19,21 +19,9 @@ import App from '../fec-client/src/App.jsx';
 describe('Overview component', () => {
 
   test('loads and displays "Overview here"', () => {
-    render(<App/>);
+    render(<Overview/>);
 
     expect(screen.getByTitle('Overview')).toHaveTextContent('Overview here');
-  });
-
-  test('loads and displays a style selection area', () => {
-    render(<App/>);
-
-    expect(screen.getByTitle('Overview')).toHaveTextContent('Style:');
-  });
-
-  test('loads and displays an add to cart button', () => {
-    render(<App/>);
-
-    expect(screen.getByTitle('Overview')).toHaveTextContent('Add To Cart');
   });
 
 });
