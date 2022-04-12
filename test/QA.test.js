@@ -9,8 +9,9 @@ import QA from './../fec-client/src/components/Q&A/QA.jsx';
 import QAList from './../fec-client/src/components/Q&A/QAList.jsx';
 import QAListEntry from './../fec-client/src/components/Q&A/QAListEntry.jsx';
 import AListEntry from './../fec-client/src/components/Q&A/AListEntry.jsx';
-import AListEntry from './../fec-client/src/components/Q&A/AListEntry.jsx';
-import AListEntry from './../fec-client/src/components/Q&A/AListEntry.jsx';
+import AddAModal from './../fec-client/src/components/Q&A/AddAModal.jsx';
+import AddQModal from './../fec-client/src/components/Q&A/AddQModal.jsx';
+import PhotoModal from './../fec-client/src/components/Q&A/PhotoModal.jsx';
 
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}
