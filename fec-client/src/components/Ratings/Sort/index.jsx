@@ -13,12 +13,6 @@ const Label = styled.label`
   font-size: 1.2rem;
 `;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-//COMPARATORS
-=======
-=======
->>>>>>> main
 const Select = styled.select`
   padding: 10px;
   margin 10px;
@@ -28,14 +22,10 @@ const Select = styled.select`
   border-radius: 7px;
 `;
 
-<<<<<<< HEAD
 
 
 //COMPARATORS -Help!!!!
->>>>>>> main
 
-=======
->>>>>>> main
 const newest = (a, b) => a.date < b.date ? 1 : -1;
 const helpful = (a, b) => b.helpfulness - a.helpfulness;
 

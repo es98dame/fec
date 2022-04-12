@@ -32,8 +32,8 @@ const ReviewBar = ({ rating, num, total, toggleFilter, toggled }) => {
       <span>{rating} stars:</span>
       <svg viewBox = '0, 0, 100, 5' width = '250'>
         <linearGradient id = {`gradient-${percent}`}>
-          <stop offset = {'0%'} stopColor = "#3D463D"></stop>
-          <stop offset = {`${percent}%`} stopColor = "#3D463D"></stop>
+          <stop offset = {'0%'} stopColor = "#10451d"></stop>
+          <stop offset = {`${percent}%`} stopColor = "#10451d"></stop>
           <stop offset = {`${percent}%`} stopColor = "#BAC3BA"></stop>
         </linearGradient>
         <rect fill = {`url(#gradient-${percent})`} width = '100' height = '100' />

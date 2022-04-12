@@ -3,28 +3,27 @@ import styled from 'styled-components';
 import factors from './factors.js';
 
 const Div = styled.div`
-<<<<<<< HEAD
-<<<<<<< HEAD
-display: flex;
-flex-direction: column;
-gap: 2%;
-min-width: max-content;
-
-=======
   display: flex;
   flex-direction: column;
   gap: 2%;
->>>>>>> main
-=======
-  display: flex;
-  flex-direction: column;
-  gap: 2%;
->>>>>>> main
+  margin: 10px;
 `;
 
 const Selection = styled.span`
   font-style: italic;
   font-size: 0.8rem;
+`;
+
+const Stuff = styled.div`
+background-color: lightgray;
+padding: 5px;
+border-radius: 5px;
+`;
+
+const ButtonArray = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const Meanings = styled.div`
@@ -49,17 +48,19 @@ const Characteristic = ({ characteristic, handleFactorChange }) => {
   return (
     <Div>
       <div>{characteristic}:  <Selection>{selection}</Selection> </div>
-      <div onChange = {handleSelectionChange}>
-        <input type = 'radio' value = '1' name = {characteristic}/> 1
-        <input type = 'radio' value = '2' name = {characteristic}/> 2
-        <input type = 'radio' value = '3' name = {characteristic}/> 3
-        <input type = 'radio' value = '4' name = {characteristic}/> 4
-        <input type = 'radio' value = '5' name = {characteristic}/> 5
-      </div>
-      <Meanings>
-        <div>{factors[characteristic][1]}</div>
-        <div>{factors[characteristic][5]}</div>
-      </Meanings>
+      <Stuff>
+        <ButtonArray onChange = {handleSelectionChange}>
+          <input type = 'radio' value = '1' name = {characteristic}/>
+          <input type = 'radio' value = '2' name = {characteristic}/>
+          <input type = 'radio' value = '3' name = {characteristic}/>
+          <input type = 'radio' value = '4' name = {characteristic}/>
+          <input type = 'radio' value = '5' name = {characteristic}/>
+        </ButtonArray>
+        <Meanings>
+          <div>{factors[characteristic][1]}</div>
+          <div>{factors[characteristic][5]}</div>
+        </Meanings>
+      </Stuff>
     </Div>
 
   );
