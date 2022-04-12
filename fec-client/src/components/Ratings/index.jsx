@@ -37,21 +37,17 @@ const Ratings = ({productId, setAvg, productName}) => {
   }, []);
 
   useEffect(() => {
-    if (filters.indexOf(1) === -1) {
+    if (filters.indexOf(true) === -1) {
       setCurrentData(data);
     } else {
-      setCurrentData(data.filter(review => filters[review.rating - 1] === 1));
+      setCurrentData(data.filter(review => filters[review.rating - 1]));
     }
   }, [filters]);
-
-  const filterByRating = (rating) => {
-    setFilters(filters.map((i, index) => index === rating - 1 ? i = 1 - i : i));
-  };
 
   return (
     <RatingsContainer>
       <h3>Reviews</h3>
-      <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
+      <RatingsBreakdown metaData = { metaData } setFilters = {setFilters}/>
       <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
       <ReviewList reviews = {currentData}/>
       <Write relevantChars = {metaData.characteristics} productId = {productId} productName = {productName}/>

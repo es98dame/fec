@@ -33,7 +33,7 @@ text-align: center:
 font-weight: bold;
 `;
 
-const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
+const ReviewBreakdown = ({ reviewData, recommended, setFilters }) => {
   const [total, average] = countTotalAndAverage( reviewData );
   const percentRecommended = Math.round(parseInt(recommended.true || 0) / total * 100);
   const [allFilters, setAllFilters] = useState(Array(5).fill(false));
@@ -43,6 +43,7 @@ const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
     const newFilters = [...allFilters];
     newFilters[rating - 1] = !newFilters[rating - 1];
     setAllFilters(newFilters);
+    setFilters(newFilters);
     setActiveFilters([1, 2, 3, 4, 5].filter((item, index) => newFilters[index]));
   };
 
@@ -55,11 +56,11 @@ const ReviewBreakdown = ({ reviewData, recommended, filterByRating }) => {
         </Average>
         <span> {total} reviews </span>
       </Summary>
-      <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
-      <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
-      <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
-      <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
-      <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} filterByRating = {filterByRating} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {5} num = {reviewData[5] || 0 } total = {total} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {4} num = {reviewData[4] || 0 } total = {total} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {3} num = {reviewData[3] || 0 } total = {total} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {2} num = {reviewData[2] || 0 } total = {total} toggleFilter = {toggleFilter}/>
+      <ReviewBar rating = {1} num = {reviewData[1] || 0 } total = {total} toggleFilter = {toggleFilter}/>
       <ActiveFilters> Displaying { activeFilters.length ?
         activeFilters.join(', ') + '-star' :
         'all'

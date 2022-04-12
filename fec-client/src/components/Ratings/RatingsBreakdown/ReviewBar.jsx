@@ -19,7 +19,7 @@ justify-content: space-between;
 `;
 
 
-const ReviewBar = ({ rating, num, total, filterByRating, toggleFilter }) => {
+const ReviewBar = ({ rating, num, total, toggleFilter }) => {
   const [clicked, setClicked] = useState(false);
   const percent = num / total * 100;
 
@@ -29,7 +29,6 @@ const ReviewBar = ({ rating, num, total, filterByRating, toggleFilter }) => {
 
   const handleClick = () => {
     toggleColor();
-    filterByRating(rating);
     toggleFilter(rating);
   };
 
