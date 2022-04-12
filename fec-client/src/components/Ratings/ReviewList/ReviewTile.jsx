@@ -76,22 +76,25 @@ gap: 5%;
 `;
 
 const HelpfulButton = styled.div`
-cursor: pointer;
-&:hover {
+&.active:hover {
+  cursor: pointer;
   color: green;
 }
 `;
 
 const ReviewTile = ({ review }) => {
   const [helpful, setHelpful] = useState(review.helpfulness);
+  const [helpfulDisable, setHelpfulDisable] = useState(false);
   const [bodyGrow, setBodyGrow] = useState(review.body.length > 250);
 
   const handleHelpfulClick = () => {
-    setHelpful(helpful + 1);
-    axios.put(`/api/reviews/${review.review_id}/helpful`)
-      .then(() => {})
-      .catch((err) => { console.log(err); });
-
+    if (!helpfulDisable) {
+      setHelpful(helpful + 1);
+      setHelpfulDisable(true);
+      axios.put(`/api/reviews/${review.review_id}/helpful`)
+        .then(() => {})
+        .catch((err) => { console.log(err); });
+    }
   };
 
   const handleShowMore = () => {
@@ -121,7 +124,7 @@ const ReviewTile = ({ review }) => {
           null }
         <Helpful>
           <div> Helpful? </div>
-          <HelpfulButton onClick = {handleHelpfulClick}> Yes ({helpful}) </HelpfulButton>
+          <HelpfulButton className = { !helpfulDisable ? 'active' : ''} onClick = {handleHelpfulClick}> Yes ({helpful}) </HelpfulButton>
         </Helpful>
         { review.response ? <div title = 'response'> {review.response} </div> : null }
       </ReviewContent>
@@ -134,21 +137,3 @@ const ReviewTile = ({ review }) => {
 
 
 export default ReviewTile;
-
-/* EXAMPLE DATA
-
-    {
-      'review_id': 1115703,
-      'rating': 3,
-      'summary': 'This is a good product Buy it please This is a good product Buy it, please',
-      'recommend': true,
-      'response': null,
-      'body': 'This is a good product Buy it please THere is a min number of charsThis is a good product Buy it please THere is a min number of chars',
-      'date': '2022-01-05T00:00:00.000Z',
-      'reviewer_name': 'notryano',
-      'helpfulness': 0,
-      'photos': []
-    }
-
-
-*/

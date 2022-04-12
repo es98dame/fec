@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import relevance from './relevance.js';
 
 const Div = styled.div`
   border-top: 1px solid lightgrey;
@@ -21,13 +22,8 @@ const Select = styled.select`
   border-radius: 7px;
 `;
 
-
-
-//COMPARATORS -Help!!!!
-
 const newest = (a, b) => a.date < b.date ? 1 : -1;
 const helpful = (a, b) => b.helpfulness - a.helpfulness;
-
 
 const Sort = ({currentData, setCurrentData}) => {
 
@@ -40,6 +36,9 @@ const Sort = ({currentData, setCurrentData}) => {
     }
     if (e.target.value === 'helpful') {
       comparator = helpful;
+    }
+    if (e.target.value === 'relevance') {
+      comparator = relevance;
     }
     const sortedData = [...currentData].sort(comparator);
     setCurrentData(sortedData);

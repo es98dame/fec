@@ -6,6 +6,7 @@ import RatingsBreakdown from './RatingsBreakdown';
 import Write from './Write';
 import Sort from './Sort';
 import countTotalAndAverage from '../Shared/countTotalAndAverage.js';
+import relevance from './Sort/relevance.js';
 
 const RatingsContainer = styled.div`
   font-weight: 300;
@@ -25,7 +26,7 @@ const Ratings = ({productId, setAvg, productName}) => {
     axios.get('/api', {headers: {path: `/reviews?product_id=${productId}&count=200`}})
       .then((response) => {
         setData(response.data.results);
-        setCurrentData(response.data.results);
+        setCurrentData(response.data.results.sort(relevance));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -40,21 +41,17 @@ const Ratings = ({productId, setAvg, productName}) => {
   }, []);
 
   useEffect(() => {
-    if (filters.indexOf(1) === -1) {
+    if (filters.indexOf(true) === -1) {
       setCurrentData(data);
     } else {
-      setCurrentData(data.filter(review => filters[review.rating - 1] === 1));
+      setCurrentData(data.filter(review => filters[review.rating - 1]));
     }
   }, [filters]);
 
-  const filterByRating = (rating) => {
-    setFilters(filters.map((i, index) => index === rating - 1 ? i = 1 - i : i));
-  };
-
   return (
     <RatingsContainer>
-      <H3>Reviews</H3>
-      <RatingsBreakdown metaData = { metaData } filterByRating = { filterByRating }/>
+      <h3>Reviews</h3>
+      <RatingsBreakdown metaData = { metaData } setFilters = {setFilters}/>
       <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
       <ReviewList reviews = {currentData}/>
       <Write relevantChars = {metaData.characteristics} productId = {productId} productName = {productName}/>
