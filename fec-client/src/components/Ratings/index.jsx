@@ -5,7 +5,7 @@ import ReviewList from './ReviewList';
 import RatingsBreakdown from './RatingsBreakdown';
 import Write from './Write';
 import Sort from './Sort';
-import countTotalAndAverage from './countTotalAndAverage.js';
+import countTotalAndAverage from '../Shared/countTotalAndAverage.js';
 
 const RatingsContainer = styled.div`
 font-weight: 300;
