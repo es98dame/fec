@@ -30,13 +30,13 @@ const QAList = ({QAData, productName, showUpdates, handleMoreQuestions, mode, st
       }
     };
 
-    const intOptions = {
+    const options = {
       root: ref.current,
       rootMargin: '2px',
       threshold: 1.0
     };
 
-    const observer = new IntersectionObserver(callback, intOptions);
+    const observer = new IntersectionObserver(callback, options);
     let children = Array.from(ref.current.children);
 
     if (storage > QAData.length) {
