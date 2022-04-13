@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 const Star = ({fill, size, color}) => {
   return (
-    <svg className='SVG-CLASS' viewBox="0 0 51 48" width = {size}>
+    <svg id ='SVG-CLASS' viewBox="0 0 51 48" width = {size}>
       <defs>
         <linearGradient id = {`gradient-${fill}`}>
           <stop offset = {'0%'} stopColor = { color }></stop>
