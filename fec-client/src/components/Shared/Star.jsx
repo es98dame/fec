@@ -6,8 +6,8 @@ const Star = ({fill, size, color}) => {
     <svg viewBox="0 0 51 48" width = {size}>
       <defs>
         <linearGradient id = {`gradient-${fill}`}>
-          <stop offset = {'0%'} stopColor = { color || "#3D463D"}></stop>
-          <stop offset = {`${fill}%`} stopColor = { color || "#3D463D"}></stop>
+          <stop offset = {'0%'} stopColor = { color || '#3D463D'}></stop>
+          <stop offset = {`${fill}%`} stopColor = { color || '#3D463D'}></stop>
           <stop offset = {`${fill}%`} stopColor = "#BAC3BA"></stop>
         </linearGradient>
       </defs>

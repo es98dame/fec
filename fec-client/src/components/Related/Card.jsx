@@ -7,8 +7,6 @@ const ProductCard = styled.div`
   display : flex;
   flex-direction: column;
   position : relative;
-  //min-width: 0;
-  // flex: 1;
   border: solid;
   border-color: lightgray;
   background : white;

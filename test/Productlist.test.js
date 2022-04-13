@@ -85,9 +85,9 @@ describe('Outfit List component', () => {
 
   test('add current item to the outfit list', async () => {
     render(<OutfitList />);
-    await waitFor(() => screen.getByTitle('firstcard'));
+    await screen.getByTitle('firstcard');
     fireEvent.click(screen.getByTitle('firstcard'));
-    await waitFor(() => screen.getByTitle('card slide'));
+    await screen.getByTitle('card slide');
     expect(screen.getByTitle('card slide')).toBeInTheDocument();
   });
 

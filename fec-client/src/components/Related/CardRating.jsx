@@ -6,7 +6,7 @@ import Star from '../Shared/Stars.jsx';
 import countTotalAndAverage from '../Shared/countTotalAndAverage.js';
 
 const CardRating = ({id})=> {
-  const [avg, setAvg] = useState('');
+  const [avg, setAvg] = useState(null);
 
   useEffect(() => {
     axios.get('/api', {headers: {path: `/reviews/meta?product_id=${id}`}})

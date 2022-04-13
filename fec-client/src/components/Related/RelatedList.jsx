@@ -36,7 +36,7 @@ const NoButton = styled.button`
 `;
 
 const Button = styled.button`
-  max-height: 374px;
+  max-height: 333px;
   display : flex;
   flex-direction: column;
   position : relative;
@@ -63,14 +63,11 @@ const TOTAL_SLIDES = 2;
 const postsPerPage = 5;
 
 const RelatedList = ({relatedArray, mode, deletehandle})=> {
-  //console.log('related arr in relate.jsx', relatedArray);
+  const [styleArray, setStyleArray] = useState('');
+  const [infoArray, setInfoArray] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideRef = useRef(null);
-
-  const [infoArray, setInfoArray] = useState('');
-  const [styleArray, setStyleArray] = useState('');
-
 
   const customAxiosFunctions = async () => {
     //get product infomation
@@ -127,8 +124,8 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
   }, [currentSlide]);
 
   useEffect(() => {
-    setInfoArray('');
     setStyleArray('');
+    setInfoArray('');
     customAxiosFunctions();
 
   }, [relatedArray]);
