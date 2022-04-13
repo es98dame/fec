@@ -34,7 +34,7 @@ const Content = styled.div`
 
 const Overview = (props) => {
   const [styles, setStyle] = useState([]);
-  const [productId] = useState(props.productId);
+  const [productId] = useState(props.productId || 65631);
   const [currentStyle, setCurrentStyle] = useState([]);
   const [currentProduct, setCurrentproduct] = useState([]);
   const [currentAvg, setCurrentAvg] = useState(props.avg);
@@ -44,13 +44,20 @@ const Overview = (props) => {
       .then((response) => {
         setStyle(response.data.results);
         setCurrentStyle(response.data.results[0]);
+      })
+      .catch((err) => {
+        console.error(err);
       });
 
     axios.get('/api', {headers: {path: `/products/${productId}`}})
       .then((response) => {
         setCurrentproduct(response.data);
         props.setProductName(response.data.name);
+      })
+      .catch((err) => {
+        console.error(err);
       });
+
   }, []);
 
   return (
@@ -58,10 +65,10 @@ const Overview = (props) => {
       <H2>Overview here</H2>
 
       <FullDiv>
-        <ImagesDiv>
+        <ImagesDiv title='Images'>
           <Images currentStyle={currentStyle}/>
         </ImagesDiv>
-        <Content>
+        <Content title='Product-specs'>
           <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct} avg={props.avg}/>
 
           <Styles styles={styles} currentStyle={currentStyle} set={setCurrentStyle}/>
