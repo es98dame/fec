@@ -177,7 +177,7 @@ describe('Review bar clicks', () => {
   test('Rating bar click triggers creation of "Show all reviews" button', () => {
     render(<RatingsBreakdown metaData = {metaData} setFilters = {()=>{}}/>);
     fireEvent.click(screen.getByTitle('review-bar-1'));
-    expect(screen.getByText('Show all reviews')).toBeInTheDocument();
+    expect(screen.queryByText('View All')).toBeInTheDocument();
   });
 
   test('Unclicking all bars triggers removal of "Show all reviews" button', () => {
@@ -185,24 +185,24 @@ describe('Review bar clicks', () => {
     fireEvent.click(screen.getByTitle('review-bar-1'));
     fireEvent.click(screen.getByTitle('review-bar-2'));
     fireEvent.click(screen.getByTitle('review-bar-4'));
-    expect(screen.getByText('Show all reviews')).toBeInTheDocument();
+    expect(screen.getByText('View All')).toBeInTheDocument();
     fireEvent.click(screen.getByTitle('review-bar-2'));
     fireEvent.click(screen.getByTitle('review-bar-4'));
     fireEvent.click(screen.getByTitle('review-bar-1'));
-    expect(screen.queryByText('Show all reviews')).not.toBeInTheDocument();
+    expect(screen.queryByText('View All')).not.toBeInTheDocument();
   });
 
   test('Clicking "Show all reviews" button resets the status of all bars to not clicked and disappears itself', () => {
     render(<RatingsBreakdown metaData = {metaData} setFilters = {()=>{}}/>);
     fireEvent.click(screen.getByTitle('review-bar-1'));
-    expect(screen.getByText('Show all reviews')).toBeInTheDocument();
-    fireEvent.click(screen.getByText('Show all reviews'));
+    expect(screen.getByText('View All')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('View All'));
     expect(screen.getByTitle('review-bar-1')).not.toHaveClass('clicked');
     expect(screen.getByTitle('review-bar-2')).not.toHaveClass('clicked');
     expect(screen.getByTitle('review-bar-3')).not.toHaveClass('clicked');
     expect(screen.getByTitle('review-bar-4')).not.toHaveClass('clicked');
     expect(screen.getByTitle('review-bar-5')).not.toHaveClass('clicked');
-    expect(screen.queryByText('Show all reviews')).not.toBeInTheDocument();
+    expect(screen.queryByText('View All')).not.toBeInTheDocument();
   });
 });
 

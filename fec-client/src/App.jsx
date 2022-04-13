@@ -79,9 +79,10 @@ const OverviewDiv = styled.div`
 `;
 
 const RelatedDiv = styled.div`
-border: 1px solid black;
 width: 90%;
 height: 25%;
+margin: auto;
+border-bottom: 1px solid lightgrey;
 `;
 
 const QandADiv = styled.div`
@@ -100,7 +101,6 @@ border-bottom: 1px solid lightgrey;
 
 const App = () => {
   const [productName, setProductName] = useState('none');
-  // const [productId, setProductId] = useState(65631);
   let [avg, setAvg] = useState(0);
   const [darkMode, setDarkMode] = useState(false);
 

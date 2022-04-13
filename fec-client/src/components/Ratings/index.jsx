@@ -10,10 +10,21 @@ import relevance from './Sort/relevance.js';
 
 const RatingsContainer = styled.div`
   font-weight: 300;
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
 `;
 
-const H3 = styled.h3`
-  font-size: x-large;
+const Left = styled.div`
+display: flex;
+flex-direction: column;
+width: 35%;
+`;
+
+const Right = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
 `;
 
 const Ratings = ({productId, setAvg, productName}) => {
@@ -50,11 +61,15 @@ const Ratings = ({productId, setAvg, productName}) => {
 
   return (
     <RatingsContainer>
-      <h3>Reviews</h3>
-      <RatingsBreakdown metaData = { metaData } setFilters = {setFilters}/>
-      <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
-      <ReviewList reviews = {currentData}/>
-      <Write relevantChars = {metaData.characteristics} productId = {productId} productName = {productName}/>
+      <Left>
+        <h3>{'Ratings & Reviews'}</h3>
+        <RatingsBreakdown metaData = { metaData } setFilters = {setFilters}/>
+      </Left>
+      <Right>
+        <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
+        <ReviewList reviews = {currentData}/>
+        <Write relevantChars = {metaData.characteristics} productId = {productId} productName = {productName}/>
+      </Right>
     </RatingsContainer>
   );
 

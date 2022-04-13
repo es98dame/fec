@@ -8,7 +8,7 @@ const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: 600px;
+  max-height: 700px;
   overflow-y: auto;
   align-content: center;
   border-top: 1px solid lightgrey;
@@ -52,7 +52,7 @@ const ReviewList = ({reviews}) => {
           ))
           }
         </div> :
-        <h4>Be the first to write a review.</h4>
+        <h4>No reviews to show.</h4>
       }
       { reviews.length > numReviews ? <ShowMore onClick = {handleShowMoreClick} >Show More Reviews</ShowMore> : null }
 
