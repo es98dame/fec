@@ -32,7 +32,7 @@ const Write = ({relevantChars, productId, productName}) => {
 
   return (
     <div title = 'write'>
-      <Button onClick = {toggleWriteModal}>Write a Review</Button>
+      <Button onClick = {toggleWriteModal}>Write a Review + </Button>
       { showModal ? <WriteModal relevantChars = {relevantChars} productId = {productId} toggleWriteModal = {toggleWriteModal} productName = {productName}/> : null}
     </div>
   );

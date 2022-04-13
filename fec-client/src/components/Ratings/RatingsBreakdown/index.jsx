@@ -6,13 +6,12 @@ import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingsBreakdownContainer = styled.div`
 display: flex;
-flex-direction: row;
-gap: 5%;
+flex-direction: column;
+gap: 50px;
 font-size: 0.8rem;
-height: 200px;
-border-top: 1px solid lightgrey;
+height: 600px;
 margin: 10px;
-padding: 10px;
+align-items: flex-start;
 `;
 
 
