@@ -43,11 +43,14 @@ const Input = styled.input`
   }
 `;
 
+const handdleChange = (func, state) => {
+  func(!state);
+};
 
-const Slider = () => {
+const Slider = ({setDarkMode, darkMode}) => {
   return (
     <Label class="switch">
-      <Input type="checkbox"/>
+      <Input type="checkbox" onChange={() => handdleChange(setDarkMode, darkMode)}/>
       <Switch class="slider round"></Switch>
     </Label>
   );
