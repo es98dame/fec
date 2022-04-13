@@ -31,14 +31,15 @@ const ActionButton = styled.img`
 
 const starturl = 'https://img.icons8.com/ios-glyphs/30/000000/star--v1.png';
 const cancelurl = 'https://img.icons8.com/ios-glyphs/30/000000/cancel.png';
-
+const p = 'Product card';
+const o = 'Outfit card';
 const Card = ({productInfo, styleInfo, mode, deletehandle }) => {
   const [show, setShow] = useState(false);
 
   return (
     <div>
       <Modal show={show} handleClose={() => { setShow(false); }} productInfo={productInfo} />
-      <ProductCard>
+      <ProductCard title = {mode === 'related' ? p : o}>
         <div>
           {mode === 'outfit'
             ? <ActionButton src={cancelurl} onClick={() => { deletehandle(productInfo.id); }} />

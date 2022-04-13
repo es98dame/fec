@@ -73,7 +73,7 @@ const OutfitList = ()=> {
 
   return (
     <Container>
-      <ProductCard onClick={addItemtoOutfit}>
+      <ProductCard title = 'firstcard' onClick={addItemtoOutfit}>
 
         <span>Add current item +</span>
 
