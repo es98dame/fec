@@ -32,10 +32,25 @@ width: 35rem;
 `;
 
 const Header = styled.div`
-background-color: lightgray;
-text-align: center;
+display: flex;
+justify-content: space-between;
+flex-direction: row;
 height: 16%;
 margin: 2%;
+padding: 2%;
+border-bottom: 1px solid lightgray;
+`;
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start:
+`;
+
+const TitleName = styled.h3`
+`;
+
+const SubTitle = styled.div`
 `;
 
 const Form = styled.div`
@@ -45,14 +60,14 @@ gap: 10px;
 height: 70%;
 overflow-y: auto;
 margin: 2%;
-`;
-
-const Field = styled.div`
 padding: 2%;
 `;
 
+const Field = styled.div`
+margin-top: 4%;
+`;
+
 const Label = styled.div`
-font-weight: 400;
 `;
 
 
@@ -61,15 +76,36 @@ font-style: italic;
 font-size: 0.7rem;
 `;
 
-const Submit = styled.input`
-font-family: inherit;
-width: 10rem;
-margin: auto;
-`;
-
 const Warning = styled.div`
 color: red;
 font-size: small;
+`;
+
+const Button = styled.button`
+  padding: 5px;
+  margin 10px;
+  background-color: #242125;
+  border: 1px solid #403244;
+  border-radius: 7px;
+  color: #fff;
+  width: 20%;
+
+  &: hover{
+    background-color: #4b464d;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  &:active{
+    background-color: #fff;
+    color: #242125;
+  }
+
+  &.exit {
+    height: 30px;
+    width: 30px;
+    align-self: flex-start;
+  }
 `;
 
 
@@ -155,10 +191,12 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
   return (
     <Modal>
       <ModalContent title = 'write-form-container' >
-        <button onClick = {toggleWriteModal}>Close</button>
         <Header>
-          <h2>Write Your Review</h2>
-          <h3>About the product {productName}</h3>
+          <Title>
+            <TitleName>Write a Review</TitleName>
+            <SubTitle>About the {productName}</SubTitle>
+          </Title>
+          <Button onClick={toggleWriteModal} className = 'exit'>X</Button>
         </Header>
         { success ?
         <h3> Thank you, your review has been submitted </h3> :
@@ -174,7 +212,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
             <input type='radio' value = '' name = 'recommend'/> No
           </Field>
           <Field>
-            <Label>Please rate the item on the following factors *: </Label>
+            <Label>Characteristics * </Label>
             {relevantFactors.map(factor => (
               <Characteristic key = {relevantChars[factor].id} characteristic = {factor} handleFactorChange = {handleFactorChange}/>
             ))}
@@ -211,7 +249,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
             </ul> :
             null }
           </Warning>
-          <Submit type = 'submit' value = 'Submit Review' onClick = {handleSubmit}/>
+          <Button onClick = {handleSubmit} >Submit Review</Button>
         </Form>
         }
       </ModalContent>

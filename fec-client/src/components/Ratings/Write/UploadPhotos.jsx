@@ -32,6 +32,34 @@ font-size: 5rem;
 font-weight: 200;
 `;
 
+const ImagePreview = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
+
+const Button = styled.button`
+  padding: 5px;
+  margin 10px;
+  background-color: #242125;
+  border: 1px solid #403244;
+  border-radius: 7px;
+  color: #fff;
+  width: 4rem;
+  font-size: 0.8rem;
+
+  &: hover{
+    background-color: #4b464d;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  &:active{
+    background-color: #fff;
+    color: #242125;
+  }
+`;
+
 const UploadPhotos = ({ images, setImages }) => {
   //const [images, setImages] = useState([]);
 
@@ -42,8 +70,9 @@ const UploadPhotos = ({ images, setImages }) => {
     setImages(images.concat([file]));
   };
 
-  const handleImageRemove = (key) => {
-    const slicedImages = images.slice(0, key).concat(images.slice(key + 1));
+  const handleImageRemove = (url) => {
+    const index = images.indexOf(url);
+    const slicedImages = images.slice(0, index).concat(images.slice(index + 1));
     setImages(slicedImages);
   };
 
@@ -56,11 +85,11 @@ const UploadPhotos = ({ images, setImages }) => {
   return (
     <form>
       <Thumbnails>
-        {images.map((url, key) => (
-          <div key = {key}>
+        {images.map(url => (
+          <ImagePreview key = {url}>
             <Img src = {url}></Img>
-            <button onClick = {() => { handleImageRemove(key); }}>Remove Image</button>
-          </div>
+            <Button onClick = {() => { handleImageRemove(url); }}>Remove</Button>
+          </ImagePreview>
         ))}
         { images.length < 5 ?
           <Div>
