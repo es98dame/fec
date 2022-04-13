@@ -5,11 +5,9 @@ import Factor from './Factor';
 const ProductContainer = styled.div`
 display: flex;
 flex-direction: column;
-flex-wrap: wrap;
 gap: 10px;
 align-items: center;
-height: 100%;
-width: 50%;
+width: 100%;
 `;
 
 const ProductBreakdown = ({ productData }) => {

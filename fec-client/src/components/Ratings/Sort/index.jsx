@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import relevance from './relevance.js';
 
 const Div = styled.div`
-  border-top: 1px solid lightgrey;
   margin: 10px;
   padding: 10px;
 `;
