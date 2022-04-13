@@ -8,13 +8,14 @@ const ReviewBreakdownContainer = styled.div`
 display: flex;
 flex-direction: column;
 gap: 10px;
+width: 100%;
 `;
 
 const Summary = styled.div`
 display: flex;
 flex-direction: row;
 font-size: 0.9rem;
-justify-content: flex-start;
+justify-content: space-around;
 align-items: flex-end;
 `;
 
@@ -29,6 +30,8 @@ font-weight: 400;
 `;
 
 const StarContainer = styled.div`
+margin-bottom: auto;
+margin-top: 2rem;
 `;
 
 const Recommend = styled.div`
@@ -88,7 +91,9 @@ const ReviewBreakdown = ({ reviewData, recommended, setFilters }) => {
     <ReviewBreakdownContainer title = 'review-breakdown'>
       <Summary>
         <Span title = 'average'>{average}</Span>
-        <Stars rating = {average} size = {'25'} color = {'#10451d'}/>
+        <StarContainer>
+          <Stars rating = {average} size = {'30'} color = {'#10451d'}/>
+        </StarContainer>
         <span> {total} reviews </span>
       </Summary>
       <Recommend title = 'percent-recommended'>{percentRecommended}% of reviewers recommend this product.</Recommend>

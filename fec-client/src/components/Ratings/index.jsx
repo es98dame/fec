@@ -18,7 +18,7 @@ const RatingsContainer = styled.div`
 const Left = styled.div`
 display: flex;
 flex-direction: column;
-flex-grow: 1;
+width: 35%;
 `;
 
 const Right = styled.div`
