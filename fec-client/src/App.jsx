@@ -89,7 +89,6 @@ border-bottom: 1px solid lightgrey;
 
 const App = () => {
   const [productName, setProductName] = useState('none');
-  // const [productId, setProductId] = useState(65631);
   let [avg, setAvg] = useState(0);
 
   //default value is '65635'

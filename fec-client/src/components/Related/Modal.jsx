@@ -91,17 +91,22 @@ const StyledTable = styled.table`
 
 const Modal = ({ handleClose, show, productInfo }) => {
   const ShowHideClassName = show ? Modaltrue : Modalfalse;
-  const id = window.localStorage.getItem("ProductId");
-  const [currentItemValues, setCurrentItemValues] = useState({});
+  const id = window.localStorage.getItem('ProductId');
+  const [currentItemValues, setCurrentItemValues] = useState('');
 
   useEffect(()=>{
-    const getValues = async () => {
-      const res = await axios.get('/api', {headers: {path: `/products/${id}`}}) //get request to get current item's values
-      setCurrentItemValues(res.data);
+    const getValues = () => {
+      axios.get('/api', {headers: {path: `/products/${id}`}})
+        .then((res)=>{
+          setCurrentItemValues(res.data);
+        })
+        .catch ((error) => {
+          console.log('axio request errors in Modal.jsx', error);
+        });
     };
 
     getValues();
-  },[])
+  }, []);
 
   return show ? (
     <div
@@ -111,18 +116,18 @@ const Modal = ({ handleClose, show, productInfo }) => {
         handleClose();
       }}
     >
-    <ShowHideClassName>
-      <Modalmain onClick={e => {
+      <ShowHideClassName>
+        <Modalmain title='ModalCard' onClick={e => {
           // do not close modal if anything inside modal content is clicked
           e.stopPropagation();
         }}>
 
-        <h3>Comparing</h3>
-        <br></br>
+          <h3>Comparing</h3>
+          <br></br>
           <div className='comparingCards'>
             <StyledTable>
               <tbody>
-              <tr>
+                <tr>
                   <td className='tdName'>Selected Item</td>
                   <td className='tdName'></td>
                   <td className='tdName'>Current Item</td>
@@ -133,29 +138,29 @@ const Modal = ({ handleClose, show, productInfo }) => {
                   <td className='tdName'>{currentItemValues.name}</td>
                 </tr>
                 {/* current item values list */}
-            {currentItemValues.features.map((i, key)=>(
-              <tr key={key}>
-              <td className='tdName'>✔️</td>
-              <td className='tdName'>{i.feature + ' : ' + i.value}</td>
-              <td className='tdName'></td>
-            </tr>
-            ))}
-            {/* clicked item values list */}
-            {productInfo.features.map((i, key)=>(
-              <tr key={key}>
-              <td className='tdName'></td>
-              <td className='tdName'>{i.feature + ' : ' + i.value}</td>
-              <td className='tdName'>✔️</td>
-            </tr>
-            ))}
+                {currentItemValues.features !== undefined && currentItemValues.features.map((i, key)=>(
+                  <tr key={key}>
+                    <td className='tdName'>✔️</td>
+                    <td className='tdName'>{i.feature + ' : ' + i.value}</td>
+                    <td className='tdName'></td>
+                  </tr>
+                ))}
+                {/* clicked item values list */}
+                {productInfo.features.map((i, key)=>(
+                  <tr key={key}>
+                    <td className='tdName'></td>
+                    <td className='tdName'>{i.feature + ' : ' + i.value}</td>
+                    <td className='tdName'>✔️</td>
+                  </tr>
+                ))}
               </tbody>
             </StyledTable>
           </div>
-        <button type="button" onClick={handleClose}>
+          <button type="button" onClick={handleClose}>
           Close
-        </button>
-      </Modalmain>
-    </ShowHideClassName>
+          </button>
+        </Modalmain>
+      </ShowHideClassName>
     </div>
 
   ) : null;
