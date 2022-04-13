@@ -16,9 +16,9 @@ const CardRating = ({id})=> {
       .catch((err) => console.log(err));
   }, []);
 
-  return(
+  return (
     <Star rating = {avg}/>
-  )
-}
+  );
+};
 
 export default CardRating;

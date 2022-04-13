@@ -36,24 +36,25 @@ const NoButton = styled.button`
 `;
 
 const Button = styled.button`
-
-
+  max-height: 374px;
   display : flex;
   flex-direction: column;
   position : relative;
-  all: unset;
   display : block;
-  border: 1px solid coral;
-  color: coral;
-  border-radius: 10px;
+  border: 1px solid black;
   position: relative;
   z-index ; 20;
   padding-left: 10px;
   padding-right: 10px;
+  opacity: 1;
+  line-height: 25;
+  color : black;
+  transition: all .5s ease;
+  background-color : transparent;
 
   &:hover {
     transition: all 0.3s ease-in-out;
-    background-color: coral;
+    background-color: #1a7431;
     color: #fff;
   }
 `;
@@ -79,7 +80,8 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
       ])
         .then(axios.spread((data1) => {
           return data1.data;
-        }));
+        }))
+        .catch((err)=> console.log('axios request error in Promise1 in RelatedList.jsx', err));
 
     });
     const resolvedResponses1 = await Promise.all(promises1);
@@ -94,7 +96,8 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
       ])
         .then(axios.spread((data1) => {
           return data1.data;
-        }));
+        }))
+        .catch((err)=> console.log('axios request error in Promise2 in RelatedList.jsx', err));
 
     });
     const resolvedResponses2 = await Promise.all(promises2);
@@ -118,7 +121,7 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
   };
 
   useEffect(() => {
-    slideRef.current.animate( { opacity: [0, 1]}, 500 );
+    //slideRef.current.animate( { opacity: [0, 1]}, 500 );
     // slideRef.current.style.transform = `translateX(-${currentSlide}03%)`;
     //setIdArray(infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)));
   }, [currentSlide]);
@@ -133,7 +136,7 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
 
   return (
     <Container>
-      <SliderContainer ref={slideRef} >
+      <SliderContainer ref={slideRef} title='card slide'>
         <ProductCard>
           {currentSlide === 0 ? <NoButton></NoButton> :
             <Button onClick={prevSlide}>←</Button>

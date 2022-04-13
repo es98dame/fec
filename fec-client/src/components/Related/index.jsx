@@ -43,7 +43,7 @@ const Products = (props) => {
         const relatedArr = [...new Set(res.data)];
         setIdArray(relatedArr);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('axio request error in Realted/index.jsx', err));
   };
 
   // componentDidmount
