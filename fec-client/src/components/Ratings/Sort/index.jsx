@@ -22,6 +22,10 @@ const Select = styled.select`
   border-radius: 7px;
 `;
 
+
+
+//COMPARATORS -Help!!!!
+
 const newest = (a, b) => a.date < b.date ? 1 : -1;
 const helpful = (a, b) => b.helpfulness - a.helpfulness;
 
@@ -45,7 +49,7 @@ const Sort = ({currentData, setCurrentData}) => {
   };
 
   return (
-    <Div>
+    <Div title = 'sort'>
       <Label> Sort by:
         <Select onChange = {handleChange}>
           <option value = 'relevance'>Relevance</option>
