@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Questions = {
-  product_id: 65631,
+  question_id: 65631,
   results: [
     {
       question_body: 'Is there a poop color?',
@@ -57,7 +57,21 @@ export const Questions = {
           photos: []
         }
       }
-    }
+    },
+    {
+      question_body: 'How soft is the fabric?',
+      asker_name: 'strange person',
+      question_helpfulness: 8,
+      reported: false,
+      answers: {}
+    },
+    {
+      question_body: 'How soft is the fabric?',
+      asker_name: 'strange person',
+      question_helpfulness: 8,
+      reported: false,
+      answers: {}
+    },
   ]
 };
 

@@ -57,8 +57,8 @@ const PhotoModal = ({hide, photo}) => {
   const container = document.getElementById('app');
 
   return reactDom.createPortal((
-    <ModalWrapper onClick={hide}>
-      <ImageContainer onClick={(e) => e.stopPropagation()}>
+    <ModalWrapper>
+      <ImageContainer>
         <Image src={photo}/>
         <ExitButton onClick={hide}>&times;</ExitButton>
       </ImageContainer>

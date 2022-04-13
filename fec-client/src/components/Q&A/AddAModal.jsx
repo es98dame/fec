@@ -16,6 +16,7 @@ const ModalWrapper = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   background-color: rgb(0, 0, 0, 0.8);
+  font-family: 'open sans';
 `;
 
 const ModalContainer = styled.div`
@@ -235,11 +236,11 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
     let valid = true;
     let entries = [];
 
-    if (!answer.length) {
+    if (!answer.length || answer.length > 1000) {
       entries.push('An answer');
       valid = false;
     }
-    if (nickname.length < 2) {
+    if (nickname.length < 2 || nickname.length > 60) {
       entries.push('Your nickname');
       valid = false;
     }
@@ -271,8 +272,8 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
 
 
   return reactDom.createPortal((
-    <ModalWrapper onClick={() => handleExit(hide)}>
-      <ModalContainer onClick={(e) => e.stopPropagation()} >
+    <ModalWrapper>
+      <ModalContainer>
         <Heading>
           <Title>
             <TitleName>Submit your Answer</TitleName>

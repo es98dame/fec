@@ -13,6 +13,7 @@ const ModalWrapper = styled.div`
   overflow-y: auto;
   outline: 0;
   background-color: rgba(0, 0, 0, .8);
+  font-family: 'open sans';
 `;
 
 const Modal = styled.div`
@@ -144,11 +145,11 @@ const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) =>
     let valid = true;
     let entries = [];
 
-    if (!question.length) {
+    if (!question.length || question.length > 1000) {
       entries.push('A question');
       valid = false;
     }
-    if (!nickname.length) {
+    if (!nickname.length || nickname.length > 60) {
       entries.push('Your nickname');
       valid = false;
     }
@@ -176,8 +177,8 @@ const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) =>
 
   return show ? ReactDom.createPortal(
     (<>
-      <ModalWrapper onClick={() => handleExit(hide)}>
-        <Modal onClick={(e) => e.stopPropagation()}>
+      <ModalWrapper>
+        <Modal>
           <Header>
             <Title>
               <TitleName>Ask Your Question</TitleName>
