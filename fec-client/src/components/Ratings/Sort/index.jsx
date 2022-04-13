@@ -49,7 +49,7 @@ const Sort = ({currentData, setCurrentData}) => {
   };
 
   return (
-    <Div>
+    <Div title = 'sort'>
       <Label> Sort by:
         <Select onChange = {handleChange}>
           <option value = 'relevance'>Relevance</option>

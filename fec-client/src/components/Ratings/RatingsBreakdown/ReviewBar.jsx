@@ -28,7 +28,7 @@ const ReviewBar = ({ rating, num, total, toggleFilter, toggled }) => {
   };
 
   return (
-    <Bar className = { toggled ? 'clicked' : ''} onClick = {handleClick}>
+    <Bar className = { toggled ? 'clicked' : ''} onClick = {handleClick} title = {`review-bar-${rating}`}>
       <span>{rating} stars:</span>
       <svg viewBox = '0, 0, 100, 5' width = '250'>
         <linearGradient id = {`gradient-${percent}`}>
@@ -38,7 +38,7 @@ const ReviewBar = ({ rating, num, total, toggleFilter, toggled }) => {
         </linearGradient>
         <rect fill = {`url(#gradient-${percent})`} width = '100' height = '100' />
       </svg>
-      <span>{num}</span>
+      <span title = {`num-ratings-${rating}`}>{num}</span>
     </Bar>
   );
 };

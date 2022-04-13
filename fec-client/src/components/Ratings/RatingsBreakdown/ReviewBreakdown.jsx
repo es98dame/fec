@@ -54,11 +54,11 @@ const ReviewBreakdown = ({ reviewData, recommended, setFilters }) => {
   };
 
   return (
-    <ReviewBreakdownContainer>
+    <ReviewBreakdownContainer title = 'review-breakdown'>
       <Summary>
         <Average>
           <Stars rating = {average} size = {'27'} color = {'#10451d'}/>
-          <span>({average})</span>
+          <span title = 'average'>({average})</span>
         </Average>
         <span> {total} reviews </span>
       </Summary>
@@ -73,7 +73,7 @@ const ReviewBreakdown = ({ reviewData, recommended, setFilters }) => {
       } reviews
       {activeFilters.length ? <button onClick = {handleShowAll}> Show all reviews </button> : null}
       </ActiveFilters>
-      <Recommend>{percentRecommended}% of reviewers recommend this product.</Recommend>
+      <Recommend title = 'percent-recommended'>{percentRecommended}% of reviewers recommend this product.</Recommend>
     </ReviewBreakdownContainer>
   );
 
