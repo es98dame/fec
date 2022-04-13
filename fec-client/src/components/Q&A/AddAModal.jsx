@@ -16,6 +16,7 @@ const ModalWrapper = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   background-color: rgb(0, 0, 0, 0.8);
+  font-family: 'open sans';
 `;
 
 const ModalContainer = styled.div`
