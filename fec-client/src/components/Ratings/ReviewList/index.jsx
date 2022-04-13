@@ -5,19 +5,6 @@ import ReviewTile from './ReviewTile.jsx';
 import Modal from './Modal.jsx';
 
 const ReviewContainer = styled.div`
-<<<<<<< HEAD
-<<<<<<< HEAD
-display: flex;
-flex-direction: column;
-gap: 1rem;
-max-height: 600px;
-overflow-y: auto;
-align-content: center;
-border-top: 1px solid lightgrey;
-margin: 10px;
-=======
-=======
->>>>>>> main
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -26,10 +13,6 @@ margin: 10px;
   align-content: center;
   border-top: 1px solid lightgrey;
   margin: 10px;
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> main
 `;
 
 const ShowMore = styled.button`
