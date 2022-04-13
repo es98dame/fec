@@ -117,10 +117,7 @@ const Modal = ({ handleClose, show, productInfo }) => {
       }}
     >
       <ShowHideClassName>
-        <Modalmain title='ModalCard' onClick={e => {
-          // do not close modal if anything inside modal content is clicked
-          e.stopPropagation();
-        }}>
+        <Modalmain title='ModalCard'>
 
           <h3>Comparing</h3>
           <br></br>

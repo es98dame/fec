@@ -8,13 +8,14 @@ import axios from 'axios';
 const Container = styled.div`
   position: relative;
   display : flex;
+  left: 40px;
 `;
 
 const ProductCard = styled.div`
   border: solid;
   border-color: lightgray;
   display : flex;
-  height: 72%;
+  height: 63.5%;
   position: relative;
   top: 10%;
   text-align: center;
@@ -22,6 +23,7 @@ const ProductCard = styled.div`
 
   &:hover {
     border-color: black;
+    background-color: #1a7431;
     transform: scale(1.01);
   }
 

@@ -6,8 +6,7 @@ import CardRating from './CardRating.jsx';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  flex : none;
-  min-height: 70%;
+
 `;
 
 const ThumbContainer = styled.div`
@@ -74,6 +73,7 @@ const RightButton = styled.button`
 const Textarea = styled.div`
   visibility: hidden;
   gap: .5rem;
+  height: 40px;
 `;
 
 const Image = styled.img`
@@ -121,10 +121,12 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
     if (value) {
       thumbcontainer.current.style.display = 'flex';
       textcontainer.current.style.visibility = 'visible';
+      textcontainer.current.style.height = '100%';
       setClickableimage(true);
     } else {
       thumbcontainer.current.style.display = 'none';
       textcontainer.current.style.visibility = 'hidden';
+      textcontainer.current.style.height = '40px';
       setClickableimage(false);
     }
   };

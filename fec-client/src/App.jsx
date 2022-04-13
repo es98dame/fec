@@ -68,9 +68,10 @@ const OverviewDiv = styled.div`
 `;
 
 const RelatedDiv = styled.div`
-border: 1px solid black;
 width: 90%;
 height: 25%;
+margin: auto;
+border-bottom: 1px solid lightgrey;
 `;
 
 const QandADiv = styled.div`
