@@ -6,6 +6,7 @@ import Ratings from './components/Ratings';
 import Overview from './components/Overview';
 import QA from './components/Q&A/QA';
 import PA from './logo/PA.png';
+import Slider from './components/Slider.jsx';
 
 const AppDiv = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
@@ -60,7 +61,7 @@ const Nav = styled.div`
 `;
 
 const OverviewDiv = styled.div`
-  border-bottom: 3px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
   width: 90%;
   height: 25%;
   margin: auto;
@@ -80,19 +81,19 @@ border-bottom: 1px solid lightgrey;
 `;
 
 const RatingsDiv = styled.div`
-font-family: inherit;
-border: 1px solid black;
 width: 90%;
 height: 25%;
+margin: auto;
+border-bottom: 1px solid lightgrey;
 `;
 
-let App = () => {
+const App = () => {
   const [productName, setProductName] = useState('none');
   let [avg, setAvg] = useState(0);
 
   //default value is '65635'
-  const productId = window.localStorage.getItem("ProductId") === null ?
-  65635 : JSON.parse(window.localStorage.getItem("ProductId")) ;
+  const productId = window.localStorage.getItem('ProductId') === null ?
+    65635 : JSON.parse(window.localStorage.getItem('ProductId'));
 
   return (
     <AppDiv>
@@ -105,6 +106,7 @@ let App = () => {
           <Button type="submit"><i className="fa fa-search"></i></Button>
           <Input type='text'></Input>
         </Form>
+        <Slider />
       </Nav>
       <div>
         <OverviewDiv>

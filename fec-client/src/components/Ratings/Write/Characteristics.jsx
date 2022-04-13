@@ -3,14 +3,23 @@ import styled from 'styled-components';
 import factors from './factors.js';
 
 const Div = styled.div`
-display: flex;
-flex-direction: column;
-gap: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: 2%;
 `;
 
 const Selection = styled.span`
+  font-style: italic;
+  font-size: 0.8rem;
+`;
+
+const Meanings = styled.div`
+display: flex;
+flex-direction: row;
+font-size: 0.7rem;
 font-style: italic;
-font-size: 0.8rem;
+justify-content: space-between;
+width: 100%;
 `;
 
 
@@ -33,6 +42,10 @@ const Characteristic = ({ characteristic, handleFactorChange }) => {
         <input type = 'radio' value = '4' name = {characteristic}/> 4
         <input type = 'radio' value = '5' name = {characteristic}/> 5
       </div>
+      <Meanings>
+        <div>{factors[characteristic][1]}</div>
+        <div>{factors[characteristic][5]}</div>
+      </Meanings>
     </Div>
 
   );
