@@ -8,18 +8,6 @@ const Label = styled.label`
   cursor: pointer;
 `;
 
-const Input = styled.input`
-  display: none;
-
-  &:checked + ${Switch}{
-    background-color: green;
-
-    &:before {
-      transform: translate(32px, -50%);
-    }
-  }
-`;
-
 const Switch = styled.div`
   position: relative;
   width: 60px;
@@ -43,12 +31,24 @@ const Switch = styled.div`
   }
 `;
 
+const Input = styled.input`
+  display: none;
+
+  &:checked + ${Switch}{
+    background-color: green;
+
+    &:before {
+      transform: translate(32px, -50%);
+    }
+  }
+`;
+
 
 const Slider = () => {
   return (
     <Label class="switch">
       <Input type="checkbox"/>
-      <Switch class="slider round"/>
+      <Switch class="slider round"></Switch>
     </Label>
   );
 };
