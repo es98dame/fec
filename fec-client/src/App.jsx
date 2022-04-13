@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import styled, {ThemeProvider} from 'styled-components';
 
 import Products from './components/Related';
 import Ratings from './components/Ratings';
@@ -8,10 +8,21 @@ import QA from './components/Q&A/QA';
 import PA from './logo/PA.png';
 import Slider from './components/Slider.jsx';
 
+const lightTheme = {
+  background: '#fff',
+  color: '#242124'
+};
+
+const darkTheme = {
+  background: '#242124',
+  color: '#fff'
+};
+
 const AppDiv = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
   font-family: 'Open Sans', sans-serif;
-  color: #242124;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const H1 = styled.h1`
@@ -91,42 +102,50 @@ border-bottom: 1px solid lightgrey;
 const App = () => {
   const [productName, setProductName] = useState('none');
   let [avg, setAvg] = useState(0);
+  const [darkMode, setDarkMode] = useState(false);
 
   //default value is '65635'
   const productId = window.localStorage.getItem('ProductId') === null ?
     65635 : JSON.parse(window.localStorage.getItem('ProductId'));
 
+  useEffect(()=> {
+  }, [darkMode]);
+
   return (
-    <AppDiv>
-      <Nav>
-        <img src={PA}/>
-        <H3>Home</H3>
-        <H3>Products</H3>
-        <H3>Cart</H3>
-        <Form>
-          <Button type="submit"><i className="fa fa-search"></i></Button>
-          <Input type='text'></Input>
-        </Form>
-        <Slider />
-      </Nav>
-      <div>
-        <OverviewDiv>
-          <Overview productId={productId} setProductName={setProductName} avg={avg}/>
-        </OverviewDiv>
+    <ThemeProvider theme={darkMode
+      ? darkTheme
+      : lightTheme}>
+      <AppDiv>
+        <Nav>
+          <img src={PA}/>
+          <H3>Home</H3>
+          <H3>Products</H3>
+          <H3>Cart</H3>
+          <Form>
+            <Button type="submit"><i className="fa fa-search"></i></Button>
+            <Input type='text'></Input>
+          </Form>
+          <Slider setDarkMode={setDarkMode} darkMode={darkMode}/>
+        </Nav>
+        <div>
+          <OverviewDiv>
+            <Overview productId={productId} setProductName={setProductName} avg={avg}/>
+          </OverviewDiv>
 
-        <RelatedDiv>
-          <Products productId={productId}/>
-        </RelatedDiv>
+          <RelatedDiv>
+            <Products productId={productId}/>
+          </RelatedDiv>
 
-        <QandADiv>
-          <QA productId={productId} productName={productName}/>
-        </QandADiv>
+          <QandADiv>
+            <QA productId={productId} productName={productName}/>
+          </QandADiv>
 
-        <RatingsDiv>
-          <Ratings productId={productId} setAvg = {setAvg} productName = {productName}/>
-        </RatingsDiv>
-      </div>
-    </AppDiv>
+          <RatingsDiv>
+            <Ratings productId={productId} setAvg = {setAvg} productName = {productName}/>
+          </RatingsDiv>
+        </div>
+      </AppDiv>
+    </ThemeProvider>
   );
 };
 
