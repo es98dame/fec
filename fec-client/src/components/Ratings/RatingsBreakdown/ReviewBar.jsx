@@ -6,7 +6,7 @@ font-size: 0.8rem;
 display: flex;
 flex-direction: row;
 gap: 5%;
-justify-content: space-between;
+justify-content: flex-start;
 
 &:hover {
   background-color: lightgray;
@@ -19,31 +19,26 @@ justify-content: space-between;
 `;
 
 
-const ReviewBar = ({ rating, num, total, filterByRating }) => {
-  const [clicked, setClicked] = useState(false);
+const ReviewBar = ({ rating, num, total, toggleFilter, toggled }) => {
+  //const [clicked, setClicked] = useState(false);
   const percent = num / total * 100;
 
-  const toggleColor = () => {
-    setClicked(!clicked);
-  };
-
   const handleClick = () => {
-    toggleColor();
-    filterByRating(rating);
+    toggleFilter(rating);
   };
 
   return (
-    <Bar className = { clicked ? 'clicked' : ''} onClick = {handleClick}>
+    <Bar className = { toggled ? 'clicked' : ''} onClick = {handleClick} title = {`review-bar-${rating}`}>
       <span>{rating} stars:</span>
       <svg viewBox = '0, 0, 100, 5' width = '250'>
         <linearGradient id = {`gradient-${percent}`}>
-          <stop offset = {'0%'} stopColor = "#3D463D"></stop>
-          <stop offset = {`${percent}%`} stopColor = "#3D463D"></stop>
+          <stop offset = {'0%'} stopColor = "#10451d"></stop>
+          <stop offset = {`${percent}%`} stopColor = "#10451d"></stop>
           <stop offset = {`${percent}%`} stopColor = "#BAC3BA"></stop>
         </linearGradient>
         <rect fill = {`url(#gradient-${percent})`} width = '100' height = '100' />
       </svg>
-      <span>{num}</span>
+      <span title = {`num-ratings-${rating}`}>{num}</span>
     </Bar>
   );
 };

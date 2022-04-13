@@ -154,7 +154,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
 
   return (
     <Modal>
-      <ModalContent>
+      <ModalContent title = 'write-form-container' >
         <button onClick = {toggleWriteModal}>Close</button>
         <Header>
           <h2>Write Your Review</h2>
@@ -181,7 +181,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
           </Field>
           <Field>
             <Label>Review Summary</Label>
-            <textarea rows='2' cols='50' placeholder = 'Example: Best purchase ever!' maxLength = '60' value = {summary} onChange = {(e) => handleChange(e, setSummary)}>{summary}</textarea>
+            <textarea title = 'summary-input' rows='2' cols='50' placeholder = 'Example: Best purchase ever!' maxLength = '60' value = {summary} onChange = {(e) => handleChange(e, setSummary)}>{summary}</textarea>
           </Field>
           <Field>
             <Label>Your Review *</Label>
@@ -194,7 +194,7 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
           </Field>
           <Field>
             <Label>Your Nickname *</Label>
-            <input type = 'text' placeholder = 'Add a name, e.g. "kara122"' maxLength = '60' size = '50' value = {name} onChange = {(e) => handleChange(e, setName)}/>
+            <input title = 'name-input' type = 'text' placeholder = 'Add a name, e.g. "kara122"' maxLength = '60' size = '50' value = {name} onChange = {(e) => handleChange(e, setName)}/>
             <Tip>For privacy reasons, do not use your full name or email address</Tip>
           </Field>
           <Field>

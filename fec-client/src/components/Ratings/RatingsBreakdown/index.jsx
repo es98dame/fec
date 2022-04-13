@@ -16,11 +16,11 @@ padding: 10px;
 `;
 
 
-const RatingsBreakdown = ({ metaData, filterByRating }) => {
+const RatingsBreakdown = ({ metaData, setFilters }) => {
   //Should I return to this and conditionally render differently?
   return (
-    <RatingsBreakdownContainer>
-      { metaData.ratings ? <ReviewBreakdown reviewData = { metaData.ratings} recommended = { metaData.recommended} filterByRating = {filterByRating}/> : null }
+    <RatingsBreakdownContainer title = 'ratings-breakdown'>
+      { metaData.ratings ? <ReviewBreakdown reviewData = { metaData.ratings} recommended = { metaData.recommended} setFilters = {setFilters}/> : null }
       { metaData.characteristics ? <ProductBreakdown productData = { metaData.characteristics}/> : null}
     </RatingsBreakdownContainer>
   );

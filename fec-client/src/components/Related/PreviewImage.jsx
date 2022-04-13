@@ -1,37 +1,17 @@
-import React, {useState, useEffect, useRef} from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import Thumbnails from './Thumbnails.jsx';
-import Star from '../Shared/Stars.jsx';
+import CardRating from './CardRating.jsx';
 
 const Container = styled.div`
-  // display: flex;
-  // flex-flow: row wrap;
-  // margin: 5px;
-  // padding: 5px;
-  // justify-content: flex-start;
-  // height: 5rem;
   display: flex;
   flex-direction: column;
-  // flex-grow: 0;
-  // flex-shrink: 1;
-  flex : none;
-  min-height: 70%;
+
 `;
 
 const ThumbContainer = styled.div`
   display: none;
 }
-`;
-
-const Mainview = styled.div`
-  // display: flex;
-  // flex-flow: row wrap;
-  // margin: 5px;
-  // padding: 5px;
-  // justify-content: flex-start;
-  // height: 5rem;
 `;
 
 const Preview = styled.div`
@@ -42,12 +22,61 @@ const Preview = styled.div`
   max-height: 250px;
 }
 `;
+const LeftButton = styled.button`
+  position: absolute;
+  width: 42px;
+  left: 0;
+  top: 137px;
+  text-align: center;
+  opacity: 1;
+  color : white;
+  border: solid 3px white;
+  transition: all .5s ease;
+  border: 3px solid white;
+  line-height: 0.5;
+  font-size: 17px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 4px;
 
-const Textarea = styled.div`
-  gap: .5rem;
+  &:hover {
+    color: #001F3F;
+    background-color: #fff;
+}
 `;
 
-var Image = styled.img`
+const RightButton = styled.button`
+  position: absolute;
+  width: 42px;
+  right: 0;
+  top: 137px;
+  text-align: center;
+  opacity: 1;
+  color : white;
+  border: solid 3px white;
+  transition: all .5s ease;
+  border: 3px solid white;
+  line-height: 0.5;
+  font-size: 17px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 4px;
+
+  &:hover {
+    color: #001F3F;
+    background-color: #fff;
+}
+`;
+
+const Textarea = styled.div`
+  visibility: hidden;
+  gap: .5rem;
+  height: 40px;
+`;
+
+const Image = styled.img`
   width: 100%;
   object-fit: fill;
   object-position: center;
@@ -60,74 +89,99 @@ const CardText = styled.p`
   padding-left: 1px;
 `;
 
-const PreviewImage = ({productInfo , styleInfo})=> {
+const PreviewImage = ({ productInfo, styleInfo }) => {
   //  console.log('inside', productInfo, styleInfo);
-  const [results , setResults] = useState([]);
   const [main, setMain] = useState('');
-  const [price , setPrice] = useState('');
-  const [discountprice , setDiscountprice] = useState(null);
+  const [price, setPrice] = useState('');
+  const [clickableimage, setClickableimage] = useState(false);
+  const [discountprice, setDiscountprice] = useState(null);
   const thumbcontainer = useRef(null);
-  // const [thumbnails, setThumbnails] = useState(null);
-  //mainimage
+  const textcontainer = useRef(null);
 
-  //as much as results length
-  //subimage mouseover chage state value & price
+  // variable for image slide
+  const [imageIndex, setImageIndex] = useState(0);
 
-  const imageClick =(url) => {
+  const imageClick = (url) => {
     setMain(url);
-  }
+  };
 
   const updateId = () => {
-    window.localStorage.setItem("ProductId", productInfo.id );
+    window.localStorage.setItem('ProductId', productInfo.id);
     window.location.reload();
-  }
+  };
 
-  const updatePrice = (sales_price) => {
-      setDiscountprice(sales_price);
-  }
+  const updatePrice = (salesprice) => {
+    setDiscountprice(salesprice);
+  };
 
-  const getColor = ()=>{
-    return discountprice === null ? 'black' : 'red';
-  }
-  const getDecor = ()=>{
-    return discountprice === null ? 'none' : ' line-through';
-  }
+  const getColor = () => (discountprice === null ? 'black' : 'red');
+  const getDecor = () => (discountprice === null ? 'none' : ' line-through');
 
   const showthumbs = (value) => {
-    if(value){
-    thumbcontainer.current.style.display = 'flex';
-    }else{
-    thumbcontainer.current.style.display = 'none';
+    if (value) {
+      thumbcontainer.current.style.display = 'flex';
+      textcontainer.current.style.visibility = 'visible';
+      textcontainer.current.style.height = '100%';
+      setClickableimage(true);
+    } else {
+      thumbcontainer.current.style.display = 'none';
+      textcontainer.current.style.visibility = 'hidden';
+      textcontainer.current.style.height = '40px';
+      setClickableimage(false);
     }
-  }
+  };
 
- useEffect(()=>{
-  setMain(styleInfo.results[0].photos[0].thumbnail_url);
-  setPrice(productInfo.default_price);
- },[styleInfo]);
+  const nextPhoto = () => {
+    setMain(styleInfo.results[0].photos[imageIndex + 1].thumbnail_url);
+    setImageIndex(imageIndex + 1);
+  };
 
- return (
-  <Container onMouseOver={() => {showthumbs(true);}} onMouseLeave={() => {showthumbs(false);}}>
-      <Preview>
-        <Image src = {main} onClick={updateId}/>
-      </Preview>
+  const prevPhoto = () => {
+    setMain(styleInfo.results[0].photos[imageIndex - 1].thumbnail_url);
+    setImageIndex(imageIndex - 1);
+  };
+
+  useEffect(() => {
+    setMain(styleInfo.results[0].photos[imageIndex].thumbnail_url);
+    setPrice(productInfo.default_price);
+  }, [styleInfo]);
+
+  return (
+    <Container onClick={() => { showthumbs(true); }} onMouseLeave={() => { showthumbs(false); }}>
+
+      {clickableimage
+        ? (
+          <Preview>
+            {imageIndex === 0 ? '' : <LeftButton onClick={prevPhoto}> ← </LeftButton> }
+            <Image src={main} onClick={updateId} />
+            {imageIndex + 1 === styleInfo.results[0].photos.length ? ''
+              : <RightButton onClick={nextPhoto}> → </RightButton> }
+          </Preview>
+        )
+        : <Preview><Image src={main} alt="Oops! no image" /></Preview>}
+
       <ThumbContainer ref={thumbcontainer}>
         { styleInfo.results instanceof Array
-        && styleInfo.results.slice(0,4).map((data,index)=>(
-          <Thumbnails key={index} results = {data} imageClick={imageClick} updatePrice={updatePrice}/>
-        ))}
-        </ThumbContainer>
-    <Textarea>
-      <CardText>{productInfo.category}</CardText>
-      <CardText>{productInfo.name}</CardText>
-      <CardText>
-        <span style={{ "color": getColor() , "textDecoration" : getDecor()}}>{price}</span>
-        {discountprice === null ? '' : discountprice}
-      </CardText>
-      <Star rating ='4'/>
-    </Textarea>
-  </Container>
- );
-}
+          && styleInfo.results.slice(0, 4).map((data, index) => (
+            <Thumbnails
+              key={index}
+              results={data}
+              imageClick={imageClick}
+              updatePrice={updatePrice}
+            />
+          ))}
+      </ThumbContainer>
+      <Textarea ref={textcontainer}>
+        <CardText>{productInfo.category}</CardText>
+        <CardText>{productInfo.name}</CardText>
+        <CardText>
+          <span style={{ color: getColor(), textDecoration: getDecor() }}>{price}</span>
+          {discountprice === null ? '' : discountprice}
+        </CardText>
+        <CardRating id={productInfo.id} />
+      </Textarea>
+    </Container>
+  );
+};
 
 export default PreviewImage;

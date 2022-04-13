@@ -21,6 +21,7 @@ const Image = styled.img`
 
   &:hover{
     border: 3px solid #4b464d;;
+    cursor: pointer;
   }
 `;
 

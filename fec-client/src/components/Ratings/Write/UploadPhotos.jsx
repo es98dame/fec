@@ -40,12 +40,11 @@ const UploadPhotos = ({ images, setImages }) => {
     const file = e.target.result;
     //setImages(images.concat([e.target.result]));
     setImages(images.concat([file]));
-    // axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, { upload_preset, file})
-    //   .then((response)=>{
-    //     console.log(response.data.url);
-    //     setImages(images.concat([response.data.url]));
-    //   })
-    //   .catch((err)=>{console.log(err)});
+  };
+
+  const handleImageRemove = (key) => {
+    const slicedImages = images.slice(0, key).concat(images.slice(key + 1));
+    setImages(slicedImages);
   };
 
   const handleUpload = (e) => {
@@ -57,11 +56,16 @@ const UploadPhotos = ({ images, setImages }) => {
   return (
     <form>
       <Thumbnails>
-        {images.map(url => <Img src = {url}></Img>)}
+        {images.map((url, key) => (
+          <div key = {key}>
+            <Img src = {url}></Img>
+            <button onClick = {() => { handleImageRemove(key); }}>Remove Image</button>
+          </div>
+        ))}
         { images.length < 5 ?
           <Div>
             <label htmlFor = 'write-review-file'>+</label>
-            <FileInput type = 'file' id = 'write-review-file' onChange = {handleUpload}/>
+            <FileInput type = 'file' id = 'write-review-file' accept=".png,.jpeg,jpg,.gif" onChange = {handleUpload}/>
           </Div> :
           null
         }

@@ -15,7 +15,7 @@ width: 50%;
 const ProductBreakdown = ({ productData }) => {
 
   return (
-    <ProductContainer>
+    <ProductContainer title = 'product-breakdown'>
       { 'Size' in productData ?
         <Factor factor = {'Size'} value = {productData.Size.value} lo = {'A size too small'} hi = {'A size too wide'} /> : null }
       { 'Width' in productData ?

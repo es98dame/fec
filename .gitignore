@@ -1,6 +1,6 @@
 node_modules
-.eslintrc.js
 bundle.js
+.eslintrc.js
 hooksPractice.jsx
 package.json
 package-lock.json

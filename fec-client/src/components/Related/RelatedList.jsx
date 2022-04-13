@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
-import Card from './Card.jsx'
+import Card from './Card.jsx';
 
 const Container = styled.div`
   overflow : hidden;
@@ -22,27 +22,40 @@ const ProductCard = styled.div`
   flex-direction: row;
 `;
 
-const Button = styled.button`
-  display : none;
-  ${Container}:hover & {
-    display : flex;
-    flex-direction: column;
-    position : relative;
-    all: unset;
-    display : block;
-    border: 1px solid coral;
-    color: coral;
-    border-radius: 10px;
-    position: relative;
-    z-index ; 20;
-    padding-left: 10px;
-    padding-right: 10px;
+const NoButton = styled.button`
 
-    &:hover {
-      transition: all 0.3s ease-in-out;
-      background-color: coral;
-      color: #fff;
-    }
+  visibility: hidden;
+  flex-direction: column;
+  position : relative;
+  display : block;
+  position: relative;
+  z-index ; 20;
+  padding-left: 10px;
+  padding-right: 21px;
+
+`;
+
+const Button = styled.button`
+  max-height: 333px;
+  display : flex;
+  flex-direction: column;
+  position : relative;
+  display : block;
+  border: 1px solid black;
+  position: relative;
+  z-index ; 20;
+  padding-left: 10px;
+  padding-right: 10px;
+  opacity: 1;
+  line-height: 25;
+  color : black;
+  transition: all .5s ease;
+  background-color : transparent;
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: #1a7431;
+    color: #fff;
   }
 `;
 
@@ -50,24 +63,22 @@ const TOTAL_SLIDES = 2;
 const postsPerPage = 5;
 
 const RelatedList = ({relatedArray, mode, deletehandle})=> {
-  // console.log('related arr in relate.jsx',relatedArray);
+  const [styleArray, setStyleArray] = useState('');
+  const [infoArray, setInfoArray] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideRef = useRef(null);
 
-  const [infoArray, setInfoArray] = useState('');
-  const [styleArray, setStyleArray] = useState('');
-
-
   const customAxiosFunctions = async () => {
-     //get product infomation
-     const promises1 = relatedArray.map((id) => {
-      return  axios.all([
+    //get product infomation
+    const promises1 = relatedArray.map((id) => {
+      return axios.all([
         axios.get('/api', {headers: {path: `/products/${id}`}}),
       ])
-      .then(axios.spread((data1) => {
-        return data1.data;
-      }));
+        .then(axios.spread((data1) => {
+          return data1.data;
+        }))
+        .catch((err)=> console.log('axios request error in Promise1 in RelatedList.jsx', err));
 
     });
     const resolvedResponses1 = await Promise.all(promises1);
@@ -77,12 +88,13 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
 
     //get product style infomation
     const promises2 = relatedArray.map((id) => {
-      return  axios.all([
+      return axios.all([
         axios.get('/api', {headers: {path: `/products/${id}/styles`}}),
       ])
-      .then(axios.spread((data1) => {
-        return data1.data;
-      }));
+        .then(axios.spread((data1) => {
+          return data1.data;
+        }))
+        .catch((err)=> console.log('axios request error in Promise2 in RelatedList.jsx', err));
 
     });
     const resolvedResponses2 = await Promise.all(promises2);
@@ -94,44 +106,51 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
   };
 
   const nextSlide = () => {
-    setCurrentSlide(currentSlide + 1)
+    setCurrentSlide(currentSlide + 1);
   };
 
   const prevSlide = () => {
     if (currentSlide === 0) {
-      setCurrentSlide(TOTAL_SLIDES);
+      return;
     } else {
       setCurrentSlide(currentSlide - 1);
     }
   };
 
   useEffect(() => {
-    slideRef.current.animate( { opacity: [0, 1]},   500 );
+    //slideRef.current.animate( { opacity: [0, 1]}, 500 );
     // slideRef.current.style.transform = `translateX(-${currentSlide}03%)`;
     //setIdArray(infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)));
   }, [currentSlide]);
 
   useEffect(() => {
+    setStyleArray('');
+    setInfoArray('');
     customAxiosFunctions();
 
   }, [relatedArray]);
 
 
-    return (
-      <Container>
-        <SliderContainer ref={slideRef} >
+  return (
+    <Container>
+      <SliderContainer ref={slideRef} title='card slide'>
         <ProductCard>
-        <Button onClick={prevSlide}>←</Button>
-      {infoArray instanceof Array && styleArray instanceof Array
-      && infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1))
-      .map((data,index)=>(
-        <Card productInfo={data} styleInfo = {styleArray[index]} key={index} mode={mode} deletehandle={deletehandle}/>
-      ))}
-      <Button onClick={nextSlide}>→</Button>
-      </ProductCard>
-        </SliderContainer>
-        </Container>
-    );
-}
+          {currentSlide === 0 ? <NoButton></NoButton> :
+            <Button onClick={prevSlide}>←</Button>
+          }
+          {infoArray instanceof Array && styleArray instanceof Array
+              && infoArray.map((data, i)=>{
+                if ( i >= currentSlide * postsPerPage && i < postsPerPage * (currentSlide + 1)) {
+                  return (<Card productInfo={data} styleInfo = {styleArray[i]} key={i} mode={mode} deletehandle={deletehandle}/>);
+                }
+              })}
+          { postsPerPage * (currentSlide + 1) >= infoArray.length ? <NoButton></NoButton> :
+            <Button onClick={nextSlide}>→</Button>
+          }
+        </ProductCard>
+      </SliderContainer>
+    </Container>
+  );
+};
 
 export default RelatedList;
