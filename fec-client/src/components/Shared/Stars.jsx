@@ -26,7 +26,7 @@ const Stars = ({rating, size, color}) => {
 
   return (
     <div>
-      {fills.map((fill,index) => (
+      {fills.map((fill, index) => (
         <Star fill = {fill} size = {size || '16'} key = {index} color = {color || '#10451d'}/>
       ))}
     </div>
