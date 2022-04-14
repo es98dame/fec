@@ -101,6 +101,8 @@ const Field = styled.div`
 
 const NicknameInput = styled.input`
   width: 190px;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const Advisory = styled.span`
@@ -111,6 +113,8 @@ const Advisory = styled.span`
 const AnswerBody = styled.textarea`
   height: 70px;
   flex: auto;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const ImageRow = styled.div`
@@ -290,7 +294,7 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
           </Field>
           <Field>
             <label>Your email*</label>
-            <input type="text" name="email" placeholder={'Example: jack@email.com'} value={email} onChange={(e) => handleTextChange(e)}></input>
+            <NicknameInput type="text" name="email" placeholder={'Example: jack@email.com'} value={email} onChange={(e) => handleTextChange(e)}></NicknameInput>
             <Advisory>For authentication reasons, you will not be emailed</Advisory>
           </Field>
           <Field>

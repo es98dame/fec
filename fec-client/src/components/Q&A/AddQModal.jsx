@@ -80,6 +80,8 @@ const Field = styled.div`
 
 const NicknameInput = styled.input`
   width: 190px;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const Advisory = styled.span`
@@ -90,6 +92,8 @@ const Advisory = styled.span`
 const QuestionBody = styled.textarea`
   height: 70px;
   flex: auto;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const SubmitButton = styled.button`
@@ -196,7 +200,7 @@ const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) =>
             </Field>
             <Field>
               <label>Your email*</label>
-              <input type="text" name="email" placeholder={'Why did you like the product or not?'} value={email} onChange={(e) => handleTextChange(e)}></input>
+              <NicknameInput type="text" name="email" placeholder={'Why did you like the product or not?'} value={email} onChange={(e) => handleTextChange(e)}></NicknameInput>
               <Advisory>For authentication reasons, you will not be emailed</Advisory>
             </Field>
             <Field>
