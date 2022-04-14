@@ -88,7 +88,7 @@ const UploadPhotos = ({ images, setImages }) => {
       <Thumbnails>
         {images.map(url => (
           <ImagePreview key = {url}>
-            <Img src = {url}></Img>
+            <Img src = {url} alt = 'Image accompanying your review'></Img>
             <Button onClick = {() => { handleImageRemove(url); }}>Remove</Button>
           </ImagePreview>
         ))}
