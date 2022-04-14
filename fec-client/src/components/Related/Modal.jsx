@@ -12,8 +12,9 @@ const Modaltrue = styled.div`
   width:100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+  color : black
   display: block;
-  z-index : 20;
+  z-index : 35;
 `;
 
 const Modalfalse = styled.div`
@@ -35,6 +36,7 @@ const Modalmain = styled.section`
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
+  color: black;
 `;
 
 const StyledTable = styled.table`
@@ -42,6 +44,8 @@ const StyledTable = styled.table`
   border: none;
   border-collapse: collapse;
   text-align : center;
+
+  //Table Style
   /* border-collapse: separate; */
   /* border-spacing: 5px 10px; */
 
@@ -89,17 +93,22 @@ const StyledTable = styled.table`
 
 const Modal = ({ handleClose, show, productInfo }) => {
   const ShowHideClassName = show ? Modaltrue : Modalfalse;
-  const id = window.localStorage.getItem("ProductId");
-  const [currentItemValues, setCurrentItemValues] = useState({});
+  const id = window.localStorage.getItem('ProductId');
+  const [currentItemValues, setCurrentItemValues] = useState('');
 
   useEffect(()=>{
-    const getValues = async () => {
-      const res = await axios.get('/api', {headers: {path: `/products/${id}`}}) //get request to get current item's values
-      setCurrentItemValues(res.data);
+    const getValues = () => {
+      axios.get('/api', {headers: {path: `/products/${id}`}})
+        .then((res)=>{
+          setCurrentItemValues(res.data);
+        })
+        .catch ((error) => {
+          console.log('axio request errors in Modal.jsx', error);
+        });
     };
 
     getValues();
-  },[])
+  }, []);
 
   return show ? (
     <div
@@ -109,18 +118,15 @@ const Modal = ({ handleClose, show, productInfo }) => {
         handleClose();
       }}
     >
-    <ShowHideClassName>
-      <Modalmain onClick={e => {
-          // do not close modal if anything inside modal content is clicked
-          e.stopPropagation();
-        }}>
+      <ShowHideClassName>
+        <Modalmain title='ModalCard'>
 
-        <h3>Comparing</h3>
-        <br></br>
+          <h3>Comparing</h3>
+          <br></br>
           <div className='comparingCards'>
             <StyledTable>
               <tbody>
-              <tr>
+                <tr>
                   <td className='tdName'>Selected Item</td>
                   <td className='tdName'></td>
                   <td className='tdName'>Current Item</td>
@@ -131,29 +137,29 @@ const Modal = ({ handleClose, show, productInfo }) => {
                   <td className='tdName'>{currentItemValues.name}</td>
                 </tr>
                 {/* current item values list */}
-            {currentItemValues.features.map((i, key)=>(
-              <tr key={key}>
-              <td className='tdName'>✔️</td>
-              <td className='tdName'>{i.feature + ' : ' + i.value}</td>
-              <td className='tdName'></td>
-            </tr>
-            ))}
-            {/* clicked item values list */}
-            {productInfo.features.map((i, key)=>(
-              <tr key={key}>
-              <td className='tdName'></td>
-              <td className='tdName'>{i.feature + ' : ' + i.value}</td>
-              <td className='tdName'>✔️</td>
-            </tr>
-            ))}
+                {currentItemValues.features !== undefined && currentItemValues.features.map((i, key)=>(
+                  <tr key={key}>
+                    <td className='tdName'>✔️</td>
+                    <td className='tdName'>{i.feature + ' : ' + i.value}</td>
+                    <td className='tdName'></td>
+                  </tr>
+                ))}
+                {/* clicked item values list */}
+                {productInfo.features.map((i, key)=>(
+                  <tr key={key}>
+                    <td className='tdName'></td>
+                    <td className='tdName'>{i.feature + ' : ' + i.value}</td>
+                    <td className='tdName'>✔️</td>
+                  </tr>
+                ))}
               </tbody>
             </StyledTable>
           </div>
-        <button type="button" onClick={handleClose}>
+          <button type="button" onClick={handleClose}>
           Close
-        </button>
-      </Modalmain>
-    </ShowHideClassName>
+          </button>
+        </Modalmain>
+      </ShowHideClassName>
     </div>
 
   ) : null;

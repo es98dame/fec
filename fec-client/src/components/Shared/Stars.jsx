@@ -20,14 +20,14 @@ const fillRating = (n) => {
 //Stars should be passed a prop 'rating', a number between 0 and 5.
 //Stars may be passed an optional prop 'size', the width (in px) of an individual star. Default 16px.
 
-const Stars = ({rating, size}) => {
+const Stars = ({rating, size, color}) => {
 
   const fills = fillRating(rating);
 
   return (
     <div>
-      {fills.map((fill) => (
-        <Star fill = {fill} size = {size || '16'}/>
+      {fills.map((fill, index) => (
+        <Star fill = {fill} size = {size || '16'} key = {index} color = {color || '#1a7431'}/>
       ))}
     </div>
 

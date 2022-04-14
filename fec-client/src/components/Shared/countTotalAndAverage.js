@@ -5,7 +5,8 @@ const countTotalAndAverage = (obj) => {
     total += parseInt(obj[num]);
     weighted += parseInt(obj[num]) * parseInt(num);
   }
-  const average = Math.round(weighted / total * 10) / 10;
+  //const average = total ? Math.round(weighted / total * 10) / 10 : 0;
+  const average = total ? (weighted / total).toFixed(1) : 0;
   return [total, average];
 };
 

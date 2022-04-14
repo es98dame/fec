@@ -9,6 +9,7 @@ flex-direction: column;
 gap: 5px;
 align-items: center;
 margin-left: 10px;
+width: 90%;
 `;
 
 const DescriptionContainer = styled.div`

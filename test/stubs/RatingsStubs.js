@@ -102,4 +102,36 @@ const RatingsStubs = {
   ]
 };
 
-export default RatingsStubs;
+const metaData = {
+  'product_id': '65634',
+  'ratings': {
+    '2': '1',
+    '3': '5',
+    '4': '4',
+    '5': '11'
+  },
+  'recommended': {
+    'false': '1',
+    'true': '20'
+  },
+  'characteristics': {
+    'Fit': {
+      'id': 220239,
+      'value': '2.8750000000000000'
+    },
+    'Length': {
+      'id': 220240,
+      'value': '3.3750000000000000'
+    },
+    'Comfort': {
+      'id': 220241,
+      'value': '3.3750000000000000'
+    },
+    'Quality': {
+      'id': 220242,
+      'value': '3.2500000000000000'
+    }
+  }
+};
+
+export {RatingsStubs, metaData};

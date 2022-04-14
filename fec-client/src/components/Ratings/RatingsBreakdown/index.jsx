@@ -1,25 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import ReviewBreakdown from './ReviewBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingsBreakdownContainer = styled.div`
 display: flex;
-flex-direction: row;
-gap: 5%;
+flex-direction: column;
+gap: 50px;
 font-size: 0.8rem;
-height: 200px;
-background-color: #f1f1f1;
-border-radius: 2px;
+height: 600px;
+margin: 10px;
+align-items: flex-start;
 `;
 
 
-const RatingsBreakdown = ({ metaData, filterByRating }) => {
+const RatingsBreakdown = ({ metaData, setFilters }) => {
   //Should I return to this and conditionally render differently?
   return (
-    <RatingsBreakdownContainer>
-      { metaData.ratings ? <ReviewBreakdown reviewData = { metaData.ratings} recommended = { metaData.recommended} filterByRating = {filterByRating}/> : null }
+    <RatingsBreakdownContainer title = 'ratings-breakdown'>
+      { metaData.ratings ? <ReviewBreakdown reviewData = { metaData.ratings} recommended = { metaData.recommended} setFilters = {setFilters}/> : null }
       { metaData.characteristics ? <ProductBreakdown productData = { metaData.characteristics}/> : null}
     </RatingsBreakdownContainer>
   );

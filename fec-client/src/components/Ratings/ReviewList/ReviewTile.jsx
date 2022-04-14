@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import dateformat from 'dateformat';
 import axios from 'axios';
+import { FaCheck } from 'react-icons/fa';
 
 import Stars from '../../Shared/Stars.jsx';
 import Photos from './Photos.jsx';
@@ -10,7 +11,7 @@ const Tile = styled.div`
 font-weight: 300;
 margin-top: 20px;
 display: flex;
-flex-direction: row;
+flex-direction: column;
 `;
 
 const UserInfo = styled.div`
@@ -22,7 +23,7 @@ padding-top: 1%;
 padding-left: 1%;
 padding-right: 2%;
 
-background-color: #f1f1f1;
+background-color: ${props => props.theme.lightgrayToDark};
 border-radius: 2px;
 `;
 
@@ -75,22 +76,25 @@ gap: 5%;
 `;
 
 const HelpfulButton = styled.div`
-cursor: pointer;
-&:hover {
+&.active:hover {
+  cursor: pointer;
   color: green;
 }
 `;
 
 const ReviewTile = ({ review }) => {
   const [helpful, setHelpful] = useState(review.helpfulness);
+  const [helpfulDisable, setHelpfulDisable] = useState(false);
   const [bodyGrow, setBodyGrow] = useState(review.body.length > 250);
 
   const handleHelpfulClick = () => {
-    setHelpful(helpful + 1);
-    axios.put(`/api/reviews/${review.review_id}/helpful`)
-      .then(() => {})
-      .catch((err) => { console.log(err); });
-
+    if (!helpfulDisable) {
+      setHelpful(helpful + 1);
+      setHelpfulDisable(true);
+      axios.put(`/api/reviews/${review.review_id}/helpful`)
+        .then(() => {})
+        .catch((err) => { console.log(err); });
+    }
   };
 
   const handleShowMore = () => {
@@ -113,12 +117,14 @@ const ReviewTile = ({ review }) => {
           <Body title = 'review-body'>{review.body}</Body>
         }
         <Photos images = {review.photos} />
-        <Recommend> {review.recommend ?
-          'Yes, I would recommend this product to a friend.' :
-          null } </Recommend>
+        {review.recommend ?
+          <Recommend>
+            <FaCheck /><span>    Yes, I would recommend this product to a friend.</span>
+          </Recommend> :
+          null }
         <Helpful>
           <div> Helpful? </div>
-          <HelpfulButton onClick = {handleHelpfulClick}> Yes ({helpful}) </HelpfulButton>
+          <HelpfulButton className = { !helpfulDisable ? 'active' : ''} onClick = {handleHelpfulClick}> Yes ({helpful}) </HelpfulButton>
         </Helpful>
         { review.response ? <div title = 'response'> {review.response} </div> : null }
       </ReviewContent>
@@ -131,21 +137,3 @@ const ReviewTile = ({ review }) => {
 
 
 export default ReviewTile;
-
-/* EXAMPLE DATA
-
-    {
-      'review_id': 1115703,
-      'rating': 3,
-      'summary': 'This is a good product Buy it please This is a good product Buy it, please',
-      'recommend': true,
-      'response': null,
-      'body': 'This is a good product Buy it please THere is a min number of charsThis is a good product Buy it please THere is a min number of chars',
-      'date': '2022-01-05T00:00:00.000Z',
-      'reviewer_name': 'notryano',
-      'helpfulness': 0,
-      'photos': []
-    }
-
-
-*/

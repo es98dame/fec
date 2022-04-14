@@ -5,7 +5,7 @@ const Button = styled.button`
   padding: 10px;
   width: 100%;
   margin 10px;
-  background-color: #242125;
+  background-color: ${props => props.theme.checkoutButton};
   border: 1px solid #403244;
   box-shadow: 2px 2px #403244;
   border-radius: 7px;
@@ -15,6 +15,7 @@ const Button = styled.button`
 
   &: hover{
     background-color: #1a7431;
+    cursor: pointer;
   }
 
   &:active{
@@ -26,10 +27,18 @@ const Button = styled.button`
 `;
 
 const NoButton = styled.button`
-  visibility: hidden;
   padding: 10px;
   width: 100%;
-  margin 10px
+  margin 10px;
+  background-color: ##8a888a;
+  border-radius: 7px;
+  color: #fff;
+  text-shadow: 1px 1px #000000;
+  font-size: 2.0rem;
+
+  &:hover{
+    cursor: no-drop;
+  }
 `;
 
 const Divs = styled.div`
@@ -43,9 +52,10 @@ const Dropdown = styled.select`
   width: 45%;
   margin 10px;
   text-align: center;
-  border: 2px solid #030303;
-  color: #030303;
+  border: 2px solid  ${props => props.theme.color};
+  color: ${props => props.theme.color};
   border-radius: 7px;
+  background-color: ${props => props.theme.background};
 `;
 
 const CheckingOut = (props) => {
@@ -77,7 +87,6 @@ const CheckingOut = (props) => {
     setSelectedCount(event.target.value);
   };
 
-
   return (
     <div>
       <Divs>
@@ -91,7 +100,7 @@ const CheckingOut = (props) => {
         </Dropdown>
 
         <Dropdown value={selectedCount} onChange={handleSelectCount}>
-          {selectedSize === '' || 'Select Size'
+          {selectedCount === undefined
             ? <option>-</option>
             : <option>1</option>}
           {skusArr.map((key) => {

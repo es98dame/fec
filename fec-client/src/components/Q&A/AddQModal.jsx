@@ -13,11 +13,12 @@ const ModalWrapper = styled.div`
   overflow-y: auto;
   outline: 0;
   background-color: rgba(0, 0, 0, .8);
+  font-family: 'open sans';
 `;
 
 const Modal = styled.div`
   z-index: 100;
-  background: cornsilk;
+  background: ${props => props.theme.background};
   position: relative;
   margin: 1.75rem auto;
   border-radius: 3px;
@@ -29,7 +30,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid ${props =>props.theme.color};
   background-color: inherit;
 `;
 
@@ -79,6 +80,8 @@ const Field = styled.div`
 
 const NicknameInput = styled.input`
   width: 190px;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const Advisory = styled.span`
@@ -89,11 +92,20 @@ const Advisory = styled.span`
 const QuestionBody = styled.textarea`
   height: 70px;
   flex: auto;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const SubmitButton = styled.button`
   width: 9em;
   align-self: flex-end;
+  background-color: ${props =>props.theme.darkgrayToLight};
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  &:hover {
+    color: lightgrey;
+  };
 `;
 
 const ErrorLabel = styled.label`
@@ -107,7 +119,7 @@ const InvalidList = styled.ul`
 
 const emailRegEx = /^([\w\.-]+)@([a-zA-z]{3,9})\.([a-zA-Z]{2,5})$/;
 
-const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmission}) => {
+const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) => {
   const [invalidEntries, setInvalidEntries] = useState([]);
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
@@ -137,11 +149,11 @@ const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmiss
     let valid = true;
     let entries = [];
 
-    if (!question.length) {
+    if (!question.length || question.length > 1000) {
       entries.push('A question');
       valid = false;
     }
-    if (!nickname.length) {
+    if (!nickname.length || nickname.length > 60) {
       entries.push('Your nickname');
       valid = false;
     }
@@ -153,8 +165,13 @@ const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmiss
     setInvalidEntries(entries);
 
     if (valid) {
-      let inputs = [nickname, email, question];
-      handleQSubmission(inputs);
+      let body = {
+        body: question,
+        name: nickname,
+        email: email,
+        product_id: productId
+      };
+      handleQSubmission(body);
       setEmail('');
       setNickname('');
       setQuestion('');
@@ -162,10 +179,10 @@ const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmiss
     }
   };
 
-  return show ? ReactDom.createPortal(
+  return show ?
     (<>
-      <ModalWrapper onClick={() => handleExit(hide)}>
-        <Modal onClick={(e) => e.stopPropagation()}>
+      <ModalWrapper>
+        <Modal>
           <Header>
             <Title>
               <TitleName>Ask Your Question</TitleName>
@@ -183,7 +200,7 @@ const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmiss
             </Field>
             <Field>
               <label>Your email*</label>
-              <input type="text" name="email" placeholder={'Why did you like the product or not?'} value={email} onChange={(e) => handleTextChange(e)}></input>
+              <NicknameInput type="text" name="email" placeholder={'Why did you like the product or not?'} value={email} onChange={(e) => handleTextChange(e)}></NicknameInput>
               <Advisory>For authentication reasons, you will not be emailed</Advisory>
             </Field>
             <Field>
@@ -199,8 +216,7 @@ const AddQModal = ({ show, hide, productName = 'Current Product', handleQSubmiss
           </Form>
         </Modal>
       </ModalWrapper>
-    </>), document.getElementById('app')
-  ) : null;
+    </>) : null;
 };
 
 export default AddQModal;

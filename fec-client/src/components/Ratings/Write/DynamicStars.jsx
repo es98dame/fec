@@ -11,9 +11,17 @@ display: flex;
 flex-direction: row;
 `;
 
-const DynamicStars = () => {
+const Selection = styled.div`
+font-style: italic;
+margin-left: 10px;
+`;
+
+const selections = ['Good', 'Fair', 'Average', 'Good', 'Great'];
+
+const DynamicStars = ({setRating}) => {
   const [fills, setFills] = useState([0, 0, 0, 0, 0]);
   const [clicked, setClicked] = useState(false);
+  const [selection, setSelection] = useState('No rating selected');
 
   const handleClick = (num) => {
     const newFills = [];
@@ -23,6 +31,8 @@ const DynamicStars = () => {
     }
     setFills(newFills);
     setClicked(true);
+    setRating(num + 1);
+    setSelection(selections[num]);
   };
 
   const handleMouseIn = (num) => {
@@ -33,11 +43,15 @@ const DynamicStars = () => {
         else { newFills.push(0); }
       }
       setFills(newFills);
+      setSelection(selections[num]);
     }
   };
 
   const handleMouseOut = () => {
-    if (!clicked) { setFills([0, 0, 0, 0, 0]); }
+    if (!clicked) {
+      setFills([0, 0, 0, 0, 0]);
+      setSelection('No rating selected');
+    }
   };
 
   return (
@@ -47,6 +61,7 @@ const DynamicStars = () => {
           <Star fill = {fills[item]} size = {'30'}/>
         </div>
       ))}
+      <Selection> {selection} </Selection>
     </StarRow>
   );
 
