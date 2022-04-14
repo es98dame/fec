@@ -175,7 +175,7 @@ const Images = (props) => {
         </ModalImagesDiv>
         <ModalCarrosselDiv>
           <ModalButton onClick={handleBack}> &#x2190; </ModalButton>
-          <Image src={image}/>
+          <Image src={image} alt='an image displaying the current product style'/>
           <ModalButton onClick={handleNext}> &#x2192; </ModalButton>
         </ModalCarrosselDiv>
       </Modal>
@@ -188,7 +188,7 @@ const Images = (props) => {
         {currentIndex === 0
           ? <NoButton></NoButton>
           : <Button onClick={handleBack}> &#x2190; </Button>}
-        <Image src={image} onClick={handleOpen}/>
+        <Image src={image} onClick={handleOpen} alt='an image displaying the current product style'/>
         {currentIndex === images.length - 1
           ? <NoButton></NoButton>
           : <Button onClick={handleNext}> &#x2192; </Button>}
