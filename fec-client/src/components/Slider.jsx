@@ -46,6 +46,7 @@ const Input = styled.input`
 
 const handdleChange = (func, state) => {
   func(!state);
+  window.localStorage.setItem('DarkMode', !state);
 };
 
 const Slider = ({setDarkMode, darkMode}) => {
