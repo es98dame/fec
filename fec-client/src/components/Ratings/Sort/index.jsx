@@ -16,8 +16,9 @@ const Select = styled.select`
   padding: 10px;
   margin 10px;
   text-align: center;
-  border: 1px solid #242124;
-  color: #242124;
+  border: 1px solid ${props => props.theme.color};
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
   border-radius: 7px;
 `;
 

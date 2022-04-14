@@ -50,8 +50,8 @@ height: 20px;
 const Button = styled.button`
   padding: 5px;
   margin 10px;
-  background-color: #242125;
-  border: 1px solid #403244;
+  background-color: ${props => props.theme.darkgrayToLight};
+  border: 1px solid ${props => props.theme.background};
   border-radius: 7px;
   color: #fff;
 

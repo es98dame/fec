@@ -21,7 +21,7 @@ const ModalWrapper = styled.div`
 
 const ModalContainer = styled.div`
   z-index: 100;
-  background: #e5e8ed;
+  background: ${props => props.theme.background };
   position: relative;
   margin: 1.75rem auto;
   border-radius: 3px;
@@ -132,7 +132,7 @@ const SubmitButton = styled.button`
   &:hover {
     color: lightgrey;
   }
-  background-color: #242125;
+  background-color: ${props => props.theme.darkgrayToLight};
   color: white;
   border-radius: 3px;
 `;
@@ -153,15 +153,15 @@ const FileHidden = styled.input`
 `;
 
 const UploadButton = styled.label`
-  border: solid 1px;
-  width: 18%;
+  border: solid 1px ${props => props.theme.darkgrayToLight};
+  width: 20%;
   padding: 2px 6px;
   font-size: 15px;
   cursor: pointer;
   &:hover {
     color: lightgrey;
   };
-  background-color: #242125;
+  background-color: ${props => props.theme.darkgrayToLight};
   color: white;
   border-radius: 3px;
 `;
@@ -271,7 +271,7 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
   };
 
 
-  return reactDom.createPortal((
+  return (
     <ModalWrapper>
       <ModalContainer>
         <Heading>
@@ -314,7 +314,7 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
         </Form>
       </ModalContainer>
     </ModalWrapper>
-  ), container);
+  )
 };
 
 

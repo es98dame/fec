@@ -6,7 +6,6 @@ const Image = styled.img`
   width: 80%;
   object-position: center;
   object-fit: contain;
-
 `;
 
 const ImagesDiv = styled.div`
@@ -33,7 +32,7 @@ const CarrosselDiv = styled.div`
   padding: 5px;
   height: 45rem;
   justify-content: space-between;
-  background-color: #242125;
+  background-color: ${props => props.theme.imagesBackground};
 `;
 
 const ModalCarrosselDiv = styled.div`
@@ -62,7 +61,7 @@ const Button = styled.button`
   color: lightgrey;
 
   &:hover{
-    background-color: #4b464d;
+    background-color: ${props => props.theme.caroselHighlight};
     cursor: pointer;
   }
   `;

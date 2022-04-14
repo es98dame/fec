@@ -35,7 +35,7 @@ const Link = styled.a`
     color: grey;
   },
   a:link {
-    color: ${ props => props.color || '#111213' }
+    color: ${ props => props.theme.color }
   }
 `;
 

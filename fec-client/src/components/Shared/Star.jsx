@@ -11,7 +11,7 @@ const Star = ({fill, size, color}) => {
           <stop offset = {`${fill}%`} stopColor = "#BAC3BA"></stop>
         </linearGradient>
       </defs>
-      <path fill={`url(#gradient-${fill})`} stroke="white" d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"> </path>
+      <path fill={`url(#gradient-${fill})`} d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"> </path>
     </svg>
   );
 

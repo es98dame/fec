@@ -35,10 +35,11 @@ const Input = styled.input`
   display: none;
 
   &:checked + ${Switch}{
-    background-color: green;
+    background-color: #242124;
 
     &:before {
       transform: translate(32px, -50%);
+      background: #4b464d;
     }
   }
 `;
