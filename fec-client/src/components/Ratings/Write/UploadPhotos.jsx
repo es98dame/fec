@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import {CLOUDINARY} from '../../../../../server/config/config.js';
 
 const cloudName = 'daxw4bdp6';
-const upload_preset = 'grzngc1a';
+const upload_preset = CLOUDINARY;
 
 const Thumbnails = styled.div`
 display: flex;
