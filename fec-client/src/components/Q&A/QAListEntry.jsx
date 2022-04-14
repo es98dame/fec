@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import AListEntry from './AListEntry.jsx';
-import AddAModal from './AddAmodal.jsx';
+import AddAModal from './AddAModal.jsx';
 
 const ContainerRow = styled.div`
   display: flex;
