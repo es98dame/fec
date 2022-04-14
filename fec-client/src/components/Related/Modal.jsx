@@ -12,6 +12,7 @@ const Modaltrue = styled.div`
   width:100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+  color : black
   display: block;
   z-index : 35;
 `;
@@ -35,6 +36,7 @@ const Modalmain = styled.section`
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
+  color: black;
 `;
 
 const StyledTable = styled.table`

@@ -22,7 +22,7 @@ visibility: hidden;
 const Div = styled.div`
 height: 10rem;
 width: 8rem;
-background-color: lightgray;
+background-color: ${props => props.theme.lightgrayToDark};
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
@@ -41,8 +41,8 @@ align-items: center;
 const Button = styled.button`
   padding: 5px;
   margin 10px;
-  background-color: #242125;
-  border: 1px solid #403244;
+  background-color: ${props => props.theme.darkgrayToLight};
+  border: 1px solid ${props => props.theme.background};
   border-radius: 7px;
   color: #fff;
   width: 4rem;

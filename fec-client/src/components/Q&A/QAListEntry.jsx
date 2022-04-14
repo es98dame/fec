@@ -17,7 +17,7 @@ const ContainerCol = styled.div`
 
 const QuestionRow = styled(ContainerRow)`
   margin-right: 5px;
-  background-color: #f1f1f1;
+  background-color: ${props => props.theme.lightgrayToDark};
   padding: 4px 0;
 `;
 
@@ -60,7 +60,7 @@ const Link = styled.a`
     color: grey;
   },
   a:link {
-    color: ${ props => props.color || '#111213' }
+    color: ${ props => props.theme.color }
   }
 `;
 
@@ -70,13 +70,13 @@ const Button = styled.button`
   margin-left: .6em;
   cursor: pointer;
   height: auto;
-  background-color: #242125;
+  background-color: ${props => props.theme.darkgrayToLight};
   width: 13%;
   border-radius: 7px;
   &:hover {
     color: grey;
   }
-  border: 2px solid #030303;
+  border: 2px solid ${props => props.theme.background};
   color: white;
 `;
 

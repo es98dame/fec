@@ -10,12 +10,24 @@ import Slider from './components/Slider.jsx';
 
 const lightTheme = {
   background: '#fff',
-  color: '#242124'
+  color: '#242124',
+  imagesBackground: '#242124',
+  checkoutButton: '#242124',
+  lightgrayToDark: 'lightgray',
+  svgFillToLight: '#10451d',
+  darkgrayToLight: '#242125',
+  caroselHighlight: '#4b464d'
 };
 
 const darkTheme = {
   background: '#242124',
-  color: '#fff'
+  color: '#ddd',
+  imagesBackground: '#4b464d',
+  checkoutButton: '#4b464d',
+  lightgrayToDark: '#4b464d',
+  svgFillToLight: '#2c9646',
+  darkgrayToLight: '#726975',
+  caroselHighlight: '#242124'
 };
 
 const AppDiv = styled.div`
@@ -63,7 +75,7 @@ const Form = styled.form`
 
 const Nav = styled.div`
   margin: auto;
-  background-color: #242125;
+  background-color: ${props => props.theme.imagesBackground};
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -108,7 +120,14 @@ const App = () => {
   const productId = window.localStorage.getItem('ProductId') === null ?
     65635 : JSON.parse(window.localStorage.getItem('ProductId'));
 
+
   useEffect(()=> {
+    const DarkMode = window.localStorage.getItem('DarkMode');
+    if (DarkMode === 'true') {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
   }, [darkMode]);
 
   return (

@@ -23,7 +23,7 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-background-color: white;
+background-color: ${props => props.theme.background};
 height: 40rem;
 width: 35rem;
 &input, textarea, button {
@@ -84,11 +84,11 @@ font-size: small;
 const Button = styled.button`
   padding: 5px;
   margin 10px;
-  background-color: #242125;
-  border: 1px solid #403244;
+  background-color: ${props => props.theme.darkgrayToLight};
+  border: 1px solid ${props => props.theme.background};
   border-radius: 7px;
   color: #fff;
-  width: 20%;
+  width: 150px;
 
   &: hover{
     background-color: #4b464d;

@@ -10,7 +10,7 @@ justify-content: flex-start;
 width: 100%;
 
 &:hover {
-  background-color: lightgray;
+  background-color: ${props => props.theme.lightgrayToDark};
 }
 
 &.clicked {
@@ -33,8 +33,8 @@ const ReviewBar = ({ rating, num, total, toggleFilter, toggled }) => {
       <span>{rating} stars:</span>
       <svg id ='SVG-ID' viewBox = '0, 0, 100, 5' width = '70%'>
         <linearGradient id = {`gradient-${percent}`}>
-          <stop offset = {'0%'} stopColor = "#10451d"></stop>
-          <stop offset = {`${percent}%`} stopColor = "#10451d"></stop>
+          <stop offset = {'0%'} stopColor = "#1a7431"></stop>
+          <stop offset = {`${percent}%`} stopColor = "#1a7431"></stop>
           <stop offset = {`${percent}%`} stopColor = "#BAC3BA"></stop>
         </linearGradient>
         <rect fill = {`url(#gradient-${percent})`} width = '100' height = '5' />
