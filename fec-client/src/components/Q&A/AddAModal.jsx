@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { CLOUDINARY } from '../../../../server/config/config.js';
 
-console.log(CLOUDINARY);
 const url = 'https://api.cloudinary.com/v1_1/daxw4bdp6/image/upload';
 
 const ModalWrapper = styled.div`
