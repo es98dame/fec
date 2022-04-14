@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal.jsx';
 import PreviewImage from './PreviewImage.jsx';
+import { FaStar , FaTimesCircle } from 'react-icons/fa';
 
 const ProductCard = styled.div`
   display : flex;
@@ -17,17 +18,16 @@ const ProductCard = styled.div`
   }
 `;
 
-const ActionButton = styled.img`
+const ActionButton = styled.span`
+  display : flex;
   position : relative;
-  left:83%;
+  left:90%;
   z-index:7;
   &:hover {
-    transform: scale(1.3);
+    opacity: 0.7;
   }
 `;
 
-const starturl = 'https://img.icons8.com/ios-glyphs/30/000000/star--v1.png';
-const cancelurl = 'https://img.icons8.com/ios-glyphs/30/000000/cancel.png';
 const p = 'Product card';
 const o = 'Outfit card';
 const Card = ({productInfo, styleInfo, mode, deletehandle }) => {
@@ -39,9 +39,8 @@ const Card = ({productInfo, styleInfo, mode, deletehandle }) => {
       <ProductCard title = {mode === 'related' ? p : o}>
         <div>
           {mode === 'outfit'
-            ? <ActionButton src={cancelurl} onClick={() => { deletehandle(productInfo.id); }} />
-            : <ActionButton src={starturl} onClick={() => { setShow(!show); }} />}
-
+            ? <ActionButton onClick={() => { deletehandle(productInfo.id); }} > <FaTimesCircle/> </ActionButton>
+            : <ActionButton onClick={() => { setShow(!show); }} > <FaStar/> </ActionButton> }
         </div>
         {styleInfo !== undefined
           ? <PreviewImage productInfo={productInfo} styleInfo={styleInfo} /> : ''}

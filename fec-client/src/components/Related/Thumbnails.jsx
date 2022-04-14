@@ -28,6 +28,7 @@ const Thumbnails = ({ results, imageClick, updatePrice }) => {
           imageClick(results.photos[0].thumbnail_url),
           updatePrice(results.sale_price);
         }}
+        alt="It's loading"
       />
     </ThumbList>
   );
