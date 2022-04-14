@@ -53,13 +53,13 @@ const ExitButton = styled.button`
   z-index: inherit;
 `;
 
-const PhotoModal = ({hide, photo}) => {
+const PhotoModal = ({hide, photo, answerer}) => {
   const container = document.getElementById('app');
 
   return reactDom.createPortal((
     <ModalWrapper>
       <ImageContainer>
-        <Image src={photo}/>
+        <Image src={photo} alt={`Photo from ${answerer}`}/>
         <ExitButton onClick={hide}>&times;</ExitButton>
       </ImageContainer>
     </ModalWrapper>

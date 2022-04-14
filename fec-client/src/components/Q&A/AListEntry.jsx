@@ -111,7 +111,7 @@ const AListEntry = ({answer, askerName}) => {
         <Link onClick={handleHelpfulYes}>{' '}Yes({count}){' '}</Link>
         <Link onClick={handleReport}>{report}</Link>
       </UserContainer>
-      {showModal ? <PhotoModal photo={photoURL.current} hide={() => setShowModal(false)}/> : null}
+      {showModal ? <PhotoModal photo={photoURL.current} hide={() => setShowModal(false)} answerer={answerer} /> : null}
     </AnswerContainer>
   );
 };
