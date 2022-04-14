@@ -141,8 +141,8 @@ const App = () => {
           <H3>Products</H3>
           <H3>Cart</H3>
           <Form>
-            <Button type="submit"><i className="fa fa-search"></i></Button>
-            <Input type='text'></Input>
+            <Button type="submit" aria-label={'fake search'}><i className="fa fa-search"></i></Button>
+            <Input aria-label={'fake search line'} type='text'></Input>
           </Form>
           <Slider setDarkMode={setDarkMode} darkMode={darkMode}/>
         </Nav>
