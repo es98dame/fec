@@ -36,12 +36,11 @@ const LeftButton = styled.button`
   font-size: 17px;
   padding: 10px;
   outline: none;
-  border-radius: 4px;
-
+  border-radius: 13px;
   &:hover {
-    color: #001F3F;
-    background-color: #fff;
-}
+    opacity: 1;
+    border: 3px solid black;
+  }
 `;
 
 const RightButton = styled.button`
@@ -58,8 +57,11 @@ const RightButton = styled.button`
 
   padding: 10px;
   outline: none;
-  border-radius: 4px;
-
+  border-radius: 13px;
+  &:hover {
+    opacity: 1;
+    border: 3px solid black;
+  }
 `;
 
 const Textarea = styled.div`
@@ -94,6 +96,7 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   const imageClick = (url) => {
+    setImageIndex(0);
     setMain(url);
   };
 
@@ -106,7 +109,22 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
     setDiscountprice(salesprice);
   };
 
-  const getColor = () => (discountprice === null ? 'black' : 'red');
+  const getColor = () => {
+    if (JSON.parse(window.localStorage.getItem('DarkMode'))) {
+      if (discountprice === null) {
+        return 'white';
+      } else {
+        return 'red';
+      }
+    } else {
+      if (discountprice === null) {
+        return 'black';
+      } else {
+        return 'red';
+      }
+    }
+  };
+
   const getDecor = () => (discountprice === null ? 'none' : ' line-through');
 
   const showthumbs = (value) => {
@@ -150,14 +168,8 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
               : <RightButton onClick={nextPhoto}> → </RightButton> }
           </Preview>
         )
-        : (<Preview>
-          {imageIndex === 0 ? '' : <LeftButton onClick={prevPhoto}> ← </LeftButton> }
-          <Image src={main} onClick={updateId} />
-          {imageIndex + 1 === styleInfo.results[0].photos.length ? ''
-            : <RightButton onClick={nextPhoto}> → </RightButton> }
-        </Preview> )
+        : <Preview><Image src={main} alt="Oops! no image" /></Preview>
       }
-      {/* // <Preview><Image src={main} alt="Oops! no image" /></Preview>} */}
 
       <ThumbContainer ref={thumbcontainer}>
         { styleInfo.results instanceof Array

@@ -108,7 +108,14 @@ const App = () => {
   const productId = window.localStorage.getItem('ProductId') === null ?
     65635 : JSON.parse(window.localStorage.getItem('ProductId'));
 
+
   useEffect(()=> {
+    const DarkMode = window.localStorage.getItem('DarkMode');
+    if (DarkMode === 'true') {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
   }, [darkMode]);
 
   return (
