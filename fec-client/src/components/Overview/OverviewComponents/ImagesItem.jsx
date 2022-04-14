@@ -32,7 +32,7 @@ const ImagesItem = (props) => {
 
   return (
     <ImgDiv>
-      <Image src={props.image} onClick={handleClick}/>
+      <Image src={props.image} onClick={handleClick} alt='a thumbnail image displaying the current product style'/>
     </ImgDiv>
   );
 };
