@@ -2,7 +2,9 @@ import React, { useRef, useState } from 'react';
 import reactDom from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { CLOUDINARY } from '../../../../server/config/config.js';
 
+console.log(CLOUDINARY);
 const url = 'https://api.cloudinary.com/v1_1/daxw4bdp6/image/upload';
 
 const ModalWrapper = styled.div`
@@ -101,6 +103,8 @@ const Field = styled.div`
 
 const NicknameInput = styled.input`
   width: 190px;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const Advisory = styled.span`
@@ -111,6 +115,8 @@ const Advisory = styled.span`
 const AnswerBody = styled.textarea`
   height: 70px;
   flex: auto;
+  color: ${props => props.theme.color};
+  background: ${props => props.theme.background};
 `;
 
 const ImageRow = styled.div`
@@ -212,7 +218,7 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
   };
 
   const sendToCloud = (inputs, files) => {
-    let uploads = files.map((file) => axios.post(url, { upload_preset: 'grzngc1a', file: file }) );
+    let uploads = files.map((file) => axios.post(url, { upload_preset: CLOUDINARY, file: file }) );
 
     Promise.all(uploads)
       .then((results) => {
@@ -290,7 +296,7 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
           </Field>
           <Field>
             <label>Your email*</label>
-            <input type="text" name="email" placeholder={'Example: jack@email.com'} value={email} onChange={(e) => handleTextChange(e)}></input>
+            <NicknameInput type="text" name="email" placeholder={'Example: jack@email.com'} value={email} onChange={(e) => handleTextChange(e)}></NicknameInput>
             <Advisory>For authentication reasons, you will not be emailed</Advisory>
           </Field>
           <Field>
