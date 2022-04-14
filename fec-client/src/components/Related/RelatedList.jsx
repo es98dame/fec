@@ -48,9 +48,7 @@ const Button = styled.button`
   padding-right: 10px;
   opacity: 1;
   line-height: 25;
-  color : black;
   transition: all .5s ease;
-  background-color : transparent;
 
   &:hover {
     transition: all 0.3s ease-in-out;
