@@ -2,9 +2,10 @@ node_modules
 bundle.js
 .eslintrc.js
 hooksPractice.jsx
-package.json
+package.jsongit
 package-lock.json
 webpack.config.js
 config.js
 memo
 coverage
+dami-branch.pem
