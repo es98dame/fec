@@ -19,7 +19,7 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  background-color: white;
+  background-color: ${props => props.theme.background};
   width: 50%;
   height: 80%;
 `;
