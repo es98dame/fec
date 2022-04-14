@@ -31,7 +31,6 @@ const darkTheme = {
 };
 
 const AppDiv = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
   font-family: 'Open Sans', sans-serif;
   color: ${props => props.theme.color};
   background: ${props => props.theme.background};
@@ -136,7 +135,7 @@ const App = () => {
       : lightTheme}>
       <AppDiv>
         <Nav>
-          <img src={PA}/>
+          <img src={PA} alt='an image of the company logo'/>
           <H3>Home</H3>
           <H3>Products</H3>
           <H3>Cart</H3>

@@ -55,7 +55,7 @@ const StylesItem = (props) => {
       {props.selectedStyle === props.style.style_id
         ? <Overlay>&#x2714;</Overlay>
         : <div></div>}
-      <Image src={photos} onClick={handleClick}/>
+      <Image src={photos} onClick={handleClick} alt='a thumbnail image displaying a different product style'/>
     </StylesDiv>
   );
 };
