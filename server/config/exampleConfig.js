@@ -6,12 +6,6 @@ var API_KEY = 'YOUR_API_KEY_HERE';
 
 module.exports = {API_KEY};
 
-module.exports = {
-  TOKEN: 'token_here',
-  url: 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp',
-  auth: { headers: { Authorization: '' } }
-};
-
 router.get('/products', overview.getProducts);
 router.get('/products/:productId', overview.getProductById);
 router.get('/products/:productId/styles', overview.getStyles);

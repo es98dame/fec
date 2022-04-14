@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import dateformat from 'dateformat';
+import moment from 'moment';
 import axios from 'axios';
 import { FaCheck } from 'react-icons/fa';
 
@@ -105,7 +105,7 @@ const ReviewTile = ({ review }) => {
     <Tile title = 'Tile'>
       <UserInfo>
         <Name>{review.reviewer_name}</Name>
-        <Date>{dateformat(review.date, 'mmmm dd, yyyy')}</Date>
+        <Date>{moment(review.date).format('MMMM Do, YYYY')}</Date>
       </UserInfo>
       <ReviewContent>
         <Stars rating = {review.rating}/>
@@ -116,7 +116,7 @@ const ReviewTile = ({ review }) => {
           </Body> :
           <Body title = 'review-body'>{review.body}</Body>
         }
-        <Photos images = {review.photos} />
+        <Photos images = {review.photos} user = {review.reviewer_name}/>
         {review.recommend ?
           <Recommend>
             <FaCheck /><span>    Yes, I would recommend this product to a friend.</span>
