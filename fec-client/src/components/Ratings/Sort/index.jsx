@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import relevance from './relevance.js';
 
 const Div = styled.div`
   margin: 10px;
@@ -22,37 +21,17 @@ const Select = styled.select`
   border-radius: 7px;
 `;
 
-
-
-//COMPARATORS -Help!!!!
-
-const newest = (a, b) => a.date < b.date ? 1 : -1;
-const helpful = (a, b) => b.helpfulness - a.helpfulness;
-
-const Sort = ({currentData, setCurrentData}) => {
-
-  const [value, setValue] = useState('Sort');
+const Sort = ({ fetch }) => {
 
   const handleChange = (e) => {
-    let comparator;
-    if (e.target.value === 'newest') {
-      comparator = newest;
-    }
-    if (e.target.value === 'helpful') {
-      comparator = helpful;
-    }
-    if (e.target.value === 'relevance') {
-      comparator = relevance;
-    }
-    const sortedData = [...currentData].sort(comparator);
-    setCurrentData(sortedData);
+    fetch(e.target.value);
   };
 
   return (
     <Div title = 'sort'>
       <Label> Sort by:
         <Select onChange = {handleChange}>
-          <option value = 'relevance'>Relevance</option>
+          <option value = 'relevant'>Relevance</option>
           <option value = 'newest'>Newest</option>
           <option value = 'helpful'>Most Helpful</option>
         </Select>
@@ -62,11 +41,3 @@ const Sort = ({currentData, setCurrentData}) => {
 };
 
 export default Sort;
-
-//dropdown
-
-//Should I write a comparator?
-//const helpfulness(default) = (a, b) => b.helpfulness - a.helpfulness
-//const newest = (a,b) => b.date - a.date
-//const relevant = combo index.
-//calculate as an index: date/Today's Date + helpful/10
