@@ -27,7 +27,7 @@ const Right = styled.div`
   width: 60%;
 `;
 
-const Ratings = ({productId, setAvg, productName}) => {
+const Ratings = ({productId, setTotalAndAvg, productName}) => {
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [metaData, setMetaData] = useState({});
@@ -46,7 +46,7 @@ const Ratings = ({productId, setAvg, productName}) => {
     axios.get('/api', {headers: {path: `/reviews/meta?product_id=${productId}`}})
       .then((response) => {
         setMetaData(response.data);
-        setAvg(countTotalAndAverage(response.data.ratings)[1]);
+        setTotalAndAvg(countTotalAndAverage(response.data.ratings));
       })
       .catch((err) => console.log(err));
   }, []);

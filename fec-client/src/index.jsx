@@ -2,10 +2,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 
+const SeeAllRegEx = /(See all) ([0-9]+) (ratings)/gi;
+
 const checkForModule = (path, e) => {
   let standard = [ 'App', 'Overview', 'RelatedList', 'QA', 'Ratings'];
 
-  if (e.target.nodeName === 'svg' || e.target.innerText === 'See all (number) ratings') {
+  if (e.target.nodeName === 'svg' || SeeAllRegEx.test(e.target.innerText)) {
     let allModules = [];
 
     for (let component of path) {

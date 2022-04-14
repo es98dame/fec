@@ -124,23 +124,29 @@ const ProductSpecs = (props) => {
   return (
     <Container>
       <Ratings>
-        <Stars rating={props.avg} size={32}/>
-        <Link onClick={handleScroll}>See all (number) ratings</Link>
+        <Stars rating={props.totalAndAvg[1]} size={32}/>
+        <Link onClick={handleScroll}>See all {props.totalAndAvg[0]} ratings</Link>
       </Ratings>
       <Bolds>Category: {props.currentProduct.category}</Bolds>
       <h3>{props.currentProduct.name}</h3>
+
       {props.currentStyle.sale_price
         ? <h4><StrikeThrough>&#x24;{props.currentStyle.original_price}</StrikeThrough> &#x24;{props.currentStyle.sale_price} </h4>
-        : <h4>&#x24;{props.currentStyle.original_price}</h4>}
+        : <h4>&#x24;{props.currentStyle.original_price}</h4>
+      }
+
       <Bolds>{props.currentProduct.slogan}</Bolds>
       <Description>{props.currentProduct.description}</Description>
+
       {props.currentProduct.features && props.currentProduct.features.length
         ? <Features>
-          {props.currentProduct.features.map((feature) =>
-            <li>{feature.value} {feature.feature}</li>
+          {props.currentProduct.features.map((feature, key) =>
+            <li key={key}>{feature.value} {feature.feature}</li>
           )}
         </Features>
-        : <div> nothing to feature</div>}
+        : <div> nothing to feature</div>
+      }
+
       <ShareDiv>
         <Facebook className="fa fa-facebook"></Facebook>
         <Twitter className="fa fa-twitter"></Twitter>
