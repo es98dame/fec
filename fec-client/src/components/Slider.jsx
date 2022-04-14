@@ -52,7 +52,13 @@ const handdleChange = (func, state) => {
 const Slider = ({setDarkMode, darkMode}) => {
   return (
     <Label className="switch">
-      <Input type="checkbox" onChange={() => handdleChange(setDarkMode, darkMode)}/>
+      <Input type="checkbox"
+        onChange={() => handdleChange(setDarkMode, darkMode)}
+        checked={ darkMode
+          ? true
+          : false
+        }
+      />
       <Switch className="slider round"></Switch>
     </Label>
   );

@@ -113,7 +113,7 @@ border-bottom: 1px solid lightgrey;
 
 const App = () => {
   const [productName, setProductName] = useState('none');
-  let [avg, setAvg] = useState(0);
+  let [totalAndAvg, setTotalAndAvg] = useState([0, 0]);
   const [darkMode, setDarkMode] = useState(false);
 
   //default value is '65635'
@@ -148,7 +148,7 @@ const App = () => {
         </Nav>
         <div>
           <OverviewDiv>
-            <Overview productId={productId} setProductName={setProductName} avg={avg}/>
+            <Overview productId={productId} setProductName={setProductName} totalAndAvg={totalAndAvg}/>
           </OverviewDiv>
 
           <RelatedDiv>
@@ -160,7 +160,7 @@ const App = () => {
           </QandADiv>
 
           <RatingsDiv>
-            <Ratings productId={productId} setAvg = {setAvg} productName = {productName}/>
+            <Ratings productId={productId} setTotalAndAvg = {setTotalAndAvg} productName = {productName}/>
           </RatingsDiv>
         </div>
       </AppDiv>
