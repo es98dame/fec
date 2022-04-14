@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import reactDom from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import { CLOUDINARY } from '../../../../config.js';
+import { CLOUDINARY } from '../../../../server/config/config.js';
 
 const url = 'https://api.cloudinary.com/v1_1/daxw4bdp6/image/upload';
 

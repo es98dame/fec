@@ -131,6 +131,8 @@ const QAListEntry = ({question, productName, productId, updateAllStorages}) => {
         let sorted = sortSeller(orderedAnswers);
         sortedAnswers.current = sorted;
 
+         console.log(sorted);
+
         buttonText === 'See More Answers' ? setAnswers(sorted.slice(0, 2)) : setAnswers(sorted);
         updateAllStorages(sorted, question.question_id);
       })
