@@ -69,7 +69,7 @@ const Overview = (props) => {
           <Images currentStyle={currentStyle}/>
         </ImagesDiv>
         <Content title='Product-specs'>
-          <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct} avg={props.avg}/>
+          <ProductSpecs currentStyle={currentStyle} currentProduct={currentProduct} totalAndAvg={props.totalAndAvg}/>
 
           <Styles styles={styles} currentStyle={currentStyle} set={setCurrentStyle}/>
 
