@@ -6,7 +6,6 @@ import RatingsBreakdown from './RatingsBreakdown';
 import Write from './Write';
 import Sort from './Sort';
 import countTotalAndAverage from '../Shared/countTotalAndAverage.js';
-import relevance from './Sort/relevance.js';
 
 const RatingsContainer = styled.div`
   font-weight: 300;
@@ -37,7 +36,7 @@ const Ratings = ({productId, setTotalAndAvg, productName}) => {
     axios.get('/api', {headers: {path: `/reviews?product_id=${productId}&count=200`}})
       .then((response) => {
         setData(response.data.results);
-        setCurrentData(response.data.results.sort(relevance));
+        setCurrentData(response.data.results);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -57,7 +56,15 @@ const Ratings = ({productId, setTotalAndAvg, productName}) => {
     } else {
       setCurrentData(data.filter(review => filters[review.rating - 1]));
     }
-  }, [filters]);
+  }, [filters, data]);
+
+  const fetch = (sortOption) => {
+    axios.get('/api', {headers: {path: `/reviews?product_id=${productId}&count=200&sort=${sortOption}`}})
+      .then((response) => {
+        setData(response.data.results);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <RatingsContainer>
@@ -66,7 +73,7 @@ const Ratings = ({productId, setTotalAndAvg, productName}) => {
         <RatingsBreakdown metaData = { metaData } setFilters = {setFilters}/>
       </Left>
       <Right>
-        <Sort currentData = {currentData} setCurrentData = {setCurrentData}/>
+        <Sort fetch = {fetch}/>
         <ReviewList reviews = {currentData}/>
         <Write relevantChars = {metaData.characteristics} productId = {productId} productName = {productName}/>
       </Right>

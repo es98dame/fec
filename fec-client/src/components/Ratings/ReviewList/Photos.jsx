@@ -12,7 +12,7 @@ const Image = styled.img`
 height: 6rem;
 `;
 
-const Photos = ({ images }) => {
+const Photos = ({ images, user }) => {
   const [modal, setModal] = useState(false);
   const [currentImage, setCurrentImage] = useState(null);
 
@@ -25,7 +25,7 @@ const Photos = ({ images }) => {
     <div>
       <ImageContainer>
         {images.map(image => (
-          <Image src={image.url} key = {image.id} onClick = {() => handleModal(image)}></Image>
+          <Image src={image.url} alt={`Image accompanying review by ${user}`} key = {image.id} onClick = {() => handleModal(image)}></Image>
         ))}
       </ImageContainer>
       { modal ? <Modal image = {currentImage} handleModal = {handleModal}/> : null }
