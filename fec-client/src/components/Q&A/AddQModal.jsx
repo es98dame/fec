@@ -18,7 +18,7 @@ const ModalWrapper = styled.div`
 
 const Modal = styled.div`
   z-index: 100;
-  background: #e5e8ed;
+  background: ${props => props.theme.background};
   position: relative;
   margin: 1.75rem auto;
   border-radius: 3px;
@@ -30,7 +30,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid ${props =>props.theme.color};
   background-color: inherit;
 `;
 
@@ -95,7 +95,7 @@ const QuestionBody = styled.textarea`
 const SubmitButton = styled.button`
   width: 9em;
   align-self: flex-end;
-  background-color: #242125;
+  background-color: ${props =>props.theme.darkgrayToLight};
   color: white;
   border-radius: 3px;
   cursor: pointer;
@@ -175,7 +175,7 @@ const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) =>
     }
   };
 
-  return show ? ReactDom.createPortal(
+  return show ?
     (<>
       <ModalWrapper>
         <Modal>
@@ -212,8 +212,7 @@ const AddQModal = ({ show, hide, productName, handleQSubmission, productId }) =>
           </Form>
         </Modal>
       </ModalWrapper>
-    </>), document.getElementById('app')
-  ) : null;
+    </>) : null;
 };
 
 export default AddQModal;

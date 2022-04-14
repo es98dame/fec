@@ -29,6 +29,7 @@ const ImageDisplay = styled.img`
   object-fit: contain;
   object-position: center;
   height: 90%;
+  max-width: 90%;
   }
 `;
 

@@ -28,14 +28,13 @@ const LeftButton = styled.button`
   left: 0;
   top: 137px;
   text-align: center;
-  opacity: 1;
-  color : white;
-  border: solid 3px white;
+  opacity: 0.7;
+
+
   transition: all .5s ease;
-  border: 3px solid white;
+
   line-height: 0.5;
   font-size: 17px;
-  background-color : transparent;
   padding: 10px;
   outline: none;
   border-radius: 4px;
@@ -52,14 +51,12 @@ const RightButton = styled.button`
   right: 0;
   top: 137px;
   text-align: center;
-  opacity: 1;
-  color : white;
-  border: solid 3px white;
+  opacity: 0.7;
+
   transition: all .5s ease;
-  border: 3px solid white;
   line-height: 0.5;
   font-size: 17px;
-  background-color : transparent;
+
   padding: 10px;
   outline: none;
   border-radius: 4px;

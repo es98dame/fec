@@ -9,7 +9,6 @@ const ProductCard = styled.div`
   position : relative;
   border: solid;
   border-color: lightgray;
-  background : white;
 
   &:hover {
     border-color: black;

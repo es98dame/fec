@@ -50,7 +50,6 @@ const Button = styled.button`
   line-height: 25;
   color : black;
   transition: all .5s ease;
-  background-color : transparent;
 
   &:hover {
     transition: all 0.3s ease-in-out;

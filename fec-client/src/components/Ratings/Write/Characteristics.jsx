@@ -15,7 +15,7 @@ const Selection = styled.span`
 `;
 
 const Stuff = styled.div`
-background-color: lightgray;
+background-color: ${props => props.theme.lightgrayToDark};
 padding: 5px;
 border-radius: 5px;
 `;

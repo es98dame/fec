@@ -32,6 +32,7 @@ const Link = styled.span`
   gap: 1rem;
   font-weight: 300;
   text-decoration: underline;
+  color: ${props => props.theme.color};
 
   &:hover{
     color: #cccccc;

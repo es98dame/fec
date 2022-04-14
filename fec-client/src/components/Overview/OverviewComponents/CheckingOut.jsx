@@ -5,7 +5,7 @@ const Button = styled.button`
   padding: 10px;
   width: 100%;
   margin 10px;
-  background-color: #242125;
+  background-color: ${props => props.theme.checkoutButton};
   border: 1px solid #403244;
   box-shadow: 2px 2px #403244;
   border-radius: 7px;
@@ -52,9 +52,10 @@ const Dropdown = styled.select`
   width: 45%;
   margin 10px;
   text-align: center;
-  border: 2px solid #030303;
-  color: #030303;
+  border: 2px solid  ${props => props.theme.color};
+  color: ${props => props.theme.color};
   border-radius: 7px;
+  background-color: ${props => props.theme.background};
 `;
 
 const CheckingOut = (props) => {

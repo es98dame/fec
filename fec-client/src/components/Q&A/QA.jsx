@@ -21,12 +21,12 @@ const Button = styled.button`
   cursor: pointer;
   height: 34px;
   width: 142px;
-  background-color: #242125;
+  background-color: ${props => props.theme.darkgrayToLight};
   &:hover {
     color: grey;
   }
   border-radius: 5px;
-  border: 2px solid #030303;
+  border: 2px solid ${props => props.theme.background};
   color: white;
   margin: 7px 0;
 `;

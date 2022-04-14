@@ -23,7 +23,7 @@ padding-top: 1%;
 padding-left: 1%;
 padding-right: 2%;
 
-background-color: #f1f1f1;
+background-color: ${props => props.theme.lightgrayToDark};
 border-radius: 2px;
 `;
 
