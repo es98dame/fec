@@ -28,14 +28,12 @@ const LeftButton = styled.button`
   left: 0;
   top: 137px;
   text-align: center;
-  opacity: 1;
-  color : white;
-  border: solid 3px white;
+  opacity: 0.7;
+
   transition: all .5s ease;
-  border: 3px solid white;
+
   line-height: 0.5;
   font-size: 17px;
-  background-color : transparent;
   padding: 10px;
   outline: none;
   border-radius: 4px;
@@ -52,22 +50,16 @@ const RightButton = styled.button`
   right: 0;
   top: 137px;
   text-align: center;
-  opacity: 1;
-  color : white;
-  border: solid 3px white;
+  opacity: 0.7;
+
   transition: all .5s ease;
-  border: 3px solid white;
   line-height: 0.5;
   font-size: 17px;
-  background-color : transparent;
+
   padding: 10px;
   outline: none;
   border-radius: 4px;
 
-  &:hover {
-    color: #001F3F;
-    background-color: #fff;
-}
 `;
 
 const Textarea = styled.div`
@@ -158,7 +150,14 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
               : <RightButton onClick={nextPhoto}> → </RightButton> }
           </Preview>
         )
-        : <Preview><Image src={main} alt="Oops! no image" /></Preview>}
+        : (<Preview>
+          {imageIndex === 0 ? '' : <LeftButton onClick={prevPhoto}> ← </LeftButton> }
+          <Image src={main} onClick={updateId} />
+          {imageIndex + 1 === styleInfo.results[0].photos.length ? ''
+            : <RightButton onClick={nextPhoto}> → </RightButton> }
+        </Preview> )
+      }
+      {/* // <Preview><Image src={main} alt="Oops! no image" /></Preview>} */}
 
       <ThumbContainer ref={thumbcontainer}>
         { styleInfo.results instanceof Array
