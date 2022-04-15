@@ -308,7 +308,7 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
             images.length < 5 ? <UploadButton htmlFor="files">Upload Image</UploadButton> : null
           }<FileHidden id="files" type="file" name="file" accept=".png,.jpeg,jpg,.gif" onChange={handleUpload}/>
           <ImageRow>
-            { images.length ? images.map((image) => <UploadedImage src={image} />) : null }
+            { images.length ? images.map((image) => <UploadedImage src={image} alt={'Your Photo Would Go Here'}/>) : null }
           </ImageRow>
           { invalidEntries.length > 0 ? (
             <Field>
