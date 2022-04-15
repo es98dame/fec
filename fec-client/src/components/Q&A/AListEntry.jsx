@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-<<<<<<< HEAD
-import PhotoModal from './PhotoModal.jsx';
-=======
 import PhotoModal from './PhotoModal';
->>>>>>> 3bb9bd9dee81de1613d18560bed9889d9fdbd008
 
 const AnswerContainer = styled.div`
   display: flex;

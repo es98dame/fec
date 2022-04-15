@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal.jsx';
 import PreviewImage from './PreviewImage.jsx';
-import { FaStar , FaTimesCircle } from 'react-icons/fa';
+import { FaStar, FaTimesCircle } from 'react-icons/fa';
 
 const ProductCard = styled.div`
   display : flex;
@@ -50,5 +50,3 @@ const Card = ({productInfo, styleInfo, mode, deletehandle }) => {
 };
 
 export default Card;
-
-// onClick={() => {deleteItemOutfit(i)}}
