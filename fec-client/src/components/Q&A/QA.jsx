@@ -176,7 +176,7 @@ const QA = ({productId, productName}) => {
       <H4>Questions And Answers</H4>
       <SearchForm title="live-search" type="submit">
         <StyledInput title="search-input" type="text" value={searchInput} onChange={ e => setSearchInput(e.target.value)} placeholder="Have a Question? Search for answers..."/>
-        <Icon aria-label="Questions and Answers Search" className="fa fa-search fa-lg"></Icon>
+        <Icon roll="search magnifying glass" className="fa fa-search fa-lg"></Icon>
         {/* <SearchIcon src={magnifyingGlass}/> */}
       </SearchForm>
       <QAList {...QAListProps}/>
