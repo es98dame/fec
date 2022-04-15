@@ -30,6 +30,9 @@ const checkForModule = (path, e) => {
     }
   } else {
     for (let component of path) {
+      if (component.id === 'app') {
+        break;
+      }
       for (let moduleName of standard) {
         if (typeof component.className === 'object') {
           continue;

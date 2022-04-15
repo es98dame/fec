@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import PhotoModal from './PhotoModal';
+import PhotoModal from './PhotoModal.jsx';
+
 
 const AnswerContainer = styled.div`
   display: flex;
@@ -111,7 +112,7 @@ const AListEntry = ({answer, askerName}) => {
         <Link onClick={handleHelpfulYes}>{' '}Yes({count}){' '}</Link>
         <Link onClick={handleReport}>{report}</Link>
       </UserContainer>
-      {showModal ? <PhotoModal photo={photoURL.current} hide={() => setShowModal(false)}/> : null}
+      {showModal ? <PhotoModal photo={photoURL.current} hide={() => setShowModal(false)} answerer={answerer} /> : null}
     </AnswerContainer>
   );
 };
