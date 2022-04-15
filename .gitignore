@@ -2,7 +2,6 @@ node_modules
 bundle.js
 .eslintrc.js
 hooksPractice.jsx
-package.json
 package-lock.json
 webpack.config.js
 config.js
