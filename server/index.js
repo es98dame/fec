@@ -5,14 +5,17 @@ const port = 3000;
 const axios = require('axios');
 const {API_KEY} = require('./config/config.js');
 const auth = { headers: { Authorization: API_KEY} };
-const shrinkRay = require('shrink-ray-current');
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../fec-client/dist')));
-app.use(shrinkRay());
-
 
 app.get('/api', (req, res) => {
 
