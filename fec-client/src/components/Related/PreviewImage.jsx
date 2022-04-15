@@ -163,7 +163,7 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
         ? (
           <Preview>
             {imageIndex === 0 ? '' : <LeftButton onClick={prevPhoto}> ← </LeftButton> }
-            <Image src={main} onClick={updateId} />
+            <Image src={main} onClick={updateId} alt="Oops! no image"/>
             {imageIndex + 1 === styleInfo.results[0].photos.length ? ''
               : <RightButton onClick={nextPhoto}> → </RightButton> }
           </Preview>
