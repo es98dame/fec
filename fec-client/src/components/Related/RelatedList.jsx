@@ -36,7 +36,7 @@ const NoButton = styled.button`
 `;
 
 const Button = styled.button`
-  max-height: 333px;
+  max-height: 312px;
   display : flex;
   flex-direction: column;
   position : relative;

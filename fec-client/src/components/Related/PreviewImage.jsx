@@ -89,15 +89,17 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
   const [price, setPrice] = useState('');
   const [clickableimage, setClickableimage] = useState(false);
   const [discountprice, setDiscountprice] = useState(null);
+  const [nowstyledindex, setNowstyledindex] = useState(0);
   const thumbcontainer = useRef(null);
   const textcontainer = useRef(null);
 
   // variable for image slide
   const [imageIndex, setImageIndex] = useState(0);
 
-  const imageClick = (url) => {
-    setImageIndex(0);
+  const imageClick = (url, index) => {
     setMain(url);
+    setImageIndex(0);
+    setNowstyledindex(index);
   };
 
   const updateId = () => {
@@ -142,12 +144,12 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
   };
 
   const nextPhoto = () => {
-    setMain(styleInfo.results[0].photos[imageIndex + 1].thumbnail_url);
+    setMain(styleInfo.results[nowstyledindex].photos[imageIndex + 1].thumbnail_url);
     setImageIndex(imageIndex + 1);
   };
 
   const prevPhoto = () => {
-    setMain(styleInfo.results[0].photos[imageIndex - 1].thumbnail_url);
+    setMain(styleInfo.results[nowstyledindex].photos[imageIndex - 1].thumbnail_url);
     setImageIndex(imageIndex - 1);
   };
 
@@ -164,7 +166,7 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
           <Preview>
             {imageIndex === 0 ? '' : <LeftButton onClick={prevPhoto}> ← </LeftButton> }
             <Image src={main} onClick={updateId} alt="Oops! no image"/>
-            {imageIndex + 1 === styleInfo.results[0].photos.length ? ''
+            {imageIndex + 1 >= styleInfo.results[nowstyledindex].photos.length ? ''
               : <RightButton onClick={nextPhoto}> → </RightButton> }
           </Preview>
         )
@@ -173,14 +175,18 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
 
       <ThumbContainer ref={thumbcontainer}>
         { styleInfo.results instanceof Array
-          && styleInfo.results.slice(0, 4).map((data, index) => (
-            <Thumbnails
-              key={index}
-              results={data}
-              imageClick={imageClick}
-              updatePrice={updatePrice}
-            />
-          ))}
+          && styleInfo.results.map((data, index) => {
+            if (index >= 0 && index < 4) {
+              return (
+                <Thumbnails
+                  index = {index}
+                  key={index}
+                  results={data}
+                  imageClick={imageClick}
+                  updatePrice={updatePrice}/>
+              );
+            }
+          })}
       </ThumbContainer>
       <Textarea ref={textcontainer}>
         <CardText>{productInfo.category}</CardText>
