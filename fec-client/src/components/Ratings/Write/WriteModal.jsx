@@ -89,18 +89,15 @@ const Button = styled.button`
   border-radius: 7px;
   color: #fff;
   width: 150px;
-
   &: hover{
     background-color: #4b464d;
     cursor: pointer;
     color: #fff;
   }
-
   &:active{
     background-color: #fff;
     color: #242125;
   }
-
   &.exit {
     height: 30px;
     width: 30px;
