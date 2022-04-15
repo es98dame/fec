@@ -7,3 +7,4 @@ webpack.config.js
 config.js
 memo
 coverage
+bundle.js.gz

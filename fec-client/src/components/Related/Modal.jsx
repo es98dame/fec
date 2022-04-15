@@ -45,29 +45,12 @@ const StyledTable = styled.table`
   border-collapse: collapse;
   text-align : center;
 
-  //Table Style
-  /* border-collapse: separate; */
-  /* border-spacing: 5px 10px; */
-
   caption-side: bottom;
-  /* empty-cell: show | hide;  */
-  /* empty-cell is a property of table or the cells themselves */
 
-  /* vertical-align: baseline | sub | super | text-top |
-                text-bottom | middle | top | bottom |
-                <percentage> | <length> */
-
-  /* tbody {
-    vertical-align: top;
-  }              */
   td,
   th {
     border: none;
   }
-  /* td,
-  th {
-    border: 1px solid;
-  } */
 
   td {
     padding: 5px 10px;
@@ -91,16 +74,49 @@ const StyledTable = styled.table`
   }
 `;
 
+const CheckTd = styled.td`
+width : 100px;
+`;
+
 const Modal = ({ handleClose, show, productInfo }) => {
   const ShowHideClassName = show ? Modaltrue : Modalfalse;
   const id = window.localStorage.getItem('ProductId');
-  const [currentItemValues, setCurrentItemValues] = useState('');
+  const [currentName, setCurrentName] = useState('');
+  const [features, setFeatures] = useState({});
+
+  const comparehelper = (data, position) => {
+    let current = features;
+    let featureList = data.features;
+    for (let i = 0; i < featureList.length; i++) {
+
+      let currentFeature = featureList[i].feature;
+
+      if (featureList[i].value !== null) {
+
+        if (!current[currentFeature]) {
+          let tuple = ['', ''];
+
+          tuple[position] = featureList[i].value;
+          if (tuple[position] === true) {
+            tuple[position] = '&#10004;';
+          }
+          current[currentFeature] = tuple;
+        } else {
+          current[currentFeature][position] = featureList[i].value;
+        }
+      }
+    }
+    if (position === 1) {
+      setCurrentName(data.name);
+    }
+    setFeatures(current);
+  };
 
   useEffect(()=>{
     const getValues = () => {
       axios.get('/api', {headers: {path: `/products/${id}`}})
         .then((res)=>{
-          setCurrentItemValues(res.data);
+          comparehelper(res.data, 0);
         })
         .catch ((error) => {
           console.log('axio request errors in Modal.jsx', error);
@@ -108,7 +124,11 @@ const Modal = ({ handleClose, show, productInfo }) => {
     };
 
     getValues();
+    comparehelper(productInfo, 1);
+    console.log('features', features);
   }, []);
+
+
 
   return show ? (
     <div
@@ -127,31 +147,54 @@ const Modal = ({ handleClose, show, productInfo }) => {
             <StyledTable>
               <tbody>
                 <tr>
-                  <td className='tdName'>Selected Item</td>
+                  <td className='tdName'><b>Selected Item</b></td>
+                  <CheckTd></CheckTd>
                   <td className='tdName'></td>
-                  <td className='tdName'>Current Item</td>
+                  <CheckTd></CheckTd>
+                  <td className='tdName'><b>Current Item</b></td>
                 </tr>
                 <tr>
                   <td className='tdName'>{productInfo.name}</td>
+                  <CheckTd></CheckTd>
                   <td className='tdName'>Name</td>
-                  <td className='tdName'>{currentItemValues.name}</td>
+                  <CheckTd></CheckTd>
+                  <td className='tdName'>{currentName}</td>
                 </tr>
-                {/* current item values list */}
-                {currentItemValues.features !== undefined && currentItemValues.features.map((i, key)=>(
-                  <tr key={key}>
-                    <td className='tdName'>✔️</td>
-                    <td className='tdName'>{i.feature + ' : ' + i.value}</td>
-                    <td className='tdName'></td>
-                  </tr>
-                ))}
-                {/* clicked item values list */}
-                {productInfo.features.map((i, key)=>(
-                  <tr key={key}>
-                    <td className='tdName'></td>
-                    <td className='tdName'>{i.feature + ' : ' + i.value}</td>
-                    <td className='tdName'>✔️</td>
-                  </tr>
-                ))}
+                {Object.keys(features).map(feature => {
+                  if (features[feature][0] === '') {
+                    return (
+                      <tr>
+                        <td>{features[feature][0]}</td>
+                        <CheckTd></CheckTd>
+                        <td><b>{feature}</b></td>
+                        <CheckTd>✔️</CheckTd>
+                        <td>{features[feature][1]}</td>
+                      </tr>
+                    );
+                  } else if (features[feature][1] === '') {
+                    return (
+                      <tr>
+                        <td>{features[feature][0]}</td>
+                        <CheckTd>✔️</CheckTd>
+                        <td><b>{feature}</b></td>
+                        <CheckTd></CheckTd>
+                        <td>{features[feature][1]}</td>
+                      </tr>
+                    );
+                  } else {
+                    return (
+                      <tr>
+                        <td>{features[feature][0]}</td>
+                        <CheckTd>✔️</CheckTd>
+                        <td><b>{feature}</b></td>
+                        <CheckTd>✔️</CheckTd>
+                        <td>{features[feature][1]}</td>
+                      </tr>
+                    );
+                  }
+                }
+
+                )}
               </tbody>
             </StyledTable>
           </div>
