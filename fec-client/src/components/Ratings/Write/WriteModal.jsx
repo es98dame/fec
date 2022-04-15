@@ -89,18 +89,15 @@ const Button = styled.button`
   border-radius: 7px;
   color: #fff;
   width: 150px;
-
   &: hover{
     background-color: #4b464d;
     cursor: pointer;
     color: #fff;
   }
-
   &:active{
     background-color: #fff;
     color: #242125;
   }
-
   &.exit {
     height: 30px;
     width: 30px;
@@ -229,11 +226,11 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
           </Field>
           <Field>
             <Label>Review Summary</Label>
-            <textarea title = 'summary-input' rows='2' cols='50' placeholder = 'Example: Best purchase ever!' maxLength = '60' value = {summary} onChange = {(e) => handleChange(e, setSummary)}>{summary}</textarea>
+            <TextArea title = 'summary-input' rows='2' cols='50' placeholder = 'Example: Best purchase ever!' maxLength = '60' value = {summary} onChange = {(e) => handleChange(e, setSummary)}>{summary}</TextArea>
           </Field>
           <Field>
             <Label>Your Review *</Label>
-            <textarea rows = '10' cols = '50' placeholder = 'Why did you like the product or not?' maxLength = '1000' value = {body} onChange = {(e) => handleChange(e, setBody)}>{body}</textarea>
+            <TextArea rows = '10' cols = '50' placeholder = 'Why did you like the product or not?' maxLength = '1000' value = {body} onChange = {(e) => handleChange(e, setBody)}>{body}</TextArea>
             <Tip>{body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}</Tip>
           </Field>
           <Field>
@@ -242,12 +239,12 @@ const WriteModal = ({relevantChars, productId, toggleWriteModal, productName }) 
           </Field>
           <Field>
             <Label>Your Nickname *</Label>
-            <input title = 'name-input' type = 'text' placeholder = 'Add a name, e.g. "kara122"' maxLength = '60' size = '50' value = {name} onChange = {(e) => handleChange(e, setName)}/>
+            <Input title = 'name-input' type = 'text' placeholder = 'Add a name, e.g. "kara122"' maxLength = '60' size = '50' value = {name} onChange = {(e) => handleChange(e, setName)}/>
             <Tip>For privacy reasons, do not use your full name or email address</Tip>
           </Field>
           <Field>
             <Label>Email *</Label>
-            <input type = 'text' placeholder = 'Your email' maxLength = '60' size = '50' value = {email} onChange = {(e) => handleChange(e, setEmail)}/>
+            <Input type = 'text' placeholder = 'Your email' maxLength = '60' size = '50' value = {email} onChange = {(e) => handleChange(e, setEmail)}/>
             <Tip>For authentication reasons, you will not be emailed</Tip>
           </Field>
           <Warning>
