@@ -38,9 +38,13 @@ const Products = (props) => {
   const getRelatedItemsId = (id) => {
     axios.get('/api', { headers: { path: `/products/${id}/related` } }) // get request to get the related item id array
       .then((res) => {
-      // console.log('related', res);
-      // unique
+
+        // console.log('related', res);
+        // unique
         const relatedArr = [...new Set(res.data)];
+        if (relatedArr.indexOf(id) !== -1) {
+          relatedArr.splice(relatedArr.indexOf(id), 1);
+        }
         setIdArray(relatedArr);
       })
       .catch((err) => console.log('axio request error in Realted/index.jsx', err));
@@ -58,9 +62,9 @@ const Products = (props) => {
         <RelatedList relatedArray={idArray} mode="related" />
       </ProductList>
       <Listtitle>Outfit List</Listtitle>
-      {/* <ProductList>
+      <ProductList>
         <OutfitList />
-      </ProductList> */}
+      </ProductList>
     </div>
   );
 };

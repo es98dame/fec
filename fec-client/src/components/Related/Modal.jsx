@@ -125,7 +125,6 @@ const Modal = ({ handleClose, show, productInfo }) => {
 
     getValues();
     comparehelper(productInfo, 1);
-    console.log('features', features);
   }, []);
 
 

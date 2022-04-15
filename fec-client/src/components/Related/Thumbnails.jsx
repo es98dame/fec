@@ -19,13 +19,13 @@ const Thumb = styled.img`
   }
 `;
 
-const Thumbnails = ({ results, imageClick, updatePrice }) => {
+const Thumbnails = ({ index, results, imageClick, updatePrice }) => {
   return (
     <ThumbList>
       <Thumb
         src={results.photos[0].thumbnail_url}
         onMouseOver={() => {
-          imageClick(results.photos[0].thumbnail_url),
+          imageClick(results.photos[0].thumbnail_url, index),
           updatePrice(results.sale_price);
         }}
         alt="It's loading"
