@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import RelatedList from './RelatedList.jsx';
+import { FaPlusCircle } from 'react-icons/fa';
 
 import axios from 'axios';
 
@@ -12,8 +13,9 @@ const Container = styled.div`
 `;
 
 const ProductCard = styled.div`
-  border: solid;
-  border-color: lightgray;
+  border: solid 3px lightgray;
+  border-radius: 19px;
+  padding: 3px;
   display : flex;
   height: 63.5%;
   position: relative;
@@ -76,9 +78,7 @@ const OutfitList = ()=> {
   return (
     <Container>
       <ProductCard title = 'firstcard' onClick={addItemtoOutfit}>
-
-        <span>Add current item +</span>
-
+        <FaPlusCircle fontSize="3em"/>
       </ProductCard>
 
       {outfitList.length !== 0 ? (
