@@ -8,9 +8,14 @@ const auth = { headers: { Authorization: API_KEY} };
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../fec-client/dist')));
-
 
 app.get('/api', (req, res) => {
 
