@@ -42,7 +42,7 @@ const Card = ({productInfo, styleInfo, mode, deletehandle }) => {
       <ProductCard title = {mode === 'related' ? p : o}>
         {mode === 'outfit'
           ? <ActionButton onClick={() => { deletehandle(productInfo.id); }} > <FaTimesCircle fill='green' fontSize="1.5em"/> </ActionButton>
-          : <ActionButton onClick={() => { setShow(!show); }} > <FaStar fill='green' fontSize="1.5em"/> </ActionButton> }
+          : <ActionButton title='ModalButton' onClick={() => { setShow(!show); }} > <FaStar fill='green' fontSize="1.5em"/> </ActionButton> }
         {styleInfo !== undefined
           ? <PreviewImage productInfo={productInfo} styleInfo={styleInfo} /> : ''}
       </ProductCard>

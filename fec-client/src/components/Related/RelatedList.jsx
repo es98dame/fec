@@ -120,7 +120,7 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
   };
 
   useEffect(() => {
-    slideRef.current.animate( { opacity: [0, 1]}, 500 );
+    //slideRef.current.animate( { opacity: [0, 1]}, 500 );
     //slideRef.current.style.transform = `translateX(-${currentSlide}03%)`;
     //setIdArray(infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)));
   }, [currentSlide]);

@@ -55,7 +55,7 @@ describe('Related Product List component', () => {
     const deletehandle = jest.fn();
     render(<Card productInfo={Data.productInfo} styleInfo={Data.styleInfo} mode = 'related' deletehandle={deletehandle}/>);
 
-    const HeadingList = screen.getAllByRole('img');
+    const HeadingList = screen.getAllByTitle('ModalButton');
     fireEvent.click(HeadingList[0]);
     await waitFor(() => screen.getByTitle('ModalCard'));
     expect(screen.getByTitle('ModalCard')).toBeInTheDocument();
