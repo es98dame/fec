@@ -80,10 +80,6 @@ const Button = styled.button`
   color: white;
 `;
 
-const Highlighted = styled.span`
-  background: yellow;
-`;
-
 const sortSeller = (answers) => {
   let result = [];
   let sellers = [];
@@ -160,8 +156,6 @@ const QAListEntry = ({question, productName, productId, updateAllStorages}) => {
     questionId: question.question_id,
     updateAnswers: updateAnswers
   };
-
-  // console.log(answers);
 
   return (
     <QContainer >

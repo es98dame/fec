@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef, useInsertionEffect, useReducer } from 'react';
+import React, { useState, useEffect, useRef, useInsertionEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import QAList from './QAList';
 import AddQModal from './AddQModal.jsx';
-
-const magnifyingGlass = 'https://www.freeiconspng.com/uploads/search-icon-png-5.png';
 
 const ContainerCol = styled.div`
   display: flex;
@@ -177,7 +175,6 @@ const QA = ({productId, productName}) => {
       <SearchForm title="live-search" type="submit">
         <StyledInput title="search-input" type="text" value={searchInput} onChange={ e => setSearchInput(e.target.value)} placeholder="Have a Question? Search for answers..."/>
         <Icon roll="search magnifying glass" className="fa fa-search fa-lg"></Icon>
-        {/* <SearchIcon src={magnifyingGlass}/> */}
       </SearchForm>
       <QAList {...QAListProps}/>
       <ButtonContainer>
