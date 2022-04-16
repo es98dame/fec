@@ -65,9 +65,9 @@ const RightButton = styled.button`
 `;
 
 const Textarea = styled.div`
-  visibility: hidden;
+  visibility: visible;
   gap: .5rem;
-  height: 40px;
+  height: 100%;
 `;
 
 const Image = styled.img`
@@ -132,13 +132,9 @@ const PreviewImage = ({ productInfo, styleInfo }) => {
   const showthumbs = (value) => {
     if (value) {
       thumbcontainer.current.style.display = 'flex';
-      textcontainer.current.style.visibility = 'visible';
-      textcontainer.current.style.height = '100%';
       setClickableimage(true);
     } else {
       thumbcontainer.current.style.display = 'none';
-      textcontainer.current.style.visibility = 'hidden';
-      textcontainer.current.style.height = '40px';
       setClickableimage(false);
     }
   };

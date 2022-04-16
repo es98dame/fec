@@ -8,8 +8,9 @@ const ProductCard = styled.div`
   display : flex;
   flex-direction: column;
   position : relative;
-  border: solid;
-  border-color: lightgray;
+  border: solid 3px lightgray;
+  border-radius: 19px;
+  padding: 3px;
 
   &:hover {
     border-color: black;
@@ -20,11 +21,13 @@ const ProductCard = styled.div`
 
 const ActionButton = styled.span`
   display : flex;
-  position : relative;
-  left:90%;
+  position: absolute;
+  right: 5px;
   z-index:7;
+
   &:hover {
     opacity: 0.7;
+    transform: scale(1.01);
   }
 `;
 
@@ -37,11 +40,9 @@ const Card = ({productInfo, styleInfo, mode, deletehandle }) => {
     <div>
       <Modal show={show} handleClose={() => { setShow(false); }} productInfo={productInfo} />
       <ProductCard title = {mode === 'related' ? p : o}>
-        <div>
-          {mode === 'outfit'
-            ? <ActionButton onClick={() => { deletehandle(productInfo.id); }} > <FaTimesCircle/> </ActionButton>
-            : <ActionButton onClick={() => { setShow(!show); }} > <FaStar/> </ActionButton> }
-        </div>
+        {mode === 'outfit'
+          ? <ActionButton onClick={() => { deletehandle(productInfo.id); }} > <FaTimesCircle fill='green' fontSize="1.5em"/> </ActionButton>
+          : <ActionButton onClick={() => { setShow(!show); }} > <FaStar fill='green' fontSize="1.5em"/> </ActionButton> }
         {styleInfo !== undefined
           ? <PreviewImage productInfo={productInfo} styleInfo={styleInfo} /> : ''}
       </ProductCard>
