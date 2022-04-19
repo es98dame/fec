@@ -51,7 +51,7 @@ The product overview section has two main parts. The main image display, and the
 ### Contributor: Owen Yoshishige
 ---
 ## Ratings and Reviews
-### Contributor: ![Kate Anderson](https://github.com/kanderson250)
+### Contributor: [Kate Anderson](https://github.com/kanderson250)
 
 The Ratings and Reviews widget contains all information related to reading and creating product reviews. The widget:
 
