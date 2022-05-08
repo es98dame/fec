@@ -21,7 +21,7 @@ The product overview section has two main parts. The main image display, and the
  - The style selector dynamically renderes product styles in rows of four. There is no limit to the styles a product can have.
 
  - The main image display always shows the first image for the product and the selcected style
-![](https://media.giphy.com/media/wQ7WzdrZAbIS1zTfGI/giphy.gif)
+![](https://media.giphy.com/media/gD1efo9J4Ear1hEHoF/giphy.gif)
 
 # Related Products
 ### **Contributor: Dami Kim**
@@ -45,7 +45,7 @@ The product overview section has two main parts. The main image display, and the
 
   - Clicking on the 'X' icon in the corner of a product card will remove the product from the user's outfit list.
   
-![image](https://user-images.githubusercontent.com/25275753/163689419-53e00744-3743-44f8-9c94-f303925ed70c.png)
+![](https://media.giphy.com/media/xHBjnBoD0YswYe77va/giphy.gif)
 
 
 ---
@@ -53,10 +53,13 @@ The product overview section has two main parts. The main image display, and the
 ### **Contributor: Owen Yoshishige**
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/owenyoshishige/)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/OwenMY)
+
+![](https://media.giphy.com/media/zQqzihdYhYCJLMOnUC/giphy.gif)
 ---
 # Ratings and Reviews
 ### **Contributor: Kate Anderson**
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kate-anderson-dev/)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kanderson250)
----
+
+![](https://media.giphy.com/media/xopC3s1h8U4HplnqWh/giphy.gif)
 
