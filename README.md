@@ -3,11 +3,6 @@
 
 # Project Atelier
 Project Atelier is an e-commerce product demo page where you can view various styles for a particular item, find related items, check Q&A, and see reviews.
-
-## Before You Begin
-  - [ ] `npm install`
-  - [ ] `npm run build`
-  - [ ] `npm run client-server`
  
 # Overview
 ### **Contributor: Ian Hoffman**
@@ -21,6 +16,7 @@ The product overview section has two main parts. The main image display, and the
  - The style selector dynamically renderes product styles in rows of four. There is no limit to the styles a product can have.
 
  - The main image display always shows the first image for the product and the selcected style
+ 
 ![](https://media.giphy.com/media/gD1efo9J4Ear1hEHoF/giphy.gif)
 
 # Related Products
@@ -48,14 +44,15 @@ The product overview section has two main parts. The main image display, and the
 ![](https://media.giphy.com/media/xHBjnBoD0YswYe77va/giphy.gif)
 
 
----
 # Questions and Answers
 ### **Contributor: Owen Yoshishige**
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/owenyoshishige/)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/OwenMY)
 
+Displays the first two user submitted questions related to the current product. A button is displayed to reveal more questions and upon the first click will expand the view until it reaches it's max height with more questions to populate the view and initiates an infinite scroll.  Each question shows the seller at the top followed by the answers sorted in order of the most helpful. There is a button inside each question to view more answers if there is more. The ability to mark specific questions and/or answers as helpful is implemented as well as the ability to report a question or answer. There is also the option to add a question and answer, both having the required data for a post and answers has the ability to upload photos.
+
 ![](https://media.giphy.com/media/zQqzihdYhYCJLMOnUC/giphy.gif)
----
+
 # Ratings and Reviews
 ### **Contributor: Kate Anderson**
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kate-anderson-dev/)
@@ -63,3 +60,18 @@ The product overview section has two main parts. The main image display, and the
 
 ![](https://media.giphy.com/media/xopC3s1h8U4HplnqWh/giphy.gif)
 
+
+## Getting Started
+
+1. Set up config file in `server/config` using `exampleConfig.js` as an example.
+
+2. Install your dependancies:
+
+   > `npm install`
+
+3. Run webpack with:
+
+   > `npm run build`
+
+4. Run your server:
+   > `npm run client-server`
