@@ -6,7 +6,6 @@ const SeeAllRegEx = /(See all)([0-9]+)(ratings)/gi;
 
 const checkForModule = (path, e) => {
   let standard = [ 'App', 'Overview', 'RelatedList', 'QA', 'Ratings'];
-
   let allModules = [];
 
   for (let component of path) {

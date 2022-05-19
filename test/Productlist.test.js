@@ -11,14 +11,10 @@ import Card from '../fec-client/src/components/Related/Card.jsx';
 import OutfitList from '../fec-client/src/components/Related/OutfitList.jsx';
 import Data from './stubs/Productlist.Stub.js';
 
-
-// Setup
-// Need to make a server
 const server = setupServer(
   rest.get('/api', (req, res, ctx) => res(ctx.json())),
 );
 
-// Need to mock out route
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
@@ -90,6 +86,4 @@ describe('Outfit List component', () => {
     await screen.getByTitle('card slide');
     expect(screen.getByTitle('card slide')).toBeInTheDocument();
   });
-
-
 });

@@ -115,10 +115,8 @@ const App = () => {
   let [totalAndAvg, setTotalAndAvg] = useState([0, 0]);
   const [darkMode, setDarkMode] = useState(false);
 
-  //default value is '65635'
   const productId = window.localStorage.getItem('ProductId') === null ?
     65635 : JSON.parse(window.localStorage.getItem('ProductId'));
-
 
   useEffect(()=> {
     const DarkMode = window.localStorage.getItem('DarkMode');
@@ -166,11 +164,5 @@ const App = () => {
     </ThemeProvider>
   );
 };
-
-// eslint-disable-next-line no-undef
-// ReactDOM.render(<App />, document.getElementById('app'));
-// ReactDOM.render is no longer supported, need to change it to this
-// https://reactjs.org/docs/react-dom-client.html
-
 
 export default App;
