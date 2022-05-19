@@ -14,7 +14,6 @@ import AddAModal from './../fec-client/src/components/Q&A/AddAModal.jsx';
 import AddQModal from './../fec-client/src/components/Q&A/AddQModal.jsx';
 import PhotoModal from './../fec-client/src/components/Q&A/PhotoModal.jsx';
 
-
 const productId = 12345;
 const productName = 'Yellow Pants';
 
@@ -76,8 +75,6 @@ test('handlers server error', async () => {
 describe('QA component', () => {
 
   describe('Questions List Buttons', () => {
-
-
     test('"Add A Question" button should exist', () => {
       render(<QA productId={productId} productName={productName}/>);
 
@@ -85,16 +82,11 @@ describe('QA component', () => {
     });
 
     test('"See More Questions" button should exist', async () => {
-      render(<QA productId={productId} productName={productName}/>)
-      // let options = {
-      //   name: 'See More Questions'
-      // };
+      render(<QA productId={productId} productName={productName}/>);
 
-      // expect(screen.getByRole('button', options)).toBeInTheDocument
       await waitFor(() => screen.findByText('See More Questions'));
-      const SeeMoreQuestions = await findByText('See More Questions')
+      const SeeMoreQuestions = await findByText('See More Questions');
     });
-
   });
 
   describe('Search Bar', () => {

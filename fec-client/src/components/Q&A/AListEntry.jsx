@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import PhotoModal from './PhotoModal.jsx';
 
-
 const AnswerContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -101,7 +100,7 @@ const AListEntry = ({answer, askerName}) => {
       </ABodyContainer>{
         answer[1].photos.length ? (
           <ImageRow>
-            {answer[1].photos.map((img) => <Image src={img} key={img} onClick={handlePhotoModal}/>)}
+            {answer[1].photos.map((img) => <Image src={img} key={img} onClick={handlePhotoModal} alt="Photo Unavailable"/>)}
           </ImageRow>
         ) : null
       }<UserContainer>

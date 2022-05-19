@@ -2,52 +2,38 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 
-const SeeAllRegEx = /(See all) ([0-9]+) (ratings)/gi;
+const SeeAllRegEx = /(See all)([0-9]+)(ratings)/gi;
 
 const checkForModule = (path, e) => {
   let standard = [ 'App', 'Overview', 'RelatedList', 'QA', 'Ratings'];
+  let allModules = [];
 
-  if (e.target.nodeName === 'svg' || SeeAllRegEx.test(e.target.innerText)) {
-    let allModules = [];
-
-    for (let component of path) {
-      if (component.id === 'app') {
-        break;
-      }
-      for (let moduleName of standard) {
-        if (typeof component.className === 'object') {
-          continue;
-        } else if (component.className.includes(moduleName)) {
-          allModules.push(moduleName);
-        }
+  for (let component of path) {
+    if (component.id === 'app') {
+      break;
+    }
+    for (let moduleName of standard) {
+      if (typeof component.className === 'object') {
+        continue;
+      } else if (component.className.includes(moduleName)) {
+        allModules.push(moduleName);
       }
     }
+  }
 
+  if (e.target.nodeName === 'svg' || SeeAllRegEx.test(e.target.innerText)) {
     if (allModules.includes('Overview')) {
       return 'Overview';
     } else {
       return 'Ratings';
     }
   } else {
-    for (let component of path) {
-      if (component.id === 'app') {
-        break;
-      }
-      for (let moduleName of standard) {
-        if (typeof component.className === 'object') {
-          continue;
-        } else if (component.className.includes(moduleName)) {
-          return moduleName;
-        }
-      }
-    }
+    return allModules[0];
   }
-
-  return 'App';
 };
 
 const getElementName = (e) => {
-  if (typeof e.target.className !== 'object') {
+  if (typeof e.target.className !== 'object' && e.target.className) {
     return e.target.className;
   } else if (e.target.id) {
     return e.target.id;

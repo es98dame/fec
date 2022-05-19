@@ -222,7 +222,7 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
     Promise.all(uploads)
       .then((results) => {
         let photos = results.map((info) => info.data.url);
-        let body = { ...inputs, photos: photos }
+        let body = { ...inputs, photos: photos };
 
         if (!photos.length) {
           body = inputs;
@@ -274,7 +274,6 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
       hide();
     }
   };
-
 
   return (
     <ModalWrapper>

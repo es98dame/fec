@@ -80,10 +80,6 @@ const Button = styled.button`
   color: white;
 `;
 
-const Highlighted = styled.span`
-  background: yellow;
-`;
-
 const sortSeller = (answers) => {
   let result = [];
   let sellers = [];
@@ -126,7 +122,6 @@ const QAListEntry = ({question, productName, productId, updateAllStorages}) => {
 
         let allAnswerIds = data.map((answer) => answer.answer_id);
         let allAnswers = data.map((answer, i) => [allAnswerIds[i], answer]);
-
         let orderedAnswers = allAnswers.length ? allAnswers.sort((a, b) => b[1].helpfulness - a[1].helpfulness) : [];
         let sorted = sortSeller(orderedAnswers);
         sortedAnswers.current = sorted;
@@ -161,10 +156,8 @@ const QAListEntry = ({question, productName, productId, updateAllStorages}) => {
     updateAnswers: updateAnswers
   };
 
-  // console.log(answers);
-
   return (
-    <QContainer >
+    <QContainer>
       <QuestionRow>
         <Label>Q:</Label>
         <QBody>{question.question_body}</QBody>

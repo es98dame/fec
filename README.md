@@ -3,7 +3,7 @@
 
 # Project Atelier
 Project Atelier is an e-commerce product demo page where you can view various styles for a particular item, find related items, check Q&A, and see reviews.
- 
+
 # Overview
 ### **Contributor: Ian Hoffman**
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ian-hoffman/)
@@ -16,7 +16,7 @@ The product overview section has two main parts. The main image display, and the
  - The style selector dynamically renderes product styles in rows of four. There is no limit to the styles a product can have.
 
  - The main image display always shows the first image for the product and the selcected style
- 
+
 ![](https://media.giphy.com/media/gD1efo9J4Ear1hEHoF/giphy.gif)
 
 # Related Products
@@ -33,14 +33,14 @@ The product overview section has two main parts. The main image display, and the
   - Mousing over the thumbnails makes the carousel of the preview image activated to navigate various style images.
 
   - Clicking on a related product card again will cause the browser to navigate to that product's page.
- 
+
  #### Outfits
   - The Outfit component allows users to save the current product to an Outfit (similar to a shopping list). Each user's outfit list is saved in their local system storage so that it is unique to them, and can persist across browser sessions.
 
   - This list has an '+' card which adds the product on the current page to your outfit.
 
   - Clicking on the 'X' icon in the corner of a product card will remove the product from the user's outfit list.
-  
+
 ![](https://media.giphy.com/media/xHBjnBoD0YswYe77va/giphy.gif)
 
 

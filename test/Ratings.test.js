@@ -31,7 +31,6 @@ test('renders Ratings component to the DOM', () => {
   expect(screen.getByTitle('write')).toBeInTheDocument();
 });
 
-
 //REVIEW LIST
 test('Renders Review List with two provided reviews', () => {
   render(<ReviewList reviews = {RatingsStubs.results}/>);
@@ -218,10 +217,6 @@ describe('Product Breakdown', () => {
   });
 });
 
-describe('Sort functionality', () => {
-  //TODO: This requires functionality with the overarching Ratings component. Idk how to test it right now.
-});
-
 describe('Write a Review basics', () => {
   test('Write a Review Modal is not on the screen. When button is clicked, modal appears', () => {
     render(<Write relevantChars = {metaData.characteristics} productId = {'65634'} productName = {'test name'}/>);
@@ -230,30 +225,3 @@ describe('Write a Review basics', () => {
     expect(screen.queryByTitle('write-form-container')).toBeInTheDocument();
   });
 });
-
-describe('Write a Review constraints', () => {
-  // test('Review summary has maximum length of 60 characters', ()=> {
-  //   render(<Write relevantChars = {metaData.characteristics} productId = {'65634'} productName = {'test name'}/>);
-  //   fireEvent.click(screen.getByText('Write a Review'));
-  //   const summary = screen.getByTitle('summary-input');
-  //   expect(summary.value.length).toBe(0);
-  //   const oneHundredAs = Array(100).fill('a').join('');
-  //   userEvent.type(summary, 'boop');
-  //   expect(summary.textContent).toBe('boop');
-  // });
-
-  // test('Name has max length of 60 chars', () => {
-  //   render(<Write relevantChars = {metaData.characteristics} productId = {'65634'} productName = {'test name'}/>);
-  //   fireEvent.click(screen.getByText('Write a Review'));
-  //   const name = screen.getByTitle('name-input');
-  //   expect(name.value.length).toBe(0);
-  //   const oneHundredAs = Array(100).fill('a').join('');
-  //   fireEvent.change(name, {target: {value: oneHundredAs}});
-  //   expect(name.value.length).toBe(60);
-  // });
-});
-
-
-
-
-

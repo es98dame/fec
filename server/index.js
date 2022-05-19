@@ -28,10 +28,7 @@ app.get('/api', (req, res) => {
     a prop for headers, and pass an object as theat props value. Call a prop in that object
     'headers' and set it equal to the endpoint you are trying to acess. If any there are
     questions ask me or refer to the example line of code above!
-
   */
-
-  console.log(`${url}${req.headers.path}`);
 
   axios.get(`${url}${req.headers.path}`, auth)
     .then((response) => {
@@ -60,7 +57,6 @@ app.put('/api', (req, res) => {
     a prop for headers, and pass an object as theat props value. Call a prop in that object
     'headers' and set it equal to the endpoint you are trying to acess. If any there are
     questions ask me or refer to the example line of code above!
-
   */
 
   axios.put(`${url}${req.headers.path}`, null, auth)
@@ -70,14 +66,11 @@ app.put('/api', (req, res) => {
     .catch((err) => res.send(err));
 });
 
-//PUT REQUEST FOR RATINGS AND REVIEWS
-
 app.put('/api/reviews/:review_id/helpful', (req, res) => {
   axios.put(`${url}/reviews/${req.params.review_id}/helpful`, null, auth)
     .then((response) => res.send(response.data))
     .catch((err) => console.log(err));
 });
-
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

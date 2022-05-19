@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import QAListEntry from './QAListEntry.jsx';
 
-//Make sure to delete borders then delete this comment at the end!!
 const QAListContainer = styled.div`
   display: flex;
   flex-direction: column;
