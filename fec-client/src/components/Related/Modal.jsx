@@ -87,20 +87,20 @@ const Modal = ({ handleClose, show, productInfo }) => {
   const comparehelper = (data, position) => {
     let current = features;
     let featureList = data.features;
-    for (let i = 0; i < featureList.length; i++) {
+    for (let i in featureList) {
 
       let currentFeature = featureList[i].feature;
 
       if (featureList[i].value !== null) {
 
         if (!current[currentFeature]) {
-          let tuple = ['', ''];
+          let storage = ['', ''];
 
-          tuple[position] = featureList[i].value;
-          if (tuple[position] === true) {
-            tuple[position] = '&#10004;';
+          storage[position] = featureList[i].value;
+          if (storage[position] === true) {
+            storage[position] = '&#10004;';
           }
-          current[currentFeature] = tuple;
+          current[currentFeature] = storage;
         } else {
           current[currentFeature][position] = featureList[i].value;
         }

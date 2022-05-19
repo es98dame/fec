@@ -8,8 +8,10 @@ const Container = styled.div`
   overflow : hidden;
   width : 100%;
   height : 600px;
-  position: relative
+  position: relative;
+  align-items: center;
 `;
+
 const SliderContainer = styled.div`
   position: relative;
   top: 47px;
@@ -20,6 +22,7 @@ const ProductCard = styled.div`
   width : 100%;
   display : flex;
   flex-direction: row;
+  gap: 0.5em;
 `;
 
 const NoButton = styled.button`
@@ -41,19 +44,20 @@ const Button = styled.button`
   flex-direction: column;
   position : relative;
   display : block;
-  border: 1px solid black;
-  position: relative;
+
   z-index ; 20;
   padding-left: 10px;
   padding-right: 10px;
   opacity: 1;
   line-height: 25;
-  transition: all .5s ease;
+
+  background: transparent;
+  color: ${props => props.theme.color};
+  border: 0px;
 
   &:hover {
     transition: all 0.3s ease-in-out;
-    background-color: #1a7431;
-    color: #fff;
+    transform: scale(1.2);
   }
 `;
 
@@ -117,7 +121,7 @@ const RelatedList = ({relatedArray, mode, deletehandle})=> {
 
   useEffect(() => {
     //slideRef.current.animate( { opacity: [0, 1]}, 500 );
-    // slideRef.current.style.transform = `translateX(-${currentSlide}03%)`;
+    //slideRef.current.style.transform = `translateX(-${currentSlide}03%)`;
     //setIdArray(infoArray.slice(currentSlide * postsPerPage , postsPerPage * (currentSlide + 1)));
   }, [currentSlide]);
 
