@@ -4,5 +4,5 @@
 const API_KEY = 'YOUR_API_KEY_HERE';
 const CLOUDINARY = 'YOUR_CLOUDINARY_KEY_HERE';
 
-module.exports.API_KEY = {API_KEY};
 module.exports.CLOUDINARY = CLOUDINARY;
+module.exports.API_KEY = API_KEY;
