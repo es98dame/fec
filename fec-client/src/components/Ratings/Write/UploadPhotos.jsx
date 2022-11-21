@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {CLOUDINARY} from '../../../../../server/config/config.js';
+// import {CLOUDINARY} from '../../../../../server/config/config.js';
 
 const cloudName = 'daxw4bdp6';
 const upload_preset = process.env.CLOUDINARY;
