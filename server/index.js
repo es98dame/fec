@@ -3,8 +3,8 @@ const app = express();
 const path = require('path');
 const port = 3000;
 const axios = require('axios');
-const {API_KEY} = require('./config/config.js');
-const auth = { headers: { Authorization: API_KEY} };
+// const {API_KEY} = require('./config/config.js');
+const auth = { headers: { Authorization: process.env.API_KEY} };
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 

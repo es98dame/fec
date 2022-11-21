@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import reactDom from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import { CLOUDINARY } from '../../../../server/config/config.js';
+// import { CLOUDINARY } from '../../../../server/config/config.js';
 
 const url = 'https://api.cloudinary.com/v1_1/daxw4bdp6/image/upload';
 
@@ -217,7 +217,7 @@ const AddAModal = ({ hide, question, productName, questionId, updateAnswers}) =>
   };
 
   const sendToCloud = (inputs, files) => {
-    let uploads = files.map((file) => axios.post(url, { upload_preset: CLOUDINARY, file: file }) );
+    let uploads = files.map((file) => axios.post(url, { upload_preset: process.env.CLOUDINARY, file: file }) );
 
     Promise.all(uploads)
       .then((results) => {
